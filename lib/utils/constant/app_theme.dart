@@ -10,7 +10,9 @@ class AppTheme{
     fontFamily: GoogleFonts.lato().fontFamily,
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.primary,
-      color: AppColors.white,
+      titleSpacing: 0,
+      titleTextStyle: AppTextStyles.headlineSmall,
+      foregroundColor: AppColors.white
     ),
     textTheme: TextTheme(
       headlineSmall: AppTextStyles.headlineSmall,

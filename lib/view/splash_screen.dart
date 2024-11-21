@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -8,7 +9,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
-      Get.offNamed(Routes.home);
+      Get.offAndToNamed(Routes.main);
     });
 
     return const Scaffold(
@@ -17,8 +18,8 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Welcome to MyApp!",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              "Sheba +",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.primary),
             ),
           ],
         ),

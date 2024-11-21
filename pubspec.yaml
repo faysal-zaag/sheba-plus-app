@@ -18,6 +18,11 @@ dependencies:
   toastification: ^2.3.0
   dio: ^5.7.0
   google_fonts: ^6.2.1
+  logger: ^2.5.0
+  url_launcher: ^6.3.1
+  phosphor_flutter: ^2.1.0
+  connectivity_plus: ^6.1.0
+  flutter_spinkit: ^5.2.1
 
 dev_dependencies:
   flutter_test:
