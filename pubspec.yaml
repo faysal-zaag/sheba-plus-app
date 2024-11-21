@@ -23,6 +23,7 @@ dependencies:
   phosphor_flutter: ^2.1.0
   connectivity_plus: ^6.1.0
   flutter_spinkit: ^5.2.1
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -32,8 +33,11 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
 flutter:
-
   uses-material-design: true
+
+  assets:
+    - assets/carousel/
+    - assets/images/
 
   
   

@@ -19,7 +19,7 @@ class AppRouters {
     ),
     GetPage(
       name: Routes.home,
-      page: () => const HomeScreen(),
+      page: () => HomeScreen(),
     ),
     GetPage(
       name: Routes.profile,

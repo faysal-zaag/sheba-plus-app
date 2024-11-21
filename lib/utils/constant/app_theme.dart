@@ -18,6 +18,14 @@ class AppTheme{
       headlineSmall: AppTextStyles.headlineSmall,
       headlineMedium: AppTextStyles.headlineMedium,
       headlineLarge: AppTextStyles.headlineLarge,
+
+      bodySmall: AppTextStyles.bodySmall,
+      bodyMedium: AppTextStyles.bodyMedium,
+      bodyLarge: AppTextStyles.bodyLarge,
+
+      titleSmall: AppTextStyles.titleSmall,
+      titleMedium: AppTextStyles.titleMedium,
+      titleLarge: AppTextStyles.titleLarge,
     )
   );
 }

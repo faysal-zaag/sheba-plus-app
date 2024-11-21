@@ -10,7 +10,7 @@ class NavigationController extends GetxController {
 
   NavigationController() {
     widgetOptions = <Widget>[
-      const HomeScreen(),
+      HomeScreen(),
       const ProfileScreen(),
     ];
   }
