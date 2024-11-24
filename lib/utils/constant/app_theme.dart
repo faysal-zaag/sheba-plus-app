@@ -11,7 +11,7 @@ class AppTheme{
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.primary,
       titleSpacing: 0,
-      titleTextStyle: AppTextStyles.headlineSmall,
+      titleTextStyle: AppTextStyles.headlineSmall.copyWith(color: AppColors.white),
       foregroundColor: AppColors.white
     ),
     textTheme: TextTheme(
@@ -26,6 +26,10 @@ class AppTheme{
       titleSmall: AppTextStyles.titleSmall,
       titleMedium: AppTextStyles.titleMedium,
       titleLarge: AppTextStyles.titleLarge,
+
+      labelSmall: AppTextStyles.labelSmall,
+      labelMedium: AppTextStyles.labelMedium,
+      labelLarge: AppTextStyles.labelLarge,
     )
   );
 }

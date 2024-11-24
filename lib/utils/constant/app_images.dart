@@ -10,4 +10,6 @@ class AppImages {
   static String google = "${AppConstants.assetImagePath}/google.png";
   static String facebook = "${AppConstants.assetImagePath}/facebook.png";
   static String apple = "${AppConstants.assetImagePath}/apple.png";
+
+  static String megaSell = "${AppConstants.assetImagePath}/mega-sell.jpeg";
 }

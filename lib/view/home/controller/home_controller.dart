@@ -11,6 +11,10 @@ class HomeController extends GetxController{
   }
 
   void onSelectService(int index){
-    selectedService(index);
+    if(selectedService.value == index) {
+      selectedService(0);
+    } else {
+      selectedService(index);
+    }
   }
 }

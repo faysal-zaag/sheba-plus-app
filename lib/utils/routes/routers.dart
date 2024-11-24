@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sheba_plus/middlewares/auth_middleware.dart';
 import 'package:sheba_plus/view/auth/register_screen/register_screen.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/sign_in_screen.dart';
 import 'package:sheba_plus/view/home/home_screen.dart';
@@ -16,6 +17,7 @@ class AppRouters {
     GetPage(
       name: Routes.main,
       page: () => MainScreen(),
+      middlewares: [AuthMiddleware()]
     ),
     GetPage(
       name: Routes.home,
@@ -27,7 +29,7 @@ class AppRouters {
     ),
     GetPage(
       name: Routes.signIn,
-      page: () => const SignInScreen(),
+      page: () => SignInScreen(),
     ),
     GetPage(
       name: Routes.register,

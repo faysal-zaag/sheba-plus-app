@@ -3,10 +3,17 @@ import 'package:get/get.dart';
 class HomeText {
   static String header1 = "Our Services".tr;
   static String headerDescription =
-      "We bring your goods from Bangladesh to Canada. In addition to that, we offer other services to the Bangladeshi diaspora in Canada. Our motto is FEEL BANGLADESH IN CANADA."
+      "We bring your goods from Bangladesh to Canada. In addition to that, we offer other services to the Bangladeshi diaspora in Canada. Our motto is"
           .tr;
+  static String headerMoto = "FEEL BANGLADESH IN CANADA.".tr;
   static String serviceSelection =
       "Please select any one of the services from below that you need in addition to shipment"
+          .tr;
+  static String dropOffMessage =
+      "We will inform about thee cost of DROP-OFF service when we get all your items in out hand, and you can make your decision then about the DROP-OFF service."
+          .tr;
+  static String shipmentMessage =
+      "We define Shipment as bringing your items from Dhaka office to our Toronto Office. However, we also offer DROP-OFF services, i.e. if you want we will deliver your parcel at your door."
           .tr;
 
   // service texts
@@ -17,22 +24,10 @@ class HomeText {
   static String agentShoppingDetails2 =
       "Please be informed that you have to deposit Agent-Service charge in advance before you start shopping."
           .tr;
-  static String agentShoppingDetails3 =
-      "We define Shipment as bringing your items from Dhaka office to our Toronto Office. However, we also offer DROP-OFF services, i.e. if you want we will deliver your parcel at your door."
-          .tr;
-  static String agentShoppingDetails4 =
-      "We will inform about thee cost of DROP-OFF service when we get all your items in out hand, and you can make your decision then about the DROP-OFF service."
-          .tr;
 
   static String displayCenter = "DISPLAY CENTER".tr;
   static String displayCenterDetails1 =
       "Buy our products from our own display center.".tr;
-  static String displayCenterDetails2 =
-      "We define Shipment as bringing your items from Dhaka office to our Toronto Office. However, we also offer DROP-OFF services, i.e. if you want we will deliver your parcel at your door. "
-          .tr;
-  static String displayCenterDetails3 =
-      "We will inform about thee cost of DROP-OFF service when we get all your items in out hand, and you can make your decision then about the DROP-OFF service."
-          .tr;
 
   static String thirdParty = "3RD PARTY".tr;
   static String thirdPartyDetails1 =
@@ -47,12 +42,6 @@ class HomeText {
   static String thirdPartyDetails4 =
       "Please ensure that this address is used as the delivery destination during checkout from the store."
           .tr;
-  static String thirdPartyDetails5 =
-      "We define Shipment as bringing your items from Dhaka office to our Toronto Office. However, we also offer DROP-OFF services, i.e. if you want we will deliver your parcel at your door."
-          .tr;
-  static String thirdPartyDetails6 =
-      "We will inform about thee cost of DROP-OFF service when we get all your items in out hand, and you can make your decision then about the DROP-OFF service."
-          .tr;
 
   static String friendsFamily = "FRIENDS & FAMILY".tr;
   static String friendsFamilyDetails1 =
@@ -60,10 +49,6 @@ class HomeText {
   static String friendsFamilyDetails2 =
       "Please list all the items that we are going to receive from your friends & family in our hub center at Bangladesh. Also add how much do we need to pay to the 3rd party."
           .tr;
-  static String friendsFamilyDetails3 =
-      "We define Shipment as bringing your items from Dhaka office to our Toronto Office. However, we also offer DROP-OFF services, i.e. if you want we will deliver your parcel at your door. "
-          .tr;
-  static String friendsFamilyDetails4 =
-      "We will inform about thee cost of DROP-OFF service when we get all your items in out hand, and you can make your decision then about the DROP-OFF service."
-          .tr;
+
+  static String newlyAddedProducts = "Newly Added Products".tr;
 }
