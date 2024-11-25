@@ -38,11 +38,8 @@ class SignInScreen extends StatelessWidget {
                 child: Padding(
                   padding: AppPaddings.messagePadding,
                   child: Text(
-                    AuthScreenText.registerNotice,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(color: AppColors.subtext),
+                    AuthScreenText.signInScreenMessage,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.subtext),
                   ),
                 ),
               ),

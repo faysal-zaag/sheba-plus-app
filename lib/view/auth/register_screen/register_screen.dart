@@ -52,7 +52,7 @@ class RegisterScreen extends StatelessWidget {
                           ?.copyWith(color: AppColors.paragraph),
                     ),
                     24.kH,
-                    RegisterForm(),
+                    const RegisterForm(),
                     12.kH,
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,

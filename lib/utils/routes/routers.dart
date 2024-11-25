@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sheba_plus/middlewares/auth_middleware.dart';
+import 'package:sheba_plus/view/auth/referral_screen/referral_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/register_screen.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/sign_in_screen.dart';
 import 'package:sheba_plus/view/home/home_screen.dart';
@@ -29,11 +30,15 @@ class AppRouters {
     ),
     GetPage(
       name: Routes.signIn,
-      page: () => SignInScreen(),
+      page: () => const SignInScreen(),
     ),
     GetPage(
       name: Routes.register,
       page: () => const RegisterScreen(),
+    ),
+    GetPage(
+      name: Routes.referral,
+      page: () => const ReferralScreen(),
     ),
   ];
 }

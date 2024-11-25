@@ -31,8 +31,7 @@ class _SignInFormState extends State<SignInForm> {
             controller: authController.signInEmailController.value,
             label: AuthScreenText.emailId,
             hintText: AuthScreenText.emailIdHintText,
-            validator: (value) => InputValidators.generalValidator(
-                value: value, message: AuthScreenText.emailIdValidatorText),
+            validator: (value) => InputValidators.emailValidator(value),
           ),
           Obx(
             () => CustomPasswordField(

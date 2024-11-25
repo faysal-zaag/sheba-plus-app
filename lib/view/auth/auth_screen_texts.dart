@@ -11,7 +11,6 @@ class AuthScreenText {
   static String forgetPassword = "Forget password?".tr;
   static String emailId = "Email id".tr;
   static String emailIdHintText = "example@gmail.com".tr;
-  static String emailIdValidatorText = "Email id should not be empty".tr;
   static String password = "Password".tr;
   static String passwordHintText = "Min. 8 characters".tr;
   static String or = "or".tr;
@@ -37,6 +36,7 @@ class AuthScreenText {
       "As a new user, you can earn points by referring a friend who is already a member! Just enter their name and phone number. Once you complete your first transaction, both of you will receive points as a reward."
           .tr;
   static String existingUserName = "Existing User’s Name".tr;
+  static String nameRequired = "Name is required".tr;
   static String existingUserNameHintText = "name of the person you're referring".tr;
   static String existingUserPhoneNumber = "Existing User’s Phone Number".tr;
   static String existingUserPhoneNumberHintText = "phone number of the referred person".tr;

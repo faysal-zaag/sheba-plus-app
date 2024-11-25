@@ -1,27 +1,45 @@
-class InputValidators{
-  static String? generalValidator({required String? value, required String message}){
-    if(value == null || value.isEmpty) {
+class InputValidators {
+  /// General validator to check if the value is empty
+  static String? generalValidator({required String? value, required String message}) {
+    if (value == null || value.trim().isEmpty) {
       return message;
     }
     return null;
   }
 
-  static String? passwordValidator(value) {
-    if (value == null || value == "") {
+  /// Validator for passwords
+  static String? passwordValidator(String? value) {
+    if (value == null || value.trim().isEmpty) {
       return "Password should not be empty";
     } else if (value.length < 8) {
-      return "Password should have minimum 8 characters";
+      return "Password should have a minimum of 8 characters";
     }
     return null;
   }
 
-  static String? confirmPasswordValidator(value, password) {
-    if (value == null || value == "") {
+  /// Validator for confirming passwords
+  static String? confirmPasswordValidator(String? value, String? password) {
+    if (value == null || value.trim().isEmpty) {
       return "Confirm password should not be empty";
     } else if (value.length < 8) {
-      return "Confirm password should have minimum 8 characters";
+      return "Confirm password should have a minimum of 8 characters";
     } else if (value != password) {
-      return "Password did not match";
+      return "Passwords do not match";
+    }
+    return null;
+  }
+
+  /// Validator for email addresses
+  static String? emailValidator(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return "Email should not be empty";
+    }
+    // Regular expression for validating email addresses
+    const emailPattern =
+        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+    final regex = RegExp(emailPattern);
+    if (!regex.hasMatch(value)) {
+      return "Enter a valid email address";
     }
     return null;
   }

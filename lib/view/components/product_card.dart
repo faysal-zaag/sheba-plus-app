@@ -43,9 +43,9 @@ class ProductCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${productModel.name}"),
+                    Text("${productModel.name}", style: Theme.of(context).textTheme.bodyMedium,),
                     8.kH,
-                    Text("\$ ${productModel.price}"),
+                    Text("\$ ${productModel.price}", style: Theme.of(context).textTheme.bodyMedium,),
                   ],
                 ),
               )

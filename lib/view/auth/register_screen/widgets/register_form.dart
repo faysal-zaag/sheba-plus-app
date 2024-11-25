@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
@@ -43,8 +45,7 @@ class _RegisterFormState extends State<RegisterForm> {
             controller: authController.registerEmailController.value,
             label: AuthScreenText.emailId,
             hintText: AuthScreenText.emailIdHintText,
-            validator: (value) => InputValidators.generalValidator(
-                value: value, message: AuthScreenText.emailIdValidatorText),
+            validator: (value) => InputValidators.emailValidator(value),
           ),
           Obx(
             () => CustomPasswordField(
@@ -61,6 +62,7 @@ class _RegisterFormState extends State<RegisterForm> {
               obscure: authController.registerConfirmPasswordObscure.value,
               setObscure: authController.onRegisterConfirmObscureTap,
               confirmPasswordField: true,
+              passwordController: authController.registerPasswordController.value,
             ),
           ),
           12.kH,
@@ -75,7 +77,11 @@ class _RegisterFormState extends State<RegisterForm> {
 
   void register() async {
     if (_registerFormKey.currentState!.validate()) {
-      authController.register();
+      final status = await authController.register();
+      if(status){
+        Utils.showSuccessToast(message: "OTP Send to your email. please verify.");
+        Get.offAndToNamed(Routes.referral);
+      }
     }
   }
 }

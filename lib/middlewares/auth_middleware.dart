@@ -1,10 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 
 class AuthMiddleware extends GetMiddleware {
-  final authController = Get.lazyPut(() => AuthController());
-
   @override
   RouteSettings? redirect(String? route) {
     bool isLoggedIn = false;

@@ -1,8 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:sheba_plus/models/login/login_request.model.dart';
+import 'package:sheba_plus/models/register/register_request.model.dart';
+import 'package:sheba_plus/utils/enums.dart';
+import 'package:sheba_plus/utils/enums.dart';
+import 'package:sheba_plus/utils/utils.dart';
+import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
 
 class AuthController extends GetxController {
+  final AuthRepository _authRepository;
+
+  AuthController(this._authRepository);
+
   final isLoggedIn = false.obs;
+  final loginProcedureLoading = false.obs;
+  final registerProcedureLoading = false.obs;
+
   final signInEmailController = TextEditingController().obs;
   final signInPasswordController = TextEditingController().obs;
 
@@ -34,11 +47,43 @@ class AuthController extends GetxController {
   }
 
   Future<bool> login() async {
-    return true;
+    try{
+      loginProcedureLoading(true);
+      await _authRepository.login(
+        loginRequest: LoginRequest(
+          email: signInEmailController.value.text,
+          password: signInPasswordController.value.text,
+        ),
+      );
+      return true;
+    }
+    catch(e){
+      return false;
+    }
+    finally{
+      loginProcedureLoading(false);
+    }
   }
 
   Future<bool> register() async {
-    return true;
+    try{
+      registerProcedureLoading(true);
+      await _authRepository.register(
+        registerRequest: RegisterRequest(
+          firstName: registerFirstNameController.value.text,
+          lastName: registerLastNameController.value.text,
+          email: registerEmailController.value.text,
+          password: registerPasswordController.value.text,
+        ),
+      );
+      return true;
+    }
+    catch(e){
+      return false;
+    }
+    finally{
+      registerProcedureLoading(false);
+    }
   }
 
   Future<bool> facebookLogin() async {

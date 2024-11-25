@@ -17,7 +17,6 @@ dependencies:
   get_storage: ^2.1.1
   toastification: ^2.3.0
   dio: ^5.7.0
-  google_fonts: ^6.2.1
   logger: ^2.5.0
   url_launcher: ^6.3.1
   phosphor_flutter: ^2.1.0
@@ -43,6 +42,52 @@ flutter:
   assets:
     - assets/carousel/
     - assets/images/
+
+  fonts:
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/lato/Lato-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/lato/Lato-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/lato/Lato-Light.ttf
+          weight: 300
+        - asset: assets/fonts/lato/Lato-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/lato/Lato-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/lato/Lato-Semibold.ttf
+          weight: 600
+        - asset: assets/fonts/lato/Lato-Black.ttf
+          weight: 900
+        - asset: assets/fonts/lato/Lato-Hairline.ttf
+          weight: 100
+
+        # Italic Variants
+        - asset: assets/fonts/lato/Lato-Italic.ttf
+          style: italic
+          weight: 400
+        - asset: assets/fonts/lato/Lato-BoldItalic.ttf
+          style: italic
+          weight: 700
+        - asset: assets/fonts/lato/Lato-LightItalic.ttf
+          style: italic
+          weight: 300
+        - asset: assets/fonts/lato/Lato-ThinItalic.ttf
+          style: italic
+          weight: 100
+        - asset: assets/fonts/lato/Lato-MediumItalic.ttf
+          style: italic
+          weight: 500
+        - asset: assets/fonts/lato/Lato-SemiboldItalic.ttf
+          style: italic
+          weight: 600
+        - asset: assets/fonts/lato/Lato-BlackItalic.ttf
+          style: italic
+          weight: 900
+        - asset: assets/fonts/lato/Lato-HairlineItalic.ttf
+          style: italic
+          weight: 100
 
   
   
