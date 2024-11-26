@@ -86,7 +86,7 @@ class _RegisterFormState extends State<RegisterForm> {
       if (status) {
         Get.offAndToNamed(Routes.emailVerification);
         Utils.showSuccessToast(
-            message: "An OTP Send to your email. please verify.");
+            message: AuthScreenText.otpSentMessage);
       }
     }
   }

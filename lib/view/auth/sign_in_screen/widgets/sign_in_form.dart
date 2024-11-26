@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
@@ -70,12 +71,17 @@ class _SignInFormState extends State<SignInForm> {
                   )
                 ],
               ),
-              Text(
-                AuthScreenText.forgetPassword,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(fontSize: 14, color: AppColors.primary),
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(Routes.forgetPassword);
+                },
+                child: Text(
+                  AuthScreenText.forgetPassword,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontSize: 14, color: AppColors.primary),
+                ),
               )
             ],
           ),

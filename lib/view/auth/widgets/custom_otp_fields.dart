@@ -6,8 +6,9 @@ import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 
 class CustomOtpFields extends StatelessWidget {
   final GlobalKey formKey;
+  final Function(String) onChanged;
   CustomOtpFields({
-    super.key, required this.formKey,
+    super.key, required this.formKey, required this.onChanged,
   });
 
   final authController = Get.find<AuthController>();
@@ -63,7 +64,7 @@ class CustomOtpFields extends StatelessWidget {
           onCompleted: (code) {
             debugPrint("Completed $code");
           },
-          onChanged: (value) => authController.registerOtpCode(value),
+          onChanged: onChanged,
           beforeTextPaste: (text) {
             return true;
           },

@@ -50,4 +50,6 @@ class AuthScreenText {
   static String weHaveJustSent = "We have just sent a verification code to".tr;
   static String createAccount = "Create Account".tr;
   static String changeEmailAddress = "Change email address".tr;
+  static String sendVerificationCode = "Send Verification Code".tr;
+  static String otpSentMessage = "An OTP Send to your email. please verify.".tr;
 }

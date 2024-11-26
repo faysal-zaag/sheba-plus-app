@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 
-class OtpVerifyScreenHeader extends StatelessWidget {
+class CommonVerificationHeader extends StatelessWidget {
   final Widget headerImage;
   final String heading;
   final String description;
 
-  const OtpVerifyScreenHeader(
+  const CommonVerificationHeader(
       {super.key,
         required this.heading,
         required this.description,

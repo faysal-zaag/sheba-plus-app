@@ -14,6 +14,7 @@ import 'package:sheba_plus/view/auth/widgets/otp_verify_screen_header.dart';
 import 'package:sheba_plus/view/components/custom_appbar.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
+import 'package:sheba_plus/view/styles.dart';
 
 class CommonVerificationScreen extends StatefulWidget {
   final String heading;
@@ -22,6 +23,7 @@ class CommonVerificationScreen extends StatefulWidget {
   final String buttonLabel;
   final String bottomLeftLabel;
   final Function() bottomLeftLabelOnClick;
+  final Function(String) onChanged;
   final VoidCallback onClick;
   final Function? resendEmailOtp;
   final Function() afterCodeSent;
@@ -44,7 +46,7 @@ class CommonVerificationScreen extends StatefulWidget {
       this.forEmail,
       this.resendEmailOtp,
       required this.afterCodeSent,
-      required this.onError});
+      required this.onError, required this.onChanged});
 
   @override
   State<CommonVerificationScreen> createState() =>
@@ -81,14 +83,11 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20.0, vertical: 32),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: AppBorderRadius.circularRadius8,
-                ),
+                decoration: Styles.roundedWhite,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      OtpVerifyScreenHeader(
+                      CommonVerificationHeader(
                         heading: widget.heading,
                         description: widget.description,
                         headerImage: widget.headerImage,
@@ -128,6 +127,7 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
                       ),
                       CustomOtpFields(
                         formKey: _formKey,
+                        onChanged: widget.onChanged,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

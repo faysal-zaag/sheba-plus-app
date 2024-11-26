@@ -29,4 +29,18 @@ class AuthRepository {
       queryParameters: verificationModel.toJson(),
     );
   }
+
+  Future<Response> verifyResetPasswordEmail({required VerificationModel verificationModel}) async {
+    return await _dio.post(
+      ApiUrls.verifyResetPasswordByEmail,
+      queryParameters: verificationModel.toJson(),
+    );
+  }
+
+  Future<Response> resetPasswordByEmail({required String email}) async {
+    return await _dio.post(
+      ApiUrls.requestResetPasswordByEmail,
+      queryParameters: {"email" : email},
+    );
+  }
 }

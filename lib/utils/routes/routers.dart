@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
 import 'package:sheba_plus/middlewares/auth_middleware.dart';
-import 'package:sheba_plus/view/auth/email_verification_screen/email_verification_screen.dart';
+import 'package:sheba_plus/view/auth/register_screen/email_verification_screen.dart';
 import 'package:sheba_plus/view/auth/referral_screen/referral_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/register_screen.dart';
+import 'package:sheba_plus/view/auth/sign_in_screen/forget_password_screen.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/sign_in_screen.dart';
+import 'package:sheba_plus/view/auth/sign_in_screen/widgets/reset_password_email_verification_screen.dart';
 import 'package:sheba_plus/view/home/home_screen.dart';
 import 'package:sheba_plus/view/main/main_screen.dart';
 import 'package:sheba_plus/view/profile/profile_screen.dart';
@@ -44,6 +46,14 @@ class AppRouters {
     GetPage(
       name: Routes.emailVerification,
       page: () => const EmailVerificationScreen(),
+    ),
+    GetPage(
+      name: Routes.forgetPassword,
+      page: () => const ForgetPasswordScreen(),
+    ),
+    GetPage(
+      name: Routes.forgetPassword,
+      page: () => const ResetPasswordEmailVerificationScreen(),
     ),
   ];
 }
