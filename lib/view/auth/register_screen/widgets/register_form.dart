@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:flutter/material.dart';
 import 'package:sheba_plus/utils/utils.dart';
-import 'package:sheba_plus/utils/validators/input_validators.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
+import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/components/custom_password_field.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
@@ -30,14 +30,14 @@ class _RegisterFormState extends State<RegisterForm> {
           TextFieldWithLabel(
             controller: authController.registerFirstNameController.value,
             label: AuthScreenText.firstName,
-            hintText: AuthScreenText.emailIdHintText,
+            hintText: AuthScreenText.firstNameHintText,
             validator: (value) => InputValidators.generalValidator(
                 value: value, message: AuthScreenText.firstNameValidatorText),
           ),
           TextFieldWithLabel(
             controller: authController.registerLastNameController.value,
             label: AuthScreenText.lastName,
-            hintText: AuthScreenText.emailIdHintText,
+            hintText: AuthScreenText.lastNameHintText,
             validator: (value) => InputValidators.generalValidator(
                 value: value, message: AuthScreenText.lastNameValidatorText),
           ),
@@ -58,18 +58,23 @@ class _RegisterFormState extends State<RegisterForm> {
           Obx(
             () => CustomPasswordField(
               label: AuthScreenText.confirmPassword,
-              controller: authController.registerConfirmPasswordController.value,
+              controller:
+                  authController.registerConfirmPasswordController.value,
               obscure: authController.registerConfirmPasswordObscure.value,
               setObscure: authController.onRegisterConfirmObscureTap,
               confirmPasswordField: true,
-              passwordController: authController.registerPasswordController.value,
+              passwordController:
+                  authController.registerPasswordController.value,
             ),
           ),
           12.kH,
-          CustomPrimaryButton(
-            label: AuthScreenText.signUp,
-            onClick: register,
-          )
+          Obx(
+            () => CustomPrimaryButton(
+              loading: authController.registerProcedureLoading.isTrue,
+              label: AuthScreenText.signUp,
+              onClick: register,
+            ),
+          ),
         ],
       ),
     );
@@ -78,9 +83,10 @@ class _RegisterFormState extends State<RegisterForm> {
   void register() async {
     if (_registerFormKey.currentState!.validate()) {
       final status = await authController.register();
-      if(status){
-        Utils.showSuccessToast(message: "OTP Send to your email. please verify.");
-        Get.offAndToNamed(Routes.referral);
+      if (status) {
+        Get.offAndToNamed(Routes.emailVerification);
+        Utils.showSuccessToast(
+            message: "An OTP Send to your email. please verify.");
       }
     }
   }

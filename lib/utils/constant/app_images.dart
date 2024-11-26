@@ -1,6 +1,7 @@
 import 'package:sheba_plus/utils/constant/app_constants.dart';
 
 class AppImages {
+  static String otpVerification = "${AppConstants.assetImagePath}/otp-verification.png";
   static String completed = "${AppConstants.assetImagePath}/completed.png";
   static String delivered = "${AppConstants.assetImagePath}/delivered.png";
   static String giftBox = "${AppConstants.assetImagePath}/gift_box.png";

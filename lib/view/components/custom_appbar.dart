@@ -6,7 +6,7 @@ import 'package:sheba_plus/utils/routes/routes.dart'; // Import PhosphorIcons
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool userIcon;
 
-  const CustomAppBar({super.key, this.userIcon = true});
+  const CustomAppBar({super.key, this.userIcon = false});
 
   @override
   Widget build(BuildContext context) {

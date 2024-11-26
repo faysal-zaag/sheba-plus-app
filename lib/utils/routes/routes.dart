@@ -6,4 +6,5 @@ class Routes {
   static const String profile = '/profile';
   static const String register = '/register';
   static const String referral = '/referral';
+  static const String emailVerification = '/email-verification';
 }

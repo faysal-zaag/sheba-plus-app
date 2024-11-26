@@ -75,7 +75,7 @@ class DialogHelper {
     );
   }
 
-  static void showLoading([String? message]) {
+  static void showLoading({String message = "Please wait..."}) {
     Get.dialog(
       Dialog(
         shape: RoundedRectangleBorder(
@@ -87,7 +87,7 @@ class DialogHelper {
             children: [
               const CustomLoader(),
               const SizedBox(height: 8),
-              Text(message ?? 'Loading...'),
+              Text(message),
             ],
           ),
         ),

@@ -22,7 +22,9 @@ class AuthScreenText {
       "Please fill up the form to register your  account!".tr;
   static String signUp = "Sign up".tr;
   static String firstName = "First name".tr;
+  static String firstNameHintText = "John".tr;
   static String lastName = "Last name".tr;
+  static String lastNameHintText = "Doe".tr;
   static String confirmPassword = "Confirm password".tr;
   static String firstNameValidatorText = "First name is required".tr;
   static String lastNameValidatorText = "Last name is required".tr;
@@ -37,7 +39,15 @@ class AuthScreenText {
           .tr;
   static String existingUserName = "Existing User’s Name".tr;
   static String nameRequired = "Name is required".tr;
-  static String existingUserNameHintText = "name of the person you're referring".tr;
+  static String existingUserNameHintText =
+      "name of the person you're referring".tr;
   static String existingUserPhoneNumber = "Existing User’s Phone Number".tr;
-  static String existingUserPhoneNumberHintText = "phone number of the referred person".tr;
+  static String existingUserPhoneNumberHintText =
+      "phone number of the referred person".tr;
+
+  // email verification
+  static String emailVerificationHeader = "Verify email address".tr;
+  static String weHaveJustSent = "We have just sent a verification code to".tr;
+  static String createAccount = "Create Account".tr;
+  static String changeEmailAddress = "Change email address".tr;
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/models/login/login_request.model.dart';
 import 'package:sheba_plus/models/register/register_request.model.dart';
+import 'package:sheba_plus/models/verification/verification_model.dart';
 import 'package:sheba_plus/utils/enums.dart';
 import 'package:sheba_plus/utils/enums.dart';
 import 'package:sheba_plus/utils/utils.dart';
@@ -15,6 +16,7 @@ class AuthController extends GetxController {
   final isLoggedIn = false.obs;
   final loginProcedureLoading = false.obs;
   final registerProcedureLoading = false.obs;
+  final otpVerificationProcessLoading = false.obs;
 
   final signInEmailController = TextEditingController().obs;
   final signInPasswordController = TextEditingController().obs;
@@ -24,6 +26,9 @@ class AuthController extends GetxController {
   final registerEmailController = TextEditingController().obs;
   final registerPasswordController = TextEditingController().obs;
   final registerConfirmPasswordController = TextEditingController().obs;
+
+  final registerResendCode = false.obs;
+  final registerOtpCode = "".obs;
 
   final signInPasswordObscure = true.obs;
   final registerPasswordObscure = true.obs;
@@ -46,8 +51,17 @@ class AuthController extends GetxController {
     keepLoggedIn(!keepLoggedIn.value);
   }
 
+  void cleanRegistrationData(){
+    registerFirstNameController.value.clear();
+    registerLastNameController.value.clear();
+    registerEmailController.value.clear();
+    registerPasswordController.value.clear();
+    registerConfirmPasswordController.value.clear();
+    registerOtpCode("");
+  }
+
   Future<bool> login() async {
-    try{
+    try {
       loginProcedureLoading(true);
       await _authRepository.login(
         loginRequest: LoginRequest(
@@ -56,17 +70,15 @@ class AuthController extends GetxController {
         ),
       );
       return true;
-    }
-    catch(e){
+    } catch (e) {
       return false;
-    }
-    finally{
+    } finally {
       loginProcedureLoading(false);
     }
   }
 
   Future<bool> register() async {
-    try{
+    try {
       registerProcedureLoading(true);
       await _authRepository.register(
         registerRequest: RegisterRequest(
@@ -77,12 +89,44 @@ class AuthController extends GetxController {
         ),
       );
       return true;
-    }
-    catch(e){
+    } catch (e) {
       return false;
-    }
-    finally{
+    } finally {
       registerProcedureLoading(false);
+    }
+  }
+
+  Future<bool> resendOtp() async {
+    try {
+      await _authRepository.register(
+        registerRequest: RegisterRequest(
+          firstName: registerFirstNameController.value.text,
+          lastName: registerLastNameController.value.text,
+          email: registerEmailController.value.text,
+          password: registerPasswordController.value.text,
+        ),
+      );
+      return true;
+    } catch (e) {
+      return false;
+    } finally {
+    }
+  }
+
+  Future<bool> verifyEmail() async {
+    try {
+      otpVerificationProcessLoading(true);
+      await _authRepository.verifyEmail(
+        verificationModel: VerificationModel(
+          code: int.parse(registerOtpCode.value),
+          email: registerEmailController.value.text,
+        ),
+      );
+      return true;
+    } catch (e) {
+      return false;
+    } finally {
+      otpVerificationProcessLoading(false);
     }
   }
 

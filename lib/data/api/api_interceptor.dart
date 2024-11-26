@@ -7,9 +7,21 @@ import 'package:sheba_plus/utils/utils.dart';
 class ApiInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // Log the request
-    debugPrint("${options.method} : ${options.uri}");
-    // Add any custom headers here
+    try {
+      final requestData = options.data;
+      final dataToLog = requestData is FormData
+          ? requestData.fields.toString() // Handle FormData safely
+          : requestData?.toString() ?? "No Data";
+
+      Log.info("API Request", data: {
+        "Method": options.method,
+        "Url": options.uri.toString(),
+        "Headers": options.headers,
+        "Data": dataToLog,
+      });
+    } catch (e) {
+      Log.error("Error logging API Request", error: e);
+    }
     options.headers['Authorization'] = "Bearer ${StorageService().getAuthToken()}";
     handler.next(options); // Continue the request
   }
