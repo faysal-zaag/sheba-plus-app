@@ -54,6 +54,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       obscureText: obscure ?? false,
       autovalidateMode: autoValidateMode ?? AutovalidateMode.onUserInteraction,
+      enabled: !readOnly,
       decoration: InputDecoration(
           focusedBorder: readOnly == true
               ? OutlineInputBorder(

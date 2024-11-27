@@ -72,7 +72,7 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: CustomAppBar(),
       body: widget.loading == true
           ? const Center(
               child: CustomLoader(),

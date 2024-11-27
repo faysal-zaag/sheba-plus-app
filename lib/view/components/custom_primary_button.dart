@@ -61,7 +61,7 @@ class CustomPrimaryButton extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                fontSize: fontSize ?? 14,
+                fontSize: fontSize ?? 16,
                 color: labelColor ?? AppColors.white,
               ),
             ),

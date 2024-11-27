@@ -21,9 +21,7 @@ class ReferralScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: const CustomAppBar(
-        userIcon: false,
-      ),
+      appBar: CustomAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: AppPaddings.screenPadding,

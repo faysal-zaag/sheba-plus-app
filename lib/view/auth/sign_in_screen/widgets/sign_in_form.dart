@@ -104,7 +104,7 @@ class _SignInFormState extends State<SignInForm> {
       final response = await authController.login();
       if (response) {
         authController.cleanSignInData();
-        Get.offAndToNamed(Routes.main);
+        Get.offAndToNamed(Routes.home);
         Utils.showSuccessToast(message: AuthScreenText.loggedInSuccessMessage);
       }
     }

@@ -20,7 +20,7 @@ class RegisterScreen extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: CustomAppBar(
         userIcon: false,
       ),
       body: SingleChildScrollView(

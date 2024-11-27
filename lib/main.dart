@@ -13,7 +13,7 @@ import 'package:toastification/toastification.dart';
 void main() async {
   await GetStorage.init();
   runApp(
-    kIsWeb && defaultTargetPlatform == TargetPlatform.linux
+    kIsWeb
         ? DevicePreview(
             enabled: true,
             builder: (context) => const MyApp(),
@@ -30,11 +30,11 @@ class MyApp extends StatelessWidget {
     return ToastificationWrapper(
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
+        initialBinding: MyBindings(),
         title: 'Sheba Plus',
         theme: AppTheme.lightTheme,
         getPages: AppRouters.routes,
         initialRoute: Routes.splash,
-        initialBinding: MyBindings(),
         builder: DevicePreview.appBuilder, // Add this for device preview
       ),
     );

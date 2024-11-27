@@ -95,6 +95,9 @@ class AuthController extends GetxController {
 
       final profileResponse = await _authRepository.getProfile(accessToken: accessToken);
       _profileController.user(User.fromJson(profileResponse.data["info"]));
+      _profileController.userFirstNameController.value.text = _profileController.user.value.firstName;
+      _profileController.userLastNameController.value.text = _profileController.user.value.lastName;
+      _profileController.userEmailController.value.text = _profileController.user.value.email;
       isLoggedIn(true);
 
       if(keepLoggedIn.isTrue){
@@ -127,6 +130,23 @@ class AuthController extends GetxController {
       registerProcedureLoading(false);
     }
   }
+
+  // Future<bool> getUserProfile() async{
+  //   try{
+  //     if(_storageService.getAuthToken() == null){
+  //       return false;
+  //     }
+  //     else{
+  //       final profileResponse = await _authRepository.getProfile();
+  //       _profileController.user(User.fromJson(profileResponse.data["info"]));
+  //       return true;
+  //     }
+  //   }
+  //   catch(e){
+  //     Log.error(e.toString());
+  //     return false;
+  //   }
+  // }
 
   Future<bool> resendOtp() async {
     try {

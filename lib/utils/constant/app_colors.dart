@@ -20,4 +20,5 @@ class AppColors{
   static const Color divider = Color(0xffE9E9E9);
   static const Color paragraph = Color(0xff515151);
   static const Color subtext = Color(0xff333333);
+  static const Color icon = Color(0xff7A8699);
 }

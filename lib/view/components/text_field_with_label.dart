@@ -28,7 +28,11 @@ class TextFieldWithLabel extends StatelessWidget {
     this.maxLine = 1,
     this.required = true,
     this.labelStyle,
-    this.validator, this.textInputType, this.readOnly, this.onTap, this.onChange,
+    this.validator,
+    this.textInputType,
+    this.readOnly,
+    this.onTap,
+    this.onChange,
   });
 
   @override
@@ -40,9 +44,13 @@ class TextFieldWithLabel extends StatelessWidget {
           children: [
             Text(
               label,
-              style: labelStyle ?? Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.blackTitle),
+              style: labelStyle ??
+                  Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: AppColors.blackTitle),
             ),
-            if (required == true)
+            if (required == true && readOnly == false)
               const Text(
                 " *",
                 style: TextStyle(color: AppColors.error),

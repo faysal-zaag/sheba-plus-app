@@ -41,6 +41,7 @@ class AuthScreenText {
   static String nameRequired = "Name is required".tr;
   static String existingUserNameHintText =
       "name of the person you're referring".tr;
+  static String phoneNumber = "Phone Number".tr;
   static String existingUserPhoneNumber = "Existing User’s Phone Number".tr;
   static String existingUserPhoneNumberHintText =
       "phone number of the referred person".tr;
@@ -54,6 +55,7 @@ class AuthScreenText {
   static String weHaveJustSent = "We have just sent a verification code to".tr;
   static String createAccount = "Create Account".tr;
   static String changeEmailAddress = "Change email address".tr;
+  static String changePassword = "Change password".tr;
   static String sendVerificationCode = "Send Verification Code".tr;
   static String otpSentMessage = "An OTP Send to your email. please verify.".tr;
   static String forgetPasswordHeadline = "By giving your email address you can go to the next phase".tr;

@@ -23,5 +23,6 @@ class MyBindings implements Bindings {
     Get.put(ProfileController());
 
     Get.put<AuthController>(AuthController(Get.find<AuthRepository>(), Get.find<StorageService>(), Get.find<ProfileController>()));
+
   }
 }

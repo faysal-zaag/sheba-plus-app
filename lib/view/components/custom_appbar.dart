@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:sheba_plus/utils/routes/routes.dart'; // Import PhosphorIcons
+import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool userIcon;
+  final bool displayCenter;
 
-  const CustomAppBar({super.key, this.userIcon = false});
+  CustomAppBar({super.key, this.userIcon = false, this.displayCenter = false});
+
+  final authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +26,17 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? [
               IconButton(
                   onPressed: () {
-                    Get.toNamed(Routes.signIn);
+                    if (authController.isLoggedIn.isTrue) {
+                      Get.toNamed(Routes.profile);
+                    } else {
+                      Get.toNamed(Routes.signIn);
+                    }
                   },
                   icon: Icon(PhosphorIcons.user()))
             ]
-          : null,
+          : displayCenter && authController.isLoggedIn.isFalse
+              ? []
+              : null,
     );
   }
 
