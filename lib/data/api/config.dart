@@ -1,13 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sheba_plus/data/api/api_urls.dart';
+import 'package:sheba_plus/data/services/storage_service.dart';
 import 'api_interceptor.dart';
 
 class Api {
+  final StorageService _storageService;
+
   final Dio dio = Dio();
   final getStorage = GetStorage();
 
-  Api() {
+  Api(this._storageService) {
     dio.options = BaseOptions(
       baseUrl: ApiUrls.baseApiUrl,
       headers: {
@@ -19,6 +22,6 @@ class Api {
     );
 
     // Add the custom interceptor
-    dio.interceptors.add(ApiInterceptor());
+    dio.interceptors.add(ApiInterceptor(_storageService));
   }
 }

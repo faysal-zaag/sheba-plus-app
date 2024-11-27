@@ -46,10 +46,16 @@ class AuthScreenText {
       "phone number of the referred person".tr;
 
   // email verification
+  static String resendCode = "Re-send Code".tr;
+  static String verificationCode = "Verification Code".tr;
+  static String verify = "Verify".tr;
   static String emailVerificationHeader = "Verify email address".tr;
+  static String emailVerifiedSuccessfully = "Email verified successfully".tr;
   static String weHaveJustSent = "We have just sent a verification code to".tr;
   static String createAccount = "Create Account".tr;
   static String changeEmailAddress = "Change email address".tr;
   static String sendVerificationCode = "Send Verification Code".tr;
   static String otpSentMessage = "An OTP Send to your email. please verify.".tr;
+  static String forgetPasswordHeadline = "By giving your email address you can go to the next phase".tr;
+  static String loggedInSuccessMessage = "Logged in successfully".tr;
 }

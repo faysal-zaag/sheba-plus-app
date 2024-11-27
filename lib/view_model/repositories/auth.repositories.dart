@@ -16,6 +16,20 @@ class AuthRepository {
     );
   }
 
+  Future<Response> getProfile({String? accessToken}) async {
+    final options = Options(
+      headers: accessToken != null
+          ? {'Authorization': 'Bearer $accessToken'}
+          : null,
+    );
+
+    return await _dio.get(
+      ApiUrls.getProfileApiUrl,
+      options: options,
+    );
+  }
+
+
   Future<Response> register({required RegisterRequest registerRequest}) async {
     return await _dio.post(
       ApiUrls.registerApiUrl,
@@ -30,9 +44,10 @@ class AuthRepository {
     );
   }
 
-  Future<Response> verifyResetPasswordEmail({required VerificationModel verificationModel}) async {
+  Future<Response> verifyResetPasswordEmail({required VerificationModel verificationModel, required String newPassword}) async {
     return await _dio.post(
       ApiUrls.verifyResetPasswordByEmail,
+      data: {"newPassword" : newPassword},
       queryParameters: verificationModel.toJson(),
     );
   }

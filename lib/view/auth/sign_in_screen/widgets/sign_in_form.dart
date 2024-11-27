@@ -4,6 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
@@ -72,7 +73,7 @@ class _SignInFormState extends State<SignInForm> {
                 ],
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Get.toNamed(Routes.forgetPassword);
                 },
                 child: Text(
@@ -86,15 +87,26 @@ class _SignInFormState extends State<SignInForm> {
             ],
           ),
           24.kH,
-          CustomPrimaryButton(
+          Obx(
+            () => CustomPrimaryButton(
+              loading: authController.signInProcedureLoading.isTrue,
               label: AuthScreenText.signIn,
-              onClick: () {
-                if (_signInFormKey.currentState!.validate()) {
-                  authController.login();
-                }
-              })
+              onClick: login,
+            ),
+          )
         ],
       ),
     );
+  }
+
+  void login() async {
+    if (_signInFormKey.currentState!.validate()) {
+      final response = await authController.login();
+      if (response) {
+        authController.cleanSignInData();
+        Get.offAndToNamed(Routes.main);
+        Utils.showSuccessToast(message: AuthScreenText.loggedInSuccessMessage);
+      }
+    }
   }
 }

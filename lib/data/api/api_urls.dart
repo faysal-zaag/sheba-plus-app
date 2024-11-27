@@ -10,4 +10,7 @@ class ApiUrls{
   static const String verifyEmailApiUrl = "$customersApiUrl/verify/email-verification";
   static const String verifyResetPasswordByEmail = "$customersApiUrl/verify/reset-password-by-email";
   static const String requestResetPasswordByEmail = "$customersApiUrl/request/reset-password-by-email";
+
+  // Profile
+  static const String getProfileApiUrl = "$securedApiUrl/users/profile";
 }

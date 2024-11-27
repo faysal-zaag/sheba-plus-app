@@ -1,20 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/models/login/login_request.model.dart';
 import 'package:sheba_plus/models/register/register_request.model.dart';
+import 'package:sheba_plus/models/user/user.dart';
 import 'package:sheba_plus/models/verification/verification_model.dart';
 import 'package:sheba_plus/utils/enums.dart';
 import 'package:sheba_plus/utils/enums.dart';
+import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/utils/utils.dart';
+import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
 
 class AuthController extends GetxController {
   final AuthRepository _authRepository;
+  final ProfileController _profileController;
+  final StorageService _storageService;
 
-  AuthController(this._authRepository);
+  AuthController(this._authRepository, this._storageService, this._profileController);
 
   final isLoggedIn = false.obs;
-  final loginProcedureLoading = false.obs;
+  final signInProcedureLoading = false.obs;
   final registerProcedureLoading = false.obs;
   final otpVerificationProcessLoading = false.obs;
   final otpVerificationForResetPasswordProcessLoading = false.obs;
@@ -30,6 +36,7 @@ class AuthController extends GetxController {
   final registerConfirmPasswordController = TextEditingController().obs;
 
   final forgetPasswordEmailController = TextEditingController().obs;
+  final newPasswordController = TextEditingController().obs;
 
   final registerResendCode = false.obs;
   final registerOtpCode = "".obs;
@@ -65,20 +72,40 @@ class AuthController extends GetxController {
     registerOtpCode("");
   }
 
+  void cleanResetPasswordData() {
+    forgetPasswordEmailController.value.clear();
+    resetPasswordByEmailOtpCode("");
+  }
+
+  void cleanSignInData() {
+    signInEmailController.value.clear();
+    signInPasswordController.value.clear();
+  }
+
   Future<bool> login() async {
     try {
-      loginProcedureLoading(true);
-      await _authRepository.login(
+      signInProcedureLoading(true);
+      final response = await _authRepository.login(
         loginRequest: LoginRequest(
           email: signInEmailController.value.text,
           password: signInPasswordController.value.text,
         ),
       );
+      String accessToken = response.data["token"]["access"];
+
+      final profileResponse = await _authRepository.getProfile(accessToken: accessToken);
+      _profileController.user(User.fromJson(profileResponse.data["info"]));
+      isLoggedIn(true);
+
+      if(keepLoggedIn.isTrue){
+        _storageService.saveAuthToken(response.data["token"]["access"]);
+      }
       return true;
     } catch (e) {
+      Log.error(e.toString());
       return false;
     } finally {
-      loginProcedureLoading(false);
+      signInProcedureLoading(false);
     }
   }
 
@@ -136,18 +163,19 @@ class AuthController extends GetxController {
 
   Future<bool> verifyResetPasswordEmail() async {
     try {
-      otpVerificationForResetPasswordProcessLoading(true);
+      otpVerificationProcessLoading(true);
       await _authRepository.verifyResetPasswordEmail(
         verificationModel: VerificationModel(
-          code: int.parse(registerOtpCode.value),
-          email: registerEmailController.value.text,
+          code: int.parse(resetPasswordByEmailOtpCode.value),
+          email: forgetPasswordEmailController.value.text,
         ),
+        newPassword: newPasswordController.value.text
       );
       return true;
     } catch (e) {
       return false;
     } finally {
-      otpVerificationForResetPasswordProcessLoading(false);
+      otpVerificationProcessLoading(false);
     }
   }
 

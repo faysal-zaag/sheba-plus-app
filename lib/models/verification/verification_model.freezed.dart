@@ -20,8 +20,7 @@ VerificationModel _$VerificationModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$VerificationModel {
-  int get code =>
-      throw _privateConstructorUsedError; // Represents the code as an integer
+  int get code => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
 
   /// Serializes this VerificationModel to a JSON map.
@@ -124,7 +123,6 @@ class _$VerificationModelImpl implements _VerificationModel {
 
   @override
   final int code;
-// Represents the code as an integer
   @override
   final String email;
 
@@ -172,7 +170,7 @@ abstract class _VerificationModel implements VerificationModel {
       _$VerificationModelImpl.fromJson;
 
   @override
-  int get code; // Represents the code as an integer
+  int get code;
   @override
   String get email;
 

@@ -1,17 +1,25 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:device_preview/device_preview.dart'; // Add device_preview package
 import 'package:sheba_plus/bindings.dart';
 import 'package:sheba_plus/utils/constant/app_theme.dart';
 import 'package:sheba_plus/utils/routes/routers.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:toastification/toastification.dart';
 
-
 void main() async {
   await GetStorage.init();
-  runApp(const MyApp());
+  runApp(
+    kIsWeb && defaultTargetPlatform == TargetPlatform.linux
+        ? DevicePreview(
+            enabled: true,
+            builder: (context) => const MyApp(),
+          )
+        : const MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -27,6 +35,7 @@ class MyApp extends StatelessWidget {
         getPages: AppRouters.routes,
         initialRoute: Routes.splash,
         initialBinding: MyBindings(),
+        builder: DevicePreview.appBuilder, // Add this for device preview
       ),
     );
   }

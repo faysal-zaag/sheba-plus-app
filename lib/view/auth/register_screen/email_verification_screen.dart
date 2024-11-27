@@ -33,9 +33,9 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       onClick: () async {
         final response = await authController.verifyResetPasswordEmail();
         if(response){
-          Utils.showSuccessToast(message: "Email verified successfully",);
+          Utils.showSuccessToast(message: AuthScreenText.emailVerifiedSuccessfully,);
           authController.cleanRegistrationData();
-          Get.offAndToNamed(Routes.signIn);
+          Get.offAndToNamed(Routes.referral);
         }
       },
       bottomLeftLabel: AuthScreenText.changeEmailAddress,
@@ -43,8 +43,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         authController.registerOtpCode("");
         Get.offAndToNamed(Routes.register);
       },
-      afterCodeSent: () {},
-      onError: () {},
       onChanged: (value) => authController.registerOtpCode(value),
     );
   }

@@ -13,15 +13,15 @@ import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
 import 'package:sheba_plus/view/styles.dart';
 
-class ForgetPasswordScreen extends StatefulWidget {
-  const ForgetPasswordScreen({super.key});
+class NewPasswordScreen extends StatefulWidget {
+  const NewPasswordScreen({super.key});
 
   @override
-  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+  State<NewPasswordScreen> createState() => _NewPasswordScreenState();
 }
 
-class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
-  final _resetPasswordFormKey = GlobalKey<FormState>();
+class _NewPasswordScreenState extends State<NewPasswordScreen> {
+  final _newPasswordFormKey = GlobalKey<FormState>();
   final authController = Get.find<AuthController>();
 
   @override
@@ -32,7 +32,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: _resetPasswordFormKey,
+          key: _newPasswordFormKey,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
             decoration: Styles.roundedWhite,
@@ -59,11 +59,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   ),
                   80.kH,
                   Obx(
-                    () => CustomPrimaryButton(
+                        () => CustomPrimaryButton(
                       loading: authController.forgetPasswordProcedureLoading.isTrue,
                       label: AuthScreenText.sendVerificationCode,
                       onClick: () {
-                        if (_resetPasswordFormKey.currentState!.validate() &&
+                        if (_newPasswordFormKey.currentState!.validate() &&
                             authController
                                 .forgetPasswordProcedureLoading.isFalse) {
                           forgetPassword();

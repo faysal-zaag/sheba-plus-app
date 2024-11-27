@@ -7,6 +7,7 @@ class Routes {
   static const String register = '/register';
   static const String referral = '/referral';
   static const String emailVerification = '/email-verification';
-  static const String emailVerificationForResetPassword = '/reset-password-email-verification';
   static const String forgetPassword = '/forget-password';
+  static const String newPassword = '/new-password';
+  static const String emailVerificationForResetPassword = '/reset-password-email-verification';
 }

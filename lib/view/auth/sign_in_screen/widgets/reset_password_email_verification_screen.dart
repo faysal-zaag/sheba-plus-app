@@ -23,29 +23,27 @@ class _ResetPasswordEmailVerificationScreenState extends State<ResetPasswordEmai
   Widget build(BuildContext context) {
     return CommonVerificationScreen(
       heading: AuthScreenText.emailVerificationHeader,
-      description:
-      "${AuthScreenText.weHaveJustSent} ${AuthUtils.getSecuredEmail(email: authController.registerEmailController.value.text)}",
+      description: "${AuthScreenText.weHaveJustSent} ${AuthUtils.getSecuredEmail(email: authController.forgetPasswordEmailController.value.text)}",
       headerImage: Image.asset(
         AppImages.otpVerification,
         width: 250,
       ),
-      buttonLabel: AuthScreenText.createAccount,
+      buttonLabel: AuthScreenText.verify,
       onClick: () async {
-        final response = await authController.verifyEmail();
+        final response = await authController.verifyResetPasswordEmail();
         if(response){
-          Utils.showSuccessToast(message: "Email verified successfully",);
-          authController.cleanRegistrationData();
+          Utils.showSuccessToast(message: AuthScreenText.emailVerifiedSuccessfully,);
+          authController.cleanResetPasswordData();
           Get.offAndToNamed(Routes.signIn);
         }
       },
       bottomLeftLabel: AuthScreenText.changeEmailAddress,
       bottomLeftLabelOnClick: () {
-        authController.registerOtpCode("");
-        Get.offAndToNamed(Routes.register);
+        authController.resetPasswordByEmailOtpCode("");
+        Get.offAndToNamed(Routes.forgetPassword);
       },
+      newPasswordField: true,
       onChanged: (value) => authController.resetPasswordByEmailOtpCode(value),
-      afterCodeSent: () {},
-      onError: () {},
     );
   }
 }
