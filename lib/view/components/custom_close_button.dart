@@ -19,15 +19,18 @@ class CustomCloseButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 24,
-      width: 24,
-      decoration: BoxDecoration(shape: BoxShape.circle, color: backgroundColor),
-      child: Center(
-        child: icon ?? Icon(
-          PhosphorIcons.x(),
-          color: iconColor,
-          size: iconSize,
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        height: 24,
+        width: 24,
+        decoration: BoxDecoration(shape: BoxShape.circle, color: backgroundColor),
+        child: Center(
+          child: icon ?? Icon(
+            PhosphorIcons.x(),
+            color: iconColor,
+            size: iconSize,
+          ),
         ),
       ),
     );

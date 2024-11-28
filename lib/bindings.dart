@@ -8,6 +8,7 @@ import 'package:sheba_plus/services/file_service.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/home/controller/home_controller.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
+import 'package:sheba_plus/view/profile/order-history/controller/order_controller.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
 import 'package:sheba_plus/view_model/repositories/profile.repository.dart';
 
@@ -25,6 +26,7 @@ class MyBindings implements Bindings {
     Get.put(NetworkController());
     Get.put(NavigationController());
     Get.put(ProfileController(Get.find<ProfileRepository>(), Get.find<FileService>()));
+    Get.put(OrderController());
 
     Get.put<AuthController>(AuthController(Get.find<AuthRepository>(), Get.find<StorageService>(), Get.find<ProfileController>()));
 

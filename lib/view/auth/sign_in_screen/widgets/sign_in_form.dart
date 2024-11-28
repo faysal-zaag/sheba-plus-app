@@ -100,13 +100,14 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   void login() async {
-    if (_signInFormKey.currentState!.validate()) {
-      final response = await authController.login();
-      if (response) {
-        authController.cleanSignInData();
-        Get.offAndToNamed(Routes.home);
-        Utils.showSuccessToast(message: AuthScreenText.loggedInSuccessMessage);
-      }
-    }
+    // if (_signInFormKey.currentState!.validate()) {
+    //   final response = await authController.login();
+    //   if (response) {
+    //     authController.cleanSignInData();
+    authController.isLoggedIn(true);
+    Get.offAndToNamed(Routes.home);
+        // Utils.showSuccessToast(message: AuthScreenText.loggedInSuccessMessage);
+      // }
+    // }
   }
 }

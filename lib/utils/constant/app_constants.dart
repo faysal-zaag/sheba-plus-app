@@ -21,12 +21,16 @@ class AppConstants {
   static const List<String> profileMenuList = [
     "Account Management",
     "Saved Address",
-    "Order History"
+    "Order History",
+    "Reward Points",
+    "Notification"
   ];
 
   static List<PhosphorIconData> profileMenuIcons = [
     PhosphorIcons.user(),
     PhosphorIcons.mapPin(),
     PhosphorIcons.clockCounterClockwise(),
+    PhosphorIcons.gift(),
+    PhosphorIcons.bell(),
   ];
 }

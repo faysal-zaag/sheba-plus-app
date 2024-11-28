@@ -25,7 +25,7 @@ class AppRouters {
     ),
     GetPage(
       name: Routes.profile,
-      page: () => const ProfileScreen(),
+      page: () => ProfileScreen(),
     ),
     GetPage(
       name: Routes.signIn,
