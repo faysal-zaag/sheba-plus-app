@@ -13,6 +13,7 @@ import 'package:sheba_plus/view/auth/widgets/custom_otp_fields.dart';
 import 'package:sheba_plus/view/auth/widgets/otp_verify_screen_header.dart';
 import 'package:sheba_plus/view/components/custom_appbar.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
+import 'package:sheba_plus/view/components/custom_password_field.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
 import 'package:sheba_plus/view/styles.dart';
@@ -45,7 +46,8 @@ class CommonVerificationScreen extends StatefulWidget {
       this.loading = false,
       this.forEmail,
       this.resendEmailOtp,
-      required this.onChanged, this.newPasswordField});
+      required this.onChanged,
+      this.newPasswordField});
 
   @override
   State<CommonVerificationScreen> createState() =>
@@ -63,7 +65,7 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
     DialogHelper.showLoading();
     final status = await authController.resendOtp();
     DialogHelper.hideLoading();
-    if(status){
+    if (status) {
       Get.offAndToNamed(Routes.emailVerification);
       Utils.showSuccessToast(message: AuthScreenText.otpSentMessage);
     }
@@ -154,11 +156,18 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
                           )
                         ],
                       ),
-                      if(widget.newPasswordField == true)
+                      if (widget.newPasswordField == true)
                         Column(
                           children: [
                             24.kH,
-                            TextFieldWithLabel(controller: authController.newPasswordController.value, label: "New Password", hintText: AuthScreenText.passwordHintText),
+                            Obx(
+                              () => CustomPasswordField(
+                                controller: authController.newPasswordController.value,
+                                obscure: authController.newPasswordObscure.value,
+                                setObscure: authController.onNewPasswordObscureTap,
+                                label: AuthScreenText.newPassword,
+                              ),
+                            ),
                           ],
                         ),
                       24.kH,

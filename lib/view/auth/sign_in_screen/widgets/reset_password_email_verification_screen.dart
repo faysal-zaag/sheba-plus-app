@@ -32,7 +32,7 @@ class _ResetPasswordEmailVerificationScreenState extends State<ResetPasswordEmai
       onClick: () async {
         final response = await authController.verifyResetPasswordEmail();
         if(response){
-          Utils.showSuccessToast(message: AuthScreenText.emailVerifiedSuccessfully,);
+          Utils.showSuccessToast(message: AuthScreenText.emailVerifiedAndPassChangeSuccessfully,);
           authController.cleanResetPasswordData();
           Get.offAndToNamed(Routes.signIn);
         }

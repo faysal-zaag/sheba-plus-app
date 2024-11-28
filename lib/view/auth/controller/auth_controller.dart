@@ -45,6 +45,7 @@ class AuthController extends GetxController {
   final signInPasswordObscure = true.obs;
   final registerPasswordObscure = true.obs;
   final registerConfirmPasswordObscure = true.obs;
+  final newPasswordObscure = true.obs;
   final keepLoggedIn = false.obs;
 
   void onSignInObscureTap() {
@@ -53,6 +54,10 @@ class AuthController extends GetxController {
 
   void onRegisterObscureTap() {
     registerPasswordObscure(!registerPasswordObscure.value);
+  }
+
+  void onNewPasswordObscureTap() {
+    newPasswordObscure(!newPasswordObscure.value);
   }
 
   void onRegisterConfirmObscureTap() {
@@ -74,6 +79,7 @@ class AuthController extends GetxController {
 
   void cleanResetPasswordData() {
     forgetPasswordEmailController.value.clear();
+    newPasswordController.value.clear();
     resetPasswordByEmailOtpCode("");
   }
 

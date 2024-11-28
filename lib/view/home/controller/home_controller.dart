@@ -5,6 +5,7 @@ class HomeController extends GetxController{
   final CarouselSliderController carouselSliderController = CarouselSliderController();
   final carouselCurrentIndex = 0.obs;
   final selectedService = 0.obs;
+  final selectedLanguage = "English".obs;
 
   void onCarouselChange(int index){
     carouselCurrentIndex(index);

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
+import 'package:sheba_plus/view/components/project_branding.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool userIcon;
@@ -15,7 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text("Sheba Plus"),
+      title: const ProjectBranding(),
       leading: IconButton(
         icon: Icon(PhosphorIcons.list()),
         onPressed: () {

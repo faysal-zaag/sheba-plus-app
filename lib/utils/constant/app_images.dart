@@ -14,4 +14,14 @@ class AppImages {
   static String apple = "${AppConstants.assetImagePath}/apple.png";
 
   static String megaSell = "${AppConstants.assetImagePath}/mega-sell.jpeg";
+
+  // flags
+  static String usaFlag = "${AppConstants.assetImagePath}/flags/usa-flag.png";
+  static String canadaFlag = "${AppConstants.assetImagePath}/flags/canada-flag.png";
+  static String bdFlag = "${AppConstants.assetImagePath}/flags/bd-flag.png";
+
+  // payment methods
+  static String visa = "${AppConstants.assetImagePath}/payment-methods/visa.png";
+  static String master = "${AppConstants.assetImagePath}/payment-methods/master.png";
+  static String paypalWhite = "${AppConstants.assetImagePath}/payment-methods/paypal.png";
 }

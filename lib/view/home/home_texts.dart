@@ -51,4 +51,6 @@ class HomeText {
           .tr;
 
   static String newlyAddedProducts = "Newly Added Products".tr;
+  static String companyAddress = "3085-3005 Kingston Road Toronto, Ontario M1M 1P1, Canada. 1-800-SEBA".tr;
+
 }

@@ -58,4 +58,18 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     fontSize: 16,
   );
+
+  static TextStyle displaySmall = const TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 12,
+  );
+  static TextStyle displayMedium = const TextStyle(
+      fontWeight: FontWeight.w600,
+      fontSize: 14,
+  );
+
+  static TextStyle displayLarge = const TextStyle(
+    fontWeight: FontWeight.w800,
+    fontSize: 16,
+  );
 }

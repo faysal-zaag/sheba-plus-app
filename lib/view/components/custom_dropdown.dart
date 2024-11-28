@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
@@ -14,6 +15,9 @@ class CustomDropdown extends StatelessWidget {
   final double borderRadius;
   final IconData icon;
   final Color iconColor;
+  final bool prefixIcon;
+  final List<PhosphorIconData> icons;
+  final TextStyle? labelStyle;
 
   const CustomDropdown({
     super.key,
@@ -25,7 +29,7 @@ class CustomDropdown extends StatelessWidget {
     this.height = 56,
     this.borderRadius = 8,
     this.icon = Icons.keyboard_arrow_down,
-    this.iconColor = AppColors.icon,
+    this.iconColor = AppColors.icon, this.prefixIcon = false, this.icons = const [], this.labelStyle,
   });
 
   @override
@@ -51,15 +55,16 @@ class CustomDropdown extends StatelessWidget {
                 value: entry.value, // The item value
                 child: Row(
                   children: [
+                    if(prefixIcon)
                     Icon(
-                      AppConstants.profileMenuIcons[entry.key],
+                      icons[entry.key],
                       // Accessing icon using index
                       size: 20,
                     ),
                     8.kW,
                     Text(
                       entry.value, // The item text
-                      style: Theme.of(context).textTheme.labelLarge,
+                      style: labelStyle ?? Theme.of(context).textTheme.labelLarge,
                     ),
                   ],
                 ),

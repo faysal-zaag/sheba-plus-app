@@ -9,6 +9,7 @@ import 'package:sheba_plus/view/components/custom_appbar.dart';
 import 'package:sheba_plus/view/home/controller/home_controller.dart';
 import 'package:sheba_plus/view/home/home_texts.dart';
 import 'package:sheba_plus/view/home/widgets/home_carousel.dart';
+import 'package:sheba_plus/view/home/widgets/drawer/home_drawer.dart';
 import 'package:sheba_plus/view/home/widgets/home_services.dart';
 import 'package:sheba_plus/view/home/widgets/newly_added_products.dart';
 
@@ -21,6 +22,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(userIcon: true,),
+      drawer: HomeDrawer(),
       backgroundColor: AppColors.white,
       body: SingleChildScrollView(
         child: Column(

@@ -8,6 +8,25 @@ class AppConstants {
     "assets/carousel/carousel-3.jpg",
   ];
 
-  static const List<String> profileMenuList = ["Account Management", "Saved Address", "Order History"];
-  static List<PhosphorIconData> profileMenuIcons = [PhosphorIcons.user(), PhosphorIcons.mapPin(), PhosphorIcons.clockCounterClockwise(),];
+  static const List<String> drawerMenuItems = [
+    "Home",
+    "Display Center",
+    "Track My Order",
+    "Help & Support",
+    "Language",
+  ];
+
+  static const List<String> languages = ["English", "Bangla"];
+
+  static const List<String> profileMenuList = [
+    "Account Management",
+    "Saved Address",
+    "Order History"
+  ];
+
+  static List<PhosphorIconData> profileMenuIcons = [
+    PhosphorIcons.user(),
+    PhosphorIcons.mapPin(),
+    PhosphorIcons.clockCounterClockwise(),
+  ];
 }

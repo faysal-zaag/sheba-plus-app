@@ -47,6 +47,8 @@ flutter:
   assets:
     - assets/carousel/
     - assets/images/
+    - assets/images/flags/
+    - assets/images/payment-methods/
 
   fonts:
     - family: Lato

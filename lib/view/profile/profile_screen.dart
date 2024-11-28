@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:sheba_plus/utils/helpers/image_uploader.dart';
 import 'package:sheba_plus/view/styles.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
@@ -39,6 +40,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onChanged: (value) =>
                     profileController.selectedProfileMenu(value),
                 selectedValue: profileController.selectedProfileMenu.value,
+                prefixIcon: true,
+                icons: AppConstants.profileMenuIcons,
               ),
             ),
             16.kH,
@@ -64,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               bottom: 0,
                               right: 0,
                               child: GestureDetector(
-                                // onTap: showImageUploaderDialog,
+                                onTap: showImageUploaderDialog,
                                 child: Container(
                                   height: 36,
                                   width: 36,
@@ -158,11 +161,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // void showImageUploaderDialog() async {
-  //   showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return ImageUploader();
-  //       });
-  // }
+  void showImageUploaderDialog() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return ImageUploader();
+        });
+  }
 }

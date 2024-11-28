@@ -29,6 +29,10 @@ class AppTheme{
       labelSmall: AppTextStyles.labelSmall,
       labelMedium: AppTextStyles.labelMedium,
       labelLarge: AppTextStyles.labelLarge,
+
+      displaySmall: AppTextStyles.displaySmall,
+      displayMedium: AppTextStyles.displayMedium,
+      displayLarge: AppTextStyles.displayLarge,
     )
   );
 }
