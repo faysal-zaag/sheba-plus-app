@@ -70,32 +70,6 @@ flutter:
         - asset: assets/fonts/lato/Lato-Hairline.ttf
           weight: 100
 
-        # Italic Variants
-        - asset: assets/fonts/lato/Lato-Italic.ttf
-          style: italic
-          weight: 400
-        - asset: assets/fonts/lato/Lato-BoldItalic.ttf
-          style: italic
-          weight: 700
-        - asset: assets/fonts/lato/Lato-LightItalic.ttf
-          style: italic
-          weight: 300
-        - asset: assets/fonts/lato/Lato-ThinItalic.ttf
-          style: italic
-          weight: 100
-        - asset: assets/fonts/lato/Lato-MediumItalic.ttf
-          style: italic
-          weight: 500
-        - asset: assets/fonts/lato/Lato-SemiboldItalic.ttf
-          style: italic
-          weight: 600
-        - asset: assets/fonts/lato/Lato-BlackItalic.ttf
-          style: italic
-          weight: 900
-        - asset: assets/fonts/lato/Lato-HairlineItalic.ttf
-          style: italic
-          weight: 100
-
   
   
   
