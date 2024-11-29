@@ -10,6 +10,7 @@ import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/auth/widgets/otp_verify_screen_header.dart';
 import 'package:sheba_plus/view/components/custom_appbar.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
+import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
 import 'package:sheba_plus/view/styles.dart';
 
@@ -26,9 +27,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return PrimaryScaffold(
       resizeToAvoidBottomInset: true,
-      appBar: CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -52,7 +52,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     ],
                   ),
                   TextFieldWithLabel(
-                    controller: authController.forgetPasswordEmailController.value,
+                    controller:
+                        authController.forgetPasswordEmailController.value,
                     label: AuthScreenText.emailId,
                     hintText: AuthScreenText.emailIdHintText,
                     validator: (value) => InputValidators.emailValidator(value),
@@ -60,7 +61,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   80.kH,
                   Obx(
                     () => CustomPrimaryButton(
-                      loading: authController.forgetPasswordProcedureLoading.isTrue,
+                      loading:
+                          authController.forgetPasswordProcedureLoading.isTrue,
                       label: AuthScreenText.sendVerificationCode,
                       onClick: () {
                         if (_resetPasswordFormKey.currentState!.validate() &&

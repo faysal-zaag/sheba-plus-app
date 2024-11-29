@@ -14,7 +14,7 @@ class CustomTab extends StatelessWidget {
     return Row(
       children: [
         ...tabItems.mapWithIndex((index, item) {
-          bool active = activeItem == item;
+          bool active = activeItem.contains(item);
 
           return Expanded(
             child: GestureDetector(

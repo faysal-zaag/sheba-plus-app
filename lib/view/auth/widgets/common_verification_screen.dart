@@ -15,6 +15,7 @@ import 'package:sheba_plus/view/components/custom_appbar.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
 import 'package:sheba_plus/view/components/custom_password_field.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
+import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
 import 'package:sheba_plus/view/styles.dart';
 
@@ -73,8 +74,7 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(),
+    return PrimaryScaffold(
       body: widget.loading == true
           ? const Center(
               child: CustomLoader(),
@@ -162,9 +162,12 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
                             24.kH,
                             Obx(
                               () => CustomPasswordField(
-                                controller: authController.newPasswordController.value,
-                                obscure: authController.newPasswordObscure.value,
-                                setObscure: authController.onNewPasswordObscureTap,
+                                controller:
+                                    authController.newPasswordController.value,
+                                obscure:
+                                    authController.newPasswordObscure.value,
+                                setObscure:
+                                    authController.onNewPasswordObscureTap,
                                 label: AuthScreenText.newPassword,
                               ),
                             ),

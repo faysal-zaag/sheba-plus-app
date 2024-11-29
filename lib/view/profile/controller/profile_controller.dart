@@ -5,7 +5,9 @@ import 'package:sheba_plus/models/user/user.dart';
 import 'package:sheba_plus/services/file_service.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/view/profile/account-management/account_management_screen.dart';
+import 'package:sheba_plus/view/profile/notification/notification_screen.dart';
 import 'package:sheba_plus/view/profile/order-history/order_history_screen.dart';
+import 'package:sheba_plus/view/profile/reward-points/reward_points_screen.dart';
 import 'package:sheba_plus/view/profile/saved-address/saved_address_screen.dart';
 import 'package:sheba_plus/view_model/repositories/profile.repository.dart';
 
@@ -31,8 +33,8 @@ class ProfileController extends GetxController{
     "Account Management": const AccountManagementScreen(),
     "Saved Address": const SavedAddressScreen(),
     "Order History": const OrderHistoryScreen(),
-    "Reward Points": const OrderHistoryScreen(),
-    "Notification": const OrderHistoryScreen(),
+    "Reward Points": const RewardPointsScreen(),
+    "Notification": NotificationScreen(),
   };
 
   Widget getSelectedScreen() {
