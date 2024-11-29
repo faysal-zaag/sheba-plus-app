@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
+import 'package:sheba_plus/view/styles.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
@@ -55,52 +56,16 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscure ?? false,
       autovalidateMode: autoValidateMode ?? AutovalidateMode.onUserInteraction,
       enabled: !readOnly,
-      decoration: InputDecoration(
-          focusedBorder: readOnly == true
-              ? OutlineInputBorder(
-                  borderRadius:
-                      customBorder ?? BorderRadius.circular(borderRadius),
-                  borderSide:
-                      const BorderSide(color: AppColors.border, width: 1.0),
-                )
-              : OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: AppColors.primary, width: 1.0),
-                  borderRadius:
-                      customBorder ?? BorderRadius.circular(borderRadius),
-                ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.error, width: 1.0),
-            borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
-            borderSide: BorderSide(
-                color: const Color(0xff000000).withOpacity(0.1), width: 1.0),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
-            borderSide: BorderSide(
-                color: const Color(0xff000000).withOpacity(0.1), width: 1.0),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.error, width: 1.0),
-            borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
-          ),
-          contentPadding: const EdgeInsets.only(bottom: 0.0, top: 15.0),
-          prefix: const Padding(
-            padding: EdgeInsets.only(left: 15.0),
-          ),
-          errorStyle: Theme.of(context)
-              .textTheme
-              .labelSmall
-              ?.copyWith(color: AppColors.error),
-          fillColor: color,
-          filled: true,
-          hintText: hintText ?? "",
-          hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.hintText),
-          suffixIcon: suffixIcon,
-          prefixIcon: prefixIcon),
+      decoration: Styles.getTextFieldInputDecoration(
+        context: context,
+        fillColor: color,
+        borderRadius: borderRadius,
+        customBorder: customBorder,
+        hintText: hintText,
+        prefixIcon: prefixIcon,
+        readOnly: readOnly,
+        suffixIcon: suffixIcon,
+      ),
       onChanged: onChange,
       controller: textEditingController,
       readOnly: readOnly,

@@ -48,6 +48,14 @@ class AuthController extends GetxController {
   final newPasswordObscure = true.obs;
   final keepLoggedIn = false.obs;
 
+  final registerAddressStreetController = TextEditingController().obs;
+  final registerAddressStreet2Controller = TextEditingController().obs;
+  final registerAddressCityController = TextEditingController().obs;
+  final registerAddressSelectedState = "".obs;
+  final registerAddressZipCodeController = TextEditingController().obs;
+  final registerAddressSelectedCountry = "".obs;
+  final registerAddressAdditionalInfo = TextEditingController().obs;
+
   void onSignInObscureTap() {
     signInPasswordObscure(!signInPasswordObscure.value);
   }
@@ -88,6 +96,17 @@ class AuthController extends GetxController {
     signInPasswordController.value.clear();
   }
 
+  Future<void> isAuthenticated({String? accessToken}) async{
+    if(accessToken != null){
+      final profileResponse = await _authRepository.getProfile(accessToken: accessToken);
+      _profileController.user(User.fromJson(profileResponse.data["info"]));
+      _profileController.userFirstNameController.value.text = _profileController.user.value.firstName;
+      _profileController.userLastNameController.value.text = _profileController.user.value.lastName;
+      _profileController.userEmailController.value.text = _profileController.user.value.email;
+      isLoggedIn(true);
+    }
+  }
+
   Future<bool> login() async {
     try {
       signInProcedureLoading(true);
@@ -99,12 +118,7 @@ class AuthController extends GetxController {
       );
       String accessToken = response.data["token"]["access"];
 
-      final profileResponse = await _authRepository.getProfile(accessToken: accessToken);
-      _profileController.user(User.fromJson(profileResponse.data["info"]));
-      _profileController.userFirstNameController.value.text = _profileController.user.value.firstName;
-      _profileController.userLastNameController.value.text = _profileController.user.value.lastName;
-      _profileController.userEmailController.value.text = _profileController.user.value.email;
-      isLoggedIn(true);
+      await isAuthenticated(accessToken: accessToken);
 
       if(keepLoggedIn.isTrue){
         _storageService.saveAuthToken(response.data["token"]["access"]);

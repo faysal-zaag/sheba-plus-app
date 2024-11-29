@@ -9,6 +9,7 @@ import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/components/custom_password_field.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
+import 'package:sheba_plus/view/global_texts.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({super.key});
@@ -71,7 +72,7 @@ class _RegisterFormState extends State<RegisterForm> {
           Obx(
             () => CustomPrimaryButton(
               loading: authController.registerProcedureLoading.isTrue,
-              label: AuthScreenText.signUp,
+              label: GlobalTexts.next,
               onClick: register,
             ),
           ),
@@ -81,13 +82,13 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void register() async {
-    if (_registerFormKey.currentState!.validate()) {
-      final status = await authController.register();
-      if (status) {
-        Get.offAndToNamed(Routes.emailVerification);
-        Utils.showSuccessToast(
-            message: AuthScreenText.otpSentMessage);
-      }
-    }
+    // if (_registerFormKey.currentState!.validate()) {
+    //   final status = await authController.register();
+    //   if (status) {
+        Get.offAndToNamed(Routes.referral);
+    //     Utils.showSuccessToast(
+    //         message: AuthScreenText.otpSentMessage);
+    //   }
+    // }
   }
 }

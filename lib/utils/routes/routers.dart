@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
 import 'package:sheba_plus/middlewares/auth_middleware.dart';
 import 'package:sheba_plus/view/auth/register_screen/email_verification_screen.dart';
-import 'package:sheba_plus/view/auth/referral_screen/referral_screen.dart';
+import 'package:sheba_plus/view/auth/register_screen/referral_screen/referral_screen.dart';
+import 'package:sheba_plus/view/auth/register_screen/register-addres/register_adress_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/register_screen.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/forget_password_screen.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/new_password_screen.dart';
@@ -26,6 +27,10 @@ class AppRouters {
     GetPage(
       name: Routes.profile,
       page: () => ProfileScreen(),
+    ),
+    GetPage(
+      name: Routes.registerAddress,
+      page: () => const RegisterAddressScreen(),
     ),
     GetPage(
       name: Routes.signIn,

@@ -62,4 +62,18 @@ class AuthScreenText {
   static String otpSentMessage = "An OTP Send to your email. please verify.".tr;
   static String forgetPasswordHeadline = "By giving your email address you can go to the next phase".tr;
   static String loggedInSuccessMessage = "Logged in successfully".tr;
+
+  // register address screen
+  static String registerAddressHeader = "Please save your home address".tr;
+  static String streetAddress = "Street Address".tr;
+  static String streetAddressValidatorText = "$streetAddress is required".tr;
+  static String cityTown = "City/Town".tr;
+  static String cityTownValidatorText = "$cityTown is required".tr;
+  static String country = "Country".tr;
+  static String countryValidatorText = "Country is required".tr;
+  static String postalOrZip = "Postcode/ZIP".tr;
+  static String postalOrZipValidatorText = "$postalOrZip is required".tr;
+  static String state = "State".tr;
+  static String stateValidatorText = "State is required".tr;
+  static String additionalInfo = "Additional Information".tr;
 }

@@ -20,7 +20,8 @@ class ProfileScreen extends StatelessWidget {
       child: Column(
         children: [
           Obx(
-                () => CustomDropdown(
+            () => CustomDropdown(
+              height: 56,
               items: AppConstants.profileMenuList,
               onChanged: (value) =>
                   profileController.selectedProfileMenu(value),
