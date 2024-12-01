@@ -26,6 +26,7 @@ class AuthScreenText {
   static String lastName = "Last name".tr;
   static String lastNameHintText = "Doe".tr;
   static String confirmPassword = "Confirm password".tr;
+  static String confirmNewPassword = "Confirm new password".tr;
   static String firstNameValidatorText = "First name is required".tr;
   static String lastNameValidatorText = "Last name is required".tr;
   static String confirmPasswordValidatorText =
@@ -52,12 +53,15 @@ class AuthScreenText {
   static String verify = "Verify".tr;
   static String emailVerificationHeader = "Verify email address".tr;
   static String emailVerifiedSuccessfully = "Email verified successfully".tr;
-  static String emailVerifiedAndPassChangeSuccessfully = "Email verified & Password changed successfully".tr;
+  static String passwordChangeSuccessfully = "Password changed successfully".tr;
   static String weHaveJustSent = "We have just sent a verification code to".tr;
   static String createAccount = "Create Account".tr;
   static String changeEmailAddress = "Change email address".tr;
   static String changePassword = "Change password".tr;
   static String newPassword = "New password".tr;
+  static String newPasswordHintText = "New password".tr;
+  static String resetPassword = "Reset password".tr;
+  static String resetPasswordInfo = "Enter your new password to reset the password.".tr;
   static String sendVerificationCode = "Send Verification Code".tr;
   static String otpSentMessage = "An OTP Send to your email. please verify.".tr;
   static String forgetPasswordHeadline = "By giving your email address you can go to the next phase".tr;

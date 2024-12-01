@@ -44,7 +44,14 @@ class AuthRepository {
     );
   }
 
-  Future<Response> verifyResetPasswordEmail({required VerificationModel verificationModel, required String newPassword}) async {
+  Future<Response> verifyResetPasswordEmail({required VerificationModel verificationModel}) async {
+    return await _dio.post(
+      ApiUrls.verifyOtpApiUrl,
+      queryParameters: verificationModel.toJson(),
+    );
+  }
+
+  Future<Response> setNewPassword({required VerificationModel verificationModel, required String newPassword}) async {
     return await _dio.post(
       ApiUrls.verifyResetPasswordByEmail,
       data: {"newPassword" : newPassword},

@@ -27,6 +27,7 @@ class AuthController extends GetxController {
   final otpVerificationProcessLoading = false.obs;
   final otpVerificationForResetPasswordProcessLoading = false.obs;
   final forgetPasswordProcedureLoading = false.obs;
+  final setNewPasswordProcedureLoading = false.obs;
 
   final signInEmailController = TextEditingController().obs;
   final signInPasswordController = TextEditingController().obs;
@@ -39,6 +40,7 @@ class AuthController extends GetxController {
 
   final forgetPasswordEmailController = TextEditingController().obs;
   final newPasswordController = TextEditingController().obs;
+  final confirmNewPasswordController = TextEditingController().obs;
 
   final registerResendCode = false.obs;
   final registerOtpCode = "".obs;
@@ -48,6 +50,7 @@ class AuthController extends GetxController {
   final registerPasswordObscure = true.obs;
   final registerConfirmPasswordObscure = true.obs;
   final newPasswordObscure = true.obs;
+  final confirmNewPasswordObscure = true.obs;
   final keepLoggedIn = false.obs;
 
   final registerAddressMobileNumberController = TextEditingController().obs;
@@ -72,6 +75,10 @@ class AuthController extends GetxController {
 
   void onNewPasswordObscureTap() {
     newPasswordObscure(!newPasswordObscure.value);
+  }
+
+  void onConfirmNewPasswordObscureTap() {
+    confirmNewPasswordObscure(!confirmNewPasswordObscure.value);
   }
 
   void onRegisterConfirmObscureTap() {
@@ -201,7 +208,7 @@ class AuthController extends GetxController {
   Future<bool> verifyEmail() async {
     try {
       otpVerificationProcessLoading(true);
-      await _authRepository.verifyEmail(
+      await _authRepository.verifyResetPasswordEmail(
         verificationModel: VerificationModel(
           code: int.parse(registerOtpCode.value),
           email: registerEmailController.value.text,
@@ -215,6 +222,24 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<bool> setNewPassword() async {
+    try {
+      setNewPasswordProcedureLoading(true);
+      await _authRepository.setNewPassword(
+          verificationModel: VerificationModel(
+            code: int.parse(resetPasswordByEmailOtpCode.value),
+            email: forgetPasswordEmailController.value.text,
+          ),
+          newPassword: newPasswordController.value.text
+      );
+      return true;
+    } catch (e) {
+      return false;
+    } finally {
+      setNewPasswordProcedureLoading(false);
+    }
+  }
+
   Future<bool> verifyResetPasswordEmail() async {
     try {
       otpVerificationProcessLoading(true);
@@ -223,7 +248,6 @@ class AuthController extends GetxController {
           code: int.parse(resetPasswordByEmailOtpCode.value),
           email: forgetPasswordEmailController.value.text,
         ),
-        newPassword: newPasswordController.value.text
       );
       return true;
     } catch (e) {

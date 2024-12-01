@@ -1,13 +1,14 @@
 import 'package:get/get.dart';
 import 'package:sheba_plus/middlewares/auth_middleware.dart';
+import 'package:sheba_plus/view/auth/forget-password/set_new_password_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/email_verification_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/referral_screen/referral_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/register-addres/register_adress_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/register_screen.dart';
-import 'package:sheba_plus/view/auth/sign_in_screen/forget_password_screen.dart';
-import 'package:sheba_plus/view/auth/sign_in_screen/new_password_screen.dart';
+import 'package:sheba_plus/view/auth/forget-password/forget_password_screen.dart';
+import 'package:sheba_plus/view/auth/forget-password/reset_password_email_screen.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/sign_in_screen.dart';
-import 'package:sheba_plus/view/auth/sign_in_screen/widgets/reset_password_email_verification_screen.dart';
+import 'package:sheba_plus/view/auth/forget-password/reset_password_email_verification_screen.dart';
 import 'package:sheba_plus/view/home/home_screen.dart';
 import 'package:sheba_plus/view/profile/profile_screen.dart';
 import 'package:sheba_plus/view/splash_screen.dart';
@@ -57,8 +58,12 @@ class AppRouters {
       page: () => const ResetPasswordEmailVerificationScreen(),
     ),
     GetPage(
-      name: Routes.newPassword,
-      page: () => const NewPasswordScreen(),
+      name: Routes.forgetPasswordEmail,
+      page: () => const ResetPasswordEmailScreen(),
+    ),
+    GetPage(
+      name: Routes.setNewPassword,
+      page: () => const SetNewPasswordScreen(),
     ),
   ];
 }

@@ -12,7 +12,6 @@ class AddressController extends GetxController{
   final addressUpdateLoading = false.obs;
   final addresses = <Address>[].obs;
   final hasSavedAddress = false.obs;
-  // final defaultAddress = Address().obs;
 
   Future<void> getAllAddress() async {
     try {

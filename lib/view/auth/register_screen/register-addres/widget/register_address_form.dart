@@ -32,7 +32,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
       child: Column(
         children: [
           CustomTextField(
-            textEditingController:
+            controller:
                 authController.registerAddressMobileNumberController.value,
             hintText: "${AuthScreenText.mobileNumber}*",
             validator: (value) => InputValidators.generalValidator(
@@ -41,7 +41,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           ),
           16.kH,
           CustomTextField(
-              textEditingController:
+              controller:
                   authController.registerAddressStreetController.value,
               hintText: "${AuthScreenText.streetAddress}*",
               validator: (value) => InputValidators.generalValidator(
@@ -49,7 +49,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
                   message: AuthScreenText.streetAddressValidatorText)),
           16.kH,
           CustomTextField(
-              textEditingController:
+              controller:
                   authController.registerAddressStreetController.value,
               hintText: "${AuthScreenText.streetAddress} 2",
               validator: (value) => InputValidators.generalValidator(
@@ -57,7 +57,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
                   message: AuthScreenText.postalOrZipValidatorText)),
           16.kH,
           CustomTextField(
-              textEditingController:
+              controller:
                   authController.registerAddressStreetController.value,
               hintText: "${AuthScreenText.cityTown}*",
               validator: (value) => InputValidators.generalValidator(
@@ -78,7 +78,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           ),
           16.kH,
           CustomTextField(
-            textEditingController:
+            controller:
                 authController.registerAddressStreetController.value,
             hintText: "${AuthScreenText.postalOrZip}*",
             validator: (value) => InputValidators.generalValidator(

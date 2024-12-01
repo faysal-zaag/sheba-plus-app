@@ -14,14 +14,14 @@ import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
 import 'package:sheba_plus/view/styles.dart';
 
-class NewPasswordScreen extends StatefulWidget {
-  const NewPasswordScreen({super.key});
+class ResetPasswordEmailScreen extends StatefulWidget {
+  const ResetPasswordEmailScreen({super.key});
 
   @override
-  State<NewPasswordScreen> createState() => _NewPasswordScreenState();
+  State<ResetPasswordEmailScreen> createState() => _ResetPasswordEmailScreenState();
 }
 
-class _NewPasswordScreenState extends State<NewPasswordScreen> {
+class _ResetPasswordEmailScreenState extends State<ResetPasswordEmailScreen> {
   final _newPasswordFormKey = GlobalKey<FormState>();
   final authController = Get.find<AuthController>();
 
@@ -84,7 +84,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
     final response = await authController.forgetPassword();
     if (response) {
       Get.offAndToNamed(Routes.emailVerificationForResetPassword);
-      Utils.showSuccessToast(message: AuthScreenText.otpSentMessage);
+      Utils.showSuccessToast(message: AuthScreenText.otpSentMessage, alignment: Alignment.topCenter);
     }
   }
 }

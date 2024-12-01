@@ -8,6 +8,7 @@ class Routes {
   static const String registerAddress = '/register-address';
   static const String emailVerification = '/email-verification';
   static const String forgetPassword = '/forget-password';
-  static const String newPassword = '/new-password';
+  static const String forgetPasswordEmail = '/forget-password-email';
+  static const String setNewPassword = '/set-new-password';
   static const String emailVerificationForResetPassword = '/reset-password-email-verification';
 }

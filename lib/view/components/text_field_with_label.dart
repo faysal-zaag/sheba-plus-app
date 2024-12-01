@@ -63,7 +63,7 @@ class TextFieldWithLabel extends StatelessWidget {
           obscure: obscure ?? false,
           suffixIcon: suffixIcon,
           hintText: hintText,
-          textEditingController: controller,
+          controller: controller,
           maxLine: maxLine ?? 1,
           validator: validator,
           readOnly: readOnly ?? false,

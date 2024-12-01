@@ -31,24 +31,23 @@ class CommonVerificationScreen extends StatefulWidget {
   final Function? resendEmailOtp;
   final String? phoneNumber;
   final bool? loading;
-  final bool? newPasswordField;
   final bool? forEmail;
 
-  const CommonVerificationScreen(
-      {super.key,
-      required this.heading,
-      required this.description,
-      required this.headerImage,
-      required this.buttonLabel,
-      required this.onClick,
-      required this.bottomLeftLabel,
-      required this.bottomLeftLabelOnClick,
-      this.phoneNumber,
-      this.loading = false,
-      this.forEmail,
-      this.resendEmailOtp,
-      required this.onChanged,
-      this.newPasswordField});
+  const CommonVerificationScreen({
+    super.key,
+    required this.heading,
+    required this.description,
+    required this.headerImage,
+    required this.buttonLabel,
+    required this.onClick,
+    required this.bottomLeftLabel,
+    required this.bottomLeftLabelOnClick,
+    this.phoneNumber,
+    this.loading = false,
+    this.forEmail,
+    this.resendEmailOtp,
+    required this.onChanged,
+  });
 
   @override
   State<CommonVerificationScreen> createState() =>
@@ -75,6 +74,7 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return PrimaryScaffold(
+      resizeToAvoidBottomInset: true,
       body: widget.loading == true
           ? const Center(
               child: CustomLoader(),
@@ -156,23 +156,6 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
                           )
                         ],
                       ),
-                      if (widget.newPasswordField == true)
-                        Column(
-                          children: [
-                            24.kH,
-                            Obx(
-                              () => CustomPasswordField(
-                                controller:
-                                    authController.newPasswordController.value,
-                                obscure:
-                                    authController.newPasswordObscure.value,
-                                setObscure:
-                                    authController.onNewPasswordObscureTap,
-                                label: AuthScreenText.newPassword,
-                              ),
-                            ),
-                          ],
-                        ),
                       24.kH,
                       Obx(
                         () => CustomPrimaryButton(

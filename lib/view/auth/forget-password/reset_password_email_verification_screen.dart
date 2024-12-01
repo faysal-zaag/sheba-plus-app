@@ -32,9 +32,8 @@ class _ResetPasswordEmailVerificationScreenState extends State<ResetPasswordEmai
       onClick: () async {
         final response = await authController.verifyResetPasswordEmail();
         if(response){
-          Utils.showSuccessToast(message: AuthScreenText.emailVerifiedAndPassChangeSuccessfully,);
-          authController.cleanResetPasswordData();
-          Get.offAndToNamed(Routes.signIn);
+          Utils.showSuccessToast(message: AuthScreenText.emailVerifiedSuccessfully,);
+          Get.offAndToNamed(Routes.setNewPassword);
         }
       },
       bottomLeftLabel: AuthScreenText.changeEmailAddress,
@@ -42,7 +41,6 @@ class _ResetPasswordEmailVerificationScreenState extends State<ResetPasswordEmai
         authController.resetPasswordByEmailOtpCode("");
         Get.offAndToNamed(Routes.forgetPassword);
       },
-      newPasswordField: true,
       onChanged: (value) => authController.resetPasswordByEmailOtpCode(value),
     );
   }

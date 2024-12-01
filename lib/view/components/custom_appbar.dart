@@ -6,6 +6,7 @@ import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/components/project_branding.dart';
+import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool userIcon;
@@ -14,6 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   CustomAppBar({super.key, this.userIcon = false, this.displayCenter = false});
 
   final authController = Get.find<AuthController>();
+  final addressController = Get.find<AddressController>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         onSelected: (String value) async {
                           if (value == "profile") {
                             if (authController.isLoggedIn.isTrue) {
-                              Get.toNamed(Routes.profile);
+                              if(addressController.hasSavedAddress.isFalse){
+                                Get.toNamed(Routes.registerAddress);
+                              }
+                              else{
+                                Get.toNamed(Routes.profile);
+                              }
                             } else {
                               Get.toNamed(Routes.signIn);
                             }
