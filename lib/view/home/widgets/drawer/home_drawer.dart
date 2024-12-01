@@ -9,7 +9,7 @@ import 'package:sheba_plus/view/components/custom_close_button.dart';
 import 'package:sheba_plus/view/components/custom_dropdown.dart';
 import 'package:sheba_plus/view/components/project_branding.dart';
 import 'package:sheba_plus/view/home/controller/home_controller.dart';
-import 'package:sheba_plus/view/home/home_texts.dart';
+import 'package:sheba_plus/view/home/home_screen_texts.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/drawer_footer_menu_items.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/drawer_menu_item.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/drawer_social_icons.dart';

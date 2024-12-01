@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sheba_plus/middlewares/auth_middleware.dart';
+import 'package:sheba_plus/middlewares/home_middleware.dart';
 import 'package:sheba_plus/view/auth/forget-password/set_new_password_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/email_verification_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/referral_screen/referral_screen.dart';
@@ -23,7 +24,7 @@ class AppRouters {
     GetPage(
       name: Routes.home,
       page: () => HomeScreen(),
-      middlewares: [AuthMiddleware()]
+      middlewares: [HomeMiddleware(), AuthMiddleware()]
     ),
     GetPage(
       name: Routes.profile,

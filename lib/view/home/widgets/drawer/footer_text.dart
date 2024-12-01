@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/view/home/home_texts.dart';
+import 'package:sheba_plus/view/home/home_screen_texts.dart';
 
 class FooterText extends StatelessWidget {
   const FooterText({super.key});

@@ -3,7 +3,7 @@ import 'package:sheba_plus/utils/constant/app_colors.dart';
 
 class CustomAuthOption extends StatelessWidget {
   final String imagePath;
-  final Function() onTap;
+  final VoidCallback onTap;
 
   const CustomAuthOption({super.key, required this.imagePath, required this.onTap});
 

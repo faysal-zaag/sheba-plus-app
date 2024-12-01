@@ -4,6 +4,9 @@ class ApiUrls{
   static const String customerAuthApiUrl = "$baseApiUrl/auth/customer";
   static const String customersApiUrl = "$baseApiUrl/customers";
 
+  // services
+  static const String servicesApiUrl = "$baseApiUrl/modules";
+
   //Authentication
   static const String loginApiUrl = "$customerAuthApiUrl/login";
   static const String registerApiUrl = "$customerAuthApiUrl/sign-up/by-email";

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/controllers/navigation_controller.dart';
 import 'package:sheba_plus/controllers/network_controller.dart';
 import 'package:sheba_plus/data/api/config.dart';
@@ -14,6 +15,7 @@ import 'package:sheba_plus/view/profile/reward-points/controller/reward_controll
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 import 'package:sheba_plus/view_model/repositories/address.repository.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
+import 'package:sheba_plus/view_model/repositories/home.repository.dart';
 import 'package:sheba_plus/view_model/repositories/profile.repository.dart';
 
 class MyBindings implements Bindings {
@@ -23,11 +25,13 @@ class MyBindings implements Bindings {
     Get.lazyPut<StorageService>(() => StorageService());
     Get.lazyPut<Dio>(() => Api(Get.find<StorageService>()).dio);
     Get.lazyPut<FileService>(() => FileService(Get.find<Dio>()));
+    Get.lazyPut<HomeRepository>(() => HomeRepository(Get.find<Dio>()));
     Get.lazyPut<AuthRepository>(() => AuthRepository(Get.find<Dio>()));
     Get.lazyPut<ProfileRepository>(() => ProfileRepository(Get.find<Dio>()));
     Get.lazyPut<AddressRepository>(() => AddressRepository(Get.find<Dio>()));
 
-    Get.put(HomeController());
+    Get.put(GlobalController());
+    Get.put(HomeController(Get.find<HomeRepository>()));
     Get.put(NetworkController());
     Get.put(NavigationController());
     Get.put(ProfileController(Get.find<ProfileRepository>(), Get.find<FileService>()));

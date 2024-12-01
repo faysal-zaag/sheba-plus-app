@@ -4,9 +4,10 @@ import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_images.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/view/components/custom_loader.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/home/controller/home_controller.dart';
-import 'package:sheba_plus/view/home/home_texts.dart';
+import 'package:sheba_plus/view/home/home_screen_texts.dart';
 import 'package:sheba_plus/view/home/widgets/home_carousel.dart';
 import 'package:sheba_plus/view/home/widgets/home_services.dart';
 import 'package:sheba_plus/view/home/widgets/newly_added_products.dart';
@@ -66,7 +67,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             // home services
-            HomeServices(),
+            Obx(() => homeController.servicesLoading.isTrue ? const CustomLoader() : HomeServices(),),
             // mega sell image
             16.kH,
             Image.asset(AppImages.megaSell),

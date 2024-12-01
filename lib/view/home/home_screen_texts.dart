@@ -51,6 +51,10 @@ class HomeText {
           .tr;
 
   static String newlyAddedProducts = "Newly Added Products".tr;
-  static String companyAddress = "3085-3005 Kingston Road Toronto, Ontario M1M 1P1, Canada. 1-800-SEBA".tr;
-
+  static String companyAddress =
+      "3085-3005 Kingston Road Toronto, Ontario M1M 1P1, Canada. 1-800-SEBA".tr;
+  static String selectService = "Select Service".tr;
+  static String fullTermsAndConditions =
+      "Please read the terms and condition before you agree.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping.Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store."
+          .tr;
 }
