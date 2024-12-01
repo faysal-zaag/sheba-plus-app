@@ -8,6 +8,7 @@ import 'package:sheba_plus/view/auth/sign_in_screen/forget_password_screen.dart'
 import 'package:sheba_plus/view/auth/sign_in_screen/new_password_screen.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/sign_in_screen.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/widgets/reset_password_email_verification_screen.dart';
+import 'package:sheba_plus/view/display_center/screen/display_center_product_list_screen.dart';
 import 'package:sheba_plus/view/home/home_screen.dart';
 import 'package:sheba_plus/view/profile/profile_screen.dart';
 import 'package:sheba_plus/view/splash_screen.dart';
@@ -59,6 +60,10 @@ class AppRouters {
     GetPage(
       name: Routes.newPassword,
       page: () => const NewPasswordScreen(),
+    ),
+    GetPage(
+      name: Routes.displayCenterServiceProductListScreen,
+      page: () => const DisplayCenterProductListScreen(),
     ),
   ];
 }

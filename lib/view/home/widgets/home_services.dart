@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/routes/routers.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/home/controller/home_controller.dart';
 import 'package:sheba_plus/view/home/home_texts.dart';
 import 'package:sheba_plus/view/home/widgets/home_service_card.dart';
@@ -35,7 +37,7 @@ class HomeServices extends StatelessWidget {
                   .bodySmall
                   ?.copyWith(color: AppColors.subtext),
             )
-          ],
+          ], onTapService: () {},
         ),
         const Divider(),
         HomeServiceCard(
@@ -58,7 +60,9 @@ class HomeServices extends StatelessWidget {
                   .bodySmall
                   ?.copyWith(color: AppColors.subtext),
             )
-          ],
+          ], onTapService: () {
+            Get.toNamed(Routes.displayCenterServiceProductListScreen);
+        },
         ),
         const Divider(),
         HomeServiceCard(
@@ -111,7 +115,7 @@ class HomeServices extends StatelessWidget {
                     ],
                   )
                 : const SizedBox())
-          ],
+          ], onTapService: () {},
         ),
         const Divider(),
         HomeServiceCard(
@@ -148,7 +152,7 @@ class HomeServices extends StatelessWidget {
                     ],
                   )
                 : const SizedBox())
-          ],
+          ], onTapService: () {},
         ),
         const Divider(),
       ],

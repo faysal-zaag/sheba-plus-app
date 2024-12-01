@@ -6,6 +6,7 @@ import 'package:sheba_plus/data/api/config.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/services/file_service.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
+import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 import 'package:sheba_plus/view/home/controller/home_controller.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
@@ -35,6 +36,7 @@ class MyBindings implements Bindings {
     Get.put(RewardController());
     Get.put(NotificationController());
     Get.put(AddressController(Get.find<AddressRepository>()));
+    Get.put(DisplayServiceController());
 
     Get.put<AuthController>(AuthController(Get.find<AuthRepository>(), Get.find<StorageService>(), Get.find<ProfileController>(), Get.find<AddressController>()));
 

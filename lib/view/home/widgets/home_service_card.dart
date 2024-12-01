@@ -12,8 +12,9 @@ import 'package:sheba_plus/view/home/home_texts.dart';
 class HomeServiceCard extends StatelessWidget {
   final List<Widget> contents;
   final int index;
+  final Function onTapService;
 
-  HomeServiceCard({super.key, required this.contents, required this.index});
+  HomeServiceCard({super.key, required this.contents, required this.index, required this.onTapService});
 
   final homeController = Get.find<HomeController>();
 
@@ -82,7 +83,9 @@ class HomeServiceCard extends StatelessWidget {
                                           children: [
                                             CustomPrimaryButton(
                                               label: "Select Service",
-                                              onClick: () {},
+                                              onClick: () {
+                                                onTapService();
+                                              },
                                               width: 160,
                                             ),
                                           ],

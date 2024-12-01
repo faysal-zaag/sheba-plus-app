@@ -10,4 +10,5 @@ class Routes {
   static const String forgetPassword = '/forget-password';
   static const String newPassword = '/new-password';
   static const String emailVerificationForResetPassword = '/reset-password-email-verification';
+  static const String displayCenterServiceProductListScreen = '/display-center-service-products';
 }
