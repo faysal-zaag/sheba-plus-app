@@ -6,6 +6,7 @@ import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/components/custom_close_button.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
@@ -43,7 +44,7 @@ class TermsAndConditionSheet extends StatelessWidget {
               ],
             ),
           ),
-          24.kH,
+          8.kH,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Container(
@@ -105,7 +106,8 @@ class TermsAndConditionSheet extends StatelessWidget {
                     label: GlobalTexts.next,
                     onClick: () {
                       if (globalController.termsAccepted.isTrue) {
-                        Get.toNamed("");
+                        Get.toNamed(Routes.agentShoppingOrderInfoScreen);
+                        globalController.termsAccepted(false);
                       } else {
                         Utils.showErrorToast(
                             message: GlobalTexts.pleaseAcceptTermsAndCondition,

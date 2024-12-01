@@ -11,4 +11,7 @@ class Routes {
   static const String forgetPasswordEmail = '/forget-password-email';
   static const String setNewPassword = '/set-new-password';
   static const String emailVerificationForResetPassword = '/reset-password-email-verification';
+
+  // service screens
+  static const String agentShoppingOrderInfoScreen = '/agent-shopping-order-info';
 }

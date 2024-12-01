@@ -14,7 +14,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final TextStyle? labelStyle;
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
-  final bool? readOnly;
+  final bool readOnly;
   final Function? onTap;
   final String? Function(String?)? onChange;
 
@@ -30,7 +30,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.labelStyle,
     this.validator,
     this.textInputType,
-    this.readOnly,
+    this.readOnly = false,
     this.onTap,
     this.onChange,
   });
@@ -40,37 +40,42 @@ class TextFieldWithLabel extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              label,
-              style: labelStyle ??
-                  Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: AppColors.blackTitle),
-            ),
-            if (required == true && readOnly == false)
-              const Text(
-                " *",
-                style: TextStyle(color: AppColors.error),
-              ),
-          ],
-        ),
-        8.kH,
+        _buildLabel(context), // Refactored to a separate method
+        8.kH, // Custom SizedBox extension
         CustomTextField(
-          textInputType: textInputType ?? TextInputType.text,
-          obscure: obscure ?? false,
-          suffixIcon: suffixIcon,
-          hintText: hintText,
           controller: controller,
+          hintText: hintText,
+          suffixIcon: suffixIcon,
+          obscure: obscure ?? false,
           maxLine: maxLine ?? 1,
+          textInputType: textInputType ?? TextInputType.text,
           validator: validator,
           readOnly: readOnly ?? false,
+          onTap: onTap,
           onChange: onChange,
         ),
-        20.kH,
+        20.kH, // Custom SizedBox extension
       ],
+    );
+  }
+
+  Widget _buildLabel(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        style: labelStyle ??
+            Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(color: AppColors.blackTitle),
+        children: [
+          TextSpan(text: label), // Regular label text
+          if (required == true && readOnly == false)
+            const TextSpan(
+              text: " *", // Required marker
+              style: TextStyle(color: AppColors.error), // Error color for the "*"
+            ),
+        ],
+      ),
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/widgets/sign_in_form.dart';
 import 'package:sheba_plus/view/auth/widgets/social_login_options.dart';
+import 'package:sheba_plus/view/components/message_container.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/styles.dart';
 
@@ -27,22 +28,7 @@ class SignInScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Message
-              Container(
-                decoration: BoxDecoration(
-                    color: AppColors.primaryLight,
-                    borderRadius: AppBorderRadius.circularRadius4,
-                    border: Border.all(color: AppColors.primary)),
-                child: Padding(
-                  padding: AppPaddings.messagePadding,
-                  child: Text(
-                    AuthScreenText.signInScreenMessage,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(color: AppColors.subtext),
-                  ),
-                ),
-              ),
+              MessageContainer(message: AuthScreenText.signInScreenMessage),
               24.kH,
               Container(
                 width: screenWidth,
