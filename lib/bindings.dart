@@ -11,6 +11,8 @@ import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/order-history/controller/order_controller.dart';
 import 'package:sheba_plus/view/profile/reward-points/controller/reward_controller.dart';
+import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
+import 'package:sheba_plus/view_model/repositories/address.repository.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
 import 'package:sheba_plus/view_model/repositories/profile.repository.dart';
 
@@ -23,6 +25,7 @@ class MyBindings implements Bindings {
     Get.lazyPut<FileService>(() => FileService(Get.find<Dio>()));
     Get.lazyPut<AuthRepository>(() => AuthRepository(Get.find<Dio>()));
     Get.lazyPut<ProfileRepository>(() => ProfileRepository(Get.find<Dio>()));
+    Get.lazyPut<AddressRepository>(() => AddressRepository(Get.find<Dio>()));
 
     Get.put(HomeController());
     Get.put(NetworkController());
@@ -31,8 +34,9 @@ class MyBindings implements Bindings {
     Get.put(OrderController());
     Get.put(RewardController());
     Get.put(NotificationController());
+    Get.put(AddressController(Get.find<AddressRepository>()));
 
-    Get.put<AuthController>(AuthController(Get.find<AuthRepository>(), Get.find<StorageService>(), Get.find<ProfileController>()));
+    Get.put<AuthController>(AuthController(Get.find<AuthRepository>(), Get.find<StorageService>(), Get.find<ProfileController>(), Get.find<AddressController>()));
 
   }
 }

@@ -9,7 +9,7 @@ class SavedAddressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemBuilder: (_, index) => const AddressCard(address: Address(),),
+      itemBuilder: (_, index) => AddressCard(address: Address(),),
       separatorBuilder: (_, index) => 12.kH,
       itemCount: 3,
     );

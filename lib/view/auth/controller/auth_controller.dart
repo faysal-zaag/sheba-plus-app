@@ -10,14 +10,16 @@ import 'package:sheba_plus/utils/enums.dart';
 import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
+import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
 
 class AuthController extends GetxController {
   final AuthRepository _authRepository;
+  final AddressController _addressController;
   final ProfileController _profileController;
   final StorageService _storageService;
 
-  AuthController(this._authRepository, this._storageService, this._profileController);
+  AuthController(this._authRepository, this._storageService, this._profileController, this._addressController);
 
   final isLoggedIn = false.obs;
   final signInProcedureLoading = false.obs;
@@ -48,6 +50,7 @@ class AuthController extends GetxController {
   final newPasswordObscure = true.obs;
   final keepLoggedIn = false.obs;
 
+  final registerAddressMobileNumberController = TextEditingController().obs;
   final registerAddressStreetController = TextEditingController().obs;
   final registerAddressStreet2Controller = TextEditingController().obs;
   final registerAddressCityController = TextEditingController().obs;
@@ -55,6 +58,9 @@ class AuthController extends GetxController {
   final registerAddressZipCodeController = TextEditingController().obs;
   final registerAddressSelectedCountry = "".obs;
   final registerAddressAdditionalInfo = TextEditingController().obs;
+
+  final referralNameController = TextEditingController().obs;
+  final referralPhoneNumberController = TextEditingController().obs;
 
   void onSignInObscureTap() {
     signInPasswordObscure(!signInPasswordObscure.value);
@@ -97,13 +103,20 @@ class AuthController extends GetxController {
   }
 
   Future<void> isAuthenticated({String? accessToken}) async{
-    if(accessToken != null){
-      final profileResponse = await _authRepository.getProfile(accessToken: accessToken);
-      _profileController.user(User.fromJson(profileResponse.data["info"]));
-      _profileController.userFirstNameController.value.text = _profileController.user.value.firstName;
-      _profileController.userLastNameController.value.text = _profileController.user.value.lastName;
-      _profileController.userEmailController.value.text = _profileController.user.value.email;
-      isLoggedIn(true);
+    try{
+      if(accessToken != null){
+        _storageService.saveAuthToken(accessToken);
+        final profileResponse = await _authRepository.getProfile(accessToken: accessToken);
+        await _addressController.getAllAddress();
+        _profileController.user(User.fromJson(profileResponse.data["info"]));
+        _profileController.userFirstNameController.value.text = _profileController.user.value.firstName;
+        _profileController.userLastNameController.value.text = _profileController.user.value.lastName;
+        _profileController.userEmailController.value.text = _profileController.user.value.email;
+        isLoggedIn(true);
+      }
+    }
+    catch(e){
+      _storageService.removeAuthToken();
     }
   }
 
@@ -119,6 +132,7 @@ class AuthController extends GetxController {
       String accessToken = response.data["token"]["access"];
 
       await isAuthenticated(accessToken: accessToken);
+      await _addressController.getAllAddress();
 
       if(keepLoggedIn.isTrue){
         _storageService.saveAuthToken(response.data["token"]["access"]);
@@ -243,5 +257,11 @@ class AuthController extends GetxController {
 
   Future<bool> appleLogin() async {
     return true;
+  }
+
+  void logout () {
+    isLoggedIn(false);
+    _profileController.user(const User());
+    _storageService.removeAuthToken();
   }
 }

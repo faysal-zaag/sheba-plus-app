@@ -85,7 +85,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
             Colors.black.withOpacity(0.5),
             BlendMode.darken,
           ),
-          image: AssetImage(AppImages.megaSell),
+          image: AssetImage(AppImages.placeHolder),
           fit: BoxFit.cover,
         ),
       ),

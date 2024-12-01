@@ -31,11 +31,11 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       ),
       buttonLabel: AuthScreenText.createAccount,
       onClick: () async {
-        final response = await authController.verifyResetPasswordEmail();
+        final response = await authController.verifyEmail();
         if(response){
           Utils.showSuccessToast(message: AuthScreenText.emailVerifiedSuccessfully,);
           authController.cleanRegistrationData();
-          Get.offAndToNamed(Routes.referral);
+          Get.offAndToNamed(Routes.registerAddress);
         }
       },
       bottomLeftLabel: AuthScreenText.changeEmailAddress,

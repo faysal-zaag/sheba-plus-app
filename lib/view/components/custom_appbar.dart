@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/components/project_branding.dart';
 
@@ -25,15 +27,94 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: userIcon
           ? [
-              IconButton(
-                  onPressed: () {
-                    if (authController.isLoggedIn.isTrue) {
-                      Get.toNamed(Routes.profile);
-                    } else {
-                      Get.toNamed(Routes.signIn);
-                    }
-                  },
-                  icon: Icon(PhosphorIcons.user()))
+              Obx(
+                () => authController.isLoggedIn.isFalse
+                    ? IconButton(
+                        onPressed: () {
+                          Get.toNamed(Routes.signIn);
+                        },
+                        icon: Icon(
+                          PhosphorIcons.user(),
+                        ),
+                      )
+                    : PopupMenuButton(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(8.0),
+                            bottomRight: Radius.circular(8.0),
+                            topLeft: Radius.circular(8.0),
+                            topRight: Radius.circular(8.0),
+                          ),
+                        ),
+                        icon: Icon(PhosphorIcons.user()),
+                        onSelected: (String value) async {
+                          if (value == "profile") {
+                            if (authController.isLoggedIn.isTrue) {
+                              Get.toNamed(Routes.profile);
+                            } else {
+                              Get.toNamed(Routes.signIn);
+                            }
+                          } else if (value == "logout") {
+                            authController.logout();
+                            Utils.showSuccessToast(
+                                message: 'Successfully logged out');
+                          }
+                        },
+                        itemBuilder: (BuildContext context) {
+                          return <PopupMenuEntry<String>>[
+                            PopupMenuItem(
+                              value: "profile",
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(10),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      PhosphorIcons.userCircle(),
+                                      color: AppColors.subtext,
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      "My Profile",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            PopupMenuItem(
+                              value: "logout",
+                              child: Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.all(10),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      PhosphorIcons.signOut(),
+                                      color: AppColors.error,
+                                    ),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      "Logout",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall
+                                          ?.copyWith(color: AppColors.error),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ];
+                        },
+                      ),
+              )
             ]
           : displayCenter && authController.isLoggedIn.isFalse
               ? []

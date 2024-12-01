@@ -17,7 +17,7 @@ class RegisterAddressScreen extends StatelessWidget {
         padding: AppPaddings.screenPadding,
         child: Container(
           decoration: Styles.roundedWhite,
-          padding: AppPaddings.screenPadding,
+          padding: AppPaddings.allPadding16,
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

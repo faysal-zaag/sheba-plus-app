@@ -72,7 +72,7 @@ class _RegisterFormState extends State<RegisterForm> {
           Obx(
             () => CustomPrimaryButton(
               loading: authController.registerProcedureLoading.isTrue,
-              label: GlobalTexts.next,
+              label: AuthScreenText.signUp,
               onClick: register,
             ),
           ),
@@ -82,13 +82,14 @@ class _RegisterFormState extends State<RegisterForm> {
   }
 
   void register() async {
-    // if (_registerFormKey.currentState!.validate()) {
-    //   final status = await authController.register();
-    //   if (status) {
-        Get.offAndToNamed(Routes.referral);
-    //     Utils.showSuccessToast(
-    //         message: AuthScreenText.otpSentMessage);
-    //   }
-    // }
+    if (_registerFormKey.currentState!.validate()) {
+      final status = await authController.register();
+      if (status) {
+        Get.offAndToNamed(Routes.emailVerification);
+        Utils.showSuccessToast(
+          message: AuthScreenText.otpSentMessage,
+        );
+      }
+    }
   }
 }

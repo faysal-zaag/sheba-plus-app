@@ -28,14 +28,14 @@ class _ReferralFormState extends State<ReferralForm> {
       child: Column(
         children: [
           TextFieldWithLabel(
-            controller: authController.registerFirstNameController.value,
+            controller: authController.referralNameController.value,
             label: AuthScreenText.existingUserName,
             hintText: AuthScreenText.existingUserNameHintText,
             validator: (value) => InputValidators.generalValidator(
                 value: value, message: AuthScreenText.nameRequired),
           ),
           TextFieldWithLabel(
-            controller: authController.registerLastNameController.value,
+            controller: authController.referralPhoneNumberController.value,
             label: AuthScreenText.existingUserPhoneNumber,
             hintText: AuthScreenText.existingUserPhoneNumberHintText,
           ),
@@ -66,7 +66,7 @@ class _ReferralFormState extends State<ReferralForm> {
   }
 
   void skipReferring() async {
-    Get.offAndToNamed(Routes.registerAddress);
+    Get.offAndToNamed(Routes.signIn);
   }
 
   void continueReferring() async {

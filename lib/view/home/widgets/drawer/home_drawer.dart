@@ -44,7 +44,7 @@ class HomeDrawer extends StatelessWidget {
               10.kH,
               Container(
                 padding: const EdgeInsets.all(16.0),
-                height: 360,
+                height: 400,
                 child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: AppConstants.drawerMenuItems.length,

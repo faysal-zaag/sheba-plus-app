@@ -65,6 +65,8 @@ class AuthScreenText {
 
   // register address screen
   static String registerAddressHeader = "Please save your home address".tr;
+  static String mobileNumber = "Mobile number".tr;
+  static String mobileNumberValidatorText = "Mobile number is required".tr;
   static String streetAddress = "Street Address".tr;
   static String streetAddressValidatorText = "$streetAddress is required".tr;
   static String cityTown = "City/Town".tr;

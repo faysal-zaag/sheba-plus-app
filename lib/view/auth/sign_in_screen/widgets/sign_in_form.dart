@@ -11,6 +11,7 @@ import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/components/custom_password_field.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
+import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -22,6 +23,7 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
   final _signInFormKey = GlobalKey<FormState>();
   final authController = Get.find<AuthController>();
+  final addressController = Get.find<AddressController>();
 
   @override
   Widget build(BuildContext context) {
@@ -100,14 +102,17 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   void login() async {
-    // if (_signInFormKey.currentState!.validate()) {
-    //   final response = await authController.login();
-    //   if (response) {
-    //     authController.cleanSignInData();
-    authController.isLoggedIn(true);
-    Get.offAndToNamed(Routes.home);
-        // Utils.showSuccessToast(message: AuthScreenText.loggedInSuccessMessage);
-      // }
-    // }
+    if (_signInFormKey.currentState!.validate()) {
+      final response = await authController.login();
+      if (response) {
+        authController.cleanSignInData();
+        if(addressController.hasSavedAddress.isTrue) {
+          Get.offAndToNamed(Routes.home);
+        } else {
+          Get.offAndToNamed(Routes.registerAddress);
+        }
+        Utils.showSuccessToast(message: AuthScreenText.loggedInSuccessMessage);
+      }
+    }
   }
 }

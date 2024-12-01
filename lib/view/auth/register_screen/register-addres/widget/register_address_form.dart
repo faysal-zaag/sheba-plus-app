@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
@@ -30,22 +32,36 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
       child: Column(
         children: [
           CustomTextField(
-              textEditingController:
-                  authController.registerAddressStreetController.value,
-              hintText: "${AuthScreenText.streetAddress}*", validator: (value) => InputValidators.generalValidator(
-              value: value, message: AuthScreenText.streetAddressValidatorText)),
+            textEditingController:
+                authController.registerAddressMobileNumberController.value,
+            hintText: "${AuthScreenText.mobileNumber}*",
+            validator: (value) => InputValidators.generalValidator(
+                value: value,
+                message: AuthScreenText.mobileNumberValidatorText),
+          ),
           16.kH,
           CustomTextField(
               textEditingController:
                   authController.registerAddressStreetController.value,
-              hintText: "${AuthScreenText.streetAddress} 2", validator: (value) => InputValidators.generalValidator(
-              value: value, message: AuthScreenText.postalOrZipValidatorText)),
+              hintText: "${AuthScreenText.streetAddress}*",
+              validator: (value) => InputValidators.generalValidator(
+                  value: value,
+                  message: AuthScreenText.streetAddressValidatorText)),
           16.kH,
           CustomTextField(
               textEditingController:
                   authController.registerAddressStreetController.value,
-              hintText: "${AuthScreenText.cityTown}*", validator: (value) => InputValidators.generalValidator(
-              value: value, message: AuthScreenText.cityTownValidatorText)),
+              hintText: "${AuthScreenText.streetAddress} 2",
+              validator: (value) => InputValidators.generalValidator(
+                  value: value,
+                  message: AuthScreenText.postalOrZipValidatorText)),
+          16.kH,
+          CustomTextField(
+              textEditingController:
+                  authController.registerAddressStreetController.value,
+              hintText: "${AuthScreenText.cityTown}*",
+              validator: (value) => InputValidators.generalValidator(
+                  value: value, message: AuthScreenText.cityTownValidatorText)),
           16.kH,
           CustomDropdown(
             items: const ["A", "B", "C"],
@@ -53,8 +69,8 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
             selectedValue: null,
             borderColor: AppColors.border,
             hintText: "${AuthScreenText.state}*",
-            validator: (value){
-              if(authController.registerAddressSelectedCountry.isEmpty){
+            validator: (value) {
+              if (authController.registerAddressSelectedCountry.isEmpty) {
                 return AuthScreenText.stateValidatorText;
               }
               return null;
@@ -62,11 +78,12 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           ),
           16.kH,
           CustomTextField(
-              textEditingController:
-                  authController.registerAddressStreetController.value,
-              hintText: "${AuthScreenText.postalOrZip}*",
+            textEditingController:
+                authController.registerAddressStreetController.value,
+            hintText: "${AuthScreenText.postalOrZip}*",
             validator: (value) => InputValidators.generalValidator(
-                value: value, message: AuthScreenText.postalOrZipValidatorText),),
+                value: value, message: AuthScreenText.postalOrZipValidatorText),
+          ),
           16.kH,
           CustomDropdown(
             items: const ["A", "B", "C"],
@@ -74,8 +91,8 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
             selectedValue: null,
             borderColor: AppColors.border,
             hintText: "${AuthScreenText.country}*",
-            validator: (value){
-              if(authController.registerAddressSelectedCountry.isEmpty){
+            validator: (value) {
+              if (authController.registerAddressSelectedCountry.isEmpty) {
                 return AuthScreenText.countryValidatorText;
               }
               return null;
@@ -85,13 +102,21 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           TextField(
             maxLines: 10, // Allows multiple lines
             minLines: 5, // Minimum height
-            decoration: Styles.getTextFieldInputDecoration(context: context, fillColor: AppColors.white, hintText: AuthScreenText.additionalInfo),),
+            decoration: Styles.getTextFieldInputDecoration(
+                context: context,
+                fillColor: AppColors.white,
+                hintText: AuthScreenText.additionalInfo),
+          ),
           24.kH,
-          CustomPrimaryButton(label: GlobalTexts.next, onClick: (){
-            if(formKey.currentState!.validate()){
-
-            }
-          })
+          CustomPrimaryButton(
+            label: GlobalTexts.next,
+            onClick: () {
+              if (formKey.currentState!.validate()) {
+                Get.toNamed(Routes.emailVerification);
+                Utils.showSuccessToast(message: AuthScreenText.otpSentMessage);
+              }
+            },
+          )
         ],
       ),
     );

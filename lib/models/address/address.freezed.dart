@@ -20,15 +20,12 @@ Address _$AddressFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Address {
-  String get title =>
-      throw _privateConstructorUsedError; // Default to 'Unknown'
-  String get country =>
-      throw _privateConstructorUsedError; // Default to 'Unknown'
-  String get city => throw _privateConstructorUsedError; // Default to 'Unknown'
-  String get state =>
-      throw _privateConstructorUsedError; // Default to 'Unknown'
-  String get street =>
-      throw _privateConstructorUsedError; // Default to 'Unknown'
+  int get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get country => throw _privateConstructorUsedError;
+  String get city => throw _privateConstructorUsedError;
+  String get state => throw _privateConstructorUsedError;
+  String get street => throw _privateConstructorUsedError;
   int get zipCode => throw _privateConstructorUsedError;
 
   /// Serializes this Address to a JSON map.
@@ -46,7 +43,8 @@ abstract class $AddressCopyWith<$Res> {
       _$AddressCopyWithImpl<$Res, Address>;
   @useResult
   $Res call(
-      {String title,
+      {int id,
+      String title,
       String country,
       String city,
       String state,
@@ -69,6 +67,7 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? country = null,
     Object? city = null,
@@ -77,6 +76,10 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
     Object? zipCode = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -113,7 +116,8 @@ abstract class _$$AddressImplCopyWith<$Res> implements $AddressCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String title,
+      {int id,
+      String title,
       String country,
       String city,
       String state,
@@ -134,6 +138,7 @@ class __$$AddressImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? title = null,
     Object? country = null,
     Object? city = null,
@@ -142,6 +147,10 @@ class __$$AddressImplCopyWithImpl<$Res>
     Object? zipCode = null,
   }) {
     return _then(_$AddressImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -174,7 +183,8 @@ class __$$AddressImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AddressImpl implements _Address {
   const _$AddressImpl(
-      {this.title = 'Unknown',
+      {this.id = 0,
+      this.title = 'Unknown',
       this.country = 'Unknown',
       this.city = 'Unknown',
       this.state = 'Unknown',
@@ -186,31 +196,29 @@ class _$AddressImpl implements _Address {
 
   @override
   @JsonKey()
+  final int id;
+  @override
+  @JsonKey()
   final String title;
-// Default to 'Unknown'
   @override
   @JsonKey()
   final String country;
-// Default to 'Unknown'
   @override
   @JsonKey()
   final String city;
-// Default to 'Unknown'
   @override
   @JsonKey()
   final String state;
-// Default to 'Unknown'
   @override
   @JsonKey()
   final String street;
-// Default to 'Unknown'
   @override
   @JsonKey()
   final int zipCode;
 
   @override
   String toString() {
-    return 'Address(title: $title, country: $country, city: $city, state: $state, street: $street, zipCode: $zipCode)';
+    return 'Address(id: $id, title: $title, country: $country, city: $city, state: $state, street: $street, zipCode: $zipCode)';
   }
 
   @override
@@ -218,6 +226,7 @@ class _$AddressImpl implements _Address {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddressImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.country, country) || other.country == country) &&
             (identical(other.city, city) || other.city == city) &&
@@ -228,8 +237,8 @@ class _$AddressImpl implements _Address {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, title, country, city, state, street, zipCode);
+  int get hashCode => Object.hash(
+      runtimeType, id, title, country, city, state, street, zipCode);
 
   /// Create a copy of Address
   /// with the given fields replaced by the non-null parameter values.
@@ -249,7 +258,8 @@ class _$AddressImpl implements _Address {
 
 abstract class _Address implements Address {
   const factory _Address(
-      {final String title,
+      {final int id,
+      final String title,
       final String country,
       final String city,
       final String state,
@@ -259,15 +269,17 @@ abstract class _Address implements Address {
   factory _Address.fromJson(Map<String, dynamic> json) = _$AddressImpl.fromJson;
 
   @override
-  String get title; // Default to 'Unknown'
+  int get id;
   @override
-  String get country; // Default to 'Unknown'
+  String get title;
   @override
-  String get city; // Default to 'Unknown'
+  String get country;
   @override
-  String get state; // Default to 'Unknown'
+  String get city;
   @override
-  String get street; // Default to 'Unknown'
+  String get state;
+  @override
+  String get street;
   @override
   int get zipCode;
 

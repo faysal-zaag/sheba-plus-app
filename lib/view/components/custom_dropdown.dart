@@ -23,6 +23,7 @@ class CustomDropdown extends StatelessWidget {
   final bool readOnly;
   final List<PhosphorIconData> icons;
   final TextStyle? labelStyle;
+  final Widget? customButton;
   final String? Function(String?)? validator;
 
   const CustomDropdown({
@@ -42,13 +43,14 @@ class CustomDropdown extends StatelessWidget {
     this.borderColor,
     this.hintText = 'Select Item',
     this.validator,
-    this.readOnly = false, this.disableBorder = false,
+    this.readOnly = false, this.disableBorder = false, this.customButton,
   });
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
       child: DropdownButtonFormField2<String>(
+        customButton: customButton,
         decoration: Styles.getTextFieldInputDecoration(
                 context: context, fillColor: backgroundColor)
             .copyWith(

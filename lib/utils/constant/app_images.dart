@@ -14,6 +14,7 @@ class AppImages {
   static String apple = "${AppConstants.assetImagePath}/apple.png";
 
   static String megaSell = "${AppConstants.assetImagePath}/mega-sell.jpeg";
+  static String placeHolder = "${AppConstants.assetImagePath}/placeholder.jpg";
 
   // flags
   static String usaFlag = "${AppConstants.assetImagePath}/flags/usa-flag.png";

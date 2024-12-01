@@ -88,19 +88,17 @@ class NotificationCard extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              // Define the action to perform when the button is pressed
               print("Track this order clicked");
             },
             style: TextButton.styleFrom(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0), // Remove default padding
-              tapTargetSize:
-                  MaterialTapTargetSize.shrinkWrap,
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             child: Text(
               ProfileScreenTexts.trackThisOrder,
               style: Theme.of(context)
                   .textTheme
-                  .bodyMedium
+                  .labelMedium
                   ?.copyWith(color: AppColors.primary),
             ),
           ),
