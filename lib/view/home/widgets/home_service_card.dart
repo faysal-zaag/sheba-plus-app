@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
@@ -11,10 +12,12 @@ import 'package:sheba_plus/view/home/home_screen_texts.dart';
 class HomeServiceCard extends StatelessWidget {
   final List<Widget> contents;
   final int index;
+  final Function onTapService;
 
-  HomeServiceCard({super.key, required this.contents, required this.index});
+  HomeServiceCard({super.key, required this.contents, required this.index, required this.onTapService});
 
   final homeController = Get.find<HomeController>();
+  final globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +43,10 @@ class HomeServiceCard extends StatelessWidget {
                       children: [
                         homeController.selectedService.value == index
                             ? Icon(
-                          PhosphorIcons.checkCircle(
-                              PhosphorIconsStyle.fill),
-                          color: AppColors.primary,
-                        )
+                                PhosphorIcons.checkCircle(
+                                    PhosphorIconsStyle.fill),
+                                color: AppColors.primary,
+                              )
                             : Icon(PhosphorIcons.circle()),
                         8.kW,
                         Expanded(
@@ -80,8 +83,12 @@ class HomeServiceCard extends StatelessWidget {
                                     MainAxisAlignment.end,
                                     children: [
                                       CustomPrimaryButton(
-                                        label: "Select Service",
-                                        onClick: () {},
+                                        label: HomeText.selectService,
+                                        onClick: () {
+                                          globalController
+                                              .showTermsAndConditionSheet(
+                                              context: context);
+                                        },
                                         width: 160,
                                       ),
                                     ],
@@ -96,13 +103,13 @@ class HomeServiceCard extends StatelessWidget {
                     ),
                   ),
                   Obx(
-                        () => homeController.selectedService.value != index
+                    () => homeController.selectedService.value != index
                         ? Row(
-                      children: [
-                        10.kW,
-                        Icon(PhosphorIcons.caretRight()),
-                      ],
-                    )
+                            children: [
+                              10.kW,
+                              Icon(PhosphorIcons.caretRight()),
+                            ],
+                          )
                         : const SizedBox(),
                   )
                 ],

@@ -32,6 +32,7 @@ dependencies:
   image_picker: ^1.1.2
   collection: ^1.18.0
   intl_phone_field: ^3.2.0
+  flutter_svg: ^2.0.16
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +52,7 @@ flutter:
     - assets/images/
     - assets/images/flags/
     - assets/images/payment-methods/
+    - assets/icons/
 
   fonts:
     - family: Lato
