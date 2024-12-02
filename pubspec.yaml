@@ -30,6 +30,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   cached_network_image: ^3.4.1
   image_picker: ^1.1.2
+  flutter_svg: ^2.0.16
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,7 @@ flutter:
     - assets/images/
     - assets/images/flags/
     - assets/images/payment-methods/
+    - assets/icons/
 
   fonts:
     - family: Lato
