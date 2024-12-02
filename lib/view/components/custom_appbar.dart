@@ -5,8 +5,10 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/utils.dart';
+import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/components/project_branding.dart';
+import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 
 import '../display_center/widgets/display_center_app_bar_cart_widget.dart';
@@ -55,7 +57,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                         icon: Icon(PhosphorIcons.user()),
                         onSelected: (String value) async {
-                          if (value == "profile") {
+                          if (value == ProfileScreenTexts.myProfile) {
                             if (authController.isLoggedIn.isTrue) {
                               if(!hasSavedAddress){
                                 Get.toNamed(Routes.registerAddress);
@@ -66,16 +68,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                             } else {
                               Get.toNamed(Routes.signIn);
                             }
-                          } else if (value == "logout") {
+                          } else if (value == ProfileScreenTexts.logOut) {
                             authController.logout();
                             Utils.showSuccessToast(
-                                message: 'Successfully logged out');
+                                message: AuthScreenText.loggedOut);
                           }
                         },
                         itemBuilder: (BuildContext context) {
                           return <PopupMenuEntry<String>>[
                             PopupMenuItem(
-                              value: "profile",
+                              value: ProfileScreenTexts.myProfile,
                               child: Container(
                                 width: double.infinity,
                                 padding: const EdgeInsets.all(10),
@@ -89,7 +91,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                       width: 8,
                                     ),
                                     Text(
-                                      "My Profile",
+                                      ProfileScreenTexts.myProfile,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall,
@@ -99,7 +101,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                               ),
                             ),
                             PopupMenuItem(
-                              value: "logout",
+                              value: ProfileScreenTexts.logOut,
                               child: Container(
                                 width: double.infinity,
                                 padding: const EdgeInsets.all(10),
@@ -113,7 +115,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                                       width: 8,
                                     ),
                                     Text(
-                                      "Logout",
+                                      ProfileScreenTexts.logOut,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall

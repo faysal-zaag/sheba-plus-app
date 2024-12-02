@@ -66,6 +66,7 @@ class AuthScreenText {
   static String otpSentMessage = "An OTP Send to your email. please verify.".tr;
   static String forgetPasswordHeadline = "By giving your email address you can go to the next phase".tr;
   static String loggedInSuccessMessage = "Logged in successfully".tr;
+  static String loggedOut = "Successfully logged out".tr;
 
   // register address screen
   static String registerAddressHeader = "Please save your home address".tr;

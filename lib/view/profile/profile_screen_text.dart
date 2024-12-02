@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
 class ProfileScreenTexts {
+  static String myProfile = "My Profile".tr;
+  static String logOut = "Logout".tr;
   static String dateOfBirth = "Date of birth".tr;
   static String updateInformation = "Update information".tr;
   static String saveChanges = "Save changes".tr;
