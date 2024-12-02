@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:sheba_plus/data/api/api_urls.dart';
 import 'package:sheba_plus/models/login/login_request.model.dart';
+import 'package:sheba_plus/models/referral/referral.dart';
 import 'package:sheba_plus/models/register/register_request.model.dart';
 import 'package:sheba_plus/models/verification/verification_model.dart';
 
@@ -13,6 +14,13 @@ class AuthRepository {
     return await _dio.post(
       ApiUrls.loginApiUrl,
       data: loginRequest.toJson(),
+    );
+  }
+
+  Future<Response> applyReferral({required Referral referral}) async {
+    return await _dio.post(
+      ApiUrls.applyReferral,
+      data: referral.toJson(),
     );
   }
 

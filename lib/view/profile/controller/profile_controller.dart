@@ -8,6 +8,7 @@ import 'package:sheba_plus/view/profile/account-management/account_management_sc
 import 'package:sheba_plus/view/profile/notification/notification_screen.dart';
 import 'package:sheba_plus/view/profile/order-history/order_history_screen.dart';
 import 'package:sheba_plus/view/profile/reward-points/reward_points_screen.dart';
+import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 import 'package:sheba_plus/view/profile/saved-address/saved_address_screen.dart';
 import 'package:sheba_plus/view_model/repositories/profile.repository.dart';
 
@@ -30,10 +31,10 @@ class ProfileController extends GetxController{
   final userDateOfBirthController = TextEditingController().obs;
 
   final Map<String, Widget> screens = {
-    "Account Management": const AccountManagementScreen(),
-    "Saved Address": const SavedAddressScreen(),
-    "Order History": const OrderHistoryScreen(),
-    "Reward Points": const RewardPointsScreen(),
+    "Account Management":  AccountManagementScreen(),
+    "Saved Address": SavedAddressScreen(),
+    "Order History":  OrderHistoryScreen(),
+    "Reward Points":  RewardPointsScreen(),
     "Notification": NotificationScreen(),
   };
 

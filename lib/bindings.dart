@@ -35,11 +35,11 @@ class MyBindings implements Bindings {
     Get.put(HomeController(Get.find<HomeRepository>()));
     Get.put(NetworkController());
     Get.put(NavigationController());
+    Get.put(AddressController(Get.find<AddressRepository>()));
     Get.put(ProfileController(Get.find<ProfileRepository>(), Get.find<FileService>()));
     Get.put(OrderController());
     Get.put(RewardController());
     Get.put(NotificationController());
-    Get.put(AddressController(Get.find<AddressRepository>()));
     Get.put(AgentShoppingController());
 
     Get.put<AuthController>(AuthController(Get.find<AuthRepository>(), Get.find<StorageService>(), Get.find<ProfileController>(), Get.find<AddressController>()));

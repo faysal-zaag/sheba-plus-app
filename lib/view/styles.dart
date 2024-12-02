@@ -25,6 +25,7 @@ class Styles {
     required BuildContext context,
     bool readOnly = false,
     BorderRadius? customBorder,
+    Border? border,
     double borderRadius = 6.0,
     required Color fillColor,
     String? hintText,

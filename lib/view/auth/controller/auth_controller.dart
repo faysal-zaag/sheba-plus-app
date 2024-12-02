@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/models/login/login_request.model.dart';
+import 'package:sheba_plus/models/referral/referral.dart';
 import 'package:sheba_plus/models/register/register_request.model.dart';
 import 'package:sheba_plus/models/user/user.dart';
 import 'package:sheba_plus/models/verification/verification_model.dart';
@@ -19,7 +20,8 @@ class AuthController extends GetxController {
   final ProfileController _profileController;
   final StorageService _storageService;
 
-  AuthController(this._authRepository, this._storageService, this._profileController, this._addressController);
+  AuthController(this._authRepository, this._storageService,
+      this._profileController, this._addressController);
 
   final isLoggedIn = false.obs;
   final signInProcedureLoading = false.obs;
@@ -28,6 +30,7 @@ class AuthController extends GetxController {
   final otpVerificationForResetPasswordProcessLoading = false.obs;
   final forgetPasswordProcedureLoading = false.obs;
   final setNewPasswordProcedureLoading = false.obs;
+  final referralApplyingLoading = false.obs;
 
   final signInEmailController = TextEditingController().obs;
   final signInPasswordController = TextEditingController().obs;
@@ -53,17 +56,9 @@ class AuthController extends GetxController {
   final confirmNewPasswordObscure = true.obs;
   final keepLoggedIn = false.obs;
 
-  final registerAddressMobileNumberController = TextEditingController().obs;
-  final registerAddressStreetController = TextEditingController().obs;
-  final registerAddressStreet2Controller = TextEditingController().obs;
-  final registerAddressCityController = TextEditingController().obs;
-  final registerAddressSelectedState = "".obs;
-  final registerAddressZipCodeController = TextEditingController().obs;
-  final registerAddressSelectedCountry = "".obs;
-  final registerAddressAdditionalInfo = TextEditingController().obs;
-
   final referralNameController = TextEditingController().obs;
-  final referralPhoneNumberController = TextEditingController().obs;
+  final referralPhoneNumber = "".obs;
+  final referralCountryCode = "".obs;
 
   void onSignInObscureTap() {
     signInPasswordObscure(!signInPasswordObscure.value);
@@ -109,20 +104,29 @@ class AuthController extends GetxController {
     signInPasswordController.value.clear();
   }
 
-  Future<void> isAuthenticated({String? accessToken}) async{
-    try{
-      if(accessToken != null){
+  void resetReferralFields() {
+    referralNameController.value.clear();
+    referralPhoneNumber.value = "";
+    referralCountryCode.value = "";
+  }
+
+  Future<void> isAuthenticated({String? accessToken}) async {
+    try {
+      if (accessToken != null) {
         _storageService.saveAuthToken(accessToken);
-        final profileResponse = await _authRepository.getProfile(accessToken: accessToken);
+        final profileResponse =
+            await _authRepository.getProfile(accessToken: accessToken);
         await _addressController.getAllAddress();
         _profileController.user(User.fromJson(profileResponse.data["info"]));
-        _profileController.userFirstNameController.value.text = _profileController.user.value.firstName;
-        _profileController.userLastNameController.value.text = _profileController.user.value.lastName;
-        _profileController.userEmailController.value.text = _profileController.user.value.email;
+        _profileController.userFirstNameController.value.text =
+            _profileController.user.value.firstName;
+        _profileController.userLastNameController.value.text =
+            _profileController.user.value.lastName;
+        _profileController.userEmailController.value.text =
+            _profileController.user.value.email;
         isLoggedIn(true);
       }
-    }
-    catch(e){
+    } catch (e) {
       _storageService.removeAuthToken();
     }
   }
@@ -141,7 +145,7 @@ class AuthController extends GetxController {
       await isAuthenticated(accessToken: accessToken);
       await _addressController.getAllAddress();
 
-      if(keepLoggedIn.isTrue){
+      if (keepLoggedIn.isTrue) {
         _storageService.saveAuthToken(response.data["token"]["access"]);
       }
       return true;
@@ -172,22 +176,23 @@ class AuthController extends GetxController {
     }
   }
 
-  // Future<bool> getUserProfile() async{
-  //   try{
-  //     if(_storageService.getAuthToken() == null){
-  //       return false;
-  //     }
-  //     else{
-  //       final profileResponse = await _authRepository.getProfile();
-  //       _profileController.user(User.fromJson(profileResponse.data["info"]));
-  //       return true;
-  //     }
-  //   }
-  //   catch(e){
-  //     Log.error(e.toString());
-  //     return false;
-  //   }
-  // }
+  Future<bool> applyReferral() async {
+    try {
+      referralApplyingLoading(true);
+      _authRepository.applyReferral(
+        referral: Referral(
+          fullName: referralNameController.value.text,
+          countryCode: referralCountryCode.value,
+          mobileNumber: referralPhoneNumber.value,
+        ),
+      );
+      return true;
+    } catch (e) {
+      return false;
+    } finally {
+      referralApplyingLoading(false);
+    }
+  }
 
   Future<bool> resendOtp() async {
     try {
@@ -230,8 +235,7 @@ class AuthController extends GetxController {
             code: int.parse(resetPasswordByEmailOtpCode.value),
             email: forgetPasswordEmailController.value.text,
           ),
-          newPassword: newPasswordController.value.text
-      );
+          newPassword: newPasswordController.value.text);
       return true;
     } catch (e) {
       return false;
@@ -283,7 +287,7 @@ class AuthController extends GetxController {
     return true;
   }
 
-  void logout () {
+  void logout() {
     isLoggedIn(false);
     _profileController.user(const User());
     _storageService.removeAuthToken();

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_textstyles.dart';
 
@@ -10,8 +11,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         color: AppColors.primary,
         titleSpacing: 0,
-        titleTextStyle:
-            AppTextStyles.headlineSmall.copyWith(color: AppColors.white),
+        titleTextStyle: AppTextStyles.headlineSmall.copyWith(color: AppColors.white),
         foregroundColor: AppColors.white,
       ),
       textButtonTheme: TextButtonThemeData(
@@ -26,6 +26,11 @@ class AppTheme {
             },
           ),
         ),
+      ),
+      dialogTheme: DialogTheme(
+        shape: OutlineInputBorder(
+          borderRadius: AppBorderRadius.circularRadius2
+        )
       ),
       textTheme: TextTheme(
         headlineSmall: AppTextStyles.headlineSmall,

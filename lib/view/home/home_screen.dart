@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             // home services
-            Obx(() => homeController.servicesLoading.isTrue ? const CustomLoader() : HomeServices(),),
+            HomeServices(),
             // mega sell image
             16.kH,
             Image.asset(AppImages.megaSell),

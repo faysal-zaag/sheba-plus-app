@@ -7,9 +7,9 @@ class AddressRepository {
   final Dio _dio;
   AddressRepository(this._dio);
 
-  Future<Response> createAddress(Address addressData) async {
+  Future<Response> createAddress({required Address addressData}) async {
     return await _dio.post(
-      ApiUrls.addressApiUrl,
+      "${ApiUrls.addressApiUrl}/create",
       data: addressData.toJson(),
     );
   }

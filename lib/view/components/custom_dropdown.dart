@@ -2,14 +2,13 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
-import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/styles.dart';
 
 class CustomDropdown extends StatelessWidget {
   final List<String> items;
   final Function(String?) onChanged;
-  final String? selectedValue;
+  final String selectedValue;
   final String hintText;
   final Color backgroundColor;
   final Color? borderColor;
@@ -99,14 +98,14 @@ class CustomDropdown extends StatelessWidget {
               ),
             )
             .toList(),
-        value: selectedValue,
+        value: selectedValue.isEmpty ? null : selectedValue,
         onChanged: onChanged,
         buttonStyleData: ButtonStyleData(
           // decoration: BoxDecoration(
           //     color: backgroundColor,
           //     border: Border.all(color: borderColor ?? Colors.transparent),
           //     borderRadius: BorderRadius.circular(borderRadius)),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 6),
           height: height,
           width: width,
         ),

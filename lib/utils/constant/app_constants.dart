@@ -1,4 +1,5 @@
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:sheba_plus/models/country.dart';
 
 class AppConstants {
   static const assetImagePath = "assets/images";
@@ -32,5 +33,10 @@ class AppConstants {
     PhosphorIcons.clockCounterClockwise(),
     PhosphorIcons.gift(),
     PhosphorIcons.bell(),
+  ];
+
+  static List<Country> countries = [
+    Country(name: "Bangladesh", countryCode: "+880", isoCode: "BD"),
+    Country(name: "Canada", countryCode: "+1", isoCode: "CA"),
   ];
 }

@@ -22,7 +22,7 @@ class AddressCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(child: Text(address.title, style: Theme.of(context).textTheme.labelLarge,)),
-              IconButton(onPressed: (){}, icon: Icon(PhosphorIcons.pencilSimple()))
+              IconButton(onPressed: () => showEditAddressBottomSheet(context, address), icon: Icon(PhosphorIcons.pencilSimple(), color: AppColors.primary,))
             ],
           ),
           8.kH,
@@ -39,4 +39,22 @@ class AddressCard extends StatelessWidget {
       ),
     );
   }
+
+  void showEditAddressBottomSheet(BuildContext context, Address address) {
+    showModalBottomSheet(
+      context: context,
+      shape: const ContinuousRectangleBorder(
+        side: BorderSide(
+          color: Colors.transparent, // Border color
+        ),
+      ),
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.9,
+        );
+      },
+    );
+  }
+
 }

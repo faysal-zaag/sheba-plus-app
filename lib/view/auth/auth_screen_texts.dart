@@ -82,4 +82,6 @@ class AuthScreenText {
   static String state = "State".tr;
   static String stateValidatorText = "State is required".tr;
   static String additionalInfo = "Additional Information".tr;
+  static String homeAddressSaved = "Home address saved successfully".tr;
+  static String numberShouldContains (length) => "Phone number should container $length digits".tr;
 }

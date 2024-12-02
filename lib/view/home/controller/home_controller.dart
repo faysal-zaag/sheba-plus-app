@@ -14,8 +14,6 @@ class HomeController extends GetxController {
   final carouselCurrentIndex = 0.obs;
   final selectedService = 0.obs;
   final selectedLanguage = "English".obs;
-  final servicesLoading = false.obs;
-  final services = <Service>[].obs;
 
   void onCarouselChange(int index) {
     carouselCurrentIndex(index);
@@ -26,26 +24,6 @@ class HomeController extends GetxController {
       selectedService(0);
     } else {
       selectedService(index);
-    }
-  }
-
-  Future<void> getServices() async {
-    try {
-      servicesLoading(true);
-
-      final response = await _homeRepository.getServices();
-
-      var serviceListData = response.data as List;
-
-      var serviceList = serviceListData.map((service) {
-        return Service.fromJson(service);
-      }).toList();
-
-      services(serviceList);
-    } catch (err) {
-      Log.error(err.toString());
-    } finally {
-      servicesLoading(false);
     }
   }
 }

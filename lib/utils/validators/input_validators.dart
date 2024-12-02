@@ -43,4 +43,21 @@ class InputValidators {
     }
     return null;
   }
+
+  static String? phoneNumberValidator(
+      {required String phone,
+        required int digitLength}) {
+    if (phone.isEmpty) {
+      return "Phone number should not be empty";
+    }
+    // } else if (phone.number.length < minDigitsLength) {
+    //   return "Number should not be less than $minDigitsLength digits";
+    // } else if (phone.number.length > maxDigitsLength) {
+    //   return "Number should not be more than $maxDigitsLength digits";
+    // }
+    else if (phone.length != digitLength) {
+      return "Phone number need to give exact $digitLength digit";
+    }
+    return null;
+  }
 }

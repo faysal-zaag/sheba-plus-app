@@ -39,7 +39,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                           PhosphorIcons.user(),
                         ),
                       )
-                    : PopupMenuButton(
+                    : Obx((){
+                      bool hasSavedAddress = addressController.hasSavedAddress.value;
+                      return PopupMenuButton(
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(8.0),
@@ -52,7 +54,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                         onSelected: (String value) async {
                           if (value == "profile") {
                             if (authController.isLoggedIn.isTrue) {
-                              if(addressController.hasSavedAddress.isFalse){
+                              if(!hasSavedAddress){
                                 Get.toNamed(Routes.registerAddress);
                               }
                               else{
@@ -120,7 +122,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                             ),
                           ];
                         },
-                      ),
+                      );
+                }),
               )
             ]
           : displayCenter && authController.isLoggedIn.isFalse
