@@ -33,6 +33,10 @@ dependencies:
   collection: ^1.18.0
   intl_phone_field: ^3.2.0
   flutter_svg: ^2.0.16
+  google_sign_in: ^6.2.2
+  firebase_auth: ^5.3.3
+  firebase_core: ^3.8.0
+  flutter_facebook_auth: ^6.0.4
 
 dev_dependencies:
   flutter_test:

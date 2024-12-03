@@ -1,18 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/models/login/login_request.model.dart';
 import 'package:sheba_plus/models/referral/referral.dart';
 import 'package:sheba_plus/models/register/register_request.model.dart';
-import 'package:sheba_plus/models/user/user.dart';
+import 'package:sheba_plus/models/user/user.dart' as userModel;
 import 'package:sheba_plus/models/verification/verification_model.dart';
-import 'package:sheba_plus/utils/enums.dart';
-import 'package:sheba_plus/utils/enums.dart';
 import 'package:sheba_plus/utils/logger.dart';
-import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class AuthController extends GetxController {
   final AuthRepository _authRepository;
@@ -117,7 +118,7 @@ class AuthController extends GetxController {
         final profileResponse =
             await _authRepository.getProfile(accessToken: accessToken);
         await _addressController.getAllAddress();
-        _profileController.user(User.fromJson(profileResponse.data["info"]));
+        _profileController.user(userModel.User.fromJson(profileResponse.data["info"]));
         _profileController.userFirstNameController.value.text =
             _profileController.user.value.firstName;
         _profileController.userLastNameController.value.text =
@@ -276,20 +277,81 @@ class AuthController extends GetxController {
   }
 
   Future<bool> facebookLogin() async {
+    final result = await FacebookAuth.instance
+        .login(permissions: ['public_profile', 'email']);
+
+    if (result.status == LoginStatus.success) {
+      String? accessToken = result.accessToken!.token;
+
+      final AuthCredential credential =
+      FacebookAuthProvider.credential(accessToken);
+      UserCredential firebaseResult =
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      String? idToken = await firebaseResult.user?.getIdToken();
+
+      final response =
+      await _authRepository.socialLogin(firebaseToken: idToken ?? '');
+
+      _storageService.saveAuthToken(response.data["token"]["access"]);
+
+      _profileController.user(userModel.User.fromJson(response.data["user"]));
+      _addressController.getAllAddress();
+      isLoggedIn(true);
+    }
     return true;
   }
 
   Future<bool> googleLogin() async {
-    return true;
+    try{
+      GoogleSignIn googleSignIn = GoogleSignIn(
+        scopes: [
+          'email',
+          'https://www.googleapis.com/auth/contacts.readonly',
+        ],
+      );
+
+      GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      if (googleUser != null) {
+        GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        UserCredential firebaseResult =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+        String? idToken = await firebaseResult.user?.getIdToken();
+
+        final response =
+        await _authRepository.socialLogin(firebaseToken: idToken ?? "");
+
+        _storageService.saveAuthToken(response.data["token"]["access"]);
+
+        _profileController.user(userModel.User.fromJson(response.data["user"]));
+        _addressController.getAllAddress();
+        isLoggedIn(true);
+      }
+      return true;
+    }
+    catch(e){
+      return false;
+    }
   }
 
   Future<bool> appleLogin() async {
     return true;
   }
 
-  void logout() {
+  void logout() async {
     isLoggedIn(false);
-    _profileController.user(const User());
+    await FirebaseAuth.instance.signOut();
+    await FacebookAuth.instance.logOut();
+    await GoogleSignIn().signOut();
+    _profileController.user(const userModel.User());
     _storageService.removeAuthToken();
   }
 }

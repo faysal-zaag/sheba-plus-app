@@ -94,6 +94,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
               items: const [
                 "Bangladesh",
                 "Canada",
+                "USA"
               ],
               onChanged: (value) =>
                   addressController.addressSelectedCountry(value),

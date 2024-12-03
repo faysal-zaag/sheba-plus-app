@@ -5,13 +5,18 @@ import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_images.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/device/device_utility.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/utils/utils.dart';
+import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/auth/widgets/custom_auth_option.dart';
+import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 
 class SocialLoginOptions extends StatelessWidget {
   SocialLoginOptions({super.key});
 
   final authController = Get.find<AuthController>();
+  final addressController = Get.find<AddressController>();
 
   facebookLogin() async {
     bool status = await authController.facebookLogin();
@@ -20,7 +25,14 @@ class SocialLoginOptions extends StatelessWidget {
 
   googleLogin() async {
     bool status = await authController.googleLogin();
-    if (status) Get.back();
+    if (status) {
+      if(addressController.hasSavedAddress.isTrue) {
+        Get.offAndToNamed(Routes.home);
+      } else {
+        Get.offAndToNamed(Routes.registerAddress);
+      }
+      Utils.showSuccessToast(message: AuthScreenText.loggedInSuccessMessage);
+    }
   }
 
   appleLogin() async {

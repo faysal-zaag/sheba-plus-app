@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">sheba-plus</string>
+    <string name="facebook_app_id">1388728429179142</string>
+    <string name="fb_login_protocol_scheme">fb1388728429179142</string>
+    <string name="facebook_client_token">3ccb62b25c1bf9bc122ec4b0525bf6b4</string>
+</resources>

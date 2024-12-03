@@ -73,4 +73,22 @@ class AuthRepository {
       queryParameters: {"email" : email},
     );
   }
+
+  Future<Response> socialLogin(
+      {required String firebaseToken,
+        String fcmRegToken = "",
+        String? fullName}) async {
+    Map<String, dynamic> body = {};
+    if (fullName != null && fullName.isNotEmpty) {
+      body['fullName'] = fullName;
+    }
+    return await _dio.post(
+      ApiUrls.socialLoginApiUrl,
+      queryParameters: {
+        "firebase-token": firebaseToken,
+        "fcmRegToken": fcmRegToken,
+      },
+      data: body.isNotEmpty ? body : null,
+    );
+  }
 }
