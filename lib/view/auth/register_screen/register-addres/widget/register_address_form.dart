@@ -16,11 +16,17 @@ import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/custom_text_field.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
 import 'package:sheba_plus/view/global_texts.dart';
+import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 import 'package:sheba_plus/view/styles.dart';
 
 class RegisterAddressForm extends StatefulWidget {
-  const RegisterAddressForm({super.key});
+  final bool withPhoneField;
+  final bool forUpdate;
+  final int? addressId;
+
+  const RegisterAddressForm(
+      {super.key, this.withPhoneField = false, this.forUpdate = false, this.addressId});
 
   @override
   State<RegisterAddressForm> createState() => _RegisterAddressFormState();
@@ -36,34 +42,35 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
       key: formKey,
       child: Column(
         children: [
-          Obx(() {
-            int validationNumberLength =
-                addressController.addressMobileNumberLength.value;
+          if (widget.withPhoneField)
+            Obx(() {
+              int validationNumberLength =
+                  addressController.addressMobileNumberLength.value;
 
-            return CustomPhoneField(
-              onCountryChanged: (Country country) {
-                addressController.addressMobileNumberLength.value =
-                    country.minLength;
-              },
-              onChanged: (PhoneNumber phoneNumber) {
-                addressController.addressMobileNumber.value =
-                    phoneNumber.number;
-                addressController.addressCountryCode.value =
-                    phoneNumber.countryCode;
-                addressController.addressCountry.value =
-                    phoneNumber.countryISOCode;
-              },
-              validator: (value) {
-                if (value != null && value.number.isEmpty) {
-                  return "Phone number required";
-                } else if (value?.number.length != validationNumberLength) {
-                  return "Phone number should container $validationNumberLength digits";
-                }
-                return null;
-              },
-            );
-          }),
-          16.kH,
+              return CustomPhoneField(
+                onCountryChanged: (Country country) {
+                  addressController.addressMobileNumberLength.value =
+                      country.minLength;
+                },
+                onChanged: (PhoneNumber phoneNumber) {
+                  addressController.addressMobileNumber.value =
+                      phoneNumber.number;
+                  addressController.addressCountryCode.value =
+                      phoneNumber.countryCode;
+                  addressController.addressCountryIso.value =
+                      phoneNumber.countryISOCode;
+                },
+                validator: (value) {
+                  if (value != null && value.number.isEmpty) {
+                    return "Phone number required";
+                  } else if (value?.number.length != validationNumberLength) {
+                    return "Phone number should container $validationNumberLength digits";
+                  }
+                  return null;
+                },
+              );
+            }),
+          if (widget.withPhoneField) 16.kH,
           CustomTextField(
               controller: addressController.addressStreetController.value,
               hintText: "${AuthScreenText.streetAddress}*",
@@ -139,11 +146,19 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           24.kH,
           Obx(
             () => CustomPrimaryButton(
-              loading: addressController.addressCreateLoading.isTrue,
-              label: GlobalTexts.saveAndContinue,
+              loading: widget.forUpdate
+                  ? addressController.addressUpdateLoading.isTrue
+                  : addressController.addressCreateLoading.isTrue,
+              label: widget.forUpdate
+                  ? ProfileScreenTexts.updateAddress
+                  : GlobalTexts.saveAndContinue,
               onClick: () {
                 if (formKey.currentState!.validate()) {
-                  saveAddress();
+                  if (widget.forUpdate) {
+                    updateAddress(addressId: widget.addressId ?? 0);
+                  } else {
+                    saveAddress();
+                  }
                 }
               },
             ),
@@ -154,11 +169,20 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
   }
 
   void saveAddress() async {
-    final response = await addressController.createAddress(title: "Home");
+    final response = await addressController.createAddress(title: "Home Address");
     if (response) {
       addressController.resetAddressFields();
       Get.offAndToNamed(Routes.referral);
       Utils.showSuccessToast(message: AuthScreenText.homeAddressSaved);
+    }
+  }
+
+  void updateAddress({required int addressId}) async {
+    final response = await addressController.updateAddress(addressId: addressId);
+    if (response) {
+      addressController.resetAddressFields();
+      Get.back();
+      Utils.showSuccessToast(message: ProfileScreenTexts.addressUpdated);
     }
   }
 }

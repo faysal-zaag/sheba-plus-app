@@ -4,6 +4,8 @@ import 'package:sheba_plus/models/address/address.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/view/profile/profile_screen_text.dart';
+import 'package:sheba_plus/view/profile/saved-address/widget/edit_address_bottom_sheet.dart';
 import 'package:sheba_plus/view/styles.dart';
 
 class AddressCard extends StatelessWidget {
@@ -26,15 +28,15 @@ class AddressCard extends StatelessWidget {
             ],
           ),
           8.kH,
-          Text("Country : ${address.country}", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),),
+          Text("${ProfileScreenTexts.country} : ${address.country}", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),),
           8.kH,
-          Text("State : ${address.state}", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),),
+          Text("${ProfileScreenTexts.state} : ${address.state}", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),),
           8.kH,
-          Text("City : ${address.city}", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),),
+          Text("${ProfileScreenTexts.city} : ${address.city}", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),),
           8.kH,
-          Text("Zip Code : ${address.zipCode}", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),),
+          Text("${ProfileScreenTexts.zipCode} : ${address.zipCode}", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),),
           8.kH,
-          Text("Street : ${address.street}", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),)
+          Text("${ProfileScreenTexts.street} : ${address.street}", style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),)
         ],
       ),
     );
@@ -45,14 +47,12 @@ class AddressCard extends StatelessWidget {
       context: context,
       shape: const ContinuousRectangleBorder(
         side: BorderSide(
-          color: Colors.transparent, // Border color
+          color: Colors.transparent,
         ),
       ),
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.9,
-        );
+        return EditAddressBottomSheet(address: address,);
       },
     );
   }

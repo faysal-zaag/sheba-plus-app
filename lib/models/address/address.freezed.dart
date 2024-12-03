@@ -26,7 +26,10 @@ mixin _$Address {
   String get city => throw _privateConstructorUsedError;
   String get state => throw _privateConstructorUsedError;
   String get street => throw _privateConstructorUsedError;
-  int get zipCode => throw _privateConstructorUsedError;
+  String? get streetAlternative => throw _privateConstructorUsedError;
+  String? get countryCode => throw _privateConstructorUsedError;
+  String? get addressDesc => throw _privateConstructorUsedError;
+  int? get zipCode => throw _privateConstructorUsedError;
 
   /// Serializes this Address to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,7 +52,10 @@ abstract class $AddressCopyWith<$Res> {
       String city,
       String state,
       String street,
-      int zipCode});
+      String? streetAlternative,
+      String? countryCode,
+      String? addressDesc,
+      int? zipCode});
 }
 
 /// @nodoc
@@ -73,7 +79,10 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
     Object? city = null,
     Object? state = null,
     Object? street = null,
-    Object? zipCode = null,
+    Object? streetAlternative = freezed,
+    Object? countryCode = freezed,
+    Object? addressDesc = freezed,
+    Object? zipCode = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -100,10 +109,22 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
               as String,
-      zipCode: null == zipCode
+      streetAlternative: freezed == streetAlternative
+          ? _value.streetAlternative
+          : streetAlternative // ignore: cast_nullable_to_non_nullable
+              as String?,
+      countryCode: freezed == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addressDesc: freezed == addressDesc
+          ? _value.addressDesc
+          : addressDesc // ignore: cast_nullable_to_non_nullable
+              as String?,
+      zipCode: freezed == zipCode
           ? _value.zipCode
           : zipCode // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ) as $Val);
   }
 }
@@ -122,7 +143,10 @@ abstract class _$$AddressImplCopyWith<$Res> implements $AddressCopyWith<$Res> {
       String city,
       String state,
       String street,
-      int zipCode});
+      String? streetAlternative,
+      String? countryCode,
+      String? addressDesc,
+      int? zipCode});
 }
 
 /// @nodoc
@@ -144,7 +168,10 @@ class __$$AddressImplCopyWithImpl<$Res>
     Object? city = null,
     Object? state = null,
     Object? street = null,
-    Object? zipCode = null,
+    Object? streetAlternative = freezed,
+    Object? countryCode = freezed,
+    Object? addressDesc = freezed,
+    Object? zipCode = freezed,
   }) {
     return _then(_$AddressImpl(
       id: null == id
@@ -171,10 +198,22 @@ class __$$AddressImplCopyWithImpl<$Res>
           ? _value.street
           : street // ignore: cast_nullable_to_non_nullable
               as String,
-      zipCode: null == zipCode
+      streetAlternative: freezed == streetAlternative
+          ? _value.streetAlternative
+          : streetAlternative // ignore: cast_nullable_to_non_nullable
+              as String?,
+      countryCode: freezed == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      addressDesc: freezed == addressDesc
+          ? _value.addressDesc
+          : addressDesc // ignore: cast_nullable_to_non_nullable
+              as String?,
+      zipCode: freezed == zipCode
           ? _value.zipCode
           : zipCode // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -189,7 +228,10 @@ class _$AddressImpl implements _Address {
       this.city = 'Unknown',
       this.state = 'Unknown',
       this.street = 'Unknown',
-      this.zipCode = 0});
+      this.streetAlternative,
+      this.countryCode,
+      this.addressDesc,
+      this.zipCode});
 
   factory _$AddressImpl.fromJson(Map<String, dynamic> json) =>
       _$$AddressImplFromJson(json);
@@ -213,12 +255,17 @@ class _$AddressImpl implements _Address {
   @JsonKey()
   final String street;
   @override
-  @JsonKey()
-  final int zipCode;
+  final String? streetAlternative;
+  @override
+  final String? countryCode;
+  @override
+  final String? addressDesc;
+  @override
+  final int? zipCode;
 
   @override
   String toString() {
-    return 'Address(id: $id, title: $title, country: $country, city: $city, state: $state, street: $street, zipCode: $zipCode)';
+    return 'Address(id: $id, title: $title, country: $country, city: $city, state: $state, street: $street, streetAlternative: $streetAlternative, countryCode: $countryCode, addressDesc: $addressDesc, zipCode: $zipCode)';
   }
 
   @override
@@ -232,13 +279,19 @@ class _$AddressImpl implements _Address {
             (identical(other.city, city) || other.city == city) &&
             (identical(other.state, state) || other.state == state) &&
             (identical(other.street, street) || other.street == street) &&
+            (identical(other.streetAlternative, streetAlternative) ||
+                other.streetAlternative == streetAlternative) &&
+            (identical(other.countryCode, countryCode) ||
+                other.countryCode == countryCode) &&
+            (identical(other.addressDesc, addressDesc) ||
+                other.addressDesc == addressDesc) &&
             (identical(other.zipCode, zipCode) || other.zipCode == zipCode));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, title, country, city, state, street, zipCode);
+  int get hashCode => Object.hash(runtimeType, id, title, country, city, state,
+      street, streetAlternative, countryCode, addressDesc, zipCode);
 
   /// Create a copy of Address
   /// with the given fields replaced by the non-null parameter values.
@@ -264,7 +317,10 @@ abstract class _Address implements Address {
       final String city,
       final String state,
       final String street,
-      final int zipCode}) = _$AddressImpl;
+      final String? streetAlternative,
+      final String? countryCode,
+      final String? addressDesc,
+      final int? zipCode}) = _$AddressImpl;
 
   factory _Address.fromJson(Map<String, dynamic> json) = _$AddressImpl.fromJson;
 
@@ -281,7 +337,13 @@ abstract class _Address implements Address {
   @override
   String get street;
   @override
-  int get zipCode;
+  String? get streetAlternative;
+  @override
+  String? get countryCode;
+  @override
+  String? get addressDesc;
+  @override
+  int? get zipCode;
 
   /// Create a copy of Address
   /// with the given fields replaced by the non-null parameter values.

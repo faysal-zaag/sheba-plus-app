@@ -30,7 +30,7 @@ class RegisterAddressScreen extends StatelessWidget {
                       ?.copyWith(fontSize: 20),
                 ),
                 24.kH,
-                const RegisterAddressForm()
+                const RegisterAddressForm(withPhoneField: true,)
               ],
             ),
           ),

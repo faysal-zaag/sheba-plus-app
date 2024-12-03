@@ -18,7 +18,7 @@ class AddressController extends GetxController {
   final addressTitle = "".obs;
   final addressMobileNumber = "".obs;
   final addressCountryCode = "".obs;
-  final addressCountry = "".obs;
+  final addressCountryIso = "".obs;
   final addressMobileNumberLength = 10.obs;
   final addressStreetController = TextEditingController().obs;
   final addressStreet2Controller = TextEditingController().obs;
@@ -33,7 +33,7 @@ class AddressController extends GetxController {
     addressTitle.value = "";
     addressMobileNumber.value = "";
     addressCountryCode.value = "";
-    addressCountry.value = "";
+    addressCountryIso.value = "";
     addressMobileNumberLength.value = 10; // Default length
     addressStreetController.value.clear();
     addressStreet2Controller.value.clear();
@@ -42,6 +42,23 @@ class AddressController extends GetxController {
     addressZipCodeController.value.clear();
     addressSelectedCountry.value = "";
     addressAdditionalInfo.value.clear();
+  }
+
+  void setAddressFieldsData({required Address address}) {
+    addressTitle.value = address.title;
+    addressSelectedCountry.value = address.country;
+    addressStreetController.value.text = address.street;
+    addressCityController.value.text = address.city;
+    addressSelectedState.value = address.state;
+    if (address.zipCode != null) {
+      addressZipCodeController.value.text = address.zipCode.toString();
+    }
+    if (address.streetAlternative != null) {
+      addressStreet2Controller.value.text = address.streetAlternative!;
+    }
+    if (address.addressDesc != null) {
+      addressAdditionalInfo.value.text = address.addressDesc!;
+    }
   }
 
   // Future methods
@@ -64,8 +81,7 @@ class AddressController extends GetxController {
       addressReadLoading(false);
     } catch (err) {
       Log.error(err.toString());
-    }
-    finally{
+    } finally {
       addressReadLoading(false);
     }
   }
@@ -73,16 +89,7 @@ class AddressController extends GetxController {
   Future<bool> createAddress({String? title}) async {
     try {
       addressCreateLoading(true);
-      Address address = Address(
-        title: title ?? addressTitle.value,
-        city: addressCityController.value.text,
-        country: addressSelectedCountry.value,
-        state: addressSelectedState.value,
-        street: addressStreetController.value.text,
-        zipCode: int.parse(
-          addressZipCodeController.value.text,
-        ),
-      );
+      Address address = getAddressData(title: title);
       await getAllAddress();
       await _addressRepository.createAddress(addressData: address);
       addressCreateLoading(false);
@@ -93,17 +100,13 @@ class AddressController extends GetxController {
     }
   }
 
-  Future<bool> updateAddress(
-      {String? addressId, required Address address}) async {
+  Future<bool> updateAddress({required int addressId}) async {
     try {
       addressUpdateLoading(true);
-      Address addressData = address;
+      Address address = getAddressData();
 
-      if (addressId == null) {
-        addressData = Address();
-      }
-
-      // await _addressRepository.updateAddress(addressId: addressId ?? address.id, address: addressData);
+      await _addressRepository.updateAddress(
+          addressId: addressId, address: address);
       await getAllAddress();
       return true;
     } catch (err) {
@@ -113,16 +116,18 @@ class AddressController extends GetxController {
     }
   }
 
-  Future<bool> deleteAddress({required String addressId}) async {
-    try {
-      // await _addressRepository.deleteAddress(addressId: addressId);
-      await getAllAddress();
-
-      return true;
-    } catch (err) {
-      return false;
-    } finally {
-      addressCreateLoading(false);
-    }
+  Address getAddressData({String? title}) {
+    return Address(
+      title: title ?? addressTitle.value,
+      city: addressCityController.value.text,
+      country: addressSelectedCountry.value,
+      state: addressSelectedState.value,
+      street: addressStreetController.value.text,
+      streetAlternative: addressStreet2Controller.value.text.isEmpty ? null : addressStreet2Controller.value.text,
+      addressDesc: addressAdditionalInfo.value.text.isEmpty ? null : addressAdditionalInfo.value.text,
+      zipCode: int.parse(
+        addressZipCodeController.value.text,
+      ),
+    );
   }
 }

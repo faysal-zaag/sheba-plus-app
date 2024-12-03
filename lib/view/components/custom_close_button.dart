@@ -22,8 +22,8 @@ class CustomCloseButton extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        height: 24,
-        width: 24,
+        height: height,
+        width: width,
         decoration: BoxDecoration(shape: BoxShape.circle, color: backgroundColor),
         child: Center(
           child: icon ?? Icon(

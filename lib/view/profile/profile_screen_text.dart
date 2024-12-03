@@ -21,8 +21,16 @@ class ProfileScreenTexts {
   static String yourTotalPoints = "Your Total Points".tr;
 
   // notification screen texts
-static String trackThisOrder = "Track this Order".tr;
-static String readMore = "Read More".tr;
-static String readLess = "Read Less".tr;
+  static String trackThisOrder = "Track this Order".tr;
+  static String readMore = "Read More".tr;
+  static String readLess = "Read Less".tr;
 
+  // saved address
+  static String country = "Country".tr;
+  static String state = "State".tr;
+  static String city = "City".tr;
+  static String zipCode = "Zip Code".tr;
+  static String street = "Street".tr;
+  static String updateAddress = "Update Address".tr;
+  static String addressUpdated = "Address updated successfully".tr;
 }

@@ -13,7 +13,10 @@ class Address with _$Address {
     @Default('Unknown') String city,
     @Default('Unknown') String state,
     @Default('Unknown') String street,
-    @Default(0) int zipCode,
+    String? streetAlternative,
+    String? countryCode,
+    String? addressDesc,
+    int? zipCode,
   }) = _Address;
 
   factory Address.fromJson(Map<String, dynamic> json) =>

@@ -27,6 +27,7 @@ class ProfileScreen extends StatelessWidget {
                   profileController.selectedProfileMenu(value),
               selectedValue: profileController.selectedProfileMenu.value,
               prefixIcon: true,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               icons: AppConstants.profileMenuIcons,
             ),
           ),

@@ -19,6 +19,7 @@ class CustomDropdown extends StatelessWidget {
   final Color iconColor;
   final bool prefixIcon;
   final bool disableBorder;
+  final EdgeInsets? padding;
   final bool readOnly;
   final List<PhosphorIconData> icons;
   final TextStyle? labelStyle;
@@ -42,7 +43,7 @@ class CustomDropdown extends StatelessWidget {
     this.borderColor,
     this.hintText = 'Select Item',
     this.validator,
-    this.readOnly = false, this.disableBorder = false, this.customButton,
+    this.readOnly = false, this.disableBorder = false, this.customButton, this.padding,
   });
 
   @override
@@ -105,7 +106,7 @@ class CustomDropdown extends StatelessWidget {
           //     color: backgroundColor,
           //     border: Border.all(color: borderColor ?? Colors.transparent),
           //     borderRadius: BorderRadius.circular(borderRadius)),
-          padding: const EdgeInsets.symmetric(horizontal: 6),
+          padding: padding ?? EdgeInsets.symmetric(horizontal: selectedValue.isEmpty ? 16 : 6),
           height: height,
           width: width,
         ),
