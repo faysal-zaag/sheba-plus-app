@@ -86,7 +86,7 @@ class _ReferralFormState extends State<ReferralForm> {
   }
 
   void skipReferring() async {
-    Get.offAndToNamed(Routes.signIn);
+    Get.back();
   }
 
   void continueReferring() async {

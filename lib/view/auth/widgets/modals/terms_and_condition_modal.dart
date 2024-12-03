@@ -22,7 +22,7 @@ class TermsAndConditionSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.background,
+          color: AppColors.white,
           borderRadius: AppBorderRadius.circularRadius4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +49,7 @@ class TermsAndConditionSheet extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Container(
               height: 250,
-              color: AppColors.white,
+              color: AppColors.background,
               padding: AppPaddings.allPadding12,
               child: SingleChildScrollView(
                 child: Text(
@@ -106,7 +106,7 @@ class TermsAndConditionSheet extends StatelessWidget {
                     label: GlobalTexts.next,
                     onClick: () {
                       if (globalController.termsAccepted.isTrue) {
-                        Get.toNamed(Routes.agentShoppingOrderInfoScreen);
+                        Get.offAndToNamed(Routes.agentShoppingOrderInfoScreen);
                         globalController.termsAccepted(false);
                       } else {
                         Utils.showErrorToast(

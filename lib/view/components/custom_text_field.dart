@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? onChange;
   final List<TextInputFormatter>? inputFormatters;
   final BorderRadius? customBorder;
-  final Function? onTap;
+  final VoidCallback? onTap;
   final AutovalidateMode? autoValidateMode;
 
   const CustomTextField(
@@ -55,7 +55,6 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       obscureText: obscure ?? false,
       autovalidateMode: autoValidateMode ?? AutovalidateMode.onUserInteraction,
-      enabled: !readOnly,
       decoration: Styles.getTextFieldInputDecoration(
         context: context,
         fillColor: color,
@@ -66,13 +65,14 @@ class CustomTextField extends StatelessWidget {
         readOnly: readOnly,
         suffixIcon: suffixIcon,
       ),
+      onTap: onTap,
       onChanged: onChange,
       controller: controller,
       readOnly: readOnly,
       validator: validator,
       keyboardType: textInputType,
       inputFormatters: inputFormatters,
-      style: const TextStyle(fontSize: 15, color: AppColors.black),
+      style: const TextStyle(fontSize: 14, color: AppColors.black),
       maxLines: maxLine,
     );
   }

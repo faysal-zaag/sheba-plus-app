@@ -17,7 +17,7 @@ class AppConstants {
     "Language",
   ];
 
-  static const List<String> languages = ["English", "Bangla"];
+  static const List<String> languages = ["English", "বাংলা"];
 
   static const List<String> profileMenuList = [
     "Account Management",

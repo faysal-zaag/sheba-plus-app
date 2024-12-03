@@ -15,7 +15,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
   final bool readOnly;
-  final Function? onTap;
+  final VoidCallback? onTap;
   final String? Function(String?)? onChange;
 
   const TextFieldWithLabel({
@@ -50,7 +50,7 @@ class TextFieldWithLabel extends StatelessWidget {
           maxLine: maxLine ?? 1,
           textInputType: textInputType ?? TextInputType.text,
           validator: validator,
-          readOnly: readOnly ?? false,
+          readOnly: readOnly,
           onTap: onTap,
           onChange: onChange,
         ),
@@ -66,7 +66,7 @@ class TextFieldWithLabel extends StatelessWidget {
             Theme.of(context)
                 .textTheme
                 .bodyMedium
-                ?.copyWith(color: AppColors.blackTitle),
+                ?.copyWith(color: AppColors.blackTitle, fontSize: 14),
         children: [
           TextSpan(text: label), // Regular label text
           if (required == true && readOnly == false)

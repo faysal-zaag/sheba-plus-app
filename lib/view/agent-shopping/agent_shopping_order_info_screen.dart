@@ -21,26 +21,31 @@ class AgentShoppingOrderInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PrimaryScaffold(
       userIcon: true,
-      body: Padding(
-        padding: AppPaddings.screenPadding,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                AgentShoppingTexts.agentShoppingOrderInfoHeader,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(fontWeight: FontWeight.w600),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: AppPaddings.screenPadding,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AgentShoppingTexts.agentShoppingOrderInfoHeader,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(fontWeight: FontWeight.w600),
+                  ),
+                  16.kH,
+                  MessageContainer(
+                      message:
+                          AgentShoppingTexts.agentShoppingOrderInfoMessage),
+                ],
               ),
-              16.kH,
-              MessageContainer(
-                  message: AgentShoppingTexts.agentShoppingOrderInfoMessage),
-              24.kH,
-              const AgentShoppingOrderInfoForm(),
-            ],
-          ),
+            ),
+            const AgentShoppingOrderInfoForm(),
+          ],
         ),
       ),
     );
