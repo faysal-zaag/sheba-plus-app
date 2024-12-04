@@ -6,6 +6,7 @@ class AppColors{
   static const Color primaryLight = Color(0xffEEFFEE);
   static const Color primary30 = Color(0xffFBFFFB);
   static const Color background = Color(0xffF4F4F1);
+  static const Color background2 = Color(0xffFAFAFA);
   static const Color cardBg = Color(0xffFAFBFB);
   static const Color cardBorder = Color(0xffF5F5F5);
   static const Color white = Color(0xffFFFFFF);
@@ -18,6 +19,7 @@ class AppColors{
   static const Color hintText = Color(0xff565656);
   static const Color border = Color(0xffE1E1E1);
   static const Color border2 = Color(0xffEBEDF0);
+  static const Color borderE6 = Color(0xffE6E6E6);
   static const Color divider = Color(0xffE9E9E9);
   static const Color paragraph = Color(0xff515151);
   static const Color subtext = Color(0xff333333);

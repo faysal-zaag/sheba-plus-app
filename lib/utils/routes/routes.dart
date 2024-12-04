@@ -12,8 +12,12 @@ class Routes {
   static const String setNewPassword = '/set-new-password';
   static const String emailVerificationForResetPassword = '/reset-password-email-verification';
 
+  // profile screens
+  static const String notificationDetails = '/notification-details';
+
   // service screens
   static const String agentShoppingOrderInfoScreen = '/agent-shopping-order-info';
+  static const String partialCheckoutScreen = '/partial-checkout-screen';
   static const String displayCenterServiceProductListScreen = '/display-center-service-products';
   static const String displayCenterServiceProductDetailsScreen = '/display-center-service-products-details';
 }

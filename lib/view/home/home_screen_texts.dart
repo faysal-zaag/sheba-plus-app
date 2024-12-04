@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class HomeText {
+class HomeScreenText {
   static String header1 = "Our Services".tr;
   static String headerDescription =
       "We bring your goods from Bangladesh to Canada. In addition to that, we offer other services to the Bangladeshi diaspora in Canada. Our motto is"
@@ -57,4 +57,6 @@ class HomeText {
   static String fullTermsAndConditions =
       "Please read the terms and condition before you agree.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping.Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store."
           .tr;
+
+  static String paymentMethod = "Payment Method".tr;
 }

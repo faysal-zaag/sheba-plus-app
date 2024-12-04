@@ -26,7 +26,10 @@ class RegisterAddressForm extends StatefulWidget {
   final int? addressId;
 
   const RegisterAddressForm(
-      {super.key, this.withPhoneField = false, this.forUpdate = false, this.addressId});
+      {super.key,
+      this.withPhoneField = false,
+      this.forUpdate = false,
+      this.addressId});
 
   @override
   State<RegisterAddressForm> createState() => _RegisterAddressFormState();
@@ -91,11 +94,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           16.kH,
           Obx(
             () => CustomDropdown(
-              items: const [
-                "Bangladesh",
-                "Canada",
-                "USA"
-              ],
+              items: const ["Bangladesh", "Canada", "USA"],
               onChanged: (value) =>
                   addressController.addressSelectedCountry(value),
               selectedValue: addressController.addressSelectedCountry.value,
@@ -170,7 +169,8 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
   }
 
   void saveAddress() async {
-    final response = await addressController.createAddress(title: "Home Address");
+    final response =
+        await addressController.createAddress(title: "Home Address");
     if (response) {
       addressController.resetAddressFields();
       Get.offAndToNamed(Routes.referral);
@@ -179,7 +179,8 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
   }
 
   void updateAddress({required int addressId}) async {
-    final response = await addressController.updateAddress(addressId: addressId);
+    final response =
+        await addressController.updateAddress(addressId: addressId);
     if (response) {
       addressController.resetAddressFields();
       Get.back();

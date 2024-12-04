@@ -22,7 +22,7 @@ class HomeServices extends StatelessWidget {
           contents: [
             Obx(
                   () => Text(
-                HomeText.agentShopping,
+                HomeScreenText.agentShopping,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: homeController.selectedService.value == 1
                         ? AppColors.primary
@@ -31,7 +31,7 @@ class HomeServices extends StatelessWidget {
             ),
             4.kH,
             Text(
-              HomeText.agentShoppingDetails1,
+              HomeScreenText.agentShoppingDetails1,
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
@@ -39,13 +39,12 @@ class HomeServices extends StatelessWidget {
             )
           ], onTapService: () {},
         ),
-        const Divider(),
         HomeServiceCard(
           index: 2,
           contents: [
             Obx(
                   () => Text(
-                HomeText.displayCenter,
+                HomeScreenText.displayCenter,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: homeController.selectedService.value == 2
                         ? AppColors.primary
@@ -54,7 +53,7 @@ class HomeServices extends StatelessWidget {
             ),
             4.kH,
             Text(
-              HomeText.displayCenterDetails1,
+              HomeScreenText.displayCenterDetails1,
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
@@ -64,13 +63,12 @@ class HomeServices extends StatelessWidget {
             Get.toNamed(Routes.displayCenterServiceProductListScreen);
         },
         ),
-        const Divider(),
         HomeServiceCard(
           index: 3,
           contents: [
             Obx(
                   () => Text(
-                HomeText.thirdParty,
+                HomeScreenText.thirdParty,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: homeController.selectedService.value == 3
                         ? AppColors.primary
@@ -79,7 +77,7 @@ class HomeServices extends StatelessWidget {
             ),
             4.kH,
             Text(
-              HomeText.thirdPartyDetails1,
+              HomeScreenText.thirdPartyDetails1,
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
@@ -90,7 +88,7 @@ class HomeServices extends StatelessWidget {
               children: [
                 12.kH,
                 Text(
-                  HomeText.thirdPartyDetails2,
+                  HomeScreenText.thirdPartyDetails2,
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
@@ -98,7 +96,7 @@ class HomeServices extends StatelessWidget {
                 ),
                 12.kH,
                 Text(
-                  HomeText.thirdPartyDetails3,
+                  HomeScreenText.thirdPartyDetails3,
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
@@ -106,7 +104,7 @@ class HomeServices extends StatelessWidget {
                 ),
                 12.kH,
                 Text(
-                  HomeText.thirdPartyDetails4,
+                  HomeScreenText.thirdPartyDetails4,
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
@@ -117,13 +115,12 @@ class HomeServices extends StatelessWidget {
                 : const SizedBox())
           ], onTapService: () {},
         ),
-        const Divider(),
         HomeServiceCard(
           index: 4,
           contents: [
             Obx(
                   () => Text(
-                HomeText.friendsFamily,
+                HomeScreenText.friendsFamily,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: homeController.selectedService.value == 4
                         ? AppColors.primary
@@ -132,7 +129,7 @@ class HomeServices extends StatelessWidget {
             ),
             4.kH,
             Text(
-              HomeText.friendsFamilyDetails1,
+              HomeScreenText.friendsFamilyDetails1,
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
@@ -143,7 +140,7 @@ class HomeServices extends StatelessWidget {
               children: [
                 12.kH,
                 Text(
-                  HomeText.friendsFamilyDetails2,
+                  HomeScreenText.friendsFamilyDetails2,
                   style: Theme.of(context)
                       .textTheme
                       .bodySmall
@@ -154,7 +151,6 @@ class HomeServices extends StatelessWidget {
                 : const SizedBox())
           ], onTapService: () {},
         ),
-        const Divider(),
       ],
     );
   }

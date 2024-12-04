@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sheba_plus/middlewares/auth_middleware.dart';
+import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
 import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_order_info_screen.dart';
 import 'package:sheba_plus/view/auth/forget-password/forget_password_screen.dart';
 import 'package:sheba_plus/view/auth/forget-password/reset_password_email_screen.dart';
@@ -14,6 +15,7 @@ import 'package:sheba_plus/view/display_center/screen/display_center_product_det
 import 'package:sheba_plus/view/display_center/screen/display_center_product_list_screen.dart';
 import 'package:sheba_plus/view/home/home_screen.dart';
 import 'package:sheba_plus/view/profile/profile_screen.dart';
+import 'package:sheba_plus/view/services/partial_checkout_screen.dart';
 import 'package:sheba_plus/view/splash_screen.dart';
 
 import 'routes.dart';
@@ -75,6 +77,14 @@ class AppRouters {
     GetPage(
       name: Routes.displayCenterServiceProductListScreen,
       page: () => const DisplayCenterProductListScreen(),
+    ),
+    GetPage(
+      name: Routes.partialCheckoutScreen,
+      page: () => PartialCheckoutScreen(),
+    ),
+    GetPage(
+      name: Routes.notificationDetails,
+      page: () => const NotificationDetailsScreen(),
     ),
     GetPage(
       name: Routes.displayCenterServiceProductDetailsScreen,

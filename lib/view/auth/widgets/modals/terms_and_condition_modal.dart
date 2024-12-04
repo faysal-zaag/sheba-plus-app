@@ -55,7 +55,7 @@ class TermsAndConditionSheet extends StatelessWidget {
               padding: AppPaddings.allPadding12,
               child: SingleChildScrollView(
                 child: Text(
-                  HomeText.fullTermsAndConditions,
+                  HomeScreenText.fullTermsAndConditions,
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         color: AppColors.subtext,
                       ),
@@ -119,12 +119,13 @@ class TermsAndConditionSheet extends StatelessWidget {
                             Get.toNamed(
                                 Routes.displayCenterServiceProductListScreen);
                             globalController.termsAccepted(false);
-                          } else {
-                            Utils.showErrorToast(
-                                message:
-                                    GlobalTexts.pleaseAcceptTermsAndCondition,
-                                alignment: Alignment.topCenter);
                           }
+                        }
+                        else {
+                          Utils.showErrorToast(
+                              message:
+                              GlobalTexts.pleaseAcceptTermsAndCondition,
+                              alignment: Alignment.topCenter);
                         }
                       }),
                 )

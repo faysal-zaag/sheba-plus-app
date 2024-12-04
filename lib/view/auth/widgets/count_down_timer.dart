@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class CountDownTimer extends StatefulWidget {
   final int startTimeMilliseconds;
   final Function()? onTimerFinish;
+  final TextStyle? textStyle;
 
-  const CountDownTimer({super.key, required this.startTimeMilliseconds, this.onTimerFinish});
+  const CountDownTimer({super.key, required this.startTimeMilliseconds, this.onTimerFinish, this.textStyle});
 
   @override
   CountDownTimerState createState() => CountDownTimerState();
@@ -42,10 +43,15 @@ class CountDownTimerState extends State<CountDownTimer> {
 
   String _formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
+
+    String twoDigitDays = twoDigits(duration.inDays);
+    String twoDigitHours = twoDigits(duration.inHours.remainder(24));
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
     String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    return '$twoDigitMinutes:$twoDigitSeconds';
+
+    return '$twoDigitDays d : $twoDigitHours h : ${twoDigitMinutes}m : ${twoDigitSeconds}s';
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +62,7 @@ class CountDownTimerState extends State<CountDownTimer> {
       children: [
         Text(
           _formatDuration(duration),
-          style: Theme.of(context).textTheme.bodySmall,
+          style: widget.textStyle ?? Theme.of(context).textTheme.bodySmall,
         ),
       ],
     );
