@@ -16,7 +16,7 @@ class GlobalController extends GetxController {
   final appSetting = const Setting().obs;
   final getDefaultSettingLoading = true.obs;
 
-  void showTermsAndConditionSheet({required BuildContext context}) {
+  void showTermsAndConditionSheet({required BuildContext context, required int serviceIndex}) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -42,7 +42,7 @@ class GlobalController extends GetxController {
                 ),
                 child: Wrap(
                   children: [
-                    TermsAndConditionSheet(),
+                    TermsAndConditionSheet(serviceIndex: serviceIndex,),
                   ],
                 ),
               ),

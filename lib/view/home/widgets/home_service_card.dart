@@ -87,7 +87,7 @@ class HomeServiceCard extends StatelessWidget {
                                         onClick: () {
                                           globalController
                                               .showTermsAndConditionSheet(
-                                              context: context);
+                                              context: context, serviceIndex: index);
                                         },
                                         width: 160,
                                       ),

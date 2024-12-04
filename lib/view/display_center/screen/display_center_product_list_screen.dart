@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/controllers/navigation_controller.dart';
+import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/routes/routers.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/view/display_center/screen/display_center_product_details_screen.dart';
 import 'package:sheba_plus/view/display_center/widgets/custom_bottom_nav_bar_widget.dart';
 
 import '../../../data/mock_data.dart';
@@ -42,8 +46,11 @@ class _DisplayCenterProductListScreenState
                 DisplayServiceHeaderWidget(),
                 ProductViewWidget(
                   productList: mockProductList,
-                  onTapProduct: (product) {},
+                  onTapProduct: (product) {
+                    Get.toNamed(Routes.displayCenterServiceProductDetailsScreen, arguments: DisplayCenterProductDetailsScreen(productId: product.id));
+                  },
                 ),
+                65.kH,
               ],
             ),
           ),

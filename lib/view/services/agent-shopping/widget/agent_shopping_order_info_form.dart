@@ -149,7 +149,7 @@ class _AgentShoppingOrderInfoFormState
               ),
               24.kH,
               CustomPrimaryButton(
-                  label: "Next",
+                  label: GlobalTexts.next,
                   onClick: () {
                     if (_formKey.currentState!.validate()) {}
                   })
@@ -160,11 +160,12 @@ class _AgentShoppingOrderInfoFormState
 
   void setTotalCost({String? value}) {
     agentShoppingController.agentShoppingServiceTotalCostController.value.text =
-        (num.parse(value ??
-                    agentShoppingController
-                        .agentShoppingServiceDurationController.value.text) *
-                (globalController.appSetting.value.hourlyRates ?? 0))
-            .toString();
+        (
+      num.parse(value ??
+              agentShoppingController
+                  .agentShoppingServiceDurationController.value.text) *
+          (globalController.appSetting.value.hourlyRates ?? 0),
+    ).toString();
   }
 
   Future<void> _showDateTimePicker(

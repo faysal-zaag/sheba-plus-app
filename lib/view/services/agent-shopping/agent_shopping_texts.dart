@@ -13,5 +13,5 @@ class AgentShoppingTexts{
   static String prePaymentWarningMessage ({required int maxValue}) => "If your shopping exceeds BDT $maxValue, in that case it is mandatory to pre pay money for shopping.".tr;
   static String serviceDuration ({required int hourlyRates}) => "How many hours of service would you like to book with the agent? (CAD $hourlyRates/hour)".tr;
   static String serviceDurationHintText = "3.5".tr;
-  static String serviceDurationCostHintText = "17.5 CAD".tr;
+  static String serviceDurationCostHintText = "17.5".tr;
 }

@@ -6,7 +6,7 @@ import '../controller/display_service_controller.dart';
 class DisplayServiceHeaderWidget extends StatelessWidget {
   DisplayServiceHeaderWidget({super.key});
 
-  final displayCenterServiceController = Get.find<DisplayServiceController>();
+  final displayCenterServiceController = Get.find<DisplayCenterServiceController>();
 
   @override
   Widget build(BuildContext context) {

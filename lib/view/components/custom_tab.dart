@@ -16,20 +16,18 @@ class CustomTab extends StatelessWidget {
         ...tabItems.mapWithIndex((index, item) {
           bool active = activeItem.contains(item);
 
-          return Expanded(
-            child: GestureDetector(
-              onTap: () => onTap(item),
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border(
-                        bottom: BorderSide(
-                            color: active ? AppColors.primary : AppColors.divider, width: active ? 2 : 1))),
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  item,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(color: active ? AppColors.primary : AppColors.subtext),
-                ),
+          return GestureDetector(
+            onTap: () => onTap(item),
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(
+                          color: active ? AppColors.primary : AppColors.divider, width: active ? 2 : 1))),
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                item,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(color: active ? AppColors.primary : AppColors.subtext),
               ),
             ),
           );
