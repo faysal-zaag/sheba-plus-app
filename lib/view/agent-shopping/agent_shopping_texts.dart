@@ -10,8 +10,8 @@ class AgentShoppingTexts{
   static String bdTimeHintText = "Enter BD time and date".tr;
   static String spendAmount = "How much do you plan to spend during the shopping session?".tr;
   static String spendAmountHintText = "26000 (BDT)".tr;
-  static String prePaymentWarningMessage = "If your shopping exceeds BDT 25k, in that case it is mandatory to pre pay money for shopping.".tr;
-  static String serviceDuration = "How many hours of service would you like to book with the agent? (CAD 5/hour)".tr;
+  static String prePaymentWarningMessage ({required int maxValue}) => "If your shopping exceeds BDT $maxValue, in that case it is mandatory to pre pay money for shopping.".tr;
+  static String serviceDuration ({required int hourlyRates}) => "How many hours of service would you like to book with the agent? (CAD $hourlyRates/hour)".tr;
   static String serviceDurationHintText = "3.5".tr;
   static String serviceDurationCostHintText = "17.5 CAD".tr;
 }

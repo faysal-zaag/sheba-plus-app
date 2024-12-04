@@ -4,6 +4,9 @@ class ApiUrls {
   static const String customerAuthApiUrl = "$baseApiUrl/auth/customer";
   static const String customersApiUrl = "$baseApiUrl/customers";
 
+  // settings
+  static const String publicSettingApiUrl = "$baseApiUrl/settings/get-default";
+  
   // services
   static const String servicesApiUrl = "$baseApiUrl/modules";
 

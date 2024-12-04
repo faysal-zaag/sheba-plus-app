@@ -22,8 +22,4 @@ class AddressRepository {
       {required int addressId, required Address address}) async {
     return await _dio.put("${ApiUrls.updateAddressApiUrl}/$addressId", data: address.toJson());
   }
-
-  Future<Response> deleteAddress({required int addressId}) async {
-    return await _dio.delete("${ApiUrls.addressApiUrl}?id=$addressId");
-  }
 }

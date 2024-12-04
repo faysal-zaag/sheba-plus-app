@@ -7,4 +7,5 @@ class AgentShoppingController extends GetxController{
   final agentShoppingBDTimeController = TextEditingController().obs;
   final agentShoppingSpendAmountController = TextEditingController().obs;
   final agentShoppingServiceDurationController = TextEditingController().obs;
+  final agentShoppingServiceTotalCostController = TextEditingController().obs;
 }

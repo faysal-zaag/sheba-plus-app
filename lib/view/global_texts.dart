@@ -7,6 +7,7 @@ class GlobalTexts{
   static String confirmExit = "Confirm Exit?".tr;
   static String quit = "Quit".tr;
   static String areYouSure = "Are you sure you want to quit?".tr;
+  static String thisFieldIsRequired = "This field is required".tr;
   static String continueText = "Continue".tr;
   static String next = "Next".tr;
   static String saveAndContinue = "Save and Continue".tr;

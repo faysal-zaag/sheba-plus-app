@@ -20,6 +20,7 @@ class AgentShoppingOrderInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PrimaryScaffold(
+      resizeToAvoidBottomInset: true,
       userIcon: true,
       body: SingleChildScrollView(
         child: Column(
