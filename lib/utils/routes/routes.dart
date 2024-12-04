@@ -16,4 +16,8 @@ class Routes {
   static const String agentShoppingOrderInfoScreen = '/agent-shopping-order-info';
   static const String displayCenterServiceProductListScreen = '/display-center-service-products';
   static const String displayCenterServiceProductDetailsScreen = '/display-center-service-products-details';
+
+
+  // Order
+  static const String cartDetailsScreen = '/cart-details';
 }

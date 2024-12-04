@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 
@@ -70,8 +71,7 @@ class _DisplayCenterProductDetailsScreenState
                   '',
             ),
           ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * .8,
+          Expanded(
             child: ListView(
               children: [
                 Obx(
@@ -184,7 +184,34 @@ class _DisplayCenterProductDetailsScreenState
               ],
             ),
           ),
-
+          Padding(
+            padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10),
+            child: Column(
+              children: [
+                const Divider(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomPrimaryButton(
+                        label: 'ADD TO CART',
+                        labelColor: AppColors.black,
+                        onClick: () {},
+                        borderColor: AppColors.black,
+                        color: AppColors.white,
+                      ),
+                    ),
+                    10.kW,
+                    Expanded(
+                      child: CustomPrimaryButton(
+                        label: 'BUY NOW',
+                        onClick: () {},
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
