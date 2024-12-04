@@ -6,7 +6,6 @@ import 'package:sheba_plus/controllers/network_controller.dart';
 import 'package:sheba_plus/data/api/config.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/services/file_service.dart';
-import 'package:sheba_plus/view/agent-shopping/controller/agent_shopping_controller.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 import 'package:sheba_plus/view/home/controller/home_controller.dart';
@@ -15,6 +14,7 @@ import 'package:sheba_plus/view/profile/notification/controller/notification_con
 import 'package:sheba_plus/view/profile/order-history/controller/order_controller.dart';
 import 'package:sheba_plus/view/profile/reward-points/controller/reward_controller.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
+import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 import 'package:sheba_plus/view_model/repositories/address.repository.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
 import 'package:sheba_plus/view_model/repositories/global.repository.dart';
