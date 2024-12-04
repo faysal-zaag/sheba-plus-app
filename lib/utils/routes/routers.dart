@@ -87,7 +87,7 @@ class AppRouters {
     ),
     GetPage(
       name: Routes.cartDetailsScreen,
-      page: () => const CartDetailsScreen(),
+      page: () => CartDetailsScreen(),
     ),
   ];
 }

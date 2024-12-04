@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/data/mock_data.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
@@ -10,7 +12,9 @@ import 'widgets/cart_item_card.dart';
 import 'widgets/order_summary_items.dart';
 
 class CartDetailsScreen extends StatelessWidget {
-  const CartDetailsScreen({Key? key}) : super(key: key);
+  CartDetailsScreen({Key? key}) : super(key: key);
+
+  final globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +57,9 @@ class CartDetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: CustomPrimaryButton(
               label: 'Proceed to Checkout',
-              onClick: () {},
+              onClick: () {
+                globalController.showRedeemPointModalSheet(context: context, totalDue: 150.00, totalRedeemPoints: 80000);
+              },
             ),
           )
         ],
