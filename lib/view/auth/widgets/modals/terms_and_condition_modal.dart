@@ -14,7 +14,9 @@ import 'package:sheba_plus/view/global_texts.dart';
 import 'package:sheba_plus/view/home/home_screen_texts.dart';
 
 class TermsAndConditionSheet extends StatelessWidget {
-  TermsAndConditionSheet({super.key});
+  final int serviceIndex;
+
+  TermsAndConditionSheet({super.key, required this.serviceIndex});
 
   final globalController = Get.find<GlobalController>();
 
@@ -105,8 +107,14 @@ class TermsAndConditionSheet extends StatelessWidget {
                   child: CustomPrimaryButton(
                     label: GlobalTexts.next,
                     onClick: () {
-                      if (globalController.termsAccepted.isTrue) {
+                      if (globalController.termsAccepted.isTrue &&
+                          serviceIndex == 1) {
                         Get.toNamed(Routes.agentShoppingOrderInfoScreen);
+                        globalController.termsAccepted(false);
+                      } else if (globalController.termsAccepted.isTrue &&
+                          serviceIndex == 2) {
+                        Get.toNamed(
+                            Routes.displayCenterServiceProductListScreen);
                         globalController.termsAccepted(false);
                       } else {
                         Utils.showErrorToast(

@@ -7,7 +7,7 @@ import 'package:sheba_plus/view/auth/widgets/modals/terms_and_condition_modal.da
 class GlobalController extends GetxController {
   final termsAccepted = false.obs;
 
-  void showTermsAndConditionSheet({required BuildContext context}) {
+  void showTermsAndConditionSheet({required BuildContext context, required int serviceIndex}) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true, // Allows dynamic height adjustment
@@ -34,7 +34,7 @@ class GlobalController extends GetxController {
                 ),
                 child: Wrap(
                   children: [
-                    TermsAndConditionSheet(),
+                    TermsAndConditionSheet(serviceIndex: serviceIndex,),
                   ],
                 ),
               ),

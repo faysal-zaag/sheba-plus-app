@@ -42,7 +42,7 @@ class MyBindings implements Bindings {
     Get.put(RewardController());
     Get.put(NotificationController());
     Get.put(AddressController(Get.find<AddressRepository>()));
-    Get.put(DisplayServiceController());
+    Get.put(DisplayCenterServiceController());
     Get.put(AgentShoppingController());
 
     Get.put<AuthController>(AuthController(Get.find<AuthRepository>(), Get.find<StorageService>(), Get.find<ProfileController>(), Get.find<AddressController>()));
