@@ -35,7 +35,7 @@ class _DisplayCenterProductListScreenState
   @override
   Widget build(BuildContext context) {
     return PrimaryScaffold(
-      displayCenter: true,
+      hasCart: true,
       body: Stack(
         children: [
           Container(

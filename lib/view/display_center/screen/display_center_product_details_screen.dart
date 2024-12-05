@@ -60,7 +60,7 @@ class _DisplayCenterProductDetailsScreenState
   @override
   Widget build(BuildContext context) {
     return PrimaryScaffold(
-      displayCenter: true,
+      hasCart: true,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

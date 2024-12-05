@@ -16,6 +16,7 @@ import 'package:sheba_plus/view/display_center/screen/display_center_product_lis
 import 'package:sheba_plus/view/home/home_screen.dart';
 import 'package:sheba_plus/view/profile/profile_screen.dart';
 import 'package:sheba_plus/view/splash_screen.dart';
+import 'package:sheba_plus/view/third_party/third_party_shop_and_item_details_screen.dart';
 
 import 'routes.dart';
 
@@ -88,6 +89,10 @@ class AppRouters {
     GetPage(
       name: Routes.cartDetailsScreen,
       page: () => CartDetailsScreen(),
+    ),
+    GetPage(
+      name: Routes.thirdPartyShopAndItemDetailsScreen,
+      page: () => const ThirdPartyShopAndItemDetailsScreen(),
     ),
   ];
 }

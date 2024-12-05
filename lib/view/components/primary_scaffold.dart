@@ -6,7 +6,7 @@ import 'package:sheba_plus/view/home/widgets/drawer/home_drawer.dart';
 
 class PrimaryScaffold extends StatelessWidget {
   final Widget body;
-  final bool displayCenter;
+  final bool hasCart;
   final bool userIcon;
   final Color backgroundColor;
   final bool resizeToAvoidBottomInset;
@@ -14,7 +14,7 @@ class PrimaryScaffold extends StatelessWidget {
   const PrimaryScaffold({
     super.key,
     required this.body,
-    this.displayCenter = false,
+    this.hasCart = false,
     this.userIcon = false,
     this.backgroundColor = AppColors.background,
     this.resizeToAvoidBottomInset = false,
@@ -26,7 +26,7 @@ class PrimaryScaffold extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: resizeToAvoidBottomInset,
         appBar: CustomAppBar(
-          displayCenter: displayCenter,
+          hasCart: hasCart,
           userIcon: userIcon,
         ),
         drawer: HomeDrawer(),

@@ -119,6 +119,12 @@ class TermsAndConditionSheet extends StatelessWidget {
                             Get.toNamed(
                                 Routes.displayCenterServiceProductListScreen);
                             globalController.termsAccepted(false);
+                          }
+                          else if (globalController.termsAccepted.isTrue &&
+                              serviceIndex == 3) {
+                            Get.toNamed(
+                                Routes.thirdPartyShopAndItemDetailsScreen);
+                            globalController.termsAccepted(false);
                           } else {
                             Utils.showErrorToast(
                                 message:
