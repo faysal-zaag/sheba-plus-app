@@ -6,6 +6,7 @@ import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/vertical_bordered_text_container.dart';
 import 'package:sheba_plus/view/profile/notification/widget/meeting_waiting_container.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
+import 'package:sheba_plus/view/services/widget/shopping-details/shopping_details.dart';
 import 'package:sheba_plus/view/styles.dart';
 
 class NotificationDetailsScreen extends StatelessWidget {
@@ -39,6 +40,7 @@ class NotificationDetailsScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                const ShoppingDetails(),
                 Column(
                   children: [
                     VerticalBorderedContainer(

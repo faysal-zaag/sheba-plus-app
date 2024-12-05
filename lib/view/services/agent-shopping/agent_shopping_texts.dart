@@ -14,4 +14,12 @@ class AgentShoppingTexts{
   static String serviceDuration ({required int hourlyRates}) => "How many hours of service would you like to book with the agent? (CAD $hourlyRates/hour)".tr;
   static String serviceDurationHintText = "3.5".tr;
   static String serviceDurationCostHintText = "17.5".tr;
+
+  // shopping details
+  static String shopName = "Shop Name".tr;
+  static String totalItem = "Total Item".tr;
+  static String itemQty = "Item Qty".tr;
+  static String itemPrice = "Item Price".tr;
+  static String totalItemPrice = "Total Item Price".tr;
+  static String totalShoppingCost = "Total Shopping Cost".tr;
 }
