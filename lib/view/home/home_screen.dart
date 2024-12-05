@@ -39,13 +39,14 @@ class HomeScreen extends StatelessWidget {
             // carousel
             HomeCarousel(homeController: homeController),
             // home service header information
-            Padding(
+            Container(
+              color: AppColors.white,
               padding: AppPaddings.screenPadding,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    HomeText.header1,
+                    HomeScreenText.header1,
                     style: Theme.of(context).textTheme.headlineSmall,
                   ),
                   16.kH,
@@ -54,10 +55,10 @@ class HomeScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodySmall,
                       children: [
                         TextSpan(
-                          text: HomeText.headerDescription,
+                          text: HomeScreenText.headerDescription,
                         ),
                         TextSpan(
-                          text: " ${HomeText.headerMoto}",
+                          text: " ${HomeScreenText.headerMoto}",
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall
@@ -68,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   16.kH,
                   Text(
-                    "${HomeText.serviceSelection} :",
+                    "${HomeScreenText.serviceSelection} :",
                     style: Theme.of(context)
                         .textTheme
                         .bodySmall

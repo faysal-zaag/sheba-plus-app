@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/utils/routes/routers.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/home/controller/home_controller.dart';
 import 'package:sheba_plus/view/home/home_screen_texts.dart';
@@ -21,8 +20,8 @@ class HomeServices extends StatelessWidget {
           index: 1,
           contents: [
             Obx(
-                  () => Text(
-                HomeText.agentShopping,
+              () => Text(
+                HomeScreenText.agentShopping,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: homeController.selectedService.value == 1
                         ? AppColors.primary
@@ -31,21 +30,21 @@ class HomeServices extends StatelessWidget {
             ),
             4.kH,
             Text(
-              HomeText.agentShoppingDetails1,
+              HomeScreenText.agentShoppingDetails1,
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
                   ?.copyWith(color: AppColors.subtext),
             )
-          ], onTapService: () {},
+          ],
+          onTapService: () {},
         ),
-        const Divider(),
         HomeServiceCard(
           index: 2,
           contents: [
             Obx(
-                  () => Text(
-                HomeText.displayCenter,
+              () => Text(
+                HomeScreenText.displayCenter,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: homeController.selectedService.value == 2
                         ? AppColors.primary
@@ -54,23 +53,23 @@ class HomeServices extends StatelessWidget {
             ),
             4.kH,
             Text(
-              HomeText.displayCenterDetails1,
+              HomeScreenText.displayCenterDetails1,
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
                   ?.copyWith(color: AppColors.subtext),
             )
-          ], onTapService: () {
+          ],
+          onTapService: () {
             Get.toNamed(Routes.displayCenterServiceProductListScreen);
-        },
+          },
         ),
-        const Divider(),
         HomeServiceCard(
           index: 3,
           contents: [
             Obx(
-                  () => Text(
-                HomeText.thirdParty,
+              () => Text(
+                HomeScreenText.thirdParty,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: homeController.selectedService.value == 3
                         ? AppColors.primary
@@ -79,7 +78,7 @@ class HomeServices extends StatelessWidget {
             ),
             4.kH,
             Text(
-              HomeText.thirdPartyDetails1,
+              HomeScreenText.thirdPartyDetails1,
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
@@ -87,43 +86,44 @@ class HomeServices extends StatelessWidget {
             ),
             Obx(() => homeController.selectedService.value == 3
                 ? Column(
-              children: [
-                12.kH,
-                Text(
-                  HomeText.thirdPartyDetails2,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(color: AppColors.subtext),
-                ),
-                12.kH,
-                Text(
-                  HomeText.thirdPartyDetails3,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(color: AppColors.subtext),
-                ),
-                12.kH,
-                Text(
-                  HomeText.thirdPartyDetails4,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(color: AppColors.subtext),
-                ),
-              ],
-            )
+                    children: [
+                      12.kH,
+                      Text(
+                        HomeScreenText.thirdPartyDetails2,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: AppColors.subtext),
+                      ),
+                      12.kH,
+                      Text(
+                        HomeScreenText.thirdPartyDetails3,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: AppColors.subtext),
+                      ),
+                      12.kH,
+                      Text(
+                        HomeScreenText.thirdPartyDetails4,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: AppColors.subtext),
+                      ),
+                    ],
+                  )
                 : const SizedBox())
-          ], onTapService: () {},
+          ],
+          onTapService: () {
+          },
         ),
-        const Divider(),
         HomeServiceCard(
           index: 4,
           contents: [
             Obx(
-                  () => Text(
-                HomeText.friendsFamily,
+              () => Text(
+                HomeScreenText.friendsFamily,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     color: homeController.selectedService.value == 4
                         ? AppColors.primary
@@ -132,7 +132,7 @@ class HomeServices extends StatelessWidget {
             ),
             4.kH,
             Text(
-              HomeText.friendsFamilyDetails1,
+              HomeScreenText.friendsFamilyDetails1,
               style: Theme.of(context)
                   .textTheme
                   .bodySmall
@@ -140,21 +140,21 @@ class HomeServices extends StatelessWidget {
             ),
             Obx(() => homeController.selectedService.value == 4
                 ? Column(
-              children: [
-                12.kH,
-                Text(
-                  HomeText.friendsFamilyDetails2,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(color: AppColors.subtext),
-                ),
-              ],
-            )
+                    children: [
+                      12.kH,
+                      Text(
+                        HomeScreenText.friendsFamilyDetails2,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: AppColors.subtext),
+                      ),
+                    ],
+                  )
                 : const SizedBox())
-          ], onTapService: () {},
+          ],
+          onTapService: () {},
         ),
-        const Divider(),
       ],
     );
   }

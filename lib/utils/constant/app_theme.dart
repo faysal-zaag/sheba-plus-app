@@ -20,13 +20,14 @@ class AppTheme {
             (states) {
               if (states.contains(WidgetState.pressed)) {
                 return AppColors.primary
-                    .withOpacity(0.1); // Feedback color for tap
+                    .withOpacity(0.1);
               }
-              return null; // Default feedback color
+              return null;
             },
           ),
         ),
       ),
+
       dialogTheme: DialogTheme(
         shape: OutlineInputBorder(
           borderRadius: AppBorderRadius.circularRadius2

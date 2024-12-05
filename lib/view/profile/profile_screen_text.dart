@@ -24,6 +24,14 @@ class ProfileScreenTexts {
   static String trackThisOrder = "Track this Order".tr;
   static String readMore = "Read More".tr;
   static String readLess = "Read Less".tr;
+  static String markAllAsRead = "Mark all as read".tr;
+  static String notificationDetailsHeader = "Order Status Notification".tr;
+  static String agentOnlineMeeting = "Agent Online Meeting".tr;
+  static String meetingTimeLeft = "Meeting Time Left".tr;
+  static String extendMeetingTime = "Extend Meeting Time ".tr;
+  static String startMeeting = "Start Meeting".tr;
+  static String meetingWillStart = "Agent meeting will start in".tr;
+  static String clickToStartMeeting = "Click the 'Start Meeting' button to start meeting now".tr;
 
   // saved address
   static String country = "Country".tr;

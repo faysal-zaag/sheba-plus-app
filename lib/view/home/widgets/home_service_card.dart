@@ -14,7 +14,11 @@ class HomeServiceCard extends StatelessWidget {
   final int index;
   final Function onTapService;
 
-  HomeServiceCard({super.key, required this.contents, required this.index, required this.onTapService});
+  HomeServiceCard(
+      {super.key,
+      required this.contents,
+      required this.index,
+      required this.onTapService});
 
   final homeController = Get.find<HomeController>();
   final globalController = Get.find<GlobalController>();
@@ -23,18 +27,26 @@ class HomeServiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if(homeController.selectedService.value == 0 || homeController.selectedService.value == index){
+        if (homeController.selectedService.value == 0 ||
+            homeController.selectedService.value == index) {
           homeController.onSelectService(index);
         }
       },
       child: Obx(
-            () => Stack(
+        () => Stack(
           children: [
             Container(
+              decoration: BoxDecoration(
+                color: homeController.selectedService.value == index
+                    ? AppColors.primaryLight.withOpacity(0.5)
+                    : AppColors.white,
+                border: const Border(
+                  bottom: BorderSide(
+                    color: AppColors.divider,
+                  ),
+                ),
+              ),
               padding: const EdgeInsets.all(16.0),
-              color: homeController.selectedService.value == index
-                  ? AppColors.primaryLight.withOpacity(0.5)
-                  : AppColors.white,
               child: Row(
                 children: [
                   Expanded(
@@ -56,45 +68,46 @@ class HomeServiceCard extends StatelessWidget {
                               ...contents,
                               homeController.selectedService.value == index
                                   ? Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  12.kH,
-                                  Text(
-                                    HomeText.shipmentMessage,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                        color: AppColors.hintText),
-                                  ),
-                                  12.kH,
-                                  Text(
-                                    HomeText.dropOffMessage,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.copyWith(
-                                        color: AppColors.hintText),
-                                  ),
-                                  24.kH,
-                                  Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.end,
-                                    children: [
-                                      CustomPrimaryButton(
-                                        label: HomeText.selectService,
-                                        onClick: () {
-                                          globalController
-                                              .showTermsAndConditionSheet(
-                                              context: context, serviceIndex: index);
-                                        },
-                                        width: 160,
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              )
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        12.kH,
+                                        Text(
+                                          HomeScreenText.shipmentMessage,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
+                                                  color: AppColors.hintText),
+                                        ),
+                                        12.kH,
+                                        Text(
+                                          HomeScreenText.dropOffMessage,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.copyWith(
+                                                  color: AppColors.hintText),
+                                        ),
+                                        24.kH,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            CustomPrimaryButton(
+                                              label: HomeScreenText.selectService,
+                                              onClick: () {
+                                                globalController
+                                                    .showTermsAndConditionSheet(
+                                                        context: context,
+                                                        serviceIndex: index);
+                                              },
+                                              width: 160,
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    )
                                   : const SizedBox()
                             ],
                           ),
@@ -115,7 +128,8 @@ class HomeServiceCard extends StatelessWidget {
                 ],
               ),
             ),
-            if(homeController.selectedService.value != index && homeController.selectedService.value != 0)
+            if (homeController.selectedService.value != index &&
+                homeController.selectedService.value != 0)
               ClipRect(
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
@@ -124,7 +138,9 @@ class HomeServiceCard extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(0.0),
                         color: Colors.grey.shade200.withOpacity(0.5)),
-                    child: Container(color: Colors.transparent,),
+                    child: Container(
+                      color: Colors.transparent,
+                    ),
                   ),
                 ),
               )

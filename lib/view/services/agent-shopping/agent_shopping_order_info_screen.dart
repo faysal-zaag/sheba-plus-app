@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/components/custom_app_bar_container_widget.dart';
 import 'package:sheba_plus/view/components/message_container.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
@@ -19,33 +18,27 @@ class AgentShoppingOrderInfoScreen extends StatelessWidget {
     return PrimaryScaffold(
       resizeToAvoidBottomInset: true,
       userIcon: true,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CustomAppBarContainerWidget(title: "Book Agent Shopping"),
-            Padding(
-              padding: AppPaddings.screenPadding,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CustomAppBarContainerWidget(title: AgentShoppingTexts.agentShoppingOrderInfoHeader,),
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    AgentShoppingTexts.agentShoppingOrderInfoHeader,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.w600),
+                  Padding(
+                    padding: AppPaddings.allPadding16,
+                    child: MessageContainer(
+                        message:
+                        AgentShoppingTexts.agentShoppingOrderInfoMessage),
                   ),
-                  16.kH,
-                  MessageContainer(
-                      message:
-                          AgentShoppingTexts.agentShoppingOrderInfoMessage),
+                  const AgentShoppingOrderInfoForm(),
                 ],
               ),
             ),
-            const AgentShoppingOrderInfoForm(),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

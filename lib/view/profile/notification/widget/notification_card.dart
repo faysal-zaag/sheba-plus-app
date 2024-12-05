@@ -5,6 +5,7 @@ import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/styles.dart';
 
@@ -88,7 +89,7 @@ class NotificationCard extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              print("Track this order clicked");
+              Get.toNamed(Routes.notificationDetails);
             },
             style: TextButton.styleFrom(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

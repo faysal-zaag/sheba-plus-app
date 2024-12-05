@@ -85,7 +85,7 @@ class HomeDrawer extends StatelessWidget {
                     const ProjectBranding(),
                     16.kH,
                     Text(
-                      HomeText.companyAddress,
+                      HomeScreenText.companyAddress,
                       style: Theme.of(context)
                           .textTheme
                           .titleSmall

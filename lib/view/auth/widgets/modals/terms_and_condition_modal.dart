@@ -55,7 +55,7 @@ class TermsAndConditionSheet extends StatelessWidget {
               padding: AppPaddings.allPadding12,
               child: SingleChildScrollView(
                 child: Text(
-                  HomeText.fullTermsAndConditions,
+                  HomeScreenText.fullTermsAndConditions,
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         color: AppColors.subtext,
                       ),
@@ -114,23 +114,24 @@ class TermsAndConditionSheet extends StatelessWidget {
                               serviceIndex == 1) {
                             Get.toNamed(Routes.agentShoppingOrderInfoScreen);
                             globalController.termsAccepted(false);
-                          } else if (globalController.termsAccepted.isTrue &&
+                          }
+                          if (globalController.termsAccepted.isTrue &&
                               serviceIndex == 2) {
                             Get.toNamed(
                                 Routes.displayCenterServiceProductListScreen);
                             globalController.termsAccepted(false);
                           }
-                          else if (globalController.termsAccepted.isTrue &&
-                              serviceIndex == 3) {
-                            Get.toNamed(
-                                Routes.thirdPartyShopAndItemDetailsScreen);
-                            globalController.termsAccepted(false);
-                          } else {
-                            Utils.showErrorToast(
-                                message:
-                                    GlobalTexts.pleaseAcceptTermsAndCondition,
-                                alignment: Alignment.topCenter);
-                          }
+                        }
+                        if (globalController.termsAccepted.isTrue &&
+                            serviceIndex == 3) {
+                          Get.toNamed(
+                              Routes.thirdPartyShopAndItemDetailsScreen);
+                          globalController.termsAccepted(false);
+                        } else {
+                          Utils.showErrorToast(
+                              message:
+                                  GlobalTexts.pleaseAcceptTermsAndCondition,
+                              alignment: Alignment.topCenter);
                         }
                       }),
                 )

@@ -10,6 +10,7 @@ class PrimaryScaffold extends StatelessWidget {
   final bool userIcon;
   final Color backgroundColor;
   final bool resizeToAvoidBottomInset;
+  final Widget? bottomNavigationBar;
 
   const PrimaryScaffold({
     super.key,
@@ -17,7 +18,7 @@ class PrimaryScaffold extends StatelessWidget {
     this.hasCart = false,
     this.userIcon = false,
     this.backgroundColor = AppColors.background,
-    this.resizeToAvoidBottomInset = false,
+    this.resizeToAvoidBottomInset = false, this.bottomNavigationBar,
   });
 
   @override
@@ -32,6 +33,7 @@ class PrimaryScaffold extends StatelessWidget {
         drawer: HomeDrawer(),
         backgroundColor: backgroundColor,
         body: body,
+        bottomNavigationBar: bottomNavigationBar,
       ),
     );
   }

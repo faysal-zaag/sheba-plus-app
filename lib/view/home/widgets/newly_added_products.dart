@@ -25,7 +25,7 @@ class NewlyAddedProducts extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  HomeText.newlyAddedProducts,
+                  HomeScreenText.newlyAddedProducts,
                   style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),

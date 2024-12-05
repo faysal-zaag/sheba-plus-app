@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/notification/widget/notification_card.dart';
@@ -30,6 +33,16 @@ class _NotificationScreenState extends State<NotificationScreen> {
             ],
             onTap: (value) =>
                 notificationController.selectedNotificationHistoryType(value))),
+        16.kH,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(PhosphorIcons.checks(), color: AppColors.primary,),
+            6.kW,
+            Text(ProfileScreenTexts.markAllAsRead, style: Theme.of(context).textTheme.displayMedium?.copyWith(color: AppColors.primary),)
+          ],
+        ),
         16.kH,
         Expanded(
           child: ListView.separated(
