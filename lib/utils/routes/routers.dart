@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sheba_plus/middlewares/auth_middleware.dart';
 import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
+import 'package:sheba_plus/view/cart/cart_details_screen.dart';
 import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_order_info_screen.dart';
 import 'package:sheba_plus/view/auth/forget-password/forget_password_screen.dart';
 import 'package:sheba_plus/view/auth/forget-password/reset_password_email_screen.dart';
@@ -93,6 +94,10 @@ class AppRouters {
             Get.arguments;
         return displayCenterProductDetailsScreen;
       },
+    ),
+    GetPage(
+      name: Routes.cartDetailsScreen,
+      page: () => CartDetailsScreen(),
     ),
   ];
 }

@@ -10,39 +10,43 @@ class CustomQuantityIncDecWidget extends StatelessWidget {
   final double? width;
   final bool? largeSize;
   final int quantity;
+  final bool hasTitle;
 
   const CustomQuantityIncDecWidget(
       {super.key,
-        required this.onIncrementPress,
-        required this.onDecrementPress,
-        required this.quantity,
-        this.height,
-        this.width, this.largeSize = false});
+      required this.onIncrementPress,
+      required this.onDecrementPress,
+      required this.quantity,
+      this.height,
+      this.hasTitle = true,
+      this.width,
+      this.largeSize = false});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              'Select Quantity',
-              style: Theme.of(context)
-                  .textTheme
-                  .labelMedium
-                  ?.copyWith(fontWeight: FontWeight.w700),
-            ),
-            Text(
-              ' *',
-              style: Theme.of(context)
-                  .textTheme
-                  .labelMedium
-                  ?.copyWith(color: AppColors.error),
-            ),
-          ],
-        ),
-        10.kH,
+        if (hasTitle)
+          Row(
+            children: [
+              Text(
+                'Select Quantity',
+                style: Theme.of(context)
+                    .textTheme
+                    .labelMedium
+                    ?.copyWith(fontWeight: FontWeight.w700),
+              ),
+              Text(
+                ' *',
+                style: Theme.of(context)
+                    .textTheme
+                    .labelMedium
+                    ?.copyWith(color: AppColors.error),
+              ),
+            ],
+          ),
+        if (hasTitle) 10.kH,
         Container(
             width: width ?? 93,
             height: height ?? 32,
@@ -64,7 +68,8 @@ class CustomQuantityIncDecWidget extends StatelessWidget {
                     icon: Icon(
                       Icons.remove,
                       size: largeSize == true ? 24 : 16,
-                      color: quantity == 1 ? AppColors.neutral70 : AppColors.black,
+                      color:
+                          quantity == 1 ? AppColors.neutral70 : AppColors.black,
                     ),
                   ),
                 ),
@@ -73,7 +78,9 @@ class CustomQuantityIncDecWidget extends StatelessWidget {
                   child: Text(
                     quantity <= 9 ? "0$quantity" : quantity.toString(),
                     textAlign: TextAlign.center,
-                    style: largeSize == true ? Theme.of(context).textTheme.labelMedium : Theme.of(context).textTheme.labelMedium,
+                    style: largeSize == true
+                        ? Theme.of(context).textTheme.labelMedium
+                        : Theme.of(context).textTheme.labelMedium,
                   ),
                 ),
                 Expanded(
@@ -83,7 +90,10 @@ class CustomQuantityIncDecWidget extends StatelessWidget {
                     onPressed: () {
                       onIncrementPress();
                     },
-                    icon: Icon(Icons.add, size: largeSize == true ? 24 : 16,),
+                    icon: Icon(
+                      Icons.add,
+                      size: largeSize == true ? 24 : 16,
+                    ),
                   ),
                 ),
               ],

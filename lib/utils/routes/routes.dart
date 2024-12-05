@@ -20,4 +20,8 @@ class Routes {
   static const String partialCheckoutScreen = '/partial-checkout-screen';
   static const String displayCenterServiceProductListScreen = '/display-center-service-products';
   static const String displayCenterServiceProductDetailsScreen = '/display-center-service-products-details';
+
+
+  // Order
+  static const String cartDetailsScreen = '/cart-details';
 }
