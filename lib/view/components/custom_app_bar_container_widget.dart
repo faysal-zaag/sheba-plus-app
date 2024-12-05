@@ -4,11 +4,11 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 
-class CustomAppBarContainerWidget extends StatelessWidget {
+class CustomHeaderContainer extends StatelessWidget {
   final String title;
   final Color backgroundColor;
 
-  const CustomAppBarContainerWidget({
+  const CustomHeaderContainer({
     super.key,
     required this.title,
     this.backgroundColor = AppColors.white,

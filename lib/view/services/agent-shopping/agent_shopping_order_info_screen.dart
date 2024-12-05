@@ -21,7 +21,7 @@ class AgentShoppingOrderInfoScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomAppBarContainerWidget(title: AgentShoppingTexts.agentShoppingOrderInfoHeader,),
+          CustomHeaderContainer(title: AgentShoppingTexts.agentShoppingOrderInfoHeader,),
           Expanded(
             child: SingleChildScrollView(
               child: Column(

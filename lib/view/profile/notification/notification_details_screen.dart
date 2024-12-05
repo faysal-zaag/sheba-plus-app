@@ -17,7 +17,7 @@ class NotificationDetailsScreen extends StatelessWidget {
     return PrimaryScaffold(
         body: Column(
       children: [
-        CustomAppBarContainerWidget(
+        CustomHeaderContainer(
             title: "${ProfileScreenTexts.ticketNumber} #DC1452080"),
         VerticalBorderedContainer(
           child: Text(

@@ -65,7 +65,7 @@ class _DisplayCenterProductDetailsScreenState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Obx(
-            () => CustomAppBarContainerWidget(
+            () => CustomHeaderContainer(
               title: displayCenterServiceController
                       .currentDisplayServiceProduct.value.name ??
                   '',

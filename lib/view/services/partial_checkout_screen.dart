@@ -28,7 +28,7 @@ class PartialCheckoutScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomAppBarContainerWidget(
+          CustomHeaderContainer(
             title: PartialCheckoutTexts.partialCheckoutScreenHeader,
           ),
           Expanded(

@@ -21,7 +21,7 @@ class CartDetailsScreen extends StatelessWidget {
     return PrimaryScaffold(
       body: Column(
         children: [
-          const CustomAppBarContainerWidget(title: 'My Cart'),
+          const CustomHeaderContainer(title: 'My Cart'),
           2.kH,
           Expanded(
             child: ListView(
