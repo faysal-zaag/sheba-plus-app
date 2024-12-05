@@ -65,6 +65,7 @@ class AddressController extends GetxController {
   Future<void> getAllAddress() async {
     try {
       addressReadLoading(true);
+      hasSavedAddress(false);
 
       final response = await _addressRepository.readAllAddress();
 

@@ -46,9 +46,9 @@ class CustomPrimaryButton extends StatelessWidget {
           side: BorderSide(color: borderColor ?? Colors.transparent),
         ),
         child: loading == true
-            ? const CustomLoader(
+            ? CustomLoader(
           size: 30,
-          color: AppColors.white,
+          color: labelColor ?? AppColors.white,
         )
             : Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -38,19 +38,29 @@ class _NotificationScreenState extends State<NotificationScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(PhosphorIcons.checks(), color: AppColors.primary,),
+            Icon(
+              PhosphorIcons.checks(),
+              color: AppColors.primary,
+            ),
             6.kW,
-            Text(ProfileScreenTexts.markAllAsRead, style: Theme.of(context).textTheme.displayMedium?.copyWith(color: AppColors.primary),)
+            Text(
+              ProfileScreenTexts.markAllAsRead,
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium
+                  ?.copyWith(color: AppColors.primary),
+            )
           ],
         ),
         16.kH,
         Expanded(
           child: ListView.separated(
-            itemBuilder: (_, index) => Obx(()=>NotificationCard(
-              readMoreOnTap: () => notificationController.readMoreOnTap(index),
-              readMoreOn:
-              notificationController.expandedNotifications.contains(index),
-            )),
+            itemBuilder: (_, index) => Obx(() => NotificationCard(
+                  readMoreOnTap: () =>
+                      notificationController.readMoreOnTap(index),
+                  readMoreOn: notificationController.expandedNotifications
+                      .contains(index),
+                )),
             separatorBuilder: (_, index) => 12.kH,
             itemCount: 3,
           ),

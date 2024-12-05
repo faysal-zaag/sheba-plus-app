@@ -21,5 +21,12 @@ class AgentShoppingTexts{
   static String itemQty = "Item Qty".tr;
   static String itemPrice = "Item Price".tr;
   static String totalItemPrice = "Total Item Price".tr;
+  static String total = "Total".tr;
   static String totalShoppingCost = "Total Shopping Cost".tr;
+  static String shoppingCost = "Shopping Cost".tr;
+  static String tax = "TAX".tr;
+  static String vat = "VAT".tr;
+  static String totalExpenditure = "Total expenditure:".tr;
+  static String alreadyPaid = "Already PAID".tr;
+  static String existingDues = "Existing DUES".tr;
 }

@@ -42,7 +42,7 @@ class AuthScreenText {
   static String nameRequired = "Name is required".tr;
   static String existingUserNameHintText =
       "name of the person you're referring".tr;
-  static String phoneNumber = "Phone Number".tr;
+  static String phoneNumber = "Phone number".tr;
   static String existingUserPhoneNumber = "Existing User’s Phone Number".tr;
   static String existingUserPhoneNumberHintText =
       "phone number of the referred person".tr;
@@ -58,10 +58,12 @@ class AuthScreenText {
   static String createAccount = "Create Account".tr;
   static String changeEmailAddress = "Change email address".tr;
   static String changePassword = "Change password".tr;
+  static String oldPassword = "Old password".tr;
   static String newPassword = "New password".tr;
   static String newPasswordHintText = "New password".tr;
   static String resetPassword = "Reset password".tr;
   static String resetPasswordInfo = "Enter your new password to reset the password.".tr;
+  static String changePasswordInfo = "Enter your old and new password to change the password.".tr;
   static String sendVerificationCode = "Send Verification Code".tr;
   static String otpSentMessage = "An OTP Send to your email. please verify.".tr;
   static String forgetPasswordHeadline = "By giving your email address you can go to the next phase".tr;

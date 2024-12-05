@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
-import 'package:sheba_plus/view/components/custom_app_bar_container_widget.dart';
+import 'package:sheba_plus/view/components/custom_header_container.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/vertical_bordered_text_container.dart';
 import 'package:sheba_plus/view/profile/notification/widget/meeting_waiting_container.dart';
+import 'package:sheba_plus/view/profile/notification/widget/order-review/order_review_questions.dart';
+import 'package:sheba_plus/view/profile/notification/widget/shopping-details/shopping_details.dart';
+import 'package:sheba_plus/view/profile/notification/widget/shopping-details/sopping_summary.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
-import 'package:sheba_plus/view/services/widget/shopping-details/shopping_details.dart';
+import 'package:sheba_plus/view/profile/notification/widget/order_status_tracks.dart';
 import 'package:sheba_plus/view/styles.dart';
 
 class NotificationDetailsScreen extends StatelessWidget {
@@ -41,6 +44,11 @@ class NotificationDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 const ShoppingDetails(),
+                const Divider(),
+                const ShoppingDetails(),
+                const ShoppingSummary(),
+                const OrderStatusTracks(),
+                const OrderReviewQuestions(),
                 Column(
                   children: [
                     VerticalBorderedContainer(

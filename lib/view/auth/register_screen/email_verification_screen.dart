@@ -24,18 +24,28 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     return CommonVerificationScreen(
       heading: AuthScreenText.emailVerificationHeader,
       description:
-          "${AuthScreenText.weHaveJustSent} ${AuthUtils.getSecuredEmail(email: authController.registerEmailController.value.text)}",
+          "${AuthScreenText.weHaveJustSent} ${AuthUtils.getSecuredEmail(email: Get.arguments ?? authController.registerEmailController.value.text)}",
       headerImage: Image.asset(
         AppImages.otpVerification,
         width: 250,
       ),
-      buttonLabel: AuthScreenText.createAccount,
+      buttonLabel: Get.arguments != null
+          ? AuthScreenText.verify
+          : AuthScreenText.createAccount,
       onClick: () async {
-        final response = await authController.verifyEmail();
-        if(response){
-          Utils.showSuccessToast(message: AuthScreenText.emailVerifiedSuccessfully,);
-          authController.cleanRegistrationData();
-          Get.offAndToNamed(Routes.registerAddress);
+        if (Get.arguments != null) {
+          final response = await authController.verifyEmail(email: Get.arguments);
+          if (response) {
+            Utils.showSuccessToast(message: AuthScreenText.emailVerifiedSuccessfully,);
+            Get.offAndToNamed(Routes.changePassword, arguments: authController.registerOtpCode.value);
+          }
+        } else {
+          final response = await authController.verifyResetPasswordEmail(email: authController.registerEmailController.value.text);
+          if (response) {
+            authController.cleanRegistrationData();
+            Get.offAndToNamed(Routes.registerAddress);
+            Utils.showSuccessToast(message: AuthScreenText.emailVerifiedSuccessfully,);
+          }
         }
       },
       bottomLeftLabel: AuthScreenText.changeEmailAddress,

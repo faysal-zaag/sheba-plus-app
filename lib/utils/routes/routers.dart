@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:sheba_plus/middlewares/auth_middleware.dart';
+import 'package:sheba_plus/view/profile/account-management/change_password_screen.dart';
 import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
 import 'package:sheba_plus/view/cart/cart_details_screen.dart';
 import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_order_info_screen.dart';
@@ -70,6 +71,10 @@ class AppRouters {
     GetPage(
       name: Routes.setNewPassword,
       page: () => const SetNewPasswordScreen(),
+    ),
+    GetPage(
+      name: Routes.changePassword,
+      page: () => const ChangePasswordScreen(),
     ),
     GetPage(
       name: Routes.agentShoppingOrderInfoScreen,

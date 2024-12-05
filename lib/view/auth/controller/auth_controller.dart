@@ -169,6 +169,7 @@ class AuthController extends GetxController {
           password: registerPasswordController.value.text,
         ),
       );
+
       return true;
     } catch (e) {
       return false;
@@ -211,17 +212,18 @@ class AuthController extends GetxController {
     } finally {}
   }
 
-  Future<bool> verifyEmail() async {
+  Future<bool> verifyEmail({String? email}) async {
     try {
       otpVerificationProcessLoading(true);
       await _authRepository.verifyResetPasswordEmail(
         verificationModel: VerificationModel(
           code: int.parse(registerOtpCode.value),
-          email: registerEmailController.value.text,
+          email: email ?? registerEmailController.value.text,
         ),
       );
       return true;
     } catch (e) {
+      Log.error(e.toString());
       return false;
     } finally {
       otpVerificationProcessLoading(false);
@@ -245,28 +247,30 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<bool> verifyResetPasswordEmail() async {
+  Future<bool> verifyResetPasswordEmail({String? email}) async {
+    print(email);
     try {
       otpVerificationProcessLoading(true);
       await _authRepository.verifyResetPasswordEmail(
         verificationModel: VerificationModel(
           code: int.parse(resetPasswordByEmailOtpCode.value),
-          email: forgetPasswordEmailController.value.text,
+          email: email ?? forgetPasswordEmailController.value.text,
         ),
       );
       return true;
     } catch (e) {
+      Log.error(e.toString());
       return false;
     } finally {
       otpVerificationProcessLoading(false);
     }
   }
 
-  Future<bool> forgetPassword() async {
+  Future<bool> forgetPassword({String? email}) async {
     try {
       forgetPasswordProcedureLoading(true);
       await _authRepository.resetPasswordByEmail(
-        email: forgetPasswordEmailController.value.text,
+        email: email ?? forgetPasswordEmailController.value.text,
       );
       return true;
     } catch (e) {

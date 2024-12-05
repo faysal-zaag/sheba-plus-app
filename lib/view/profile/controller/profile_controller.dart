@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sheba_plus/models/user/user.dart';
+import 'package:sheba_plus/models/verification/verification_model.dart';
 import 'package:sheba_plus/services/file_service.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
+import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/view/profile/account-management/account_management_screen.dart';
 import 'package:sheba_plus/view/profile/notification/notification_screen.dart';
 import 'package:sheba_plus/view/profile/order-history/order_history_screen.dart';
@@ -12,7 +14,7 @@ import 'package:sheba_plus/view/profile/saved-address/controller/address_control
 import 'package:sheba_plus/view/profile/saved-address/saved_address_screen.dart';
 import 'package:sheba_plus/view_model/repositories/profile.repository.dart';
 
-class ProfileController extends GetxController{
+class ProfileController extends GetxController {
   final ProfileRepository _profileRepository;
   final FileService _fileService;
 
@@ -22,6 +24,7 @@ class ProfileController extends GetxController{
 
   final profileEditable = false.obs;
   final loadingUploadingPicture = false.obs;
+  final changePasswordProcedureLoading = false.obs;
   final selectedProfileMenu = AppConstants.profileMenuList[0].obs;
 
   final userFirstNameController = TextEditingController().obs;
@@ -30,11 +33,37 @@ class ProfileController extends GetxController{
   final userPhoneNumberController = TextEditingController().obs;
   final userDateOfBirthController = TextEditingController().obs;
 
+  final oldPasswordController = TextEditingController().obs;
+  final newPasswordController = TextEditingController().obs;
+  final confirmNewPasswordController = TextEditingController().obs;
+
+  final oldPasswordObscure = true.obs;
+  final newPasswordObscure = true.obs;
+  final confirmNewPasswordObscure = true.obs;
+
+  void resetChangePasswordFields() {
+    oldPasswordController.value.clear();
+    newPasswordController.value.clear();
+    confirmNewPasswordController.value.clear();
+  }
+
+  void onOldPasswordObscureTap() {
+    oldPasswordObscure(!oldPasswordObscure.value);
+  }
+
+  void onNewPasswordObscureTap() {
+    newPasswordObscure(!newPasswordObscure.value);
+  }
+
+  void onConfirmNewPasswordObscureTap() {
+    confirmNewPasswordObscure(!confirmNewPasswordObscure.value);
+  }
+
   final Map<String, Widget> screens = {
-    "Account Management":  AccountManagementScreen(),
+    "Account Management": AccountManagementScreen(),
     "Saved Address": SavedAddressScreen(),
-    "Order History":  OrderHistoryScreen(),
-    "Reward Points":  RewardPointsScreen(),
+    "Order History": OrderHistoryScreen(),
+    "Reward Points": RewardPointsScreen(),
     "Notification": NotificationScreen(),
   };
 
@@ -53,8 +82,28 @@ class ProfileController extends GetxController{
     } catch (err) {
       return false;
     }
-    finally{
+    finally {
       loadingUploadingPicture(false);
+    }
+  }
+
+  Future<bool> changePassword({required String otpCode}) async {
+    try {
+      changePasswordProcedureLoading(true);
+      await _profileRepository.changePassword(
+        verificationModel: VerificationModel(
+          code: int.parse(otpCode),
+          email: user.value.email,
+        ),
+        oldPassword: oldPasswordController.value.text,
+        newPassword: newPasswordController.value.text,
+    );
+    return true;
+    } catch (e) {
+      Log.error(e.toString());
+    return false;
+    } finally {
+    changePasswordProcedureLoading(false);
     }
   }
 }

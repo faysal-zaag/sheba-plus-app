@@ -146,8 +146,8 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
                           Obx(
                             () => authController.registerResendCode.isFalse
                                 ? CountDownTimer(
-                                    startTimeMilliseconds:
-                                        AuthUtils.getVerificationTime(),
+                                    verificationPage: true,
+                                    startTimeMilliseconds: AuthUtils.getVerificationTime(),
                                     onTimerFinish: () => authController
                                         .registerResendCode(!authController
                                             .registerResendCode.value),

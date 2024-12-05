@@ -7,7 +7,7 @@ import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 
-import '../../components/custom_app_bar_container_widget.dart';
+import '../../components/custom_header_container.dart';
 import '../../components/custom_tab.dart';
 import '../widgets/display_center_product/display_center_service_product_carousel.dart';
 import '../widgets/display_center_product/product_colors_select_widget.dart';

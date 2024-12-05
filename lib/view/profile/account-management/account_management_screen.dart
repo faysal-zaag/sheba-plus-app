@@ -5,7 +5,9 @@ import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/helpers/image_uploader.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
+import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/image/custom_image.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
@@ -17,10 +19,12 @@ class AccountManagementScreen extends StatefulWidget {
   const AccountManagementScreen({super.key});
 
   @override
-  State<AccountManagementScreen> createState() => _AccountManagementScreenState();
+  State<AccountManagementScreen> createState() =>
+      _AccountManagementScreenState();
 }
 
 class _AccountManagementScreenState extends State<AccountManagementScreen> {
+  final authController = Get.find<AuthController>();
   final profileController = Get.find<ProfileController>();
 
   @override
@@ -67,65 +71,63 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
             ),
             16.kH,
             Obx(
-                  () => TextFieldWithLabel(
-                controller:
-                profileController.userFirstNameController.value,
+              () => TextFieldWithLabel(
+                controller: profileController.userFirstNameController.value,
                 label: AuthScreenText.firstName,
                 hintText: "",
                 readOnly: profileController.profileEditable.isFalse,
               ),
             ),
             Obx(
-                  () => TextFieldWithLabel(
-                  controller:
-                  profileController.userLastNameController.value,
+              () => TextFieldWithLabel(
+                  controller: profileController.userLastNameController.value,
                   label: AuthScreenText.lastName,
                   hintText: "",
-                  readOnly:
-                  profileController.profileEditable.isFalse),
+                  readOnly: profileController.profileEditable.isFalse),
             ),
             Obx(
-                  () => TextFieldWithLabel(
-                controller:
-                profileController.userEmailController.value,
+              () => TextFieldWithLabel(
+                controller: profileController.userEmailController.value,
                 label: AuthScreenText.emailId,
                 hintText: "",
                 readOnly: profileController.profileEditable.isFalse,
               ),
             ),
             Obx(
-                  () => TextFieldWithLabel(
-                  controller: profileController
-                      .userPhoneNumberController.value,
+              () => TextFieldWithLabel(
+                  controller: profileController.userPhoneNumberController.value,
                   label: AuthScreenText.phoneNumber,
                   hintText: "",
-                  readOnly:
-                  profileController.profileEditable.isFalse),
+                  readOnly: profileController.profileEditable.isFalse),
             ),
             Obx(
-                  () => TextFieldWithLabel(
-                  controller: profileController
-                      .userDateOfBirthController.value,
+              () => TextFieldWithLabel(
+                  controller: profileController.userDateOfBirthController.value,
                   label: ProfileScreenTexts.dateOfBirth,
                   hintText: "",
-                  readOnly:
-                  profileController.profileEditable.isFalse),
+                  readOnly: profileController.profileEditable.isFalse),
             ),
-            CustomPrimaryButton(
-              label: AuthScreenText.changePassword,
-              onClick: () {},
-              color: AppColors.white,
-              borderColor: AppColors.black,
-              labelColor: AppColors.black,
+            Obx(
+              () => CustomPrimaryButton(
+                loading: authController.forgetPasswordProcedureLoading.isTrue,
+                label: AuthScreenText.changePassword,
+                onClick: () async {
+                  await authController.forgetPassword(email: profileController.user.value.email);
+                  Get.toNamed(Routes.emailVerification, arguments: profileController.user.value.email);
+                },
+                color: AppColors.white,
+                borderColor: AppColors.black,
+                labelColor: AppColors.black,
+              ),
             ),
             16.kH,
             Obx(
-                  () => CustomPrimaryButton(
+              () => CustomPrimaryButton(
                 label: profileController.profileEditable.isTrue
                     ? ProfileScreenTexts.saveChanges
                     : ProfileScreenTexts.updateInformation,
-                onClick: () => profileController.profileEditable(
-                    !profileController.profileEditable.value),
+                onClick: () => profileController
+                    .profileEditable(!profileController.profileEditable.value),
               ),
             ),
           ],
