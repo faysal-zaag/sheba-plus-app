@@ -14,6 +14,7 @@ class ApiUrls {
   static const String loginApiUrl = "$customerAuthApiUrl/login";
   static const String registerApiUrl = "$customerAuthApiUrl/sign-up/by-email";
   static const String verifyOtpApiUrl = "$customersApiUrl/verify/otp";
+  static const String verifyForgetPasswordApiUrl = "$customersApiUrl/verify/forget-password";
   static const String socialLoginApiUrl = "$baseApiUrl/customer/social/login";
   static const String verifyEmailApiUrl =
       "$customersApiUrl/verify/email-verification";
@@ -33,4 +34,5 @@ class ApiUrls {
 
   // customer
   static const String applyReferral = "$securedApiUrl/customers/apply-referral";
+  static const String changePassword = "$securedApiUrl/customers/reset-password";
 }

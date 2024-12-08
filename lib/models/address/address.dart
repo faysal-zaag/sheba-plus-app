@@ -15,6 +15,7 @@ class Address with _$Address {
     @Default('Unknown') String street,
     String? streetAlternative,
     String? countryCode,
+    String? mobileNumber,
     String? addressDesc,
     int? zipCode,
   }) = _Address;

@@ -112,8 +112,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                 loading: authController.forgetPasswordProcedureLoading.isTrue,
                 label: AuthScreenText.changePassword,
                 onClick: () async {
-                  await authController.forgetPassword(email: profileController.user.value.email);
-                  Get.toNamed(Routes.emailVerification, arguments: profileController.user.value.email);
+                  Get.toNamed(Routes.changePassword);
                 },
                 color: AppColors.white,
                 borderColor: AppColors.black,

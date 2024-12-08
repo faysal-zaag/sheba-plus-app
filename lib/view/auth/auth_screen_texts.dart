@@ -2,89 +2,83 @@ import 'package:get/get.dart';
 
 class AuthScreenText {
   // Sign in Texts
-  static String signInScreenMessage =
-      "Hi there,\nPlease open your personal account to get your customized notification. If you haven’t yet signed up, please register now!"
-          .tr;
-  static String signIn = "Sign In".tr;
-  static String signInNotice = "Please fill up the form to sign in!".tr;
-  static String keepMeLoggedIn = "Keep me logged in".tr;
-  static String forgetPassword = "Forget password?".tr;
-  static String emailId = "Email id".tr;
-  static String emailIdHintText = "example@gmail.com".tr;
-  static String password = "Password".tr;
-  static String passwordHintText = "Min. 8 characters".tr;
-  static String or = "or".tr;
-  static String noAccount = "Don't have an account ?".tr;
+  static String get signInScreenMessage => "signInScreenMessage".tr;
+  static String get signIn => "signIn".tr;
+  static String get signInNotice => "signInNotice".tr;
+  static String get keepMeLoggedIn => "keepMeLoggedIn".tr;
+  static String get forgetPassword => "forgetPassword".tr;
+  static String get emailId => "emailId".tr;
+  static String get emailIdHintText => "emailIdHintText".tr;
+  static String get password => "password".tr;
+  static String get passwordHintText => "passwordHintText".tr;
+  static String get or => "or".tr;
+  static String get noAccount => "noAccount".tr;
 
   // Sign up Texts
-  static String registerAccount = "Register Account".tr;
-  static String registerNotice =
-      "Please fill up the form to register your  account!".tr;
-  static String signUp = "Sign up".tr;
-  static String firstName = "First name".tr;
-  static String firstNameHintText = "John".tr;
-  static String lastName = "Last name".tr;
-  static String lastNameHintText = "Doe".tr;
-  static String confirmPassword = "Confirm password".tr;
-  static String confirmNewPassword = "Confirm new password".tr;
-  static String firstNameValidatorText = "First name is required".tr;
-  static String lastNameValidatorText = "Last name is required".tr;
-  static String confirmPasswordValidatorText =
-      "Confirm Password should not be empty".tr;
-  static String alreadyHaveAnAccount = "Already have an account ?".tr;
+  static String get registerAccount => "registerAccount".tr;
+  static String get registerNotice => "registerNotice".tr;
+  static String get signUp => "signUp".tr;
+  static String get firstName => "firstName".tr;
+  static String get firstNameHintText => "firstNameHintText".tr;
+  static String get lastName => "lastName".tr;
+  static String get lastNameHintText => "lastNameHintText".tr;
+  static String get confirmPassword => "confirmPassword".tr;
+  static String get confirmNewPassword => "confirmNewPassword".tr;
+  static String get firstNameValidatorText => "firstNameValidatorText".tr;
+  static String get lastNameValidatorText => "lastNameValidatorText".tr;
+  static String get confirmPasswordValidatorText => "confirmPasswordValidatorText".tr;
+  static String get alreadyHaveAnAccount => "alreadyHaveAnAccount".tr;
 
   // Referring screen texts
-  static String referringHeader = "Earn Points by Referring a Friend!".tr;
-  static String referringDescription =
-      "As a new user, you can earn points by referring a friend who is already a member! Just enter their name and phone number. Once you complete your first transaction, both of you will receive points as a reward."
-          .tr;
-  static String existingUserName = "Existing User’s Name".tr;
-  static String nameRequired = "Name is required".tr;
-  static String existingUserNameHintText =
-      "name of the person you're referring".tr;
-  static String phoneNumber = "Phone number".tr;
-  static String existingUserPhoneNumber = "Existing User’s Phone Number".tr;
-  static String existingUserPhoneNumberHintText =
-      "phone number of the referred person".tr;
+  static String get referringHeader => "referringHeader".tr;
+  static String get referringDescription => "referringDescription".tr;
+  static String get existingUserName => "existingUserName".tr;
+  static String get nameRequired => "nameRequired".tr;
+  static String get existingUserNameHintText => "existingUserNameHintText".tr;
+  static String get phoneNumber => "phoneNumber".tr;
+  static String get existingUserPhoneNumber => "existingUserPhoneNumber".tr;
+  static String get existingUserPhoneNumberHintText => "existingUserPhoneNumberHintText".tr;
 
   // email verification
-  static String resendCode = "Re-send Code".tr;
-  static String verificationCode = "Verification Code".tr;
-  static String verify = "Verify".tr;
-  static String emailVerificationHeader = "Verify email address".tr;
-  static String emailVerifiedSuccessfully = "Email verified successfully".tr;
-  static String passwordChangeSuccessfully = "Password changed successfully".tr;
-  static String weHaveJustSent = "We have just sent a verification code to".tr;
-  static String createAccount = "Create Account".tr;
-  static String changeEmailAddress = "Change email address".tr;
-  static String changePassword = "Change password".tr;
-  static String oldPassword = "Old password".tr;
-  static String newPassword = "New password".tr;
-  static String newPasswordHintText = "New password".tr;
-  static String resetPassword = "Reset password".tr;
-  static String resetPasswordInfo = "Enter your new password to reset the password.".tr;
-  static String changePasswordInfo = "Enter your old and new password to change the password.".tr;
-  static String sendVerificationCode = "Send Verification Code".tr;
-  static String otpSentMessage = "An OTP Send to your email. please verify.".tr;
-  static String forgetPasswordHeadline = "By giving your email address you can go to the next phase".tr;
-  static String loggedInSuccessMessage = "Logged in successfully".tr;
-  static String loggedOut = "Successfully logged out".tr;
+  static String get resendCode => "resendCode".tr;
+  static String get verificationCode => "verificationCode".tr;
+  static String get verify => "verify".tr;
+  static String get emailVerificationHeader => "emailVerificationHeader".tr;
+  static String get emailVerifiedSuccessfully => "emailVerifiedSuccessfully".tr;
+  static String get passwordChangeSuccessfully => "passwordChangeSuccessfully".tr;
+  static String get weHaveJustSent => "weHaveJustSent".tr;
+  static String get createAccount => "createAccount".tr;
+  static String get changeEmailAddress => "changeEmailAddress".tr;
+  static String get changePassword => "changePassword".tr;
+  static String get oldPassword => "oldPassword".tr;
+  static String get newPassword => "newPassword".tr;
+  static String get newPasswordHintText => "newPasswordHintText".tr;
+  static String get resetPassword => "resetPassword".tr;
+  static String get resetPasswordInfo => "resetPasswordInfo".tr;
+  static String get changePasswordInfo => "changePasswordInfo".tr;
+  static String get sendVerificationCode => "sendVerificationCode".tr;
+  static String get otpSentMessage => "otpSentMessage".tr;
+  static String get forgetPasswordHeadline => "forgetPasswordHeadline".tr;
+  static String get loggedInSuccessMessage => "loggedInSuccessMessage".tr;
+  static String get loggedOut => "loggedOut".tr;
 
   // register address screen
-  static String registerAddressHeader = "Please save your home address".tr;
-  static String mobileNumber = "Mobile number".tr;
-  static String mobileNumberValidatorText = "Mobile number is required".tr;
-  static String streetAddress = "Street Address".tr;
-  static String streetAddressValidatorText = "$streetAddress is required".tr;
-  static String cityTown = "City/Town".tr;
-  static String cityTownValidatorText = "$cityTown is required".tr;
-  static String country = "Country".tr;
-  static String countryValidatorText = "Country is required".tr;
-  static String postalOrZip = "Postcode/ZIP".tr;
-  static String postalOrZipValidatorText = "$postalOrZip is required".tr;
-  static String state = "State".tr;
-  static String stateValidatorText = "State is required".tr;
-  static String additionalInfo = "Additional Information".tr;
-  static String homeAddressSaved = "Home address saved successfully".tr;
-  static String numberShouldContains (length) => "Phone number should container $length digits".tr;
+  static String get registerAddressHeader => "registerAddressHeader".tr;
+  static String get mobileNumber => "mobileNumber".tr;
+  static String get mobileNumberValidatorText => "mobileNumberValidatorText".tr;
+  static String get streetAddress => "streetAddress".tr;
+  static String get streetAddressValidatorText => "streetAddressValidatorText".tr;
+  static String get cityTown => "cityTown".tr;
+  static String get cityTownValidatorText => "cityTownValidatorText".tr;
+  static String get country => "country".tr;
+  static String get countryValidatorText => "countryValidatorText".tr;
+  static String get postalOrZip => "postalOrZip".tr;
+  static String get postalOrZipValidatorText => "postalOrZipValidatorText".tr;
+  static String get state => "state".tr;
+  static String get stateValidatorText => "stateValidatorText".tr;
+  static String get additionalInfo => "additionalInfo".tr;
+  static String get homeAddressSaved => "homeAddressSaved".tr;
+
+  // Dynamic message
+  static String numberShouldContains(int length) => "numberShouldContains".trParams({'length': length.toString()});
 }

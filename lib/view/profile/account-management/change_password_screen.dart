@@ -89,7 +89,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   80.kH,
                   Obx(
                     () => CustomPrimaryButton(
-                      loading: profileController.changePasswordProcedureLoading.isTrue,
+                      loading: profileController
+                          .changePasswordProcedureLoading.isTrue,
                       label: AuthScreenText.confirmPassword,
                       onClick: () {
                         if (_newPasswordFormKey.currentState!.validate() &&
@@ -110,8 +111,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   }
 
   void changePassword() async {
-    final response =
-        await profileController.changePassword(otpCode: Get.arguments);
+    final response = await profileController.changePassword();
     if (response) {
       Get.back();
       profileController.resetChangePasswordFields();

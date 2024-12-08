@@ -59,18 +59,6 @@ class ProfileController extends GetxController {
     confirmNewPasswordObscure(!confirmNewPasswordObscure.value);
   }
 
-  final Map<String, Widget> screens = {
-    "Account Management": AccountManagementScreen(),
-    "Saved Address": SavedAddressScreen(),
-    "Order History": OrderHistoryScreen(),
-    "Reward Points": RewardPointsScreen(),
-    "Notification": NotificationScreen(),
-  };
-
-  Widget getSelectedScreen() {
-    return screens[selectedProfileMenu.value] ?? const Placeholder();
-  }
-
   Future<bool> uploadProfilePicture({required XFile file}) async {
     try {
       loadingUploadingPicture(true);
@@ -87,14 +75,10 @@ class ProfileController extends GetxController {
     }
   }
 
-  Future<bool> changePassword({required String otpCode}) async {
+  Future<bool> changePassword() async {
     try {
       changePasswordProcedureLoading(true);
       await _profileRepository.changePassword(
-        verificationModel: VerificationModel(
-          code: int.parse(otpCode),
-          email: user.value.email,
-        ),
         oldPassword: oldPasswordController.value.text,
         newPassword: newPasswordController.value.text,
     );

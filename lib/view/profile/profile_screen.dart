@@ -5,7 +5,12 @@ import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/components/custom_dropdown.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
+import 'package:sheba_plus/view/profile/account-management/account_management_screen.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
+import 'package:sheba_plus/view/profile/notification/notification_screen.dart';
+import 'package:sheba_plus/view/profile/order-history/order_history_screen.dart';
+import 'package:sheba_plus/view/profile/reward-points/reward_points_screen.dart';
+import 'package:sheba_plus/view/profile/saved-address/saved_address_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -14,29 +19,45 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, Widget> screens = {
+      "accountManagement": const AccountManagementScreen(),
+      "savedAddress": SavedAddressScreen(),
+      "orderHistory": const OrderHistoryScreen(),
+      "rewardPoints": const RewardPointsScreen(),
+      "notification": const NotificationScreen(),
+    };
+
     return PrimaryScaffold(
-        body: Padding(
-      padding: AppPaddings.screenPadding,
-      child: Column(
-        children: [
-          Obx(
-            () => CustomDropdown(
-              height: 56,
-              items: AppConstants.profileMenuList,
-              onChanged: (value) =>
-                  profileController.selectedProfileMenu(value),
-              selectedValue: profileController.selectedProfileMenu.value,
-              prefixIcon: true,
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              icons: AppConstants.profileMenuIcons,
+      body: Padding(
+        padding: AppPaddings.screenPadding,
+        child: Column(
+          children: [
+            Obx(
+              () => CustomDropdown(
+                height: 56,
+                items: AppConstants.profileMenuList
+                    .map((menu) => menu.tr)
+                    .toList(),
+                onChanged: (value) {
+                  profileController.selectedProfileMenu(value);
+                },
+                selectedValue: profileController.selectedProfileMenu.value,
+                prefixIcon: true,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                icons: AppConstants.profileMenuIcons,
+              ),
             ),
-          ),
-          16.kH,
-          Expanded(
-            child: Obx(() => profileController.getSelectedScreen()),
-          ),
-        ],
+            16.kH,
+            Obx(
+              () => Expanded(
+                child: screens[profileController
+                        .selectedProfileMenu.value.camelCase] ??
+                    const Placeholder(),
+              ),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

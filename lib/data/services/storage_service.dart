@@ -44,7 +44,7 @@ class StorageService {
 
   /// Save Language Preference
   void saveLanguage(String languageCode) {
-    // Example values: "en" or "es"
+    // Example values: "en" or "bn"
     _storage.write(_languageKey, languageCode);
   }
 

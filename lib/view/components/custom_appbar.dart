@@ -44,97 +44,92 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                           PhosphorIcons.user(),
                         ),
                       )
-                    : Obx((){
-                      bool hasSavedAddress = addressController.hasSavedAddress.value;
-                      return PopupMenuButton(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(8.0),
-                            bottomRight: Radius.circular(8.0),
-                            topLeft: Radius.circular(8.0),
-                            topRight: Radius.circular(8.0),
+                    : Obx(() {
+                        bool hasSavedAddress =
+                            addressController.hasSavedAddress.value;
+
+                        return PopupMenuButton(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(8.0),
+                              bottomRight: Radius.circular(8.0),
+                              topLeft: Radius.circular(8.0),
+                              topRight: Radius.circular(8.0),
+                            ),
                           ),
-                        ),
-                        icon: Icon(PhosphorIcons.user()),
-                        onSelected: (String value) async {
-                          if (value == ProfileScreenTexts.myProfile) {
-                            if (authController.isLoggedIn.isTrue) {
-                              if(!hasSavedAddress){
+                          icon: Icon(PhosphorIcons.user()),
+                          onSelected: (String value) async {
+                            if (value == ProfileScreenTexts.myProfile) {
+                              if (!hasSavedAddress) {
                                 Get.toNamed(Routes.registerAddress);
-                              }
-                              else{
+                              } else {
                                 Get.toNamed(Routes.profile);
                               }
-                            } else {
-                              Get.toNamed(Routes.signIn);
+                            } else if (value == ProfileScreenTexts.logOut) {
+                              authController.logout();
+                              Utils.showSuccessToast(
+                                  message: AuthScreenText.loggedOut);
                             }
-                          } else if (value == ProfileScreenTexts.logOut) {
-                            authController.logout();
-                            Utils.showSuccessToast(
-                                message: AuthScreenText.loggedOut);
-                          }
-                        },
-                        itemBuilder: (BuildContext context) {
-                          return <PopupMenuEntry<String>>[
-                            PopupMenuItem(
-                              value: ProfileScreenTexts.myProfile,
-                              child: Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.all(10),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      PhosphorIcons.userCircle(),
-                                      color: AppColors.subtext,
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      ProfileScreenTexts.myProfile,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall,
-                                    ),
-                                  ],
+                          },
+                          itemBuilder: (BuildContext context) {
+                            return <PopupMenuEntry<String>>[
+                              PopupMenuItem(
+                                value: ProfileScreenTexts.myProfile,
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.all(10),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        PhosphorIcons.userCircle(),
+                                        color: AppColors.subtext,
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text(
+                                        ProfileScreenTexts.myProfile,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            PopupMenuItem(
-                              value: ProfileScreenTexts.logOut,
-                              child: Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.all(10),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      PhosphorIcons.signOut(),
-                                      color: AppColors.error,
-                                    ),
-                                    const SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      ProfileScreenTexts.logOut,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall
-                                          ?.copyWith(color: AppColors.error),
-                                    ),
-                                  ],
+                              PopupMenuItem(
+                                value: ProfileScreenTexts.logOut,
+                                child: Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.all(10),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        PhosphorIcons.signOut(),
+                                        color: AppColors.error,
+                                      ),
+                                      const SizedBox(
+                                        width: 8,
+                                      ),
+                                      Text(
+                                        ProfileScreenTexts.logOut,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall
+                                            ?.copyWith(color: AppColors.error),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ];
-                        },
-                      );
-                }),
+                            ];
+                          },
+                        );
+                      }),
               )
             ]
           : displayCenter && authController.isLoggedIn.isFalse
-              ? [
-        const DisplayCenterAppBarCartWidget()
-                ]
+              ? [const DisplayCenterAppBarCartWidget()]
               : null,
     );
   }

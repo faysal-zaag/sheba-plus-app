@@ -1,62 +1,70 @@
 import 'package:get/get.dart';
 
 class ProfileScreenTexts {
-  static String myProfile = "My Profile".tr;
-  static String logOut = "Logout".tr;
-  static String dateOfBirth = "Date of birth".tr;
-  static String updateInformation = "Update information".tr;
-  static String saveChanges = "Save changes".tr;
+  //profile menus
+  static String get accountManagement => "accountManagement".tr;
+  static String get savedAddress => "savedAddress".tr;
+  static String get orderHistory => "orderHistory".tr;
+  static String get rewardPoints => "rewardPoints".tr;
+  static String get notification => "notification".tr;
 
-  //order history screen texts
-  static String ticketNumber = "Ticket Number".tr;
-  static String searchByTickerNumber = "Search by Ticket Number".tr;
-  static String activeOrder = "Active Orders".tr;
-  static String allOrderHistory = "All Order History".tr;
-  static String viewDetails = "View Details".tr;
+  // Profile screen texts
+  static String get myProfile => "myProfile".tr;
+  static String get logOut => "logOut".tr;
+  static String get dateOfBirth => "dateOfBirth".tr;
+  static String get updateInformation => "updateInformation".tr;
+  static String get saveChanges => "saveChanges".tr;
 
-  // reward points screen texts
-  static String whichIsEquivalentTo = "Which is equivalent to".tr;
-  static String all = "All".tr;
-  static String unread = "Unread".tr;
-  static String yourTotalPoints = "Your Total Points".tr;
+  // Order history screen texts
+  static String get ticketNumber => "ticketNumber".tr;
+  static String get searchByTicketNumber => "searchByTicketNumber".tr;
+  static String get activeOrder => "activeOrder".tr;
+  static String get allOrderHistory => "allOrderHistory".tr;
+  static String get viewDetails => "viewDetails".tr;
 
-  // notification screen texts
-  static String trackThisOrder = "Track this Order".tr;
-  static String readMore = "Read More".tr;
-  static String readLess = "Read Less".tr;
-  static String markAllAsRead = "Mark all as read".tr;
-  static String notificationDetailsHeader = "Order Status Notification".tr;
-  static String agentOnlineMeeting = "Agent Online Meeting".tr;
-  static String meetingTimeLeft = "Meeting Time Left".tr;
-  static String extendMeetingTime = "Extend Meeting Time ".tr;
-  static String startMeeting = "Start Meeting".tr;
-  static String meetingWillStart = "Agent meeting will start in".tr;
-  static String clickToStartMeeting = "Click the 'Start Meeting' button to start meeting now".tr;
+  // Reward points screen texts
+  static String get whichIsEquivalentTo => "whichIsEquivalentTo".tr;
+  static String get all => "all".tr;
+  static String get unread => "unread".tr;
+  static String get yourTotalPoints => "yourTotalPoints".tr;
 
-  // saved address
-  static String country = "Country".tr;
-  static String state = "State".tr;
-  static String city = "City".tr;
-  static String zipCode = "Zip Code".tr;
-  static String street = "Street".tr;
-  static String updateAddress = "Update Address".tr;
-  static String addressUpdated = "Address updated successfully".tr;
+  // Notification screen texts
+  static String get trackThisOrder => "trackThisOrder".tr;
+  static String get readMore => "readMore".tr;
+  static String get readLess => "readLess".tr;
+  static String get markAllAsRead => "markAllAsRead".tr;
+  static String get notificationDetailsHeader => "notificationDetailsHeader".tr;
+  static String get agentOnlineMeeting => "agentOnlineMeeting".tr;
+  static String get meetingTimeLeft => "meetingTimeLeft".tr;
+  static String get extendMeetingTime => "extendMeetingTime".tr;
+  static String get startMeeting => "startMeeting".tr;
+  static String get meetingWillStart => "meetingWillStart".tr;
+  static String get clickToStartMeeting => "clickToStartMeeting".tr;
 
-  // order status Message
-  static String inDhakaOffice = "Your parcel is in DHAKA OFFICE, it is under the process of SHIPMENT".tr;
-  static String onAir = "The shipment is being ensured. Your parcel is on the way to Toronto Office.".tr;
-  static String inOffice = "Your parcel is at our Toronto Office. You can contact our Toronto office for the collection of your Parcel.\n\nPhone No: +1 437 333 9698,\n\nAddress: 565 BIRCHMOUNT ROAD, TORONTO M1K 1P8, CANADA".tr;
-  static String onTheWay = "Your Parcel is our TORONTO OFFICE. It will soon be dispatched at your home address.".tr;
-  static String delivered = "Your Parcel is successfully delivered to your home address.".tr;
+  // Saved address
+  static String get country => "country".tr;
+  static String get state => "state".tr;
+  static String get city => "city".tr;
+  static String get zipCode => "zipCode".tr;
+  static String get street => "street".tr;
+  static String get updateAddress => "updateAddress".tr;
+  static String get addressUpdated => "addressUpdated".tr;
 
-  // order review questions
-static String question1 = "Do you find the website or app user friendly?".tr;
-static String question2 = "Are you satisfied with our office service?".tr;
-static String question3 = "Are you satisfied with our shipment service?".tr;
-static String question4 = "Are you satisfied with our pick-up service?".tr;
-static String question5 = "Are you satisfied with our drop-off service?".tr;
-static String question6 = "Are you satisfied with our agent service?".tr;
-static String question7 = "Are you satisfied with our products in display center?".tr;
-static String additionalCustomerComment = "Additional Customer Comment (If Any)".tr;
-static String reviewCriticismMessage = "Any constructive criticism will be appreciated and rewarded with points.".tr;
+  // Order status messages
+  static String get inDhakaOffice => "inDhakaOffice".tr;
+  static String get onAir => "onAir".tr;
+  static String get inOffice => "inOffice".tr;
+  static String get onTheWay => "onTheWay".tr;
+  static String get delivered => "delivered".tr;
+
+  // Order review questions
+  static String get question1 => "question1".tr;
+  static String get question2 => "question2".tr;
+  static String get question3 => "question3".tr;
+  static String get question4 => "question4".tr;
+  static String get question5 => "question5".tr;
+  static String get question6 => "question6".tr;
+  static String get question7 => "question7".tr;
+  static String get additionalCustomerComment => "additionalCustomerComment".tr;
+  static String get reviewCriticismMessage => "reviewCriticismMessage".tr;
 }

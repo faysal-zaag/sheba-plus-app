@@ -88,6 +88,7 @@ class _RegisterFormState extends State<RegisterForm> {
         Get.offAndToNamed(Routes.emailVerification);
         Utils.showSuccessToast(
           message: AuthScreenText.otpSentMessage,
+          alignment: Alignment.topCenter
         );
       }
     }

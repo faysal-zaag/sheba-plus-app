@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/app_images.dart';
@@ -16,9 +17,10 @@ import 'package:sheba_plus/view/home/widgets/drawer/drawer_social_icons.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/footer_text.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/payment_methods.dart';
 
-class HomeDrawer extends StatelessWidget {
-  HomeDrawer({super.key});
+class CustomDrawer extends StatelessWidget {
+  CustomDrawer({super.key});
 
+  final storageService = Get.find<StorageService>();
   final homeController = Get.find<HomeController>();
 
   @override
@@ -44,21 +46,30 @@ class HomeDrawer extends StatelessWidget {
               10.kH,
               Container(
                 padding: const EdgeInsets.all(16.0),
-                height: 400,
+                height: 420,
                 child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: AppConstants.drawerMenuItems.length,
                   itemBuilder: (context, index) {
                     return DrawerMenuItem(
-                      title: AppConstants.drawerMenuItems[index],
+                      title: AppConstants.drawerMenuItems[index].tr,
                       suffix: index == 4
                           ? Obx(
                               () => CustomDropdown(
                                 items: AppConstants.languages,
                                 height: 24,
                                 icon: Icons.arrow_drop_down,
-                                onChanged: (value) =>
-                                    homeController.selectedLanguage(value),
+                                onChanged: (value){
+                                  if(value == "English"){
+                                    Get.updateLocale(const Locale('en', 'US'));
+                                    storageService.saveLanguage("en");
+                                  }
+                                  else{
+                                    Get.updateLocale(const Locale('bn', 'BD'));
+                                    storageService.saveLanguage("bn");
+                                  }
+                                  homeController.selectedLanguage(value);
+                                },
                                 selectedValue:
                                     homeController.selectedLanguage.value,
                                 labelStyle:
@@ -94,22 +105,23 @@ class HomeDrawer extends StatelessWidget {
                     16.kH,
                     const DrawerSocialIcons(),
                     24.kH,
-                    DrawerFooterMenuItems(header: "COMPANY", menuItems: [
-                      DrawerFooterMenu(title: "ABOUT US", route: "/"),
-                      DrawerFooterMenu(title: "OUR BLOG", route: "/")
+                    DrawerFooterMenuItems(header: "company".tr, menuItems: [
+                      DrawerFooterMenu(title: "aboutUs".tr, route: "/"),
+                      DrawerFooterMenu(title: "ourBlog".tr, route: "/")
                     ]),
                     20.kH,
-                    DrawerFooterMenuItems(header: "CONTACT", menuItems: [
-                      DrawerFooterMenu(title: "CHAT WITH US", route: "/"),
-                      DrawerFooterMenu(title: "CALL US", route: "/"),
-                      DrawerFooterMenu(title: "EMAIL US", route: "/"),
+                    DrawerFooterMenuItems(header: "contact".tr, menuItems: [
+                      DrawerFooterMenu(title: "chatWithUs".tr, route: "/"),
+                      DrawerFooterMenu(title: "callUs".tr, route: "/"),
+                      DrawerFooterMenu(title: "emailUs".tr, route: "/"),
                     ]),
                     20.kH,
-                    DrawerFooterFlagSections(header: "OUR OFFICE", countries: [
-                      DrawerFooterCountry(country: "CANADA", flag: AppImages.usaFlag),
-                      DrawerFooterCountry(country: "USA", flag: AppImages.canadaFlag),
-                      DrawerFooterCountry(country: "BANGLADESH", flag: AppImages.bdFlag),
+                    DrawerFooterFlagSections(header: "ourOffice".tr, countries: [
+                      DrawerFooterCountry(country: "canada".tr, flag: AppImages.usaFlag),
+                      DrawerFooterCountry(country: "usa".tr, flag: AppImages.canadaFlag),
+                      DrawerFooterCountry(country: "bangladesh".tr, flag: AppImages.bdFlag),
                     ]),
+
                     20.kH,
                     const PaymentMethods(),
                     24.kH,

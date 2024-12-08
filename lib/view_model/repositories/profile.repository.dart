@@ -11,11 +11,10 @@ class ProfileRepository{
         .patch(ApiUrls.getProfileImageApiUrl, data: {"profilePicture": imageKey});
   }
 
-  Future<Response> changePassword({required VerificationModel verificationModel, required String oldPassword, required String newPassword}) async {
+  Future<Response> changePassword({required String oldPassword, required String newPassword}) async {
     return await _dio.post(
-      ApiUrls.verifyResetPasswordByEmail,
-      data: {"oldPassword" : oldPassword, "newPassword" : newPassword, "reset": true},
-      queryParameters: verificationModel.toJson(),
+      ApiUrls.changePassword,
+      data: {"oldPassword" : oldPassword, "newPassword" : newPassword,},
     );
   }
 }

@@ -20,7 +20,7 @@ class AuthRepository {
   Future<Response> applyReferral({required Referral referral}) async {
     return await _dio.post(
       ApiUrls.applyReferral,
-      data: referral.toJson(),
+      queryParameters: referral.toJson(),
     );
   }
 
@@ -61,7 +61,7 @@ class AuthRepository {
 
   Future<Response> setNewPassword({required VerificationModel verificationModel, required String newPassword}) async {
     return await _dio.post(
-      ApiUrls.verifyResetPasswordByEmail,
+      ApiUrls.verifyForgetPasswordApiUrl,
       data: {"newPassword" : newPassword},
       queryParameters: verificationModel.toJson(),
     );

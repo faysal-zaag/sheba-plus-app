@@ -28,6 +28,7 @@ mixin _$Address {
   String get street => throw _privateConstructorUsedError;
   String? get streetAlternative => throw _privateConstructorUsedError;
   String? get countryCode => throw _privateConstructorUsedError;
+  String? get mobileNumber => throw _privateConstructorUsedError;
   String? get addressDesc => throw _privateConstructorUsedError;
   int? get zipCode => throw _privateConstructorUsedError;
 
@@ -54,6 +55,7 @@ abstract class $AddressCopyWith<$Res> {
       String street,
       String? streetAlternative,
       String? countryCode,
+      String? mobileNumber,
       String? addressDesc,
       int? zipCode});
 }
@@ -81,6 +83,7 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
     Object? street = null,
     Object? streetAlternative = freezed,
     Object? countryCode = freezed,
+    Object? mobileNumber = freezed,
     Object? addressDesc = freezed,
     Object? zipCode = freezed,
   }) {
@@ -117,6 +120,10 @@ class _$AddressCopyWithImpl<$Res, $Val extends Address>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String?,
+      mobileNumber: freezed == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
       addressDesc: freezed == addressDesc
           ? _value.addressDesc
           : addressDesc // ignore: cast_nullable_to_non_nullable
@@ -145,6 +152,7 @@ abstract class _$$AddressImplCopyWith<$Res> implements $AddressCopyWith<$Res> {
       String street,
       String? streetAlternative,
       String? countryCode,
+      String? mobileNumber,
       String? addressDesc,
       int? zipCode});
 }
@@ -170,6 +178,7 @@ class __$$AddressImplCopyWithImpl<$Res>
     Object? street = null,
     Object? streetAlternative = freezed,
     Object? countryCode = freezed,
+    Object? mobileNumber = freezed,
     Object? addressDesc = freezed,
     Object? zipCode = freezed,
   }) {
@@ -206,6 +215,10 @@ class __$$AddressImplCopyWithImpl<$Res>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String?,
+      mobileNumber: freezed == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
       addressDesc: freezed == addressDesc
           ? _value.addressDesc
           : addressDesc // ignore: cast_nullable_to_non_nullable
@@ -230,6 +243,7 @@ class _$AddressImpl implements _Address {
       this.street = 'Unknown',
       this.streetAlternative,
       this.countryCode,
+      this.mobileNumber,
       this.addressDesc,
       this.zipCode});
 
@@ -259,13 +273,15 @@ class _$AddressImpl implements _Address {
   @override
   final String? countryCode;
   @override
+  final String? mobileNumber;
+  @override
   final String? addressDesc;
   @override
   final int? zipCode;
 
   @override
   String toString() {
-    return 'Address(id: $id, title: $title, country: $country, city: $city, state: $state, street: $street, streetAlternative: $streetAlternative, countryCode: $countryCode, addressDesc: $addressDesc, zipCode: $zipCode)';
+    return 'Address(id: $id, title: $title, country: $country, city: $city, state: $state, street: $street, streetAlternative: $streetAlternative, countryCode: $countryCode, mobileNumber: $mobileNumber, addressDesc: $addressDesc, zipCode: $zipCode)';
   }
 
   @override
@@ -283,6 +299,8 @@ class _$AddressImpl implements _Address {
                 other.streetAlternative == streetAlternative) &&
             (identical(other.countryCode, countryCode) ||
                 other.countryCode == countryCode) &&
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber) &&
             (identical(other.addressDesc, addressDesc) ||
                 other.addressDesc == addressDesc) &&
             (identical(other.zipCode, zipCode) || other.zipCode == zipCode));
@@ -290,8 +308,19 @@ class _$AddressImpl implements _Address {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, country, city, state,
-      street, streetAlternative, countryCode, addressDesc, zipCode);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      title,
+      country,
+      city,
+      state,
+      street,
+      streetAlternative,
+      countryCode,
+      mobileNumber,
+      addressDesc,
+      zipCode);
 
   /// Create a copy of Address
   /// with the given fields replaced by the non-null parameter values.
@@ -319,6 +348,7 @@ abstract class _Address implements Address {
       final String street,
       final String? streetAlternative,
       final String? countryCode,
+      final String? mobileNumber,
       final String? addressDesc,
       final int? zipCode}) = _$AddressImpl;
 
@@ -340,6 +370,8 @@ abstract class _Address implements Address {
   String? get streetAlternative;
   @override
   String? get countryCode;
+  @override
+  String? get mobileNumber;
   @override
   String? get addressDesc;
   @override
