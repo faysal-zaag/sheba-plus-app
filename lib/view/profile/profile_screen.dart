@@ -19,13 +19,13 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, Widget> screens = {
-      "accountManagement": const AccountManagementScreen(),
-      "savedAddress": SavedAddressScreen(),
-      "orderHistory": const OrderHistoryScreen(),
-      "rewardPoints": const RewardPointsScreen(),
-      "notification": const NotificationScreen(),
-    };
+    final List<Widget> screens = [
+      const AccountManagementScreen(),
+      SavedAddressScreen(),
+      const OrderHistoryScreen(),
+      const RewardPointsScreen(),
+      const NotificationScreen(),
+    ];
 
     return PrimaryScaffold(
       body: Padding(
@@ -51,8 +51,7 @@ class ProfileScreen extends StatelessWidget {
             Obx(
               () => Expanded(
                 child: screens[profileController
-                        .selectedProfileMenu.value.camelCase] ??
-                    const Placeholder(),
+                        .selectedProfileMenuIndex.value],
               ),
             ),
           ],

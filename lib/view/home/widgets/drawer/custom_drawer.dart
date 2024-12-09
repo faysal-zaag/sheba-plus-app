@@ -6,6 +6,7 @@ import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/app_images.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/extensions.dart';
 import 'package:sheba_plus/view/components/custom_close_button.dart';
 import 'package:sheba_plus/view/components/custom_dropdown.dart';
 import 'package:sheba_plus/view/components/project_branding.dart';
@@ -16,19 +17,20 @@ import 'package:sheba_plus/view/home/widgets/drawer/drawer_menu_item.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/drawer_social_icons.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/footer_text.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/payment_methods.dart';
+import 'package:collection/collection.dart';
+import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 
 class CustomDrawer extends StatelessWidget {
   CustomDrawer({super.key});
 
   final storageService = Get.find<StorageService>();
   final homeController = Get.find<HomeController>();
+  final profileController = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(0)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
       backgroundColor: AppColors.white,
       child: SafeArea(
         child: SingleChildScrollView(
@@ -46,45 +48,40 @@ class CustomDrawer extends StatelessWidget {
               10.kH,
               Container(
                 padding: const EdgeInsets.all(16.0),
-                height: 420,
-                child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: AppConstants.drawerMenuItems.length,
-                  itemBuilder: (context, index) {
-                    return DrawerMenuItem(
-                      title: AppConstants.drawerMenuItems[index].tr,
-                      suffix: index == 4
-                          ? Obx(
-                              () => CustomDropdown(
-                                items: AppConstants.languages,
-                                height: 24,
-                                icon: Icons.arrow_drop_down,
-                                onChanged: (value){
-                                  if(value == "English"){
-                                    Get.updateLocale(const Locale('en', 'US'));
-                                    storageService.saveLanguage("en");
-                                  }
-                                  else{
-                                    Get.updateLocale(const Locale('bn', 'BD'));
-                                    storageService.saveLanguage("bn");
-                                  }
-                                  homeController.selectedLanguage(value);
-                                },
-                                selectedValue:
-                                    homeController.selectedLanguage.value,
-                                labelStyle:
-                                    Theme.of(context).textTheme.bodyMedium,
-                              ),
-                            )
-                          : const SizedBox(),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return Divider(
-                      color: Colors.grey[300],
-                      thickness: 1,
-                    );
-                  },
+                child: Column(
+                  children: [
+                    ...AppConstants.drawerMenuItems.mapIndexed((index, menuItem) => Column(
+                          children: [
+                            DrawerMenuItem(
+                              title: AppConstants.drawerMenuItems[index].tr,
+                              suffix: index == 4
+                                  ? Obx(
+                                      () => CustomDropdown(
+                                        items: AppConstants.languages,
+                                        height: 24,
+                                        icon: Icons.arrow_drop_down,
+                                        onChanged: (value) {
+                                          if (value == "English") {
+                                            Get.updateLocale(const Locale('en', 'US'));
+                                            storageService.saveLanguage("en");
+                                            profileController.selectedProfileMenu(AppConstants.profileMenuListBangla[profileController.selectedProfileMenu.value]?.tr);
+                                          } else {
+                                            Get.updateLocale(const Locale('bn', 'BD'));
+                                            storageService.saveLanguage("bn");
+                                            profileController.selectedProfileMenu(profileController.selectedProfileMenu.value.camelCase?.tr);
+                                          }
+                                          homeController.selectedLanguage(value);
+                                        },
+                                        selectedValue: homeController.selectedLanguage.value,
+                                        labelStyle: Theme.of(context).textTheme.bodyMedium,
+                                      ),
+                                    )
+                                  : const SizedBox(),
+                            ),
+                            const Divider()
+                          ],
+                        ))
+                  ],
                 ),
               ),
               Container(
@@ -97,18 +94,12 @@ class CustomDrawer extends StatelessWidget {
                     16.kH,
                     Text(
                       HomeScreenText.companyAddress,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall
-                          ?.copyWith(color: AppColors.neutral70),
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.neutral70),
                     ),
                     16.kH,
                     const DrawerSocialIcons(),
                     24.kH,
-                    DrawerFooterMenuItems(header: "company".tr, menuItems: [
-                      DrawerFooterMenu(title: "aboutUs".tr, route: "/"),
-                      DrawerFooterMenu(title: "ourBlog".tr, route: "/")
-                    ]),
+                    DrawerFooterMenuItems(header: "company".tr, menuItems: [DrawerFooterMenu(title: "aboutUs".tr, route: "/"), DrawerFooterMenu(title: "ourBlog".tr, route: "/")]),
                     20.kH,
                     DrawerFooterMenuItems(header: "contact".tr, menuItems: [
                       DrawerFooterMenu(title: "chatWithUs".tr, route: "/"),
@@ -121,11 +112,12 @@ class CustomDrawer extends StatelessWidget {
                       DrawerFooterCountry(country: "usa".tr, flag: AppImages.canadaFlag),
                       DrawerFooterCountry(country: "bangladesh".tr, flag: AppImages.bdFlag),
                     ]),
-
                     20.kH,
                     const PaymentMethods(),
                     24.kH,
-                    const Divider(color: AppColors.subtext,),
+                    const Divider(
+                      color: AppColors.subtext,
+                    ),
                     24.kH,
                     const FooterText()
                   ],

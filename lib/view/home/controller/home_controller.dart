@@ -21,11 +21,11 @@ class HomeController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    if(_storageService.getLanguage() == "en"){
-      selectedLanguage("English");
+    if(_storageService.getLanguage() == "bn"){
+      selectedLanguage("বাংলা");
     }
     else{
-      selectedLanguage("বাংলা");
+      selectedLanguage("English");
     }
   }
   void onCarouselChange(int index) {

@@ -25,7 +25,8 @@ class ProfileController extends GetxController {
   final profileEditable = false.obs;
   final loadingUploadingPicture = false.obs;
   final changePasswordProcedureLoading = false.obs;
-  final selectedProfileMenu = AppConstants.profileMenuList[0].obs;
+  final selectedProfileMenu = AppConstants.profileMenuList[0].tr.obs;
+  final selectedProfileMenuIndex = 0.obs;
 
   final userFirstNameController = TextEditingController().obs;
   final userLastNameController = TextEditingController().obs;

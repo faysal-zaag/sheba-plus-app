@@ -28,6 +28,14 @@ class AppConstants {
     "notification",
   ];
 
+  static Map<String, String> profileMenuListBangla = {
+    "অ্যাকাউন্ট ব্যবস্থাপনা": 'accountManagement',
+    "সংরক্ষিত ঠিকানা": 'savedAddress',
+    "অর্ডার ইতিহাস": 'orderHistory',
+    "রিওয়ার্ড পয়েন্টস": 'rewardPoints',
+    "বিজ্ঞপ্তি": 'notification',
+  };
+
   static List<PhosphorIconData> profileMenuIcons = [
     PhosphorIcons.user(),
     PhosphorIcons.mapPin(),
