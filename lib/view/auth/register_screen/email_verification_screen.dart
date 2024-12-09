@@ -31,12 +31,12 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
       ),
       buttonLabel: AuthScreenText.createAccount,
       onClick: () async {
-        final response = await authController.verifyEmail();
-        if(response){
-          Utils.showSuccessToast(message: AuthScreenText.emailVerifiedSuccessfully,);
-          authController.cleanRegistrationData();
-          Get.offAndToNamed(Routes.registerAddress);
-        }
+          final response = await authController.verifyEmail(email: authController.registerEmailController.value.text);
+          if (response) {
+            authController.cleanRegistrationData();
+            Get.offAndToNamed(Routes.registerAddress);
+            Utils.showSuccessToast(message: AuthScreenText.emailVerifiedSuccessfully,);
+          }
       },
       bottomLeftLabel: AuthScreenText.changeEmailAddress,
       bottomLeftLabelOnClick: () {

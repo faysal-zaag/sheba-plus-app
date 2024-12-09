@@ -1,25 +1,24 @@
 import 'package:get/get.dart';
 
-class GlobalTexts{
-  static String appName = "Sheba Plus".tr;
-  static String cancel = "Cancel".tr;
-  static String skip = "Skip".tr;
-  static String confirmExit = "Confirm Exit?".tr;
-  static String quit = "Quit".tr;
-  static String areYouSure = "Are you sure you want to quit?".tr;
-  static String thisFieldIsRequired = "This field is required".tr;
-  static String continueText = "Continue".tr;
-  static String next = "Next".tr;
-  static String yes = "Yes".tr;
-  static String no = "No".tr;
-  static String pending = "Pending".tr;
-  static String saveAndContinue = "Save and Continue".tr;
-  static String termsAndCondition = "Terms & Condition".tr;
-  static String iAcceptTermsAndCondition = "I accept the terms and condition.".tr;
-  static String pleaseAcceptTermsAndCondition = "Please accept out terms and conditions".tr;
+class GlobalTexts {
+  static String get appName => "appName".tr;
+  static String get cancel => "cancel".tr;
+  static String get skip => "skip".tr;
+  static String get confirmExit => "confirmExit".tr;
+  static String get quit => "quit".tr;
+  static String get areYouSure => "areYouSure".tr;
+  static String get thisFieldIsRequired => "thisFieldIsRequired".tr;
+  static String get continueText => "continueText".tr;
+  static String get next => "next".tr;
+  static String get yes => "yes".tr;
+  static String get no => "no".tr;
+  static String get pending => "pending".tr;
+  static String get saveAndContinue => "saveAndContinue".tr;
+  static String get termsAndCondition => "termsAndCondition".tr;
+  static String get iAcceptTermsAndCondition => "iAcceptTermsAndCondition".tr;
+  static String get pleaseAcceptTermsAndCondition => "pleaseAcceptTermsAndCondition".tr;
 
   //currencies
-  static String bdt = "BDT".tr;
-  static String cad = "CAD".tr;
-
+  static String get bdt => "bdt".tr;
+  static String get cad => "cad".tr;
 }

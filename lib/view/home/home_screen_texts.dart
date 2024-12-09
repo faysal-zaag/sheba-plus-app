@@ -1,62 +1,35 @@
 import 'package:get/get.dart';
 
 class HomeScreenText {
-  static String header1 = "Our Services".tr;
-  static String headerDescription =
-      "We bring your goods from Bangladesh to Canada. In addition to that, we offer other services to the Bangladeshi diaspora in Canada. Our motto is"
-          .tr;
-  static String headerMoto = "FEEL BANGLADESH IN CANADA.".tr;
-  static String serviceSelection =
-      "Please select any one of the services from below that you need in addition to shipment"
-          .tr;
-  static String dropOffMessage =
-      "We will inform about thee cost of DROP-OFF service when we get all your items in out hand, and you can make your decision then about the DROP-OFF service."
-          .tr;
-  static String shipmentMessage =
-      "We define Shipment as bringing your items from Dhaka office to our Toronto Office. However, we also offer DROP-OFF services, i.e. if you want we will deliver your parcel at your door."
-          .tr;
+  static String get header1 => "header1".tr;
+  static String get headerDescription => "headerDescription".tr;
+  static String get headerMoto => "headerMoto".tr;
+  static String get serviceSelection => "serviceSelection".tr;
+  static String get dropOffMessage => "dropOffMessage".tr;
+  static String get shipmentMessage => "shipmentMessage".tr;
 
   // service texts
-  static String agentShopping = "AGENT SHOPPING".tr;
-  static String agentShoppingDetails1 =
-      "Our agent will contact you through real-time video communication and walk you from shop to shop and mall to mall. You will buy your items from Bangladesh. You will feel like you are shopping for Bangladesh by yourself."
-          .tr;
-  static String agentShoppingDetails2 =
-      "Please be informed that you have to deposit Agent-Service charge in advance before you start shopping."
-          .tr;
+  static String get agentShopping => "agentShopping".tr;
+  static String get agentShoppingDetails1 => "agentShoppingDetails1".tr;
+  static String get agentShoppingDetails2 => "agentShoppingDetails2".tr;
 
-  static String displayCenter = "DISPLAY CENTER".tr;
-  static String displayCenterDetails1 =
-      "Buy our products from our own display center.".tr;
+  static String get displayCenter => "displayCenter".tr;
+  static String get displayCenterDetails1 => "displayCenterDetails1".tr;
 
-  static String thirdParty = "3RD PARTY".tr;
-  static String thirdPartyDetails1 =
-      "Buy items from 3rd party (i.e. any other shops or companies). We will deliver it to you."
-          .tr;
-  static String thirdPartyDetails2 =
-      "When purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping."
-          .tr;
-  static String thirdPartyDetails3 =
-      "Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh"
-          .tr;
-  static String thirdPartyDetails4 =
-      "Please ensure that this address is used as the delivery destination during checkout from the store."
-          .tr;
+  static String get thirdParty => "thirdParty".tr;
+  static String get thirdPartyDetails1 => "thirdPartyDetails1".tr;
+  static String get thirdPartyDetails2 => "thirdPartyDetails2".tr;
+  static String get thirdPartyDetails3 => "thirdPartyDetails3".tr;
+  static String get thirdPartyDetails4 => "thirdPartyDetails4".tr;
 
-  static String friendsFamily = "FRIENDS & FAMILY".tr;
-  static String friendsFamilyDetails1 =
-      "We will bring your items from your friends and family.".tr;
-  static String friendsFamilyDetails2 =
-      "Please list all the items that we are going to receive from your friends & family in our hub center at Bangladesh. Also add how much do we need to pay to the 3rd party."
-          .tr;
+  static String get friendsFamily => "friendsFamily".tr;
+  static String get friendsFamilyDetails1 => "friendsFamilyDetails1".tr;
+  static String get friendsFamilyDetails2 => "friendsFamilyDetails2".tr;
 
-  static String newlyAddedProducts = "Newly Added Products".tr;
-  static String companyAddress =
-      "3085-3005 Kingston Road Toronto, Ontario M1M 1P1, Canada. 1-800-SEBA".tr;
-  static String selectService = "Select Service".tr;
-  static String fullTermsAndConditions =
-      "Please read the terms and condition before you agree.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping.Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store."
-          .tr;
+  static String get newlyAddedProducts => "newlyAddedProducts".tr;
+  static String get companyAddress => "companyAddress".tr;
+  static String get selectService => "selectService".tr;
+  static String get fullTermsAndConditions => "fullTermsAndConditions".tr;
 
-  static String paymentMethod = "Payment Method".tr;
+  static String get paymentMethod => "paymentMethod".tr;
 }

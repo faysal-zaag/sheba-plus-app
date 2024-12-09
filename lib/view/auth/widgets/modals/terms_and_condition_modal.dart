@@ -104,7 +104,9 @@ class TermsAndConditionSheet extends StatelessWidget {
                 ),
                 16.kW,
                 Expanded(
-                  child: CustomPrimaryButton(
+                  child: Obx(
+                    () => CustomPrimaryButton(
+                      disabled: globalController.termsAccepted.isFalse,
                       label: GlobalTexts.next,
                       onClick: () {
                         if (globalController.termsAccepted.isTrue) {
@@ -119,8 +121,17 @@ class TermsAndConditionSheet extends StatelessWidget {
                               serviceIndex == 2) {
                             Get.toNamed(
                                 Routes.displayCenterServiceProductListScreen);
+                          } else if (globalController.termsAccepted.isTrue &&
+                              serviceIndex == 2) {
+                            Get.toNamed(
+                                Routes.displayCenterServiceProductListScreen);
                             globalController.termsAccepted(false);
                           }
+                        } else {
+                          Utils.showErrorToast(
+                              message:
+                                  GlobalTexts.pleaseAcceptTermsAndCondition,
+                              alignment: Alignment.topCenter);
                         }
                         if (globalController.termsAccepted.isTrue &&
                             serviceIndex == 3) {
@@ -133,7 +144,9 @@ class TermsAndConditionSheet extends StatelessWidget {
                                   GlobalTexts.pleaseAcceptTermsAndCondition,
                               alignment: Alignment.topCenter);
                         }
-                      }),
+                      },
+                    ),
+                  ),
                 )
               ],
             ),

@@ -37,7 +37,7 @@ class MyBindings implements Bindings {
     Get.lazyPut<AddressRepository>(() => AddressRepository(Get.find<Dio>()));
 
     Get.put(GlobalController(Get.find<GlobalRepository>()));
-    Get.put(HomeController(Get.find<HomeRepository>()));
+    Get.put(HomeController(Get.find<HomeRepository>(), Get.find<StorageService>()));
     Get.put(NetworkController());
     Get.put(NavigationController());
     Get.put(AddressController(Get.find<AddressRepository>()));

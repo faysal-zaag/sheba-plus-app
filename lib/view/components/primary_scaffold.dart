@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/view/components/custom_appbar.dart';
-import 'package:sheba_plus/view/home/widgets/drawer/home_drawer.dart';
+import 'package:sheba_plus/view/home/widgets/drawer/custom_drawer.dart';
 
 class PrimaryScaffold extends StatelessWidget {
   final Widget body;
@@ -30,7 +30,7 @@ class PrimaryScaffold extends StatelessWidget {
           hasCart: hasCart,
           userIcon: userIcon,
         ),
-        drawer: HomeDrawer(),
+        drawer: CustomDrawer(),
         backgroundColor: backgroundColor,
         body: body,
         bottomNavigationBar: bottomNavigationBar,

@@ -142,6 +142,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
               fillColor: AppColors.white,
               hintText: AuthScreenText.additionalInfo,
             ),
+            controller: addressController.addressAdditionalInfo.value,
           ),
           24.kH,
           Obx(

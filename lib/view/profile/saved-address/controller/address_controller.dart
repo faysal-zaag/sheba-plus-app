@@ -65,6 +65,7 @@ class AddressController extends GetxController {
   Future<void> getAllAddress() async {
     try {
       addressReadLoading(true);
+      hasSavedAddress(false);
 
       final response = await _addressRepository.readAllAddress();
 
@@ -90,11 +91,13 @@ class AddressController extends GetxController {
     try {
       addressCreateLoading(true);
       Address address = getAddressData(title: title);
-      await getAllAddress();
+
       await _addressRepository.createAddress(addressData: address);
+      await getAllAddress();
       addressCreateLoading(false);
       return true;
     } catch (err) {
+      Log.error(err.toString());
       addressCreateLoading(false);
       return false;
     }
@@ -110,6 +113,7 @@ class AddressController extends GetxController {
       await getAllAddress();
       return true;
     } catch (err) {
+      Log.error(err.toString());
       return false;
     } finally {
       addressUpdateLoading(false);
@@ -125,6 +129,8 @@ class AddressController extends GetxController {
       street: addressStreetController.value.text,
       streetAlternative: addressStreet2Controller.value.text.isEmpty ? null : addressStreet2Controller.value.text,
       addressDesc: addressAdditionalInfo.value.text.isEmpty ? null : addressAdditionalInfo.value.text,
+      mobileNumber: addressMobileNumber.value,
+      countryCode: addressCountryCode.value,
       zipCode: int.parse(
         addressZipCodeController.value.text,
       ),

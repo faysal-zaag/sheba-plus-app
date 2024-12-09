@@ -20,17 +20,12 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  String get email =>
-      throw _privateConstructorUsedError; // Default value as an empty string
-  String get firstName =>
-      throw _privateConstructorUsedError; // Default value as an empty string
-  String get lastName =>
-      throw _privateConstructorUsedError; // Default value as an empty string
-  String? get profilePicture =>
-      throw _privateConstructorUsedError; // Optional field
-  int? get mobileNumber => throw _privateConstructorUsedError; // Optional field
-  String? get countryCode =>
-      throw _privateConstructorUsedError; // Optional field
+  String get email => throw _privateConstructorUsedError;
+  String get firstName => throw _privateConstructorUsedError;
+  String get lastName => throw _privateConstructorUsedError;
+  String? get profilePicture => throw _privateConstructorUsedError;
+  String? get mobileNumber => throw _privateConstructorUsedError;
+  String? get countryCode => throw _privateConstructorUsedError;
   num? get dateOfBirth => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
@@ -52,7 +47,7 @@ abstract class $UserCopyWith<$Res> {
       String firstName,
       String lastName,
       String? profilePicture,
-      int? mobileNumber,
+      String? mobileNumber,
       String? countryCode,
       num? dateOfBirth});
 }
@@ -100,7 +95,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       mobileNumber: freezed == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       countryCode: freezed == countryCode
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
@@ -125,7 +120,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String firstName,
       String lastName,
       String? profilePicture,
-      int? mobileNumber,
+      String? mobileNumber,
       String? countryCode,
       num? dateOfBirth});
 }
@@ -170,7 +165,7 @@ class __$$UserImplCopyWithImpl<$Res>
       mobileNumber: freezed == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       countryCode: freezed == countryCode
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
@@ -201,24 +196,18 @@ class _$UserImpl implements _User {
   @override
   @JsonKey()
   final String email;
-// Default value as an empty string
   @override
   @JsonKey()
   final String firstName;
-// Default value as an empty string
   @override
   @JsonKey()
   final String lastName;
-// Default value as an empty string
   @override
   final String? profilePicture;
-// Optional field
   @override
-  final int? mobileNumber;
-// Optional field
+  final String? mobileNumber;
   @override
   final String? countryCode;
-// Optional field
   @override
   final num? dateOfBirth;
 
@@ -274,24 +263,24 @@ abstract class _User implements User {
       final String firstName,
       final String lastName,
       final String? profilePicture,
-      final int? mobileNumber,
+      final String? mobileNumber,
       final String? countryCode,
       final num? dateOfBirth}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  String get email; // Default value as an empty string
+  String get email;
   @override
-  String get firstName; // Default value as an empty string
+  String get firstName;
   @override
-  String get lastName; // Default value as an empty string
+  String get lastName;
   @override
-  String? get profilePicture; // Optional field
+  String? get profilePicture;
   @override
-  int? get mobileNumber; // Optional field
+  String? get mobileNumber;
   @override
-  String? get countryCode; // Optional field
+  String? get countryCode;
   @override
   num? get dateOfBirth;
 

@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:toastification/toastification.dart';
 
@@ -23,4 +25,20 @@ class Utils{
   static void showErrorToast({required String message, Alignment alignment = Alignment.bottomCenter}) {
     showToast(message: message, success: false, alignment: alignment);
   }
+
+  static Locale getInitialLocal() {
+    String? code = StorageService().getLanguage();
+    switch (code) {
+      case "en":
+        {
+          return const Locale("en", "US");
+        }
+      case "bn":
+        {
+          return const Locale("bn", "BD");
+        }
+    }
+    return const Locale("en", "US");
+  }
+
 }

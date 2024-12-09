@@ -16,6 +16,7 @@ _$AddressImpl _$$AddressImplFromJson(Map<String, dynamic> json) =>
       street: json['street'] as String? ?? 'Unknown',
       streetAlternative: json['streetAlternative'] as String?,
       countryCode: json['countryCode'] as String?,
+      mobileNumber: json['mobileNumber'] as String?,
       addressDesc: json['addressDesc'] as String?,
       zipCode: (json['zipCode'] as num?)?.toInt(),
     );
@@ -30,6 +31,7 @@ Map<String, dynamic> _$$AddressImplToJson(_$AddressImpl instance) =>
       'street': instance.street,
       'streetAlternative': instance.streetAlternative,
       'countryCode': instance.countryCode,
+      'mobileNumber': instance.mobileNumber,
       'addressDesc': instance.addressDesc,
       'zipCode': instance.zipCode,
     };

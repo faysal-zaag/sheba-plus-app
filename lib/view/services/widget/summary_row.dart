@@ -10,7 +10,7 @@ class SummaryRow extends StatelessWidget {
   final String value;
   final Color? titleColor;
   final Color? valueColor;
-  const SummaryRow({super.key, required this.title, required this.value, this.customTitle, this.customValue, this.valueColor, this.titleColor, this.titleStyle, this.valueStyle});
+  const SummaryRow({super.key, this.title = "", this.value = "", this.customTitle, this.customValue, this.valueColor, this.titleColor, this.titleStyle, this.valueStyle});
 
   @override
   Widget build(BuildContext context) {

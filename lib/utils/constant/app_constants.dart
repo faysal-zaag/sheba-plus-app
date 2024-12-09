@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/models/country.dart';
 
@@ -9,23 +10,31 @@ class AppConstants {
     "assets/carousel/carousel-3.jpg",
   ];
 
-  static const List<String> drawerMenuItems = [
-    "Home",
-    "Display Center",
-    "Track My Order",
-    "Help & Support",
-    "Language",
+  static List<String> drawerMenuItems = [
+    "home",
+    "displayCenter",
+    "trackMyOrder",
+    "helpAndSupport",
+    "language",
   ];
 
   static const List<String> languages = ["English", "বাংলা"];
 
-  static const List<String> profileMenuList = [
-    "Account Management",
-    "Saved Address",
-    "Order History",
-    "Reward Points",
-    "Notification"
+  static List<String> profileMenuList = [
+    "accountManagement",
+    "savedAddress",
+    "orderHistory",
+    "rewardPoints",
+    "notification",
   ];
+
+  static Map<String, String> profileMenuListBangla = {
+    "অ্যাকাউন্ট ব্যবস্থাপনা": 'accountManagement',
+    "সংরক্ষিত ঠিকানা": 'savedAddress',
+    "অর্ডার ইতিহাস": 'orderHistory',
+    "রিওয়ার্ড পয়েন্টস": 'rewardPoints',
+    "বিজ্ঞপ্তি": 'notification',
+  };
 
   static List<PhosphorIconData> profileMenuIcons = [
     PhosphorIcons.user(),

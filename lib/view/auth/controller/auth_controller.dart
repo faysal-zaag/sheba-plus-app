@@ -59,6 +59,7 @@ class AuthController extends GetxController {
 
   final referralNameController = TextEditingController().obs;
   final referralPhoneNumber = "".obs;
+  final referralPhoneNumberLength = 10.obs;
   final referralCountryCode = "".obs;
 
   void onSignInObscureTap() {
@@ -111,7 +112,7 @@ class AuthController extends GetxController {
     referralCountryCode.value = "";
   }
 
-  Future<void> isAuthenticated({String? accessToken}) async {
+  Future<bool> isAuthenticated({String? accessToken}) async {
     try {
       if (accessToken != null) {
         _storageService.saveAuthToken(accessToken);
@@ -125,10 +126,16 @@ class AuthController extends GetxController {
             _profileController.user.value.lastName;
         _profileController.userEmailController.value.text =
             _profileController.user.value.email;
+        _profileController.userPhoneNumberController.value.text =
+            "${_profileController.user.value.countryCode}${_profileController.user.value.mobileNumber}";
         isLoggedIn(true);
+        return true;
       }
+      return false;
     } catch (e) {
+      Log.error(e.toString());
       _storageService.removeAuthToken();
+      return false;
     }
   }
 
@@ -144,7 +151,6 @@ class AuthController extends GetxController {
       String accessToken = response.data["token"]["access"];
 
       await isAuthenticated(accessToken: accessToken);
-      await _addressController.getAllAddress();
 
       if (keepLoggedIn.isTrue) {
         _storageService.saveAuthToken(response.data["token"]["access"]);
@@ -169,8 +175,10 @@ class AuthController extends GetxController {
           password: registerPasswordController.value.text,
         ),
       );
+
       return true;
     } catch (e) {
+      Log.error(e.toString());
       return false;
     } finally {
       registerProcedureLoading(false);
@@ -180,15 +188,18 @@ class AuthController extends GetxController {
   Future<bool> applyReferral() async {
     try {
       referralApplyingLoading(true);
-      _authRepository.applyReferral(
-        referral: Referral(
-          fullName: referralNameController.value.text,
-          countryCode: referralCountryCode.value,
-          mobileNumber: referralPhoneNumber.value,
-        ),
+      Referral referralData= Referral(
+        fullName: referralNameController.value.text,
+        countryCode: referralCountryCode.value,
+        mobileNumber: referralPhoneNumber.value,
+      );
+
+      await _authRepository.applyReferral(
+        referral: referralData,
       );
       return true;
     } catch (e) {
+      Log.error(e.toString());
       return false;
     } finally {
       referralApplyingLoading(false);
@@ -207,21 +218,26 @@ class AuthController extends GetxController {
       );
       return true;
     } catch (e) {
+      Log.error(e.toString());
       return false;
     } finally {}
   }
 
-  Future<bool> verifyEmail() async {
+  Future<bool> verifyEmail({String? email}) async {
     try {
       otpVerificationProcessLoading(true);
-      await _authRepository.verifyResetPasswordEmail(
+      final response = await _authRepository.verifyEmail(
         verificationModel: VerificationModel(
           code: int.parse(registerOtpCode.value),
-          email: registerEmailController.value.text,
+          email: email ?? registerEmailController.value.text,
         ),
       );
+      String accessToken = response.data["token"]["access"];
+      _storageService.saveAuthToken(accessToken);
+
       return true;
     } catch (e) {
+      Log.error(e.toString());
       return false;
     } finally {
       otpVerificationProcessLoading(false);
@@ -239,37 +255,40 @@ class AuthController extends GetxController {
           newPassword: newPasswordController.value.text);
       return true;
     } catch (e) {
+      Log.error(e.toString());
       return false;
     } finally {
       setNewPasswordProcedureLoading(false);
     }
   }
 
-  Future<bool> verifyResetPasswordEmail() async {
+  Future<bool> verifyResetPasswordEmail({String? email}) async {
     try {
       otpVerificationProcessLoading(true);
       await _authRepository.verifyResetPasswordEmail(
         verificationModel: VerificationModel(
           code: int.parse(resetPasswordByEmailOtpCode.value),
-          email: forgetPasswordEmailController.value.text,
+          email: email ?? forgetPasswordEmailController.value.text,
         ),
       );
       return true;
     } catch (e) {
+      Log.error(e.toString());
       return false;
     } finally {
       otpVerificationProcessLoading(false);
     }
   }
 
-  Future<bool> forgetPassword() async {
+  Future<bool> forgetPassword({String? email}) async {
     try {
       forgetPasswordProcedureLoading(true);
       await _authRepository.resetPasswordByEmail(
-        email: forgetPasswordEmailController.value.text,
+        email: email ?? forgetPasswordEmailController.value.text,
       );
       return true;
     } catch (e) {
+      Log.error(e.toString());
       return false;
     } finally {
       forgetPasswordProcedureLoading(false);
@@ -338,6 +357,7 @@ class AuthController extends GetxController {
       return true;
     }
     catch(e){
+      Log.error(e.toString());
       return false;
     }
   }

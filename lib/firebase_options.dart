@@ -17,9 +17,14 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
+      return const FirebaseOptions(
+          apiKey: "AIzaSyAZJCM_w5Q8ql5uFBSZ5m-OBmN1NlnOt0A",
+          authDomain: "sheba-plus.firebaseapp.com",
+          projectId: "sheba-plus",
+          storageBucket: "sheba-plus.firebasestorage.app",
+          messagingSenderId: "836476357749",
+          appId: "1:836476357749:web:20bda60c9438ed04b7bc3c",
+          measurementId: "G-JZ4GGT38VZ"
       );
     }
     switch (defaultTargetPlatform) {

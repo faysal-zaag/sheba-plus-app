@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_field/countries.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
@@ -37,9 +38,13 @@ class _ReferralFormState extends State<ReferralForm> {
           ),
           Obx(() {
             int validationNumberLength =
-                authController.referralPhoneNumber.value.length;
+                authController.referralPhoneNumberLength.value;
 
             return CustomPhoneField(
+              onCountryChanged: (Country country) {
+                authController.referralPhoneNumberLength.value =
+                    country.minLength;
+              },
               label: AuthScreenText.existingUserPhoneNumber,
               onChanged: (value) {
                 authController.referralPhoneNumber.value = value.number;
@@ -93,6 +98,7 @@ class _ReferralFormState extends State<ReferralForm> {
     if (_referralFormKey.currentState!.validate()) {
       final response = await authController.applyReferral();
       if (response) {
+        authController.resetReferralFields();
         if (authController.isLoggedIn.isTrue) {
           Get.offAndToNamed(Routes.home);
         } else {

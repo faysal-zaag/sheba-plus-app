@@ -10,6 +10,7 @@ class Routes {
   static const String forgetPassword = '/forget-password';
   static const String forgetPasswordEmail = '/forget-password-email';
   static const String setNewPassword = '/set-new-password';
+  static const String changePassword = '/change-password';
   static const String emailVerificationForResetPassword = '/reset-password-email-verification';
 
   // profile screens

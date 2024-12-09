@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/view/components/custom_appbar.dart';
+import 'package:sheba_plus/view/components/custom_header_container.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/message_container.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/global_texts.dart';
 import 'package:sheba_plus/view/third_party/controller/third_party_service_controller.dart';
 
-import '../components/custom_app_bar_container_widget.dart';
 import 'widget/shop_and_item_information_card.dart';
 
 class ThirdPartyShopAndItemDetailsScreen extends StatelessWidget {
@@ -30,7 +31,7 @@ class ThirdPartyShopAndItemDetailsScreen extends StatelessWidget {
         children: [
           Column(
             children: [
-              const CustomAppBarContainerWidget(
+              const CustomHeaderContainer(
                 title: '3rd Party Shop & Item details',
               ),
               SizedBox(

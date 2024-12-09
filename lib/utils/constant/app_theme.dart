@@ -27,7 +27,9 @@ class AppTheme {
           ),
         ),
       ),
-
+      dividerTheme: const DividerThemeData(
+        color: AppColors.divider
+      ),
       dialogTheme: DialogTheme(
         shape: OutlineInputBorder(
           borderRadius: AppBorderRadius.circularRadius2

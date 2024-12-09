@@ -6,8 +6,9 @@ class CountDownTimer extends StatefulWidget {
   final int startTimeMilliseconds;
   final Function()? onTimerFinish;
   final TextStyle? textStyle;
+  final bool verificationPage;
 
-  const CountDownTimer({super.key, required this.startTimeMilliseconds, this.onTimerFinish, this.textStyle});
+  const CountDownTimer({super.key, required this.startTimeMilliseconds, this.onTimerFinish, this.textStyle, this.verificationPage = false});
 
   @override
   CountDownTimerState createState() => CountDownTimerState();
@@ -49,7 +50,7 @@ class CountDownTimerState extends State<CountDownTimer> {
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
     String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
 
-    return '$twoDigitDays d : $twoDigitHours h : ${twoDigitMinutes}m : ${twoDigitSeconds}s';
+    return widget.verificationPage ? '${twoDigitMinutes}m : ${twoDigitSeconds}s' : '$twoDigitDays d : $twoDigitHours h : ${twoDigitMinutes}m : ${twoDigitSeconds}s';
   }
 
 

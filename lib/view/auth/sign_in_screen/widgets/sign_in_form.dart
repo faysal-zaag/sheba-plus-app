@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
@@ -23,6 +24,7 @@ class SignInForm extends StatefulWidget {
 class _SignInFormState extends State<SignInForm> {
   final _signInFormKey = GlobalKey<FormState>();
   final authController = Get.find<AuthController>();
+  final storageService = Get.find<StorageService>();
   final addressController = Get.find<AddressController>();
 
   @override
@@ -74,6 +76,7 @@ class _SignInFormState extends State<SignInForm> {
                   )
                 ],
               ),
+              if(storageService.getLanguage() == "en")
               GestureDetector(
                 onTap: () {
                   Get.toNamed(Routes.forgetPassword);
@@ -88,6 +91,20 @@ class _SignInFormState extends State<SignInForm> {
               )
             ],
           ),
+          24.kH,
+          if(storageService.getLanguage() == "bn")
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(Routes.forgetPassword);
+              },
+              child: Text(
+                AuthScreenText.forgetPassword,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontSize: 14, color: AppColors.primary),
+              ),
+            ),
           24.kH,
           Obx(
             () => CustomPrimaryButton(

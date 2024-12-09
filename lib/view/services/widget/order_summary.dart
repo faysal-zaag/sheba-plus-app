@@ -28,7 +28,6 @@ class OrderSummary extends StatelessWidget {
           ),
           36.kH,
           SummaryRow(
-              title: "",
               customTitle: RichText(
                   text: TextSpan(
                       style: Theme.of(context).textTheme.displayMedium,

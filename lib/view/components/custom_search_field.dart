@@ -10,6 +10,6 @@ class CustomSearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomTextField(controller: searchController, suffixIcon: Icon(PhosphorIcons.magnifyingGlass(), color: AppColors.paragraph,), hintText: ProfileScreenTexts.searchByTickerNumber,);
+    return CustomTextField(controller: searchController, suffixIcon: Icon(PhosphorIcons.magnifyingGlass(), color: AppColors.paragraph,), hintText: ProfileScreenTexts.searchByTicketNumber,);
   }
 }

@@ -14,6 +14,7 @@ class CustomPrimaryButton extends StatelessWidget {
   final Color? labelColor;
   final bool? loading;
   final bool? small;
+  final bool? disabled; // Added disabled parameter
   final Widget? icon;
 
   const CustomPrimaryButton({
@@ -28,6 +29,7 @@ class CustomPrimaryButton extends StatelessWidget {
     this.borderColor,
     this.labelColor,
     this.loading = false,
+    this.disabled = false, // Default is false
     this.icon,
   });
 
@@ -37,8 +39,10 @@ class CustomPrimaryButton extends StatelessWidget {
       height: height,
       width: width ?? double.infinity,
       child: MaterialButton(
-        onPressed: loading == true ? null : onClick,
-        color: color ?? AppColors.primary,
+        onPressed: (loading == true || disabled == true) ? null : onClick, // Check for disabled
+        color: disabled == true
+            ? (color?.withOpacity(0.5) ?? AppColors.primary.withOpacity(0.5))
+            : (color ?? AppColors.primary),
         disabledColor: color?.withOpacity(0.5) ?? AppColors.primary.withOpacity(0.5),
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -46,9 +50,9 @@ class CustomPrimaryButton extends StatelessWidget {
           side: BorderSide(color: borderColor ?? Colors.transparent),
         ),
         child: loading == true
-            ? const CustomLoader(
+            ? CustomLoader(
           size: 30,
-          color: AppColors.white,
+          color: labelColor ?? AppColors.white,
         )
             : Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -62,7 +66,9 @@ class CustomPrimaryButton extends StatelessWidget {
               label,
               style: TextStyle(
                 fontSize: fontSize ?? 16,
-                color: labelColor ?? AppColors.white,
+                color: disabled == true
+                    ? (labelColor?.withOpacity(0.5) ?? AppColors.white.withOpacity(0.5))
+                    : (labelColor ?? AppColors.white),
               ),
             ),
           ],

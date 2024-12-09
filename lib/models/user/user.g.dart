@@ -11,7 +11,7 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       firstName: json['firstName'] as String? ?? '',
       lastName: json['lastName'] as String? ?? '',
       profilePicture: json['profilePicture'] as String?,
-      mobileNumber: (json['mobileNumber'] as num?)?.toInt(),
+      mobileNumber: json['mobileNumber'] as String?,
       countryCode: json['countryCode'] as String?,
       dateOfBirth: json['dateOfBirth'] as num?,
     );

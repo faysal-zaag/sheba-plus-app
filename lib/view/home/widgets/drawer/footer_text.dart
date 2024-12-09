@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/view/home/home_screen_texts.dart';
 
 class FooterText extends StatelessWidget {
   const FooterText({super.key});
@@ -18,13 +18,25 @@ class FooterText extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
               children: [
                 TextSpan(
-                  text: "2008-2024, ",style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.neutral70)
+                  text: "footerYear".tr,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall
+                      ?.copyWith(color: AppColors.neutral70),
                 ),
                 TextSpan(
-                  text: "SEBA.com",style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.white)
+                  text: "footerCompany".tr,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall
+                      ?.copyWith(color: AppColors.white),
                 ),
                 TextSpan(
-                  text: " Inc or its affiliates.",style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.neutral70)
+                  text: "footerAffiliates".tr,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall
+                      ?.copyWith(color: AppColors.neutral70),
                 ),
               ],
             ),
@@ -36,16 +48,32 @@ class FooterText extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall,
               children: [
                 TextSpan(
-                  text: "© All rights reserved. ",style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.neutral70)
+                  text: "footerRights".tr,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall
+                      ?.copyWith(color: AppColors.neutral70),
                 ),
                 TextSpan(
-                  text: "SEBA.com",style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.white)
+                  text: "footerTrademark".tr,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall
+                      ?.copyWith(color: AppColors.white),
                 ),
                 TextSpan(
-                  text: " is a trademark of ",style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.neutral70)
+                  text: "footerTrademarkOf".tr,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall
+                      ?.copyWith(color: AppColors.neutral70),
                 ),
                 TextSpan(
-                  text: "SEBA.com.Inc",style: Theme.of(context).textTheme.displaySmall?.copyWith(color: AppColors.neutral70)
+                  text: "footerTrademarkCompany".tr,
+                  style: Theme.of(context)
+                      .textTheme
+                      .displaySmall
+                      ?.copyWith(color: AppColors.neutral70),
                 ),
               ],
             ),

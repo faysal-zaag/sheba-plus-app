@@ -6,9 +6,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:device_preview/device_preview.dart'; // Add device_preview package
 import 'package:sheba_plus/bindings.dart';
 import 'package:sheba_plus/firebase_options.dart';
+import 'package:sheba_plus/utils/constant/app_language.dart';
 import 'package:sheba_plus/utils/constant/app_theme.dart';
 import 'package:sheba_plus/utils/routes/routers.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/global_texts.dart';
 import 'package:toastification/toastification.dart';
 
@@ -36,11 +38,14 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialBinding: MyBindings(),
+        locale: Utils.getInitialLocal(),
+        translations: AppLanguage(),
+        fallbackLocale: const Locale('en', 'UK'),
         title: GlobalTexts.appName,
         theme: AppTheme.lightTheme,
         getPages: AppRouters.routes,
         initialRoute: Routes.splash,
-        builder: DevicePreview.appBuilder, // Add this for device preview
+        builder: DevicePreview.appBuilder,
       ),
     );
   }
