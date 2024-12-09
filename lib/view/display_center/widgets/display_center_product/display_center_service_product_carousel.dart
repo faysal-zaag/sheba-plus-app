@@ -50,7 +50,7 @@ class DisplayCenterServiceProductCarousel extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: AppConstants.imgList.asMap().entries.map((entry) {
+              children: AppConstants.carouselImages.asMap().entries.map((entry) {
                 return GestureDetector(
                   onTap: () =>
                       carouselSliderController.animateToPage(entry.key),

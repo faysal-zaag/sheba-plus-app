@@ -1,11 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
+import 'package:sheba_plus/utils/constant/app_paddings.dart';
+import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/home/controller/home_controller.dart';
+import 'package:sheba_plus/view/home/home_screen_texts.dart';
 
 class HomeCarousel extends StatelessWidget {
   final HomeController homeController;
+
   const HomeCarousel({super.key, required this.homeController});
 
   @override
@@ -13,12 +19,12 @@ class HomeCarousel extends StatelessWidget {
     return Stack(
       children: [
         SizedBox(
-          height: 120,
+          height: 300,
           child: CarouselSlider.builder(
             carouselController: homeController.carouselSliderController,
-            itemCount: 3,
+            itemCount: 4,
             options: CarouselOptions(
-              height: 120,
+              height: 300,
               aspectRatio: 16 / 9,
               enlargeCenterPage: false,
               autoPlay: true,
@@ -33,22 +39,34 @@ class HomeCarousel extends StatelessWidget {
                   // Image
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    height: 120,
+                    height: 300,
                     child: Image.asset(
-                      "assets/carousel/carousel-${index + 1}.jpg",
+                      AppConstants.carouselImages[index],
                       fit: BoxFit.cover,
                     ),
                   ),
                   // Gradient Overlay
                   Positioned.fill(
                     child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent, // Top transparent
-                            Colors.black.withOpacity(0.6), // Bottom light black
+                      decoration: BoxDecoration(color: AppColors.black.withOpacity(0.5)),
+                    ),
+                  ),
+                  // Banner text
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(AppConstants.carouselHeaderTexts[index], style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.white)),
+                            12.kH,
+                            Text(
+                              AppConstants.carouselHeaderDetails[index],
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.white),
+                            ),
                           ],
                         ),
                       ),
@@ -59,25 +77,23 @@ class HomeCarousel extends StatelessWidget {
             },
           ),
         ),
+        // navigation's
         Positioned.fill(
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: AppConstants.imgList.asMap().entries.map((entry) {
+              children: AppConstants.carouselImages.asMap().entries.map((entry) {
                 return GestureDetector(
-                  onTap: () => homeController.carouselSliderController
-                      .animateToPage(entry.key),
+                  onTap: () => homeController.carouselSliderController.animateToPage(entry.key),
                   child: Obx(
-                        () => Container(
+                    () => Container(
                       width: 8.0,
                       height: 8.0,
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 4.0),
+                      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.white
-                            .withOpacity(homeController.carouselCurrentIndex.value == entry.key ? 0.9 : 0.5),
+                        color: Colors.white.withOpacity(homeController.carouselCurrentIndex.value == entry.key ? 0.9 : 0.5),
                       ),
                     ),
                   ),
@@ -85,7 +101,35 @@ class HomeCarousel extends StatelessWidget {
               }).toList(),
             ),
           ),
-        )
+        ),
+        // left arrow
+        Positioned.fill(
+            child: Align(
+          alignment: Alignment.centerLeft,
+          child: IconButton(
+              onPressed: () {},
+              icon: Obx(
+                () => Icon(
+                  PhosphorIcons.caretLeft(),
+                  color: Colors.white,
+                  size: 25,
+                ),
+              )),
+        )),
+        // right arrow
+        Positioned.fill(
+            child: Align(
+          alignment: Alignment.centerRight,
+          child: IconButton(
+              onPressed: () {},
+              icon: Obx(
+                () => Icon(
+                  PhosphorIcons.caretRight(),
+                  color: Colors.white,
+                  size: 25,
+                ),
+              )),
+        ))
       ],
     );
   }

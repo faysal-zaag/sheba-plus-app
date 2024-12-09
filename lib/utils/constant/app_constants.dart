@@ -1,13 +1,28 @@
-import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/models/country.dart';
+import 'package:sheba_plus/view/home/home_screen_texts.dart';
 
 class AppConstants {
   static const assetImagePath = "assets/images";
-  static const List<String> imgList = [
+  static const List<String> carouselImages = [
     "assets/carousel/carousel-1.jpg",
     "assets/carousel/carousel-2.jpg",
     "assets/carousel/carousel-3.jpg",
+    "assets/carousel/carousel-4.jpg",
+  ];
+
+  static List<String> carouselHeaderTexts = [
+    HomeScreenText.agentShopping,
+    HomeScreenText.displayCenter,
+    HomeScreenText.thirdParty,
+    HomeScreenText.friendsFamily,
+  ];
+
+  static List<String> carouselHeaderDetails = [
+    HomeScreenText.agentShoppingDetails1,
+    HomeScreenText.displayCenterDetails1,
+    HomeScreenText.thirdPartyDetails1,
+    HomeScreenText.friendsFamilyDetails1,
   ];
 
   static List<String> drawerMenuItems = [
