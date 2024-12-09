@@ -19,12 +19,12 @@ class HomeCarousel extends StatelessWidget {
     return Stack(
       children: [
         SizedBox(
-          height: 300,
+          height: 220,
           child: CarouselSlider.builder(
             carouselController: homeController.carouselSliderController,
             itemCount: 4,
             options: CarouselOptions(
-              height: 300,
+              height: 220,
               aspectRatio: 16 / 9,
               enlargeCenterPage: false,
               autoPlay: true,
@@ -39,7 +39,7 @@ class HomeCarousel extends StatelessWidget {
                   // Image
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    height: 300,
+                    height: 220,
                     child: Image.asset(
                       AppConstants.carouselImages[index],
                       fit: BoxFit.cover,
@@ -60,10 +60,10 @@ class HomeCarousel extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(AppConstants.carouselHeaderTexts[index], style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.white)),
+                            Text(AppConstants.carouselHeaderTexts[index].tr, style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.white)),
                             12.kH,
                             Text(
-                              AppConstants.carouselHeaderDetails[index],
+                              AppConstants.carouselHeaderDetails[index].tr,
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.white),
                             ),

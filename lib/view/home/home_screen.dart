@@ -27,12 +27,14 @@ class HomeScreen extends StatelessWidget {
   final homeController = Get.find<HomeController>();
   final authController = Get.find<AuthController>();
   final globalController = Get.find<GlobalController>();
+  final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return PrimaryScaffold(
       userIcon: true,
       body: SingleChildScrollView(
+        controller: scrollController, // Add the scroll controller
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -79,7 +81,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             // home services
-            HomeServices(),
+            HomeServices(scrollController: scrollController,),
             // mega sell image
             16.kH,
             Image.asset(AppImages.megaSell),

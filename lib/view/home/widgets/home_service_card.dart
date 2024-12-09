@@ -14,11 +14,12 @@ class HomeServiceCard extends StatelessWidget {
   final int index;
   final Function onTapService;
 
-  HomeServiceCard(
-      {super.key,
-      required this.contents,
-      required this.index,
-      required this.onTapService});
+  HomeServiceCard({
+    super.key,
+    required this.contents,
+    required this.index,
+    required this.onTapService,
+  });
 
   final homeController = Get.find<HomeController>();
   final globalController = Get.find<GlobalController>();
@@ -27,8 +28,8 @@ class HomeServiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (homeController.selectedService.value == 0 ||
-            homeController.selectedService.value == index) {
+        onTapService();
+        if (homeController.selectedService.value == 0 || homeController.selectedService.value == index) {
           homeController.onSelectService(index);
         }
       },
@@ -37,9 +38,7 @@ class HomeServiceCard extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: homeController.selectedService.value == index
-                    ? AppColors.primaryLight.withOpacity(0.5)
-                    : AppColors.white,
+                color: homeController.selectedService.value == index ? AppColors.primaryLight.withOpacity(0.5) : AppColors.white,
                 border: const Border(
                   bottom: BorderSide(
                     color: AppColors.divider,
@@ -55,8 +54,7 @@ class HomeServiceCard extends StatelessWidget {
                       children: [
                         homeController.selectedService.value == index
                             ? Icon(
-                                PhosphorIcons.checkCircle(
-                                    PhosphorIconsStyle.fill),
+                                PhosphorIcons.checkCircle(PhosphorIconsStyle.fill),
                                 color: AppColors.primary,
                               )
                             : Icon(PhosphorIcons.circle()),
@@ -68,39 +66,26 @@ class HomeServiceCard extends StatelessWidget {
                               ...contents,
                               homeController.selectedService.value == index
                                   ? Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         12.kH,
                                         Text(
                                           HomeScreenText.shipmentMessage,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall
-                                              ?.copyWith(
-                                                  color: AppColors.hintText),
+                                          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.hintText),
                                         ),
                                         12.kH,
                                         Text(
                                           HomeScreenText.dropOffMessage,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall
-                                              ?.copyWith(
-                                                  color: AppColors.hintText),
+                                          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.hintText),
                                         ),
                                         24.kH,
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
+                                          mainAxisAlignment: MainAxisAlignment.end,
                                           children: [
                                             CustomPrimaryButton(
                                               label: HomeScreenText.selectService,
                                               onClick: () {
-                                                globalController
-                                                    .showTermsAndConditionSheet(
-                                                        context: context,
-                                                        serviceIndex: index);
+                                                globalController.showTermsAndConditionSheet(context: context, serviceIndex: index);
                                               },
                                               width: 160,
                                             ),
@@ -128,16 +113,13 @@ class HomeServiceCard extends StatelessWidget {
                 ],
               ),
             ),
-            if (homeController.selectedService.value != index &&
-                homeController.selectedService.value != 0)
+            if (homeController.selectedService.value != index && homeController.selectedService.value != 0)
               ClipRect(
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 4.0, sigmaY: 4.0),
                   child: Container(
                     height: 180.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(0.0),
-                        color: Colors.grey.shade200.withOpacity(0.5)),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(0.0), color: Colors.grey.shade200.withOpacity(0.5)),
                     child: Container(
                       color: Colors.transparent,
                     ),
