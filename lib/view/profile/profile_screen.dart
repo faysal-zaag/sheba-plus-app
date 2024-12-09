@@ -35,10 +35,19 @@ class ProfileScreen extends StatelessWidget {
             Obx(
               () => CustomDropdown(
                 height: 56,
-                items: AppConstants.profileMenuList
-                    .map((menu) => menu.tr)
-                    .toList(),
+                items: AppConstants.profileMenuList.map((menu) => menu.tr).toList(),
                 onChanged: (value) {
+                  if (value == "accountManagement".tr) {
+                    profileController.selectedProfileMenuIndex(0);
+                  } else if (value == "savedAddress".tr) {
+                    profileController.selectedProfileMenuIndex(1);
+                  } else if (value == "orderHistory".tr) {
+                    profileController.selectedProfileMenuIndex(2);
+                  } else if (value == "rewardPoints".tr) {
+                    profileController.selectedProfileMenuIndex(3);
+                  } else if (value == "notification".tr) {
+                    profileController.selectedProfileMenuIndex(4);
+                  }
                   profileController.selectedProfileMenu(value);
                 },
                 selectedValue: profileController.selectedProfileMenu.value,
@@ -50,8 +59,7 @@ class ProfileScreen extends StatelessWidget {
             16.kH,
             Obx(
               () => Expanded(
-                child: screens[profileController
-                        .selectedProfileMenuIndex.value],
+                child: screens[profileController.selectedProfileMenuIndex.value],
               ),
             ),
           ],
