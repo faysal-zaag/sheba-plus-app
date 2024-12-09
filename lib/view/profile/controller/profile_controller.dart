@@ -23,6 +23,7 @@ class ProfileController extends GetxController {
   final user = const User().obs;
 
   final profileEditable = false.obs;
+  final loadingUpdatingUserInfo = false.obs;
   final loadingUploadingPicture = false.obs;
   final changePasswordProcedureLoading = false.obs;
   final selectedProfileMenu = AppConstants.profileMenuList[0].tr.obs;
@@ -33,6 +34,7 @@ class ProfileController extends GetxController {
   final userEmailController = TextEditingController().obs;
   final userPhoneNumberController = TextEditingController().obs;
   final userDateOfBirthController = TextEditingController().obs;
+  final userDateOfBirthInMilliseconds = 0.obs;
 
   final oldPasswordController = TextEditingController().obs;
   final newPasswordController = TextEditingController().obs;
@@ -60,6 +62,21 @@ class ProfileController extends GetxController {
     confirmNewPasswordObscure(!confirmNewPasswordObscure.value);
   }
 
+  Future<bool> updateUserInfo() async {
+    try {
+      loadingUpdatingUserInfo(true);
+      User userInfo = user.value.copyWith(firstName: userFirstNameController.value.text, lastName: userLastNameController.value.text, dateOfBirth: userDateOfBirthInMilliseconds.value);
+      final response = await _profileRepository.updateUserInfo(userInfo: userInfo);
+      user(User.fromJson(response.data["info"]));
+      return true;
+    } catch (err) {
+      Log.error(err.toString());
+      return false;
+    } finally {
+      loadingUpdatingUserInfo(false);
+    }
+  }
+
   Future<bool> uploadProfilePicture({required XFile file}) async {
     try {
       loadingUploadingPicture(true);
@@ -70,8 +87,7 @@ class ProfileController extends GetxController {
       return true;
     } catch (err) {
       return false;
-    }
-    finally {
+    } finally {
       loadingUploadingPicture(false);
     }
   }
@@ -82,13 +98,13 @@ class ProfileController extends GetxController {
       await _profileRepository.changePassword(
         oldPassword: oldPasswordController.value.text,
         newPassword: newPasswordController.value.text,
-    );
-    return true;
+      );
+      return true;
     } catch (e) {
       Log.error(e.toString());
-    return false;
+      return false;
     } finally {
-    changePasswordProcedureLoading(false);
+      changePasswordProcedureLoading(false);
     }
   }
 }

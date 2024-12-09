@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/helpers/image_uploader.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
@@ -19,13 +22,13 @@ class AccountManagementScreen extends StatefulWidget {
   const AccountManagementScreen({super.key});
 
   @override
-  State<AccountManagementScreen> createState() =>
-      _AccountManagementScreenState();
+  State<AccountManagementScreen> createState() => _AccountManagementScreenState();
 }
 
 class _AccountManagementScreenState extends State<AccountManagementScreen> {
   final authController = Get.find<AuthController>();
   final profileController = Get.find<ProfileController>();
+  final globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +56,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                       child: Container(
                         height: 36,
                         width: 36,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.primaryLight),
+                        decoration: const BoxDecoration(shape: BoxShape.circle, color: AppColors.primaryLight),
                         child: Center(
                           child: Icon(
                             PhosphorIcons.camera(),
@@ -75,6 +76,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                 controller: profileController.userFirstNameController.value,
                 label: AuthScreenText.firstName,
                 hintText: "",
+                required: profileController.profileEditable.isTrue,
                 readOnly: profileController.profileEditable.isFalse,
               ),
             ),
@@ -83,6 +85,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                   controller: profileController.userLastNameController.value,
                   label: AuthScreenText.lastName,
                   hintText: "",
+                  required: profileController.profileEditable.isTrue,
                   readOnly: profileController.profileEditable.isFalse),
             ),
             Obx(
@@ -90,22 +93,29 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                 controller: profileController.userEmailController.value,
                 label: AuthScreenText.emailId,
                 hintText: "",
-                readOnly: profileController.profileEditable.isFalse,
+                readOnly: true,
               ),
             ),
             Obx(
-              () => TextFieldWithLabel(
-                  controller: profileController.userPhoneNumberController.value,
-                  label: AuthScreenText.phoneNumber,
-                  hintText: "",
-                  readOnly: profileController.profileEditable.isFalse),
+              () => TextFieldWithLabel(controller: profileController.userPhoneNumberController.value, label: AuthScreenText.phoneNumber, hintText: "", readOnly: true),
             ),
             Obx(
               () => TextFieldWithLabel(
-                  controller: profileController.userDateOfBirthController.value,
-                  label: ProfileScreenTexts.dateOfBirth,
-                  hintText: "",
-                  readOnly: profileController.profileEditable.isFalse),
+                controller: profileController.userDateOfBirthController.value,
+                label: ProfileScreenTexts.dateOfBirth,
+                hintText: "",
+                required: profileController.profileEditable.isTrue,
+                readOnly: true,
+                onTap: () {
+                  if (profileController.profileEditable.isTrue) {
+                    globalController.showDatePickerOnly(
+                      context: context,
+                      onPicked: setDateOfBirth,
+                      firstDate: DateTime(1800)
+                    );
+                  }
+                },
+              ),
             ),
             Obx(
               () => CustomPrimaryButton(
@@ -122,17 +132,31 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
             16.kH,
             Obx(
               () => CustomPrimaryButton(
-                label: profileController.profileEditable.isTrue
-                    ? ProfileScreenTexts.saveChanges
-                    : ProfileScreenTexts.updateInformation,
-                onClick: () => profileController
-                    .profileEditable(!profileController.profileEditable.value),
+                loading: profileController.loadingUpdatingUserInfo.isTrue,
+                label: profileController.profileEditable.isTrue ? ProfileScreenTexts.saveChanges : ProfileScreenTexts.updateInformation,
+                onClick: () async{
+                  if(profileController.profileEditable.isTrue){
+                    final response = await profileController.updateUserInfo();
+                    if(response){
+                      Utils.showSuccessToast(message: "User information updated successfully");
+                      profileController.profileEditable(false);
+                    }
+                  }
+                  else{
+                    profileController.profileEditable(true);
+                  }
+                },
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void setDateOfBirth(DateTime selectedDate) {
+    profileController.userDateOfBirthInMilliseconds.value = selectedDate.millisecondsSinceEpoch;
+    profileController.userDateOfBirthController.value.text = DateFormat('yyyy-MM-dd').format(selectedDate);
   }
 
   void showImageUploaderDialog() async {

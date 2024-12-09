@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/models/setting/setting.dart';
+import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/view/auth/widgets/modals/terms_and_condition_modal.dart';
 import 'package:sheba_plus/view_model/repositories/global.repository.dart';
@@ -100,5 +103,101 @@ class GlobalController extends GetxController {
             ],
           );
         });
+  }
+
+  Future<void> showDateTimePicker(
+      {required BuildContext context,
+        bool canadianTime = false,
+        DateTime? initialDate,
+        DateTime? firstDate,
+        DateTime? lastDate,
+        required Function(DateTime, bool) onPicked
+      }) async {
+    DateTime now = DateTime.now();
+
+    // Show Date Picker
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: initialDate ?? now,
+      firstDate: firstDate ?? now,
+      lastDate: lastDate ?? DateTime(2500),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: AppColors.primary,
+              onPrimary: Colors.white,
+              onSurface: Colors.black,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.primary,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (pickedDate != null) {
+      // Show Time Picker
+      TimeOfDay? pickedTime = await showTimePicker(
+        context: Get.context!,
+        initialTime: TimeOfDay.fromDateTime(now),
+      );
+
+      if (pickedTime != null) {
+        DateTime selectedDateTime = DateTime(
+          pickedDate.year,
+          pickedDate.month,
+          pickedDate.day,
+          pickedTime.hour,
+          pickedTime.minute,
+        );
+
+        onPicked(selectedDateTime, canadianTime);
+      }
+    }
+  }
+
+  Future<void> showDatePickerOnly(
+      {required BuildContext context,
+        DateTime? initialDate,
+        DateTime? firstDate,
+        DateTime? lastDate,
+        required Function(DateTime) onPicked
+      }) async {
+    DateTime now = DateTime.now();
+
+    // Show Date Picker
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: initialDate ?? now,
+      firstDate: firstDate ?? now,
+      lastDate: lastDate ?? DateTime(2500),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: AppColors.primary,
+              onPrimary: Colors.white,
+              onSurface: Colors.black,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: AppColors.primary,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if(pickedDate != null)
+    {
+      onPicked(pickedDate);
+    }
   }
 }

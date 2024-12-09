@@ -23,9 +23,7 @@ class TermsAndConditionSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: AppBorderRadius.circularRadius4),
+      decoration: BoxDecoration(color: AppColors.white, borderRadius: AppBorderRadius.circularRadius4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -37,10 +35,7 @@ class TermsAndConditionSheet extends StatelessWidget {
               children: [
                 Text(
                   GlobalTexts.termsAndCondition,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall
-                      ?.copyWith(fontWeight: FontWeight.w600),
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 CustomCloseButton(onPressed: () => Get.back())
               ],
@@ -67,16 +62,11 @@ class TermsAndConditionSheet extends StatelessWidget {
             children: [
               Obx(
                 () => IconButton(
-                    onPressed: () => globalController
-                        .termsAccepted(!globalController.termsAccepted.value),
+                    onPressed: () => globalController.termsAccepted(!globalController.termsAccepted.value),
                     icon: Icon(
-                      globalController.termsAccepted.isTrue
-                          ? PhosphorIcons.checkSquare(PhosphorIconsStyle.fill)
-                          : PhosphorIcons.square(),
+                      globalController.termsAccepted.isTrue ? PhosphorIcons.checkSquare(PhosphorIconsStyle.fill) : PhosphorIcons.square(),
                       size: 16,
-                      color: globalController.termsAccepted.isTrue
-                          ? AppColors.primary
-                          : AppColors.black,
+                      color: globalController.termsAccepted.isTrue ? AppColors.primary : AppColors.black,
                     )),
               ),
               Text(
@@ -87,8 +77,7 @@ class TermsAndConditionSheet extends StatelessWidget {
           ),
           8.kH,
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
             child: Row(
               children: [
                 Expanded(
@@ -110,39 +99,14 @@ class TermsAndConditionSheet extends StatelessWidget {
                       label: GlobalTexts.next,
                       onClick: () {
                         if (globalController.termsAccepted.isTrue) {
-                          Get.offAndToNamed(
-                              Routes.agentShoppingOrderInfoScreen);
-                          if (globalController.termsAccepted.isTrue &&
-                              serviceIndex == 1) {
-                            Get.toNamed(Routes.agentShoppingOrderInfoScreen);
-                            globalController.termsAccepted(false);
+                          if (serviceIndex == 1) {
+                            Get.offAndToNamed(Routes.agentShoppingOrderInfoScreen);
+                          } else if (serviceIndex == 2) {
+                            Get.offAndToNamed(Routes.displayCenterServiceProductListScreen);
+                          } else if (serviceIndex == 3) {
+                            Get.offAndToNamed(Routes.thirdPartyShopAndItemDetailsScreen);
                           }
-                          if (globalController.termsAccepted.isTrue &&
-                              serviceIndex == 2) {
-                            Get.toNamed(
-                                Routes.displayCenterServiceProductListScreen);
-                          } else if (globalController.termsAccepted.isTrue &&
-                              serviceIndex == 2) {
-                            Get.toNamed(
-                                Routes.displayCenterServiceProductListScreen);
-                            globalController.termsAccepted(false);
-                          }
-                        } else {
-                          Utils.showErrorToast(
-                              message:
-                                  GlobalTexts.pleaseAcceptTermsAndCondition,
-                              alignment: Alignment.topCenter);
-                        }
-                        if (globalController.termsAccepted.isTrue &&
-                            serviceIndex == 3) {
-                          Get.toNamed(
-                              Routes.thirdPartyShopAndItemDetailsScreen);
                           globalController.termsAccepted(false);
-                        } else {
-                          Utils.showErrorToast(
-                              message:
-                                  GlobalTexts.pleaseAcceptTermsAndCondition,
-                              alignment: Alignment.topCenter);
                         }
                       },
                     ),

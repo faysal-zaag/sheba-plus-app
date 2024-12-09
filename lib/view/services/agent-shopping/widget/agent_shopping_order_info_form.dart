@@ -60,7 +60,7 @@ class _AgentShoppingOrderInfoFormState
                   color: AppColors.primary,
                 ),
                 onTap: () {
-                  _showDateTimePicker(context: context, canadianTime: true);
+                  globalController.showDateTimePicker(context: context, canadianTime: true, onPicked: setTime);
                 },
                 validator: (value) => InputValidators.generalValidator(
                   value: value,
@@ -79,7 +79,7 @@ class _AgentShoppingOrderInfoFormState
                 validator: (value) => InputValidators.generalValidator(
                     value: value, message: GlobalTexts.thisFieldIsRequired),
                 onTap: () {
-                  _showDateTimePicker(context: context);
+                  globalController.showDateTimePicker(context: context, onPicked: setTime);
                 },
               ),
               12.kH,
@@ -169,75 +169,25 @@ class _AgentShoppingOrderInfoFormState
     ).toString();
   }
 
-  Future<void> _showDateTimePicker(
-      {required BuildContext context,
-      bool canadianTime = false,
-      DateTime? initialDate,
-      DateTime? firstDate,
-      DateTime? lastDate}) async {
-    DateTime now = DateTime.now();
-
-    // Show Date Picker
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: initialDate ?? now,
-      firstDate: firstDate ?? now,
-      lastDate: lastDate ?? DateTime(2500),
-      builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: AppColors.primary,
-              onPrimary: Colors.white,
-              onSurface: Colors.black,
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor: AppColors.primary,
-              ),
-            ),
-          ),
-          child: child!,
-        );
-      },
-    );
-
-    if (pickedDate != null) {
-      // Show Time Picker
-      TimeOfDay? pickedTime = await showTimePicker(
-        context: Get.context!,
-        initialTime: TimeOfDay.fromDateTime(now),
+  void setTime(DateTime selectedDateTime, bool canadianTime){
+    if (canadianTime) {
+      agentShoppingController.agentShoppingEasternTimeController.value
+          .text = getFormattedDateTime(
+        selectedDateTime: selectedDateTime,
       );
-
-      if (pickedTime != null) {
-        DateTime selectedDateTime = DateTime(
-          pickedDate.year,
-          pickedDate.month,
-          pickedDate.day,
-          pickedTime.hour,
-          pickedTime.minute,
-        );
-
-        if (canadianTime) {
-          agentShoppingController.agentShoppingEasternTimeController.value
-              .text = getFormattedDateTime(
+      agentShoppingController.agentShoppingBDTimeController.value.text =
+          getFormattedDateTimeInBD(
             selectedDateTime: selectedDateTime,
           );
-          agentShoppingController.agentShoppingBDTimeController.value.text =
-              getFormattedDateTimeInBD(
+    } else {
+      agentShoppingController.agentShoppingBDTimeController.value.text =
+          getFormattedDateTime(
             selectedDateTime: selectedDateTime,
           );
-        } else {
-          agentShoppingController.agentShoppingBDTimeController.value.text =
-              getFormattedDateTime(
-            selectedDateTime: selectedDateTime,
-          );
-          agentShoppingController.agentShoppingEasternTimeController.value
-              .text = getFormattedDateTimeInCanada(
-            selectedDateTime: selectedDateTime,
-          );
-        }
-      }
+      agentShoppingController.agentShoppingEasternTimeController.value
+          .text = getFormattedDateTimeInCanada(
+        selectedDateTime: selectedDateTime,
+      );
     }
   }
 

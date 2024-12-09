@@ -26,6 +26,7 @@ class ApiUrls {
   // Profile
   static const String getProfileApiUrl = "$securedApiUrl/users/profile";
   static const String getProfileImageApiUrl = "$securedApiUrl/users/profile";
+  static const String updateUserApiUrl = "$getProfileApiUrl/update";
   static const String imageUploadApiUrl = "$securedApiUrl/users/profile";
 
   // address

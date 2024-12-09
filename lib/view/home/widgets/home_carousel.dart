@@ -107,29 +107,32 @@ class HomeCarousel extends StatelessWidget {
             child: Align(
           alignment: Alignment.centerLeft,
           child: IconButton(
-              onPressed: () {},
-              icon: Obx(
-                () => Icon(
-                  PhosphorIcons.caretLeft(),
-                  color: Colors.white,
-                  size: 25,
-                ),
-              )),
+            onPressed: () {
+              homeController.carouselSliderController.previousPage();
+            },
+            icon: Icon(
+              PhosphorIcons.caretLeft(),
+              color: Colors.white,
+              size: 25,
+            ),
+          ),
         )),
         // right arrow
         Positioned.fill(
-            child: Align(
-          alignment: Alignment.centerRight,
-          child: IconButton(
-              onPressed: () {},
-              icon: Obx(
-                () => Icon(
-                  PhosphorIcons.caretRight(),
-                  color: Colors.white,
-                  size: 25,
-                ),
-              )),
-        ))
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: IconButton(
+              onPressed: () {
+                homeController.carouselSliderController.nextPage();
+              },
+              icon: Icon(
+                PhosphorIcons.caretRight(),
+                color: Colors.white,
+                size: 25,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
