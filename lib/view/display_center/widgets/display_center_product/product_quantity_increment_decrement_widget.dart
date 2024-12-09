@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 
 import '../../../../utils/constant/app_colors.dart';
@@ -52,8 +53,8 @@ class CustomQuantityIncDecWidget extends StatelessWidget {
             height: height ?? 32,
             padding: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(2.0),
-              border: Border.all(color: AppColors.neutral70),
+              borderRadius: AppBorderRadius.circularRadius4,
+              border: Border.all(color: AppColors.border),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

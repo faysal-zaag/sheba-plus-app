@@ -55,6 +55,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       obscureText: obscure ?? false,
       autovalidateMode: autoValidateMode ?? AutovalidateMode.onUserInteraction,
+      cursorColor: AppColors.primary,
       decoration: Styles.getTextFieldInputDecoration(
         context: context,
         fillColor: color,

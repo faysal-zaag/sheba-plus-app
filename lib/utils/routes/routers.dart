@@ -12,12 +12,16 @@ import 'package:sheba_plus/view/auth/register_screen/referral_screen/referral_sc
 import 'package:sheba_plus/view/auth/register_screen/register-addres/register_adress_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/register_screen.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/sign_in_screen.dart';
+import 'package:sheba_plus/view/cart/cart_details_screen.dart';
 import 'package:sheba_plus/view/display_center/screen/display_center_product_details_screen.dart';
 import 'package:sheba_plus/view/display_center/screen/display_center_product_list_screen.dart';
 import 'package:sheba_plus/view/home/home_screen.dart';
+import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
 import 'package:sheba_plus/view/profile/profile_screen.dart';
+import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_order_info_screen.dart';
 import 'package:sheba_plus/view/services/partial_checkout_screen.dart';
 import 'package:sheba_plus/view/splash_screen.dart';
+import 'package:sheba_plus/view/third_party/third_party_shop_and_item_details_screen.dart';
 
 import 'routes.dart';
 
@@ -102,6 +106,10 @@ class AppRouters {
     GetPage(
       name: Routes.cartDetailsScreen,
       page: () => CartDetailsScreen(),
+    ),
+    GetPage(
+      name: Routes.thirdPartyShopAndItemDetailsScreen,
+      page: () => ThirdPartyShopAndItemDetailsScreen(),
     ),
   ];
 }

@@ -15,9 +15,10 @@ import '../display_center/widgets/display_center_app_bar_cart_widget.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool userIcon;
+  final bool hasCart;
   final bool displayCenter;
 
-  CustomAppBar({super.key, this.userIcon = false, this.displayCenter = false});
+  CustomAppBar({super.key, this.userIcon = false, this.hasCart = false, this.displayCenter = false});
 
   final authController = Get.find<AuthController>();
   final addressController = Get.find<AddressController>();
@@ -130,6 +131,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ]
           : displayCenter && authController.isLoggedIn.isFalse
               ? [const DisplayCenterAppBarCartWidget()]
+          : hasCart && authController.isLoggedIn.isFalse
+              ? [
+        const DisplayCenterAppBarCartWidget()
+                ]
               : null,
     );
   }
