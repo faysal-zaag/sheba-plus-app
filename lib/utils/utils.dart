@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
@@ -39,6 +41,14 @@ class Utils{
         }
     }
     return const Locale("en", "US");
+  }
+
+  static prettifyJson(dynamic json, String API) {
+    // Convert the JSON data to a string with indentation for better readability
+    final prettyString = JsonEncoder.withIndent('  ').convert(json);
+    return debugPrint(
+        "=-=-=-=-=-=-=-> show json data from ${API} : $prettyString",
+        wrapWidth: 1024);
   }
 
 }

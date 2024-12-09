@@ -35,4 +35,7 @@ class ApiUrls {
   // customer
   static const String applyReferral = "$securedApiUrl/customers/apply-referral";
   static const String changePassword = "$securedApiUrl/customers/reset-password";
+
+  //Display Service
+  static const String getAllDisplayServiceProductsApiUrl = "$baseApiUrl/products";
 }

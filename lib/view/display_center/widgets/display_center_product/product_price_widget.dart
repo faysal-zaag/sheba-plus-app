@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sheba_plus/models/display_service/display_service_product.dart';
 import 'package:sheba_plus/models/product/product.model.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 
 class ProductPriceWidget extends StatelessWidget {
-  final ProductModel product;
+  final DisplayServiceProduct product;
 
   const ProductPriceWidget({Key? key, required this.product}) : super(key: key);
 

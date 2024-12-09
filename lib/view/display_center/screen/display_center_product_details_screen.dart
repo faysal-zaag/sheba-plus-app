@@ -46,8 +46,10 @@ class _DisplayCenterProductDetailsScreenState
   int quantity = 1;
 
   _initCall() async {
-    displayCenterServiceController.getDisplayServiceProductById(
+    await displayCenterServiceController.getDisplayCenterServiceProductById(
         id: widget.productId);
+    // displayCenterServiceController.getDisplayServiceProductById(
+    //     id: widget.productId);
   }
 
   @override
@@ -91,21 +93,20 @@ class _DisplayCenterProductDetailsScreenState
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //TODO add dynamic category name
                       Text(
                         'Men',
                         style: Theme.of(context).textTheme.labelMedium,
                       ),
                       5.kH,
-                      Text(
+                      Obx(() => Text(
                         displayCenterServiceController
-                                .currentDisplayServiceProduct.value.name ??
+                            .currentDisplayServiceProduct.value.name ??
                             '',
                         style: Theme.of(context)
                             .textTheme
                             .headlineMedium
                             ?.copyWith(fontWeight: FontWeight.w500),
-                      ),
+                      ),),
                       5.kH,
                       Obx(
                         () => ProductPriceWidget(
@@ -113,105 +114,105 @@ class _DisplayCenterProductDetailsScreenState
                               .currentDisplayServiceProduct.value,
                         ),
                       ),
-                      ProductColorsSelectWidget(
-                        productColorList: productColors,
-                        onSelectColor: (value) {
-                          setState(() {
-                            selectedColor = value;
-                          });
-                        },
-                        selectedColor: selectedColor,
-                      ),
-                      ProductSizeWidget(
-                        productSizeList: sizeList,
-                        onTapSize: (value) {
-                          setState(() {
-                            selectedProductSize = value;
-                          });
-                        },
-                        selectedSize: selectedProductSize,
-                      ),
-                      CustomQuantityIncDecWidget(
-                        height: 54,
-                        width: 122,
-                        largeSize: true,
-                        quantity: quantity,
-                        onIncrementPress: () {
-                          setState(() {
-                            quantity++;
-                          });
-                        },
-                        onDecrementPress: () {
-                          if (quantity > 1) {
-                            setState(() {
-                              quantity--;
-                            });
-                          }
-                        },
-                      ),
-                      Obx(
-                        () => SizedBox(
-                          width: MediaQuery.of(context).size.width,
-                          height: 50,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: CustomTab(
-                              activeItem: displayCenterServiceController
-                                  .selectProductDetailsType.value,
-                              tabItems: displayCenterServiceController
-                                  .productDetailsTypeList,
-                              onTap: (value) => displayCenterServiceController
-                                  .selectProductDetailsType(value),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Obx(
-                        () => Container(
-                          padding: const EdgeInsets.all(80),
-                          child: Center(
-                            child: Text(
-                              displayCenterServiceController
-                                  .selectProductDetailsType.value,
-                              style: Theme.of(context).textTheme.bodySmall,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // ProductColorsSelectWidget(
+                      //   productColorList: productColors,
+                      //   onSelectColor: (value) {
+                      //     setState(() {
+                      //       selectedColor = value;
+                      //     });
+                      //   },
+                      //   selectedColor: selectedColor,
+                      // ),
+                      // ProductSizeWidget(
+                      //   productSizeList: sizeList,
+                      //   onTapSize: (value) {
+                      //     setState(() {
+                      //       selectedProductSize = value;
+                      //     });
+                      //   },
+                      //   selectedSize: selectedProductSize,
+                      // ),
+                      // CustomQuantityIncDecWidget(
+                      //   height: 54,
+                      //   width: 122,
+                      //   largeSize: true,
+                      //   quantity: quantity,
+                      //   onIncrementPress: () {
+                      //     setState(() {
+                      //       quantity++;
+                      //     });
+                      //   },
+                      //   onDecrementPress: () {
+                      //     if (quantity > 1) {
+                      //       setState(() {
+                      //         quantity--;
+                      //       });
+                      //     }
+                      //   },
+                      // ),
+                      // Obx(
+                      //   () => SizedBox(
+                      //     width: MediaQuery.of(context).size.width,
+                      //     height: 50,
+                      //     child: SingleChildScrollView(
+                      //       scrollDirection: Axis.horizontal,
+                      //       child: CustomTab(
+                      //         activeItem: displayCenterServiceController
+                      //             .selectProductDetailsType.value,
+                      //         tabItems: displayCenterServiceController
+                      //             .productDetailsTypeList,
+                      //         onTap: (value) => displayCenterServiceController
+                      //             .selectProductDetailsType(value),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Obx(
+                      //   () => Container(
+                      //     padding: const EdgeInsets.all(80),
+                      //     child: Center(
+                      //       child: Text(
+                      //         displayCenterServiceController
+                      //             .selectProductDetailsType.value,
+                      //         style: Theme.of(context).textTheme.bodySmall,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10),
-            child: Column(
-              children: [
-                const Divider(),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CustomPrimaryButton(
-                        label: 'ADD TO CART',
-                        labelColor: AppColors.black,
-                        onClick: () {},
-                        borderColor: AppColors.black,
-                        color: AppColors.white,
-                      ),
-                    ),
-                    10.kW,
-                    Expanded(
-                      child: CustomPrimaryButton(
-                        label: 'BUY NOW',
-                        onClick: () {},
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10),
+          //   child: Column(
+          //     children: [
+          //       const Divider(),
+          //       Row(
+          //         children: [
+          //           Expanded(
+          //             child: CustomPrimaryButton(
+          //               label: 'ADD TO CART',
+          //               labelColor: AppColors.black,
+          //               onClick: () {},
+          //               borderColor: AppColors.black,
+          //               color: AppColors.white,
+          //             ),
+          //           ),
+          //           10.kW,
+          //           Expanded(
+          //             child: CustomPrimaryButton(
+          //               label: 'BUY NOW',
+          //               onClick: () {},
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
