@@ -70,7 +70,9 @@ class ApiInterceptor extends Interceptor {
         case 401:
         case 403:
         case 404:
-          Utils.showErrorToast(message: err.response?.data?["message"]);
+          String messageString = err.response?.data?["message"];
+          Log.error(messageString);
+          Utils.showErrorToast(message: messageString);
           break;
         default:
           Log.warning(
