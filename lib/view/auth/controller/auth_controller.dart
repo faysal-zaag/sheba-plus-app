@@ -330,8 +330,9 @@ class AuthController extends GetxController {
       await _addressController.getAllAddress();
       await createDeviceToken();
       isLoggedIn(true);
+      return true;
     }
-    return true;
+    return false;
   }
 
   Future<bool> googleLogin() async {
@@ -367,8 +368,9 @@ class AuthController extends GetxController {
         await _addressController.getAllAddress();
         await createDeviceToken();
         isLoggedIn(true);
+        return true;
       }
-      return true;
+      return false;
     }
     catch(e){
       Log.error(e.toString());

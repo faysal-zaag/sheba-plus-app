@@ -41,9 +41,9 @@ class CustomPrimaryButton extends StatelessWidget {
       child: MaterialButton(
         onPressed: (loading == true || disabled == true) ? null : onClick, // Check for disabled
         color: disabled == true
-            ? (color?.withOpacity(0.5) ?? AppColors.primary.withOpacity(0.5))
+            ? AppColors.background.withOpacity(0.5)
             : (color ?? AppColors.primary),
-        disabledColor: color?.withOpacity(0.5) ?? AppColors.primary.withOpacity(0.5),
+        disabledColor: AppColors.background,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: AppBorderRadius.circularRadius4,
@@ -67,7 +67,7 @@ class CustomPrimaryButton extends StatelessWidget {
               style: TextStyle(
                 fontSize: fontSize ?? 16,
                 color: disabled == true
-                    ? (labelColor?.withOpacity(0.5) ?? AppColors.white.withOpacity(0.5))
+                    ? AppColors.black.withOpacity(0.2)
                     : (labelColor ?? AppColors.white),
               ),
             ),

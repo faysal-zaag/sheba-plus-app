@@ -6,7 +6,7 @@ class AuthScreenText {
   static String get signIn => "signIn".tr;
   static String get signInNotice => "signInNotice".tr;
   static String get keepMeLoggedIn => "keepMeLoggedIn".tr;
-  static String get forgetPassword => "forgetPassword".tr;
+  static String get forgotPassword => "forgotPassword".tr;
   static String get emailId => "emailId".tr;
   static String get emailIdHintText => "emailIdHintText".tr;
   static String get password => "password".tr;

@@ -90,7 +90,7 @@ class CustomDrawer extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const ProjectBranding(),
+                    ProjectBranding(textStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.white),),
                     16.kH,
                     Text(
                       HomeScreenText.companyAddress,
@@ -99,7 +99,7 @@ class CustomDrawer extends StatelessWidget {
                     16.kH,
                     const DrawerSocialIcons(),
                     24.kH,
-                    DrawerFooterMenuItems(header: "company".tr, menuItems: [DrawerFooterMenu(title: "aboutUs".tr, route: "/"), DrawerFooterMenu(title: "ourBlog".tr, route: "/")]),
+                    DrawerFooterMenuItems(header: "company".tr, menuItems: [DrawerFooterMenu(title: "aboutUs".tr, route: "/")]),
                     20.kH,
                     DrawerFooterMenuItems(header: "contact".tr, menuItems: [
                       DrawerFooterMenu(title: "chatWithUs".tr, route: "/"),

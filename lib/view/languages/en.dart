@@ -42,12 +42,12 @@ final Map<String, String> en = {
   "bangladesh": "BANGLADESH",
   //footer
   "footerYear": "2008-2024, ",
-  "footerCompany": "SEBA.com",
-  "footerAffiliates": " Inc or its affiliates.",
+  "footerCompany": "SHEBA.com",
+  "footerAffiliates": " or its affiliates.",
   "footerRights": "© All rights reserved. ",
-  "footerTrademark": "SEBA.com",
+  "footerTrademark": "SHEBA.com",
   "footerTrademarkOf": " is a trademark of ",
-  "footerTrademarkCompany": "SEBA.com Inc",
+  "footerTrademarkCompany": "SHEBA.com.Inc",
 
   //Home screen text
   'header1': "Our Services",
@@ -82,7 +82,7 @@ final Map<String, String> en = {
   'friendsFamilyDetails2':
   "Please list all the items that we are going to receive from your friends & family in our hub center at Bangladesh. Also add how much do we need to pay to the 3rd party.",
   'newlyAddedProducts': "Newly Added Products",
-  'companyAddress': "3085-3005 Kingston Road Toronto, Ontario M1M 1P1, Canada. 1-800-SEBA",
+  'companyAddress': "3085-3005 Kingston Road Toronto, Ontario M1M 1P1, Canada. 1-800-SHEBA",
   'selectService': "Select Service",
   'fullTermsAndConditions':
   "Please read the terms and condition before you agree.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping.Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.",
@@ -93,7 +93,7 @@ final Map<String, String> en = {
   'signIn': "Sign In",
   'signInNotice': "Please fill up the form to sign in!",
   'keepMeLoggedIn': "Keep me logged in",
-  'forgetPassword': "Forget password?",
+  'forgotPassword': "Forgot password?",
   'emailId': "Email id",
   'emailIdHintText': "example@gmail.com",
   'password': "Password",

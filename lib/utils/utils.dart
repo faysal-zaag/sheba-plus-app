@@ -13,7 +13,7 @@ class Utils{
         showProgressBar: false,
         style: ToastificationStyle.fillColored,
         type: success ? ToastificationType.success : ToastificationType.error,
-        autoCloseDuration: const Duration(seconds: 5),
+        autoCloseDuration: const Duration(seconds: 3),
         primaryColor: success ? AppColors.primary : AppColors.error
     );
   }

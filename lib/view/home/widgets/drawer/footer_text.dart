@@ -73,7 +73,7 @@ class FooterText extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .displaySmall
-                      ?.copyWith(color: AppColors.neutral70),
+                      ?.copyWith(color: AppColors.white),
                 ),
               ],
             ),

@@ -20,12 +20,10 @@ class AgentShoppingOrderInfoForm extends StatefulWidget {
   const AgentShoppingOrderInfoForm({super.key});
 
   @override
-  State<AgentShoppingOrderInfoForm> createState() =>
-      _AgentShoppingOrderInfoFormState();
+  State<AgentShoppingOrderInfoForm> createState() => _AgentShoppingOrderInfoFormState();
 }
 
-class _AgentShoppingOrderInfoFormState
-    extends State<AgentShoppingOrderInfoForm> {
+class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm> {
   final _formKey = GlobalKey<FormState>();
   final agentShoppingController = Get.find<AgentShoppingController>();
   final globalController = Get.find<GlobalController>();
@@ -40,8 +38,7 @@ class _AgentShoppingOrderInfoFormState
           child: Column(
             children: [
               TextFieldWithLabel(
-                controller: agentShoppingController
-                    .agentShoppingMeetingLocationController.value,
+                controller: agentShoppingController.agentShoppingMeetingLocationController.value,
                 label: AgentShoppingTexts.meetingLocation,
                 hintText: AgentShoppingTexts.meetingLocationHintText,
                 validator: (value) => InputValidators.generalValidator(
@@ -51,8 +48,7 @@ class _AgentShoppingOrderInfoFormState
               ),
               TextFieldWithLabel(
                 readOnly: true,
-                controller: agentShoppingController
-                    .agentShoppingEasternTimeController.value,
+                controller: agentShoppingController.agentShoppingEasternTimeController.value,
                 label: AgentShoppingTexts.easternTime,
                 hintText: AgentShoppingTexts.easternTimeHintText,
                 suffixIcon: Icon(
@@ -69,83 +65,68 @@ class _AgentShoppingOrderInfoFormState
               ),
               CustomTextField(
                 readOnly: true,
-                controller:
-                    agentShoppingController.agentShoppingBDTimeController.value,
+                controller: agentShoppingController.agentShoppingBDTimeController.value,
                 hintText: AgentShoppingTexts.bdTimeHintText,
                 suffixIcon: Icon(
                   PhosphorIcons.calendarDots(),
                   color: AppColors.primary,
                 ),
-                validator: (value) => InputValidators.generalValidator(
-                    value: value, message: GlobalTexts.thisFieldIsRequired),
+                validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
                 onTap: () {
                   globalController.showDateTimePicker(context: context, onPicked: setTime);
                 },
               ),
               12.kH,
               TextFieldWithLabel(
-                controller: agentShoppingController
-                    .agentShoppingSpendAmountController.value,
+                controller: agentShoppingController.agentShoppingSpendAmountController.value,
                 label: AgentShoppingTexts.spendAmount,
                 hintText: AgentShoppingTexts.spendAmountHintText,
-                validator: (value) => InputValidators.generalValidator(
-                    value: value, message: GlobalTexts.thisFieldIsRequired),
+                validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
               ),
               Obx(
                 () => Text(
-                  AgentShoppingTexts.prePaymentWarningMessage(
-                      maxValue:
-                          globalController.appSetting.value.maxBudget ?? 0),
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleSmall
-                      ?.copyWith(color: AppColors.error),
+                  AgentShoppingTexts.prePaymentWarningMessage(maxValue: globalController.appSetting.value.maxBudget ?? 0),
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
                 ),
               ),
               12.kH,
-              Obx(() => Text(AgentShoppingTexts.serviceDuration(
-                  hourlyRates:
-                      globalController.appSetting.value.hourlyRates ?? 0))),
+              Obx(() => Text(AgentShoppingTexts.serviceDuration(hourlyRates: globalController.appSetting.value.hourlyRates ?? 0))),
               12.kH,
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                      child: CustomTextField(
-                    controller: agentShoppingController
-                        .agentShoppingServiceDurationController.value,
-                    hintText: AgentShoppingTexts.serviceDurationHintText,
-                    textInputType: TextInputType.number,
-                    inputFormatters: [InputFormatters.numberOnly],
-                    onChange: (value) {
-                      if (value != null) {
-                        setTotalCost(value: value.isEmpty ? "0" : null);
-                      }
-                      return null;
-                    },
-                    validator: (value) => InputValidators.generalValidator(
-                        value: value, message: GlobalTexts.thisFieldIsRequired),
-                  )),
-                  12.kW,
-                  Expanded(
-                    child: CustomTextField(
-                      readOnly: true,
-                      controller: agentShoppingController
-                          .agentShoppingServiceTotalCostController.value,
-                      hintText: AgentShoppingTexts.serviceDurationCostHintText,
-                      suffixIcon: const SizedBox(
-                        width: 100,
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 16.0),
-                            child: Text("(CAD)"),
-                          ),
-                        ),
-                      ),
+              CustomTextField(
+                controller: agentShoppingController.agentShoppingServiceDurationController.value,
+                hintText: AgentShoppingTexts.serviceDurationHintText,
+                textInputType: TextInputType.number,
+                inputFormatters: [InputFormatters.numberOnly],
+                onChange: (value) {
+                  if (value != null) {
+                    setTotalCost(value: value.isEmpty ? "0" : null);
+                  }
+                  return null;
+                },
+                validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
+              ),
+              12.kH,
+              CustomTextField(
+                controller: agentShoppingController.agentShoppingServiceTotalCostController.value,
+                hintText: AgentShoppingTexts.serviceDurationCostHintText,
+                suffixIcon: const SizedBox(
+                  width: 100,
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 16.0),
+                      child: Text("(CAD)"),
                     ),
                   ),
-                ],
+                ),
+                textInputType: TextInputType.number,
+                inputFormatters: [InputFormatters.numberOnly],
+                onChange: (value) {
+                  if (value != null) {
+                    setServiceDuration(value: value.isEmpty ? "0" : null);
+                  }
+                  return null;
+                },
               ),
               24.kH,
               CustomPrimaryButton(
@@ -161,31 +142,33 @@ class _AgentShoppingOrderInfoFormState
 
   void setTotalCost({String? value}) {
     agentShoppingController.agentShoppingServiceTotalCostController.value.text =
-        (
-      num.parse(value ??
-              agentShoppingController
-                  .agentShoppingServiceDurationController.value.text) *
-          (globalController.appSetting.value.hourlyRates ?? 0),
-    ).toString();
+        "${num.parse(value ?? agentShoppingController.agentShoppingServiceDurationController.value.text) * (globalController.appSetting.value.hourlyRates ?? 0)}";
   }
 
-  void setTime(DateTime selectedDateTime, bool canadianTime){
+  void setServiceDuration({String? value}) {
+    final hourlyRate = globalController.appSetting.value.hourlyRates ?? 0;
+
+    if (hourlyRate > 0) {
+      // Ensure hourlyRate is not zero to avoid division by zero
+      agentShoppingController.agentShoppingServiceDurationController.value.text = "${num.parse(value ?? agentShoppingController.agentShoppingServiceTotalCostController.value.text) / hourlyRate}";
+    } else {
+      agentShoppingController.agentShoppingServiceDurationController.value.text = '0'; // Set to 0 if hourlyRate is not available
+    }
+  }
+
+  void setTime(DateTime selectedDateTime, bool canadianTime) {
     if (canadianTime) {
-      agentShoppingController.agentShoppingEasternTimeController.value
-          .text = getFormattedDateTime(
+      agentShoppingController.agentShoppingEasternTimeController.value.text = getFormattedDateTime(
         selectedDateTime: selectedDateTime,
       );
-      agentShoppingController.agentShoppingBDTimeController.value.text =
-          getFormattedDateTimeInBD(
-            selectedDateTime: selectedDateTime,
-          );
+      agentShoppingController.agentShoppingBDTimeController.value.text = getFormattedDateTimeInBD(
+        selectedDateTime: selectedDateTime,
+      );
     } else {
-      agentShoppingController.agentShoppingBDTimeController.value.text =
-          getFormattedDateTime(
-            selectedDateTime: selectedDateTime,
-          );
-      agentShoppingController.agentShoppingEasternTimeController.value
-          .text = getFormattedDateTimeInCanada(
+      agentShoppingController.agentShoppingBDTimeController.value.text = getFormattedDateTime(
+        selectedDateTime: selectedDateTime,
+      );
+      agentShoppingController.agentShoppingEasternTimeController.value.text = getFormattedDateTimeInCanada(
         selectedDateTime: selectedDateTime,
       );
     }
@@ -198,8 +181,7 @@ class _AgentShoppingOrderInfoFormState
 
   String getFormattedDateTimeInCanada({required DateTime? selectedDateTime}) {
     if (selectedDateTime == null) return "No Date Selected";
-    return DateFormat('yyyy-MM-dd hh:mm:ss a')
-        .format(selectedDateTime.toUtc().add(const Duration(hours: -5)));
+    return DateFormat('yyyy-MM-dd hh:mm:ss a').format(selectedDateTime.toUtc().add(const Duration(hours: -5)));
   }
 
   String getFormattedDateTimeInBD({required DateTime? selectedDateTime}) {
