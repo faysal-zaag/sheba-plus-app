@@ -27,8 +27,8 @@ class HomeServices extends StatelessWidget {
       // Scroll to the card position
       scrollController.animateTo(
         scrollController.offset + offset - kToolbarHeight,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
+        duration: const Duration(milliseconds: 600), // Increase duration for smoother scroll
+        curve: Curves.easeInOutCubic, // Use a smoother curve
       );
     }
   }
@@ -55,7 +55,7 @@ class HomeServices extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.subtext),
             )
           ],
-          onTapService: () {
+          setOnFocus: () {
             scrollToCard(0);
           },
         ),
@@ -75,7 +75,7 @@ class HomeServices extends StatelessWidget {
               style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.subtext),
             )
           ],
-          onTapService: () {
+          setOnFocus: () {
             scrollToCard(1);
           },
         ),
@@ -118,7 +118,7 @@ class HomeServices extends StatelessWidget {
                   : const SizedBox(),
             )
           ],
-          onTapService: () {
+          setOnFocus: () {
             scrollToCard(2);
           },
         ),
@@ -151,7 +151,7 @@ class HomeServices extends StatelessWidget {
                   : const SizedBox(),
             )
           ],
-          onTapService: () {
+          setOnFocus: () {
             scrollToCard(3);
           },
         ),

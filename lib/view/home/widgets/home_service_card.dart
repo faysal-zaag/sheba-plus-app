@@ -12,13 +12,13 @@ import 'package:sheba_plus/view/home/home_screen_texts.dart';
 class HomeServiceCard extends StatelessWidget {
   final List<Widget> contents;
   final int index;
-  final Function onTapService;
+  final Function setOnFocus;
 
   HomeServiceCard({
     super.key,
     required this.contents,
     required this.index,
-    required this.onTapService,
+    required this.setOnFocus,
   });
 
   final homeController = Get.find<HomeController>();
@@ -28,8 +28,8 @@ class HomeServiceCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onTapService();
         if (homeController.selectedService.value == 0 || homeController.selectedService.value == index) {
+          if(homeController.selectedService.value != index) setOnFocus();
           homeController.onSelectService(index);
         }
       },
