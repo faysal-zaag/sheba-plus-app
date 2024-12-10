@@ -46,3 +46,4 @@ jobs:
         with:
           name: sheba-plus-${{ env.VERSION_NAME }}-${{ env.VERSION_CODE }}.apk
           path: build/app/outputs/flutter-apk/sheba-plus-${{ env.VERSION_NAME }}-${{ env.VERSION_CODE }}.apk
+          if-no-files-found: error
