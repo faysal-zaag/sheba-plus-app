@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:device_preview/device_preview.dart'; // Add device_preview package
 import 'package:sheba_plus/bindings.dart';
+import 'package:sheba_plus/controllers/firebase_controller.dart';
 import 'package:sheba_plus/firebase_options.dart';
 import 'package:sheba_plus/utils/constant/app_language.dart';
 import 'package:sheba_plus/utils/constant/app_theme.dart';
@@ -19,6 +20,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseController().initNotifications();
   runApp(
     kIsWeb
         ? DevicePreview(

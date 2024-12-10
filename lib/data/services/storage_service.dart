@@ -13,12 +13,17 @@ class StorageService {
 
   // Keys for storing data
   static const String _authTokenKey = 'authToken';
+  static const String _fcmTokenKey = 'fcmToken';
   static const String _themeModeKey = 'themeMode';
   static const String _languageKey = 'language';
 
   /// Save Authentication Token
   void saveAuthToken(String token) {
     _storage.write(_authTokenKey, token);
+  }
+
+  void saveFCMToken(String token) {
+    _storage.write(_fcmTokenKey, token);
   }
 
   /// Get Authentication Token

@@ -1,0 +1,48 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main # Trigger on push to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Set up Flutter environment
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.0'
+
+      # Run Flutter Pub Get
+      - name: Install Dependencies
+        run: flutter pub get
+
+      # Get version name and code from pubspec.yaml
+      - name: Extract Version
+        id: extract_version
+        run: |
+          version=$(grep '^version: ' pubspec.yaml | cut -d ' ' -f 2)
+          echo "VERSION_NAME=${version%%+*}" >> $GITHUB_ENV
+          echo "VERSION_CODE=${version##*+}" >> $GITHUB_ENV
+
+      # Build the APK
+      - name: Build APK
+        run: flutter build apk --release
+
+      # Rename the APK with version information
+      - name: Rename APK
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/sheba-plus-${VERSION_NAME}-${VERSION_CODE}.apk
+
+      # Upload the APK as a build artifact
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: sheba-plus-${{ env.VERSION_NAME }}-${{ env.VERSION_CODE }}.apk
+          path: build/app/outputs/flutter-apk/sheba-plus-${{ env.VERSION_NAME }}-${{ env.VERSION_CODE }}.apk
