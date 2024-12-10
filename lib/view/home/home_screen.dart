@@ -10,6 +10,7 @@ import 'package:sheba_plus/utils/constant/app_images.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/device/device_utility.dart';
+import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/components/confirmation_model.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
@@ -21,13 +22,44 @@ import 'package:sheba_plus/view/home/widgets/home_screen_loading.dart';
 import 'package:sheba_plus/view/home/widgets/home_services.dart';
 import 'package:sheba_plus/view/home/widgets/newly_added_products.dart';
 
-class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
   final homeController = Get.find<HomeController>();
   final authController = Get.find<AuthController>();
   final globalController = Get.find<GlobalController>();
   final scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.detached) {
+      // Perform operation when app is terminated
+      performOperationOnTerminate();
+    }
+  }
+
+  void performOperationOnTerminate() {
+    Log.info("App terminated");
+    if(authController.keepLoggedIn.isFalse){
+      StorageService().removeAuthToken();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

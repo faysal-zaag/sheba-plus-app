@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/formatters/input_formatters.dart';
 import 'package:sheba_plus/view/components/custom_text_field.dart';
 
 class TextFieldWithLabel extends StatelessWidget {
@@ -14,6 +16,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final TextStyle? labelStyle;
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
+  final List<TextInputFormatter>? inputFormatters;
   final bool readOnly;
   final VoidCallback? onTap;
   final String? Function(String?)? onChange;
@@ -32,7 +35,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.textInputType,
     this.readOnly = false,
     this.onTap,
-    this.onChange,
+    this.onChange, this.inputFormatters,
   });
 
   @override
@@ -52,6 +55,7 @@ class TextFieldWithLabel extends StatelessWidget {
           validator: validator,
           readOnly: readOnly,
           onTap: onTap,
+          inputFormatters: inputFormatters,
           onChange: onChange,
         ),
         20.kH, // Custom SizedBox extension

@@ -1,5 +1,6 @@
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/models/country.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/home/home_screen_texts.dart';
 
 class AppConstants {
@@ -17,6 +18,14 @@ class AppConstants {
     "trackMyOrder",
     "helpAndSupport",
     "language",
+  ];
+
+  static List<String> drawerMenuRoutes = [
+    Routes.home,
+    Routes.home,
+    Routes.home,
+    Routes.home,
+    Routes.home,
   ];
 
   static const List<String> languages = ["English", "বাংলা"];

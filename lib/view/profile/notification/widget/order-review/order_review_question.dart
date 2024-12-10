@@ -13,7 +13,7 @@ class OrderReviewQuestion extends StatelessWidget {
       children: [
         Text(question, style: Theme.of(context).textTheme.titleSmall,),
         12.kH,
-        TwoOptionsRadioRow(selectedValue: true, onChanged: (){}),
+        TwoOptionsRadioRow(selectedValue: true, onChanged: (index){}),
         24.kH,
       ],
     );

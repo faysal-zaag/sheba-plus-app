@@ -11,7 +11,7 @@ final Map<String, String> bn = {
   "next": "পরবর্তী",
   "yes": "হ্যাঁ",
   "no": "না",
-  "pending": "মুলতুবি",
+  "pending": "পেন্ডিং",
   "saveAndContinue": "সংরক্ষণ করুন এবং চালিয়ে যান",
   "termsAndCondition": "শর্তাবলী",
   "iAcceptTermsAndCondition": "আমি শর্তাবলী মেনে নিচ্ছি।",

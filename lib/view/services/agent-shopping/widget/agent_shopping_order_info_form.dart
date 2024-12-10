@@ -78,6 +78,8 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
               ),
               12.kH,
               TextFieldWithLabel(
+                textInputType: TextInputType.number,
+                inputFormatters: [InputFormatters.numberOnly],
                 controller: agentShoppingController.agentShoppingSpendAmountController.value,
                 label: AgentShoppingTexts.spendAmount,
                 hintText: AgentShoppingTexts.spendAmountHintText,

@@ -25,10 +25,19 @@ class ThirdPartyServiceController extends GetxController {
     Shop(id: 1, name: '', address: '', phoneNumber: ''),
   ].obs;
 
-  void togglePaidOrNot() {
-    alreadyPaid(!alreadyPaid.value);
+  void togglePaidOrNot(int index) {
+    if (index == 0 && alreadyPaid.isFalse) {
+      alreadyPaid(true);
+    } else if (index == 1 && alreadyPaid.isTrue) {
+      alreadyPaid(false);
+    }
   }
-  void needPickUpServiceYesOrNot() {
-    needPickUpService(!needPickUpService.value);
+
+  void needPickUpServiceYesOrNot(int index) {
+    if (index == 0 && needPickUpService.isFalse) {
+      needPickUpService(true);
+    } else if (index == 1 && needPickUpService.isTrue) {
+      needPickUpService(false);
+    }
   }
 }

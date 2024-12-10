@@ -52,31 +52,36 @@ class CustomDrawer extends StatelessWidget {
                   children: [
                     ...AppConstants.drawerMenuItems.mapIndexed((index, menuItem) => Column(
                           children: [
-                            DrawerMenuItem(
-                              title: AppConstants.drawerMenuItems[index].tr,
-                              suffix: index == 4
-                                  ? Obx(
-                                      () => CustomDropdown(
-                                        items: AppConstants.languages,
-                                        height: 24,
-                                        icon: Icons.arrow_drop_down,
-                                        onChanged: (value) {
-                                          if (value == "English") {
-                                            Get.updateLocale(const Locale('en', 'US'));
-                                            storageService.saveLanguage("en");
-                                            profileController.selectedProfileMenu(AppConstants.profileMenuListBangla[profileController.selectedProfileMenu.value]?.tr);
-                                          } else {
-                                            Get.updateLocale(const Locale('bn', 'BD'));
-                                            storageService.saveLanguage("bn");
-                                            profileController.selectedProfileMenu(profileController.selectedProfileMenu.value.camelCase?.tr);
-                                          }
-                                          homeController.selectedLanguage(value);
-                                        },
-                                        selectedValue: homeController.selectedLanguage.value,
-                                        labelStyle: Theme.of(context).textTheme.bodyMedium,
-                                      ),
-                                    )
-                                  : const SizedBox(),
+                            GestureDetector(
+                              onTap: (){
+                                Get.offAndToNamed(AppConstants.drawerMenuRoutes[index]);
+                              },
+                              child: DrawerMenuItem(
+                                title: AppConstants.drawerMenuItems[index].tr,
+                                suffix: index == 4
+                                    ? Obx(
+                                        () => CustomDropdown(
+                                          items: AppConstants.languages,
+                                          height: 24,
+                                          icon: Icons.arrow_drop_down,
+                                          onChanged: (value) {
+                                            if (value == "English") {
+                                              Get.updateLocale(const Locale('en', 'US'));
+                                              storageService.saveLanguage("en");
+                                              profileController.selectedProfileMenu(AppConstants.profileMenuListBangla[profileController.selectedProfileMenu.value]?.tr);
+                                            } else {
+                                              Get.updateLocale(const Locale('bn', 'BD'));
+                                              storageService.saveLanguage("bn");
+                                              profileController.selectedProfileMenu(profileController.selectedProfileMenu.value.camelCase?.tr);
+                                            }
+                                            homeController.selectedLanguage(value);
+                                          },
+                                          selectedValue: homeController.selectedLanguage.value,
+                                          labelStyle: Theme.of(context).textTheme.bodyMedium,
+                                        ),
+                                      )
+                                    : const SizedBox(),
+                              ),
                             ),
                             if(index != 4)const Divider()
                           ],

@@ -104,7 +104,7 @@ final Map<String, String> en = {
   // Sign up Texts
   'registerAccount': "Register Account",
   'registerNotice': "Please fill up the form to register your account!",
-  'signUp': "Sign up",
+  'signUp': "Sign Up",
   'firstName': "First name",
   'firstNameHintText': "John",
   'lastName': "Last name",

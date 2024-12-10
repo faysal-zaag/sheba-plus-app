@@ -115,6 +115,7 @@ class AuthController extends GetxController {
   Future<bool> isAuthenticated({String? accessToken}) async {
     try {
       if (accessToken != null) {
+        keepLoggedIn(true);
         _storageService.saveAuthToken(accessToken);
         final profileResponse =
             await _authRepository.getProfile(accessToken: accessToken);
