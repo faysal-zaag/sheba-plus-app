@@ -24,7 +24,7 @@ class DisplayCenterServiceController extends GetxController {
 
   final carouselCurrentIndex = 0.obs;
   final selectProductDetailsType = 'DESCRIPTION'.obs;
-  final totalDisplayServiceProduct = 630.obs;
+  final totalDisplayServiceProduct = 0.obs;
   final displayServiceProductList = <DisplayServiceProduct>[].obs;
 
   var currentDisplayServiceProduct = DisplayServiceProduct(
@@ -94,8 +94,9 @@ class DisplayCenterServiceController extends GetxController {
           .map((e) => DisplayServiceProduct.fromJson(e))
           .toList();
       displayServiceProductList(list);
+      totalDisplayServiceProduct(response.data['totalElements']);
       debugPrint(
-          "all display products: ${displayServiceProductList.map((p) => p.toJson())}",
+          "all display products: ${response.data}",
           wrapWidth: 1024);
     } catch (err) {
       Log.error(err.toString());

@@ -38,4 +38,8 @@ class ApiUrls {
 
   //Display Service
   static const String getAllDisplayServiceProductsApiUrl = "$baseApiUrl/products";
+
+  // Category
+  static const String getAllCategoryApiUrl = "$baseApiUrl/categories";
+  static const String getAllSubCategoryApiUrl = "$baseApiUrl/sub-categories";
 }

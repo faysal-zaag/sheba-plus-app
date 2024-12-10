@@ -34,7 +34,6 @@ class _DisplayCenterProductListScreenState
   @override
   void initState() {
     // TODO: implement initState
-    // navigationController.selectedIndex(1);
     _initCall();
     super.initState();
   }

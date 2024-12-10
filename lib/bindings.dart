@@ -8,6 +8,7 @@ import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/services/file_service.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/cart/controller/cart_controller.dart';
+import 'package:sheba_plus/view/category/controller/category_controller.dart';
 import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 import 'package:sheba_plus/view/home/controller/home_controller.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
@@ -19,6 +20,7 @@ import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shoppin
 import 'package:sheba_plus/view/third_party/controller/third_party_service_controller.dart';
 import 'package:sheba_plus/view_model/repositories/address.repository.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
+import 'package:sheba_plus/view_model/repositories/category_repository.dart';
 import 'package:sheba_plus/view_model/repositories/display_center_repository.dart';
 import 'package:sheba_plus/view_model/repositories/global.repository.dart';
 import 'package:sheba_plus/view_model/repositories/home.repository.dart';
@@ -37,6 +39,7 @@ class MyBindings implements Bindings {
     Get.lazyPut<ProfileRepository>(() => ProfileRepository(Get.find<Dio>()));
     Get.lazyPut<AddressRepository>(() => AddressRepository(Get.find<Dio>()));
     Get.lazyPut<DisplayCenterServiceRepository>(() => DisplayCenterServiceRepository(Get.find<Dio>()));
+    Get.lazyPut<CategoryRepository>(() => CategoryRepository(Get.find<Dio>()));
 
     Get.put(GlobalController(Get.find<GlobalRepository>()));
     Get.put(HomeController(Get.find<HomeRepository>(), Get.find<StorageService>()));
@@ -49,6 +52,7 @@ class MyBindings implements Bindings {
     Get.put(NotificationController());
     Get.put(AddressController(Get.find<AddressRepository>()));
     Get.put(DisplayCenterServiceController(Get.find<DisplayCenterServiceRepository>()));
+    Get.put(CategoryController(Get.find<CategoryRepository>()));
     Get.put(AgentShoppingController());
     Get.put(CartController());
     Get.put(ThirdPartyServiceController());
