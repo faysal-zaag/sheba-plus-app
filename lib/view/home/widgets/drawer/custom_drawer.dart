@@ -78,7 +78,7 @@ class CustomDrawer extends StatelessWidget {
                                     )
                                   : const SizedBox(),
                             ),
-                            const Divider()
+                            if(index != 4)const Divider()
                           ],
                         ))
                   ],

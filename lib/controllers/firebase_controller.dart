@@ -42,9 +42,9 @@ class FirebaseController {
 
     FirebaseMessaging.onMessage.listen((message) async {
       final notification = message.notification;
-      if (notification == null) return;
+      Log.info("Notification response = ${message.data}");
 
-      // print('onMessage data========>>${message.data}');
+      if (notification == null) return;
 
       _localNotifications.show(
           notification.hashCode,
@@ -71,6 +71,7 @@ class FirebaseController {
 
     await _localNotifications.initialize(initializationSettings, onDidReceiveNotificationResponse: (notificationResponse) {
       final String? payload = notificationResponse.payload;
+      Log.info("Notification response = ${notificationResponse.payload}");
       if (payload != null) {
         final message = RemoteMessage.fromMap(jsonDecode(payload));
 

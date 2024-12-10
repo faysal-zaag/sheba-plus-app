@@ -51,8 +51,10 @@ class TermsAndConditionSheet extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Text(
                   HomeScreenText.fullTermsAndConditions,
+                  textAlign: TextAlign.justify,
                   style: Theme.of(context).textTheme.displaySmall?.copyWith(
                         color: AppColors.subtext,
+                        fontSize: 13,
                       ),
                 ),
               ),
@@ -69,9 +71,12 @@ class TermsAndConditionSheet extends StatelessWidget {
                       color: globalController.termsAccepted.isTrue ? AppColors.primary : AppColors.black,
                     )),
               ),
-              Text(
-                GlobalTexts.iAcceptTermsAndCondition,
-                style: Theme.of(context).textTheme.displayMedium,
+              GestureDetector(
+                onTap: () => globalController.termsAccepted(!globalController.termsAccepted.value),
+                child: Text(
+                  GlobalTexts.iAcceptTermsAndCondition,
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
               )
             ],
           ),

@@ -39,7 +39,7 @@ class HomeServiceCard extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: homeController.selectedService.value == index ? AppColors.primaryLight.withOpacity(0.5) : AppColors.white,
-                border: const Border(
+                border: index == 4 ? null : const Border(
                   bottom: BorderSide(
                     color: AppColors.divider,
                   ),

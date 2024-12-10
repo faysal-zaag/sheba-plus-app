@@ -35,6 +35,7 @@ class HomeScreen extends StatelessWidget {
       canPop: false,
       onPopInvokedWithResult: _showExitDialog,
       child: PrimaryScaffold(
+        backgroundColor: AppColors.white,
         userIcon: true,
         body: SingleChildScrollView(
           controller: scrollController, // Add the scroll controller
