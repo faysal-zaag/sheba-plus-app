@@ -87,6 +87,7 @@ class TermsAndConditionSheet extends StatelessWidget {
                     labelColor: AppColors.black,
                     label: GlobalTexts.cancel,
                     onClick: () {
+                      globalController.termsAccepted(false);
                       Get.back();
                     },
                   ),

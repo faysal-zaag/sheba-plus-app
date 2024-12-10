@@ -14,36 +14,32 @@ class ConfirmationDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      actionsPadding: const EdgeInsets.all(20.0),
+      actionsPadding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0, bottom: 10.0),
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5)),
       title: Text(title),
       content: Text(
         confirmationMessage,
       ),
-      actions: <Widget>[
-        GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                cancelText,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-            )),
-        GestureDetector(
-          onTap: onOkPressed,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              okText,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Get.back();
+          },
+          child: Text(
+            cancelText,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
+        TextButton(
+          onPressed: onOkPressed,
+          child: Text(
+            okText,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
       ],
+
     );
   }
 }

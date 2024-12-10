@@ -31,6 +31,10 @@ class StorageService {
     return _storage.read<String>(_authTokenKey);
   }
 
+  String? getFCMToken() {
+    return _storage.read<String>(_fcmTokenKey);
+  }
+
   /// Remove Authentication Token
   void removeAuthToken() {
     _storage.remove(_authTokenKey);

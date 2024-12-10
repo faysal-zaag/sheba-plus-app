@@ -36,4 +36,9 @@ class ApiUrls {
   // customer
   static const String applyReferral = "$securedApiUrl/customers/apply-referral";
   static const String changePassword = "$securedApiUrl/customers/reset-password";
+
+  // public controller
+  static const String createDeviceToken = "$baseApiUrl/firebase/device/token/create";
+  static const String removeDeviceToken = "$baseApiUrl/firebase/device/token/remove";
+
 }

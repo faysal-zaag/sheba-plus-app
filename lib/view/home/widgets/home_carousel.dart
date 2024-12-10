@@ -16,6 +16,20 @@ class HomeCarousel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<String> carouselHeaderTexts = [
+      HomeScreenText.agentShopping,
+      HomeScreenText.displayCenter,
+      HomeScreenText.thirdParty,
+      HomeScreenText.friendsFamily,
+    ];
+
+    List<String> carouselHeaderDetails = [
+      HomeScreenText.agentShoppingDetails1,
+      HomeScreenText.displayCenterDetails1,
+      HomeScreenText.thirdPartyDetails1,
+      HomeScreenText.friendsFamilyDetails1,
+    ];
+
     return Stack(
       children: [
         SizedBox(
@@ -60,10 +74,10 @@ class HomeCarousel extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(AppConstants.carouselHeaderTexts[index].tr, style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.white)),
+                            Text(carouselHeaderTexts[index].tr, style: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.white)),
                             12.kH,
                             Text(
-                              AppConstants.carouselHeaderDetails[index].tr,
+                              carouselHeaderDetails[index].tr,
                               textAlign: TextAlign.center,
                               style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.white),
                             ),

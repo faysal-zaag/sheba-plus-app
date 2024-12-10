@@ -155,6 +155,8 @@ class AuthController extends GetxController {
       if (keepLoggedIn.isTrue) {
         _storageService.saveAuthToken(response.data["token"]["access"]);
       }
+      await createDeviceToken();
+
       return true;
     } catch (e) {
       Log.error(e.toString());
@@ -262,6 +264,16 @@ class AuthController extends GetxController {
     }
   }
 
+  Future<bool> createDeviceToken() async {
+    try {
+      await _authRepository.createDeviceToken(userId: _profileController.user.value.id, fcmToken: _storageService.getFCMToken() ?? "");
+      return true;
+    } catch (e) {
+      Log.error(e.toString());
+      return false;
+    }
+  }
+
   Future<bool> verifyResetPasswordEmail({String? email}) async {
     try {
       otpVerificationProcessLoading(true);
@@ -315,7 +327,8 @@ class AuthController extends GetxController {
       _storageService.saveAuthToken(response.data["token"]["access"]);
 
       _profileController.user(userModel.User.fromJson(response.data["user"]));
-      _addressController.getAllAddress();
+      await _addressController.getAllAddress();
+      await createDeviceToken();
       isLoggedIn(true);
     }
     return true;
@@ -351,7 +364,8 @@ class AuthController extends GetxController {
         _storageService.saveAuthToken(response.data["token"]["access"]);
 
         _profileController.user(userModel.User.fromJson(response.data["user"]));
-        _addressController.getAllAddress();
+        await _addressController.getAllAddress();
+        await createDeviceToken();
         isLoggedIn(true);
       }
       return true;
@@ -371,6 +385,7 @@ class AuthController extends GetxController {
     await FirebaseAuth.instance.signOut();
     await FacebookAuth.instance.logOut();
     await GoogleSignIn().signOut();
+    _authRepository.removeDeviceToken(fcmToken: _storageService.getFCMToken() ?? "");
     _profileController.user(const userModel.User());
     _storageService.removeAuthToken();
   }

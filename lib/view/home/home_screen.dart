@@ -31,62 +31,66 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PrimaryScaffold(
-      userIcon: true,
-      body: SingleChildScrollView(
-        controller: scrollController, // Add the scroll controller
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // carousel
-            HomeCarousel(homeController: homeController),
-            // home service header information
-            Container(
-              color: AppColors.white,
-              padding: AppPaddings.screenPadding,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    HomeScreenText.header1,
-                    style: Theme.of(context).textTheme.headlineSmall,
-                  ),
-                  16.kH,
-                  RichText(
-                    text: TextSpan(
-                      style: Theme.of(context).textTheme.bodySmall,
-                      children: [
-                        TextSpan(
-                          text: HomeScreenText.headerDescription,
-                        ),
-                        TextSpan(
-                          text: " ${HomeScreenText.headerMoto}",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: AppColors.primary),
-                        ),
-                      ],
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: _showExitDialog,
+      child: PrimaryScaffold(
+        userIcon: true,
+        body: SingleChildScrollView(
+          controller: scrollController, // Add the scroll controller
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // carousel
+              HomeCarousel(homeController: homeController),
+              // home service header information
+              Container(
+                color: AppColors.white,
+                padding: AppPaddings.screenPadding,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      HomeScreenText.header1,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                  ),
-                  16.kH,
-                  Text(
-                    "${HomeScreenText.serviceSelection} :",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(color: AppColors.subtext),
-                  ),
-                ],
+                    16.kH,
+                    RichText(
+                      text: TextSpan(
+                        style: Theme.of(context).textTheme.bodySmall,
+                        children: [
+                          TextSpan(
+                            text: HomeScreenText.headerDescription,
+                          ),
+                          TextSpan(
+                            text: " ${HomeScreenText.headerMoto}",
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(color: AppColors.primary),
+                          ),
+                        ],
+                      ),
+                    ),
+                    16.kH,
+                    Text(
+                      "${HomeScreenText.serviceSelection} :",
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: AppColors.subtext),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            // home services
-            HomeServices(scrollController: scrollController,),
-            // mega sell image
-            16.kH,
-            Image.asset(AppImages.megaSell),
-            const NewlyAddedProducts()
-          ],
+              // home services
+              HomeServices(scrollController: scrollController,),
+              // mega sell image
+              16.kH,
+              Image.asset(AppImages.megaSell),
+              const NewlyAddedProducts()
+            ],
+          ),
         ),
       ),
     );

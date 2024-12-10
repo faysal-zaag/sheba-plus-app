@@ -4,6 +4,7 @@ import 'package:sheba_plus/models/login/login_request.model.dart';
 import 'package:sheba_plus/models/referral/referral.dart';
 import 'package:sheba_plus/models/register/register_request.model.dart';
 import 'package:sheba_plus/models/verification/verification_model.dart';
+import 'package:sheba_plus/utils/device/device_utility.dart';
 
 class AuthRepository {
   final Dio _dio;
@@ -71,6 +72,23 @@ class AuthRepository {
     return await _dio.post(
       ApiUrls.requestResetPasswordByEmail,
       queryParameters: {"email" : email},
+    );
+  }
+
+  Future<Response> createDeviceToken({required int userId, required String fcmToken}) async {
+    return await _dio.post(
+      ApiUrls.createDeviceToken,
+      data: {
+        "userId": userId,
+        "registrationToken": fcmToken,
+        "applicationType" : DeviceUtils.isAndroid() ? "CONSUMER_APP" : "CONSUMER_APP_IOS"
+      },
+    );
+  }
+
+  Future<Response> removeDeviceToken({required String fcmToken}) async {
+    return await _dio.delete(
+      "${ApiUrls.removeDeviceToken}/$fcmToken",
     );
   }
 

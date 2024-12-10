@@ -11,20 +11,6 @@ class AppConstants {
     "assets/carousel/carousel-4.jpg",
   ];
 
-  static List<String> carouselHeaderTexts = [
-    HomeScreenText.agentShopping,
-    HomeScreenText.displayCenter,
-    HomeScreenText.thirdParty,
-    HomeScreenText.friendsFamily,
-  ];
-
-  static List<String> carouselHeaderDetails = [
-    HomeScreenText.agentShoppingDetails1,
-    HomeScreenText.displayCenterDetails1,
-    HomeScreenText.thirdPartyDetails1,
-    HomeScreenText.friendsFamilyDetails1,
-  ];
-
   static List<String> drawerMenuItems = [
     "home",
     "displayCenter",
