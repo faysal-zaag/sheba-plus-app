@@ -23,19 +23,47 @@ class DisplayCenterServiceController extends GetxController {
   final loadingDisplayCenterServiceProductById = false.obs;
 
   final carouselCurrentIndex = 0.obs;
-  final selectProductDetailsType = ''.obs;
+  final selectProductDetailsType = 'DESCRIPTION'.obs;
   final totalDisplayServiceProduct = 630.obs;
   final displayServiceProductList = <DisplayServiceProduct>[].obs;
 
-  var currentDisplayServiceProduct =  DisplayServiceProduct(id: 0, name: '', description: '', specification: '', quantity: 0, price: 0, discountPercentage: 0, thumbnailImage: '', totalSellAmount: 0, totalSellCount: 0, subCategoryList: [], colorList: [], createdBy: null, createdAt: 0, updatedAt: 0).obs;
+  var currentDisplayServiceProduct = DisplayServiceProduct(
+          id: 0,
+          name: '',
+          description: '',
+          specification: '',
+          quantity: 0,
+          price: 0,
+          discountPercentage: 0,
+          thumbnailImage: '',
+          totalSellAmount: 0,
+          totalSellCount: 0,
+          subCategoryList: [],
+          colorList: [],
+          createdBy: null,
+          createdAt: 0,
+          updatedAt: 0)
+      .obs;
   final productDetailsTypeList = [
     'DESCRIPTION',
     'SPECIFICATION',
     'ADDITIONAL',
+    'EXTERNAL',
   ];
 
   void onCarouselChange(int index) {
     carouselCurrentIndex(index);
+  }
+
+  num calculateDiscountPrice(
+      {required num productPrice, num? discountPercentage}) {
+    num discountPrice = ((productPrice) * ((discountPercentage ?? 0) / 100));
+    return discountPrice;
+  }
+
+  num calculatePriceAfterDiscount({required num price, num? discountPrice}){
+    num finalPrice = ((price) - (discountPrice ?? 0));
+    return finalPrice;
   }
 
   // void getDisplayServiceProductById({required int id}) {
@@ -53,7 +81,6 @@ class DisplayCenterServiceController extends GetxController {
   //     loadingCurrentDisplayServiceProduct(false);
   //   }
   // }
-
 
   // ================ Public Api call ==============
   Future<void> getAllDisplayCenterServiceProducts() async {
@@ -76,17 +103,20 @@ class DisplayCenterServiceController extends GetxController {
       loadingAllDisplayCenterServiceProducts(false);
     }
   }
+
   Future<void> getDisplayCenterServiceProductById({required int id}) async {
     try {
       loadingDisplayCenterServiceProductById(true);
-
       final response =
           await _displayCenterServiceRepository.getProductById(id: id);
-      currentDisplayServiceProduct(response.data['Data']);
-
-      debugPrint(
-          "get display products: ${response.data}",
-          wrapWidth: 1024);
+      currentDisplayServiceProduct(
+          DisplayServiceProduct.fromJson(response.data));
+      currentDisplayServiceProduct.value.discountPrice = calculateDiscountPrice(
+          productPrice: currentDisplayServiceProduct.value.price,
+          discountPercentage:
+              currentDisplayServiceProduct.value.discountPercentage);
+      Utils.prettifyJson(response.data,
+          'Single product response data');
     } catch (err) {
       Log.error(err.toString());
     } finally {

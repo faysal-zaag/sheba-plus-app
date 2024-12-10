@@ -43,6 +43,10 @@ class Utils{
     return const Locale("en", "US");
   }
 
+  static Color hexToColor(String hexCode) {
+    return Color(int.parse(hexCode.replaceFirst('#', '0xFF')));
+  }
+
   static prettifyJson(dynamic json, String API) {
     // Convert the JSON data to a string with indentation for better readability
     final prettyString = JsonEncoder.withIndent('  ').convert(json);

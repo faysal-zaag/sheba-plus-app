@@ -1,3 +1,6 @@
+import 'package:sheba_plus/models/display_service/product_image.dart';
+import 'package:sheba_plus/models/display_service/product_size.dart';
+
 import '../executor/created_by.dart';
 import 'color.dart';
 import 'sub_category.dart';
@@ -15,13 +18,16 @@ class DisplayServiceProduct {
   final String? additionalInfo;
   final String? sku;
   final int quantity;
-  final int price;
-  final int discountPercentage;
+  final num price;
+  num discountPrice;
+  final num? discountPercentage;
   final String thumbnailImage;
-  final int totalSellAmount;
-  final int totalSellCount;
+  final num totalSellAmount;
+  final num totalSellCount;
   final List<SubCategory> subCategoryList;
-  final List<Color> colorList;
+  final List<ProductColor> colorList;
+  final List<ProductSize> sizeList;
+  final List<ProductImage> images;
   final CreatedBy? createdBy;
   final int createdAt;
   final int updatedAt;
@@ -35,13 +41,16 @@ class DisplayServiceProduct {
     this.sku,
     required this.quantity,
     required this.price,
-    required this.discountPercentage,
+    this.discountPercentage,
+    this.sizeList = const [],
     required this.thumbnailImage,
     required this.totalSellAmount,
     required this.totalSellCount,
     required this.subCategoryList,
     required this.colorList,
+    this.discountPrice = 0,
     this.createdBy,
+    this.images = const [],
     required this.createdAt,
     required this.updatedAt,
   });
@@ -65,8 +74,14 @@ class DisplayServiceProduct {
           .map((item) => SubCategory.fromJson(item))
           .toList(),
       colorList: (json['colorList'] as List)
-          .map((item) => Color.fromJson(item))
+          .map((item) => ProductColor.fromJson(item))
           .toList(),
+      sizeList: json['sizeList'] != null  ? (json['sizeList'] as List)
+          .map((item) => ProductSize.fromJson(item))
+          .toList() : [],
+      images: json['images'] != null  ? (json['images'] as List)
+          .map((item) => ProductImage.fromJson(item))
+          .toList() : [],
       createdBy: CreatedBy.fromJson(json['createdBy']),
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
@@ -88,8 +103,10 @@ class DisplayServiceProduct {
       'thumbnailImage': thumbnailImage,
       'totalSellAmount': totalSellAmount,
       'totalSellCount': totalSellCount,
+      'images': images,
       'subCategoryList': subCategoryList.map((item) => item.toJson()).toList(),
       'colorList': colorList.map((item) => item.toJson()).toList(),
+      'sizeList': sizeList.map((item) => item.toJson()).toList(),
       'createdBy': createdBy?.toJson(),
       'createdAt': createdAt,
       'updatedAt': updatedAt,

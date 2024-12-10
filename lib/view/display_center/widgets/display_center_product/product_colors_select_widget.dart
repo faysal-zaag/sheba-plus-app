@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:sheba_plus/models/display_service/color.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/utils.dart';
 
 import '../../../../utils/constant/app_colors.dart';
 
 class ProductColorsSelectWidget extends StatelessWidget {
-  final List<Color> productColorList;
+  final List<ProductColor> productColorList;
   final Function onSelectColor;
-  final Color selectedColor;
+  final ProductColor selectedColor;
 
   const ProductColorsSelectWidget(
       {Key? key,
@@ -59,7 +61,7 @@ class ProductColorsSelectWidget extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(10.0),
                   decoration: BoxDecoration(
-                    color: productColorList[index],
+                    color: Utils.hexToColor(productColorList[index].code),
                     shape: BoxShape.circle,
                     border: Border.all(
                       width: 3,
