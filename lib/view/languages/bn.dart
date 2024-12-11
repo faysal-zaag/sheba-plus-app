@@ -136,7 +136,7 @@ final Map<String, String> bn = {
   'changePasswordInfo': "আপনার পুরানো এবং নতুন পাসওয়ার্ড দিয়ে পাসওয়ার্ড পরিবর্তন করুন।",
   'sendVerificationCode': "যাচাই কোড পাঠান",
   'otpSentMessage': "একটি OTP আপনার ইমেইলে পাঠানো হয়েছে। দয়া করে যাচাই করুন।",
-  'forgetPasswordHeadline': "আপনার ইমেল ঠিকানা প্রদান করে আপনি পরবর্তী ধাপে যেতে পারবেন",
+  'forgetPasswordHeadline': "আপনার পাসওয়ার্ড পুনরুদ্ধারের জন্য একটি ওটিপি পেতে আপনার ইমেইল ঠিকানা প্রবেশ করুন।",
   'loggedInSuccessMessage': "সফলভাবে লগইন হয়েছে",
   'loggedOut': "সফলভাবে লগআউট হয়েছে",
 
@@ -170,6 +170,7 @@ final Map<String, String> bn = {
   'dateOfBirth': "জন্ম তারিখ",
   'updateInformation': "তথ্য আপডেট করুন",
   'saveChanges': "পরিবর্তন সংরক্ষণ করুন",
+  'profileUpdated': "ব্যবহারকারীর তথ্য সফলভাবে আপডেট হয়েছে।",
 
   // Order history screen texts
   'ticketNumber': "টিকেট নম্বর",

@@ -73,7 +73,7 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       keyboardType: textInputType,
       inputFormatters: inputFormatters,
-      style: const TextStyle(fontSize: 14, color: AppColors.black),
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
       maxLines: maxLine,
     );
   }

@@ -145,7 +145,7 @@ final Map<String, String> en = {
   'changePasswordInfo': "Enter your old and new password to change the password.",
   'sendVerificationCode': "Send Verification Code",
   'otpSentMessage': "An OTP Send to your email. please verify.",
-  'forgetPasswordHeadline': "By giving your email address you can go to the next phase",
+  'forgetPasswordHeadline': "Enter your email address to receive an OTP for password recovery.",
   'loggedInSuccessMessage': "Logged in successfully",
   'loggedOut': "Successfully logged out",
 
@@ -180,6 +180,7 @@ final Map<String, String> en = {
   'dateOfBirth': "Date of birth",
   'updateInformation': "Update Information",
   'saveChanges': "Save Changes",
+  'profileUpdated': "User information updated successfully",
 
   // Order history screen texts
   'ticketNumber': "Ticket Number",

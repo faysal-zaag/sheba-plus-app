@@ -39,10 +39,9 @@ class CustomPrimaryButton extends StatelessWidget {
       height: height,
       width: width ?? double.infinity,
       child: MaterialButton(
-        onPressed: (loading == true || disabled == true) ? null : onClick, // Check for disabled
-        color: disabled == true
-            ? AppColors.background.withOpacity(0.5)
-            : (color ?? AppColors.primary),
+        onPressed: (loading == true || disabled == true) ? null : onClick,
+        // Check for disabled
+        color: disabled == true ? AppColors.background.withOpacity(0.5) : (color ?? AppColors.primary),
         disabledColor: AppColors.background,
         elevation: 0,
         shape: RoundedRectangleBorder(
@@ -51,28 +50,26 @@ class CustomPrimaryButton extends StatelessWidget {
         ),
         child: loading == true
             ? CustomLoader(
-          size: 30,
-          color: labelColor ?? AppColors.white,
-        )
+                size: 30,
+                color: labelColor ?? AppColors.white,
+              )
             : Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (icon != null)
-              Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: icon,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (icon != null)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: icon,
+                    ),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: fontSize ?? 16,
+                      color: disabled == true ? AppColors.black.withOpacity(0.2) : (labelColor ?? AppColors.white),
+                    ),
+                  ),
+                ],
               ),
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: fontSize ?? 16,
-                color: disabled == true
-                    ? AppColors.black.withOpacity(0.2)
-                    : (labelColor ?? AppColors.white),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

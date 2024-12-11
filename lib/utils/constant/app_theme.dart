@@ -14,6 +14,11 @@ class AppTheme {
         titleTextStyle: AppTextStyles.headlineSmall.copyWith(color: AppColors.white),
         foregroundColor: AppColors.white,
       ),
+      datePickerTheme: DatePickerThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(4.0),
+        ),
+      ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom().copyWith(
           overlayColor: WidgetStateProperty.resolveWith<Color?>(

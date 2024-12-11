@@ -6,7 +6,9 @@ enum PaymentMethod { td, paypal }
 class AgentShoppingController extends GetxController {
   final agentShoppingMeetingLocationController = TextEditingController().obs;
   final agentShoppingEasternTimeController = TextEditingController().obs;
+  final agentShoppingEasternTime = 0.obs;
   final agentShoppingBDTimeController = TextEditingController().obs;
+  final agentShoppingBDTime = 0.obs;
   final agentShoppingSpendAmountController = TextEditingController().obs;
   final agentShoppingServiceDurationController = TextEditingController().obs;
   final agentShoppingServiceTotalCostController = TextEditingController().obs;

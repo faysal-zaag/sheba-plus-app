@@ -4,6 +4,7 @@ import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:sheba_plus/models/address/address.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
+import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/utils.dart';
@@ -50,30 +51,53 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
             Obx(() {
               int validationNumberLength = addressController.addressMobileNumberLength.value;
 
-              return CustomPhoneField(
-                onCountryChanged: (Country country) {
-                  addressController.addressMobileNumberLength.value = country.minLength;
-                },
-                onChanged: (PhoneNumber phoneNumber) {
-                  addressController.addressMobileNumber.value = phoneNumber.number;
-                  addressController.addressCountryCode.value = phoneNumber.countryCode;
-                  addressController.addressCountryIso.value = phoneNumber.countryISOCode;
-                },
+              return FormField<PhoneNumber>(
+                initialValue: PhoneNumber(
+                  countryCode: addressController.addressCountryCode.value,
+                  number: addressController.addressMobileNumber.value,
+                  countryISOCode: AppConstants.countries.firstWhere((country) => country.countryCode == addressController.addressCountryCode.value).isoCode,
+                ),
                 validator: (value) {
-                  if (value != null && value.number.isEmpty) {
-                    return "Phone number required";
-                  } else if (value?.number.length != validationNumberLength) {
-                    return "Phone number should container $validationNumberLength digits";
-                  }
-                  return null;
+                  // Use the same validator you were using before
+                  return InputValidators.phoneNumberValidator(value: value, validationNumberLength: validationNumberLength);
+                },
+                builder: (state) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomPhoneField(
+                        onCountryChanged: (Country country) {
+                          addressController.addressMobileNumberLength.value = country.minLength;
+                        },
+                        onChanged: (PhoneNumber phoneNumber) {
+                          addressController.addressMobileNumber.value = phoneNumber.number;
+                          addressController.addressCountryCode.value = phoneNumber.countryCode;
+                          addressController.addressCountryIso.value = phoneNumber.countryISOCode;
+                        },
+                        validator: (value) {
+                          // Pass the validator from the FormField
+                          return state.hasError ? state.errorText : null;
+                        },
+                      ),
+                      if (state.hasError)
+                        Text(
+                          state.errorText ?? '',
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(color: AppColors.error),
+                        ),
+                    ],
+                  );
                 },
               );
             }),
           if (widget.withPhoneField) 16.kH,
           CustomTextField(
-              controller: addressController.addressStreetController.value,
-              hintText: "${AuthScreenText.streetAddress}*",
-              validator: (value) => InputValidators.generalValidator(value: value, message: AuthScreenText.streetAddressValidatorText)),
+            controller: addressController.addressStreetController.value,
+            hintText: "${AuthScreenText.streetAddress}*",
+            validator: (value) => InputValidators.generalValidator(
+              value: value,
+              message: AuthScreenText.streetAddressValidatorText,
+            ),
+          ),
           16.kH,
           CustomTextField(
             controller: addressController.addressStreet2Controller.value,
@@ -140,6 +164,9 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
               loading: widget.forUpdate ? addressController.addressUpdateLoading.isTrue : addressController.addressCreateLoading.isTrue,
               label: widget.forUpdate ? ProfileScreenTexts.updateAddress : GlobalTexts.saveAndContinue,
               onClick: () {
+                // if(addressController.addressMobileNumber.isEmpty){
+                //   return Utils.showErrorToast(message: "Phone number is required");
+                // }
                 if (_formKey.currentState!.validate()) {
                   if (widget.forUpdate) {
                     updateAddress(addressId: widget.addressId ?? 0);

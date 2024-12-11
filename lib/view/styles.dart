@@ -35,16 +35,12 @@ class Styles {
     return InputDecoration(
         focusedBorder: readOnly == true
             ? OutlineInputBorder(
-                borderRadius:
-                    customBorder ?? BorderRadius.circular(borderRadius),
-                borderSide:
-                    const BorderSide(color: AppColors.border, width: 1.0),
+                borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
+                borderSide: const BorderSide(color: AppColors.border, width: 1.0),
               )
             : OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: AppColors.primary, width: 1.0),
-                borderRadius:
-                    customBorder ?? BorderRadius.circular(borderRadius),
+                borderSide: const BorderSide(color: AppColors.primary, width: 1.0),
+                borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
               ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.error, width: 1.0),
@@ -52,13 +48,11 @@ class Styles {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(
-              color: const Color(0xff000000).withOpacity(0.1), width: 1.0),
+          borderSide: BorderSide(color: const Color(0xff000000).withOpacity(0.1), width: 1.0),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(
-              color: const Color(0xff000000).withOpacity(0.1), width: 1.0),
+          borderSide: BorderSide(color: const Color(0xff000000).withOpacity(0.1), width: 1.0),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.error, width: 1.0),
@@ -68,18 +62,33 @@ class Styles {
         prefix: const Padding(
           padding: EdgeInsets.only(left: 15.0),
         ),
-        errorStyle: Theme.of(context)
-            .textTheme
-            .labelSmall
-            ?.copyWith(color: AppColors.error),
+        errorStyle: Theme.of(context).textTheme.labelSmall?.copyWith(color: AppColors.error),
         fillColor: fillColor,
         filled: true,
         hintText: hintText ?? "",
-        hintStyle: Theme.of(context)
-            .textTheme
-            .bodySmall
-            ?.copyWith(color: AppColors.hintText),
+        hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.hintText),
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon);
+  }
+
+  static Theme getDateTimePickerTheme(BuildContext context, Widget? child, {bool timePicker = true}) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        colorScheme: ColorScheme.light(
+          primary: AppColors.primary,
+          onPrimary: Colors.white,
+          onSurface: Colors.black,
+          secondary: AppColors.primaryLight,
+          surface: AppColors.white,
+          surfaceContainerHighest: AppColors.black.withOpacity(0.03),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            foregroundColor: AppColors.primary,
+          ),
+        ),
+      ),
+      child: child!,
+    );
   }
 }

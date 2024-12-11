@@ -1,3 +1,5 @@
+import 'package:intl_phone_field/phone_number.dart';
+
 class InputValidators {
   /// General validator to check if the value is empty
   static String? generalValidator({required String? value, required String message}) {
@@ -44,20 +46,13 @@ class InputValidators {
     return null;
   }
 
-  static String? phoneNumberValidator(
-      {required String phone,
-        required int digitLength}) {
-    if (phone.isEmpty) {
-      return "Phone number should not be empty";
+  static String? phoneNumberValidator
+        ({required PhoneNumber? value, required int validationNumberLength}) {
+      if (value != null && value.number.isEmpty) {
+        return "Phone number required";
+      } else if (value?.number.length != validationNumberLength) {
+        return "Phone number should container $validationNumberLength digits";
+      }
+      return null;
     }
-    // } else if (phone.number.length < minDigitsLength) {
-    //   return "Number should not be less than $minDigitsLength digits";
-    // } else if (phone.number.length > maxDigitsLength) {
-    //   return "Number should not be more than $maxDigitsLength digits";
-    // }
-    else if (phone.length != digitLength) {
-      return "Phone number need to give exact $digitLength digit";
-    }
-    return null;
-  }
 }

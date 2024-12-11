@@ -52,6 +52,7 @@ class _RegisterNewAddressFormState extends State<RegisterNewAddressForm> {
 
               return CustomPhoneField(
                 onCountryChanged: (Country country) {
+                  addressController.newAddressMobileNumber("");
                   addressController.newAddressMobileNumberLength.value = country.minLength;
                 },
                 onChanged: (PhoneNumber phoneNumber) {

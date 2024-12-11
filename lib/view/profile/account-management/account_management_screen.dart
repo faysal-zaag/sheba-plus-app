@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_field/countries.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
+import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/formatters/date_formatters.dart';
 import 'package:sheba_plus/utils/helpers/image_uploader.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/utils.dart';
+import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
+import 'package:sheba_plus/view/components/custom_phone_number_field.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/image/custom_image.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
@@ -33,7 +38,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
   @override
   void dispose() {
     profileController.profileEditable(false);
-    if(profileController.user.value.dateOfBirth == null || profileController.user.value.dateOfBirth == 0){
+    if (profileController.user.value.dateOfBirth == null || profileController.user.value.dateOfBirth == 0) {
       profileController.userDateOfBirthController.value.clear();
       profileController.userDateOfBirthInMilliseconds(0);
     }
@@ -107,8 +112,31 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
               ),
             ),
             Obx(
-              () => TextFieldWithLabel(controller: profileController.userPhoneNumberController.value, label: AuthScreenText.phoneNumber, hintText: "", readOnly: true),
+              (){
+                int validationNumberLength = profileController.userPhoneNumberValidationLength.value;
+
+                return AbsorbPointer(
+                  absorbing: profileController.profileEditable.isFalse,
+                  child: CustomPhoneField(
+                    required: profileController.profileEditable.isTrue,
+                    controller: profileController.userPhoneNumberController.value,
+                    initialCountryCode: AppConstants.countries.firstWhere((country) => country.countryCode == profileController.user.value.countryCode).isoCode,
+                    onCountryChanged: (Country country) {
+                      profileController.userPhoneNumberController.value.clear();
+                      profileController.userPhoneNumberValidationLength.value =
+                          country.minLength;
+                    },
+                    label: AuthScreenText.phoneNumber,
+                    onChanged: (value) {
+                      profileController.userPhoneNumberController.value.text = value.number;
+                      profileController.userPhoneNumberCountryCode.value = value.countryCode;
+                    },
+                    validator: (value) => InputValidators.phoneNumberValidator(value: value, validationNumberLength: validationNumberLength),
+                  ),
+                );
+              },
             ),
+            16.kH,
             Obx(
               () => TextFieldWithLabel(
                 controller: profileController.userDateOfBirthController.value,
@@ -118,11 +146,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                 readOnly: true,
                 onTap: () {
                   if (profileController.profileEditable.isTrue) {
-                    globalController.showDatePickerOnly(
-                      context: context,
-                      onPicked: setDateOfBirth,
-                      firstDate: DateTime(1800)
-                    );
+                    globalController.showDatePickerOnly(context: context, onPicked: setDateOfBirth, firstDate: DateTime(1800));
                   }
                 },
               ),
@@ -144,15 +168,14 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
               () => CustomPrimaryButton(
                 loading: profileController.loadingUpdatingUserInfo.isTrue,
                 label: profileController.profileEditable.isTrue ? ProfileScreenTexts.saveChanges : ProfileScreenTexts.updateInformation,
-                onClick: () async{
-                  if(profileController.profileEditable.isTrue){
+                onClick: () async {
+                  if (profileController.profileEditable.isTrue) {
                     final response = await profileController.updateUserInfo();
-                    if(response){
-                      Utils.showSuccessToast(message: "User information updated successfully");
+                    if (response) {
+                      Utils.showSuccessToast(message: ProfileScreenTexts.profileUpdated);
                       profileController.profileEditable(false);
                     }
-                  }
-                  else{
+                  } else {
                     profileController.profileEditable(true);
                   }
                 },

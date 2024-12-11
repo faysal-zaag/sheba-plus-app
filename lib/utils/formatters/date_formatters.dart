@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:sheba_plus/utils/constant/app_constants.dart';
 
 class DateFormatters{
   static String convertDateTimeToYYYYMMDD({required DateTime dateTime}){
@@ -12,23 +13,22 @@ class DateFormatters{
 
   static String getFormattedDateTimeInCanada({required DateTime? selectedDateTime}) {
     if (selectedDateTime == null) return "No Date Selected";
-    return DateFormat('yyyy-MM-dd hh:mm:ss a').format(selectedDateTime.toUtc().add(const Duration(hours: -5)));
+    return DateFormat('yyyy-MM-dd hh:mm:ss a').format(getCanadianTime(selectedDateTime));
   }
-
+  
   static String getFormattedDateTimeInBD({required DateTime? selectedDateTime}) {
     if (selectedDateTime == null) return "No Date Selected";
+    return DateFormat('yyyy-MM-dd hh:mm:ss a').format(getBDTime(selectedDateTime));
+  }
 
-    // Define time offsets
-    const Duration canadaOffset = Duration(hours: -5);
-    const Duration bdOffset = Duration(hours: 6);
+  static DateTime getCanadianTime(DateTime dateTime){
+    return dateTime.toUtc().add(AppConstants.canadaOffset);
+  }
 
-    // Treat selectedDateTime as being in Canada time, adjust to UTC
-    DateTime utcTime = selectedDateTime.subtract(canadaOffset);
+  static DateTime getBDTime(DateTime dateTime){
+    DateTime utcTime = dateTime.subtract(AppConstants.canadaOffset);
 
     // Convert UTC time to Bangladesh time
-    DateTime bdTime = utcTime.add(bdOffset);
-
-    // Format the BD time
-    return DateFormat('yyyy-MM-dd hh:mm:ss a').format(bdTime);
+    return utcTime.add(AppConstants.bdOffset);
   }
 }

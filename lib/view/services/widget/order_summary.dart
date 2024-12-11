@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sheba_plus/controllers/global_controller.dart';
+import 'package:sheba_plus/data/api/config.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
@@ -14,9 +16,11 @@ class OrderSummary extends StatelessWidget {
   OrderSummary({super.key});
 
   final agentShoppingController = Get.find<AgentShoppingController>();
+  final globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {
+    double shoppingAmount = double.parse(agentShoppingController.agentShoppingSpendAmountController.value.text);
     return Container(
       color: AppColors.white,
       padding: AppPaddings.screenPadding,
@@ -40,12 +44,12 @@ class OrderSummary extends StatelessWidget {
                 ],
               ),
             ),
-            value: "CAD",
+            value: "${agentShoppingController.agentShoppingServiceTotalCostController.value.text} CAD",
           ),
           SummaryRow(
             title: PartialCheckoutTexts.shoppingCost,
-            value: GlobalTexts.pending,
-            valueColor: AppColors.error,
+            value: shoppingAmount > 25000 ? "$shoppingAmount ${GlobalTexts.bdt}" : GlobalTexts.pending,
+            valueColor: shoppingAmount > 25000 ? AppColors.black : AppColors.error,
           ),
           SummaryRow(
             title: PartialCheckoutTexts.shippingCost,

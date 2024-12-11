@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
+import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/formatters/date_formatters.dart';
@@ -60,7 +61,11 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
                   color: AppColors.primary,
                 ),
                 onTap: () {
-                  globalController.showDateTimePicker(context: context, canadianTime: true, onPicked: setTime);
+                  globalController.showDateTimePicker(
+                      context: context,
+                      canadianTime: true,
+                      onPicked: setTime,
+                      initialDate: agentShoppingController.agentShoppingEasternTime.value != 0 ? DateTime.fromMillisecondsSinceEpoch(agentShoppingController.agentShoppingEasternTime.value) : null);
                 },
                 validator: (value) => InputValidators.generalValidator(
                   value: value,
@@ -77,7 +82,10 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
                 ),
                 validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
                 onTap: () {
-                  globalController.showDateTimePicker(context: context, onPicked: setTime);
+                  globalController.showDateTimePicker(
+                      context: context,
+                      onPicked: setTime,
+                      initialDate: agentShoppingController.agentShoppingBDTime.value != 0 ? DateTime.fromMillisecondsSinceEpoch(agentShoppingController.agentShoppingBDTime.value) : null);
                 },
               ),
               12.kH,
@@ -164,6 +172,9 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
   }
 
   void setTime(DateTime selectedDateTime, bool canadianTime) {
+    agentShoppingController.agentShoppingEasternTime.value = DateFormatters.getCanadianTime(selectedDateTime).millisecondsSinceEpoch;
+    agentShoppingController.agentShoppingBDTime.value = DateFormatters.getBDTime(selectedDateTime).millisecondsSinceEpoch;
+
     if (canadianTime) {
       agentShoppingController.agentShoppingEasternTimeController.value.text = DateFormatters.getFormattedDateTime(
         selectedDateTime: selectedDateTime,
@@ -172,6 +183,7 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
         selectedDateTime: selectedDateTime,
       );
     } else {
+      agentShoppingController.agentShoppingEasternTime.value = selectedDateTime.millisecondsSinceEpoch;
       agentShoppingController.agentShoppingBDTimeController.value.text = DateFormatters.getFormattedDateTime(
         selectedDateTime: selectedDateTime,
       );

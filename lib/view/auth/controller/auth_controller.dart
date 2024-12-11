@@ -127,7 +127,9 @@ class AuthController extends GetxController {
         _profileController.userFirstNameController.value.text = user.firstName;
         _profileController.userLastNameController.value.text = user.lastName;
         _profileController.userEmailController.value.text = user.email;
-        _profileController.userPhoneNumberController.value.text = "${user.countryCode}${user.mobileNumber}";
+        _profileController.userPhoneNumberController.value.text = "${user.mobileNumber}";
+        _profileController.userPhoneNumberCountryCode.value = "${user.countryCode}";
+        _profileController.userPhoneNumberValidationLength.value = user.countryCode?.length ?? 0;
         if(dateOfBirth != null && dateOfBirth != 0) {
           _profileController.userDateOfBirthInMilliseconds.value = dateOfBirth;
           _profileController.userDateOfBirthController.value.text = DateFormatters.convertDateTimeToYYYYMMDD(dateTime: DateTime.fromMillisecondsSinceEpoch(dateOfBirth));

@@ -33,6 +33,8 @@ class ProfileController extends GetxController {
   final userLastNameController = TextEditingController().obs;
   final userEmailController = TextEditingController().obs;
   final userPhoneNumberController = TextEditingController().obs;
+  final userPhoneNumberValidationLength = 10.obs;
+  final userPhoneNumberCountryCode = "".obs;
   final userDateOfBirthController = TextEditingController().obs;
   final userDateOfBirthInMilliseconds = 0.obs;
 
@@ -65,7 +67,14 @@ class ProfileController extends GetxController {
   Future<bool> updateUserInfo() async {
     try {
       loadingUpdatingUserInfo(true);
-      User userInfo = user.value.copyWith(firstName: userFirstNameController.value.text, lastName: userLastNameController.value.text, dateOfBirth: userDateOfBirthInMilliseconds.value);
+      User userInfo = user.value.copyWith(
+        firstName: userFirstNameController.value.text,
+        lastName: userLastNameController.value.text,
+        dateOfBirth: userDateOfBirthInMilliseconds.value,
+        mobileNumber: userPhoneNumberController.value.text,
+        countryCode: userPhoneNumberCountryCode.value
+      );
+      Log.info("${userInfo.toJson()}");
       final response = await _profileRepository.updateUserInfo(userInfo: userInfo);
       user(User.fromJson(response.data["info"]));
       return true;

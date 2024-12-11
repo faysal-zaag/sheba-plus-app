@@ -11,9 +11,11 @@ class CustomPhoneField extends StatelessWidget {
   final bool? required;
   final String? label;
   final TextStyle? labelStyle;
+  final TextEditingController? controller;
   final Function(PhoneNumber)? onChanged;
   final Function(Country)? onCountryChanged;
   final TextInputType? textInputType;
+  final String initialCountryCode;
   final String? Function(PhoneNumber?)? validator;
 
   const CustomPhoneField({
@@ -22,7 +24,11 @@ class CustomPhoneField extends StatelessWidget {
     this.label,
     required this.onChanged,
     this.labelStyle,
-    this.textInputType, this.onCountryChanged, this.validator,
+    this.textInputType,
+    this.onCountryChanged,
+    this.validator,
+    this.controller,
+    this.initialCountryCode = "BD",
   });
 
   @override
@@ -34,7 +40,10 @@ class CustomPhoneField extends StatelessWidget {
             children: [
               Text(
                 label ?? "",
-                style: labelStyle ?? Theme.of(context).textTheme.bodyMedium,
+                style: labelStyle ?? Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: AppColors.blackTitle, fontSize: 14),
               ),
               if (required == true)
                 const Text(
@@ -45,11 +54,12 @@ class CustomPhoneField extends StatelessWidget {
           ),
         8.kH,
         IntlPhoneField(
+          controller: controller,
           decoration: Styles.getTextFieldInputDecoration(
             context: context,
             fillColor: AppColors.white,
           ),
-          initialCountryCode: 'BD',
+          initialCountryCode: initialCountryCode,
           onCountryChanged: onCountryChanged,
           pickerDialogStyle: PickerDialogStyle(
             backgroundColor: Colors.white,
@@ -60,7 +70,7 @@ class CustomPhoneField extends StatelessWidget {
             ),
           ),
           validator: validator,
-          style: Theme.of(context).textTheme.titleSmall,
+          style: Theme.of(context).textTheme.bodyMedium,
           onChanged: onChanged,
           disableLengthCheck: true,
         ),

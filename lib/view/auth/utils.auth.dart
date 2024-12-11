@@ -2,7 +2,7 @@ class AuthUtils{
   static int getVerificationTime() {
     return DateTime.now()
         .add(
-      const Duration(minutes: 15),
+      const Duration(minutes: 3),
     )
         .millisecondsSinceEpoch;
   }

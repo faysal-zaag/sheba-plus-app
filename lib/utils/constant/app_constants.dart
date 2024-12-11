@@ -57,5 +57,9 @@ class AppConstants {
   static List<Country> countries = [
     Country(name: "Bangladesh", countryCode: "+880", isoCode: "BD"),
     Country(name: "Canada", countryCode: "+1", isoCode: "CA"),
+    Country(name: "USA", countryCode: "+1", isoCode: "US"),
   ];
+
+  static const Duration canadaOffset = Duration(hours: -5);
+  static const Duration bdOffset = Duration(hours: 6);
 }

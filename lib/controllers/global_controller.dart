@@ -6,6 +6,7 @@ import 'package:sheba_plus/models/setting/setting.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/view/auth/widgets/modals/terms_and_condition_modal.dart';
+import 'package:sheba_plus/view/styles.dart';
 import 'package:sheba_plus/view_model/repositories/global.repository.dart';
 
 import '../view/components/custom_common_modal_sheet_parent_widget.dart';
@@ -122,26 +123,7 @@ class GlobalController extends GetxController {
       firstDate: firstDate ?? now,
       lastDate: lastDate ?? DateTime(2500),
       builder: (context, child) {
-        return Theme(
-          data: Theme.of(context).copyWith(
-            dialogTheme: DialogTheme(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4.0),
-              ),
-            ),
-            colorScheme: const ColorScheme.light(
-              primary: AppColors.primary,
-              onPrimary: Colors.white,
-              onSurface: Colors.black,
-            ),
-            textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(
-                foregroundColor: AppColors.primary,
-              ),
-            ),
-          ),
-          child: child!,
-        );
+        return Styles.getDateTimePickerTheme(context, child);
       },
     );
 
@@ -149,7 +131,10 @@ class GlobalController extends GetxController {
       // Show Time Picker
       TimeOfDay? pickedTime = await showTimePicker(
         context: Get.context!,
-        initialTime: TimeOfDay.fromDateTime(now),
+        initialTime: TimeOfDay.fromDateTime(initialDate ?? now),
+        builder: (context, child) {
+          return Styles.getDateTimePickerTheme(context, child);
+        },
       );
 
       if (pickedTime != null) {
