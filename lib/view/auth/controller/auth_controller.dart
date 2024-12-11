@@ -8,6 +8,7 @@ import 'package:sheba_plus/models/referral/referral.dart';
 import 'package:sheba_plus/models/register/register_request.model.dart';
 import 'package:sheba_plus/models/user/user.dart' as userModel;
 import 'package:sheba_plus/models/verification/verification_model.dart';
+import 'package:sheba_plus/utils/formatters/date_formatters.dart';
 import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
@@ -21,8 +22,7 @@ class AuthController extends GetxController {
   final ProfileController _profileController;
   final StorageService _storageService;
 
-  AuthController(this._authRepository, this._storageService,
-      this._profileController, this._addressController);
+  AuthController(this._authRepository, this._storageService, this._profileController, this._addressController);
 
   final isLoggedIn = false.obs;
   final signInProcedureLoading = false.obs;
@@ -112,23 +112,26 @@ class AuthController extends GetxController {
     referralCountryCode.value = "";
   }
 
-  Future<bool> isAuthenticated({String? accessToken}) async {
+  Future<bool> isAuthenticated({String? accessToken, bool keepMeLoggedIn = true}) async {
     try {
       if (accessToken != null) {
-        keepLoggedIn(true);
+        keepLoggedIn(keepMeLoggedIn);
         _storageService.saveAuthToken(accessToken);
-        final profileResponse =
-            await _authRepository.getProfile(accessToken: accessToken);
+        final profileResponse = await _authRepository.getProfile(accessToken: accessToken);
         await _addressController.getAllAddress();
         _profileController.user(userModel.User.fromJson(profileResponse.data["info"]));
-        _profileController.userFirstNameController.value.text =
-            _profileController.user.value.firstName;
-        _profileController.userLastNameController.value.text =
-            _profileController.user.value.lastName;
-        _profileController.userEmailController.value.text =
-            _profileController.user.value.email;
-        _profileController.userPhoneNumberController.value.text =
-            "${_profileController.user.value.countryCode}${_profileController.user.value.mobileNumber}";
+        userModel.User user = _profileController.user.value;
+
+        int? dateOfBirth = user.dateOfBirth;
+
+        _profileController.userFirstNameController.value.text = user.firstName;
+        _profileController.userLastNameController.value.text = user.lastName;
+        _profileController.userEmailController.value.text = user.email;
+        _profileController.userPhoneNumberController.value.text = "${user.countryCode}${user.mobileNumber}";
+        if(dateOfBirth != null && dateOfBirth != 0) {
+          _profileController.userDateOfBirthInMilliseconds.value = dateOfBirth;
+          _profileController.userDateOfBirthController.value.text = DateFormatters.convertDateTimeToYYYYMMDD(dateTime: DateTime.fromMillisecondsSinceEpoch(dateOfBirth));
+        }
         isLoggedIn(true);
         return true;
       }
@@ -151,7 +154,7 @@ class AuthController extends GetxController {
       );
       String accessToken = response.data["token"]["access"];
 
-      await isAuthenticated(accessToken: accessToken);
+      await isAuthenticated(accessToken: accessToken, keepMeLoggedIn: keepLoggedIn.value);
 
       if (keepLoggedIn.isTrue) {
         _storageService.saveAuthToken(response.data["token"]["access"]);
@@ -191,7 +194,7 @@ class AuthController extends GetxController {
   Future<bool> applyReferral() async {
     try {
       referralApplyingLoading(true);
-      Referral referralData= Referral(
+      Referral referralData = Referral(
         fullName: referralNameController.value.text,
         countryCode: referralCountryCode.value,
         mobileNumber: referralPhoneNumber.value,
@@ -309,21 +312,17 @@ class AuthController extends GetxController {
   }
 
   Future<bool> facebookLogin() async {
-    final result = await FacebookAuth.instance
-        .login(permissions: ['public_profile', 'email']);
+    final result = await FacebookAuth.instance.login(permissions: ['public_profile', 'email']);
 
     if (result.status == LoginStatus.success) {
       String? accessToken = result.accessToken!.token;
 
-      final AuthCredential credential =
-      FacebookAuthProvider.credential(accessToken);
-      UserCredential firebaseResult =
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      final AuthCredential credential = FacebookAuthProvider.credential(accessToken);
+      UserCredential firebaseResult = await FirebaseAuth.instance.signInWithCredential(credential);
 
       String? idToken = await firebaseResult.user?.getIdToken();
 
-      final response =
-      await _authRepository.socialLogin(firebaseToken: idToken ?? '');
+      final response = await _authRepository.socialLogin(firebaseToken: idToken ?? '');
 
       _storageService.saveAuthToken(response.data["token"]["access"]);
 
@@ -337,7 +336,7 @@ class AuthController extends GetxController {
   }
 
   Future<bool> googleLogin() async {
-    try{
+    try {
       GoogleSignIn googleSignIn = GoogleSignIn(
         scopes: [
           'email',
@@ -355,13 +354,11 @@ class AuthController extends GetxController {
           idToken: googleAuth.idToken,
         );
 
-        UserCredential firebaseResult =
-        await FirebaseAuth.instance.signInWithCredential(credential);
+        UserCredential firebaseResult = await FirebaseAuth.instance.signInWithCredential(credential);
 
         String? idToken = await firebaseResult.user?.getIdToken();
 
-        final response =
-        await _authRepository.socialLogin(firebaseToken: idToken ?? "");
+        final response = await _authRepository.socialLogin(firebaseToken: idToken ?? "");
 
         _storageService.saveAuthToken(response.data["token"]["access"]);
 
@@ -372,8 +369,7 @@ class AuthController extends GetxController {
         return true;
       }
       return false;
-    }
-    catch(e){
+    } catch (e) {
       Log.error(e.toString());
       return false;
     }
@@ -385,6 +381,7 @@ class AuthController extends GetxController {
 
   void logout() async {
     isLoggedIn(false);
+    keepLoggedIn(false);
     await FirebaseAuth.instance.signOut();
     await FacebookAuth.instance.logOut();
     await GoogleSignIn().signOut();

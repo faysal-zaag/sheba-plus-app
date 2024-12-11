@@ -109,7 +109,7 @@ final Map<String, String> en = {
   'firstNameHintText': "John",
   'lastName': "Last name",
   'lastNameHintText': "Doe",
-  'confirmPassword': "Confirm password",
+  'confirmPassword': "Confirm Password",
   'confirmNewPassword': "Confirm new password",
   'firstNameValidatorText': "First name is required",
   'lastNameValidatorText': "Last name is required",
@@ -178,8 +178,8 @@ final Map<String, String> en = {
   'myProfile': "My Profile",
   'logOut': "Logout",
   'dateOfBirth': "Date of birth",
-  'updateInformation': "Update information",
-  'saveChanges': "Save changes",
+  'updateInformation': "Update Information",
+  'saveChanges': "Save Changes",
 
   // Order history screen texts
   'ticketNumber': "Ticket Number",

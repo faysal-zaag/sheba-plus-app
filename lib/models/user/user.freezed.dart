@@ -27,7 +27,7 @@ mixin _$User {
   String? get profilePicture => throw _privateConstructorUsedError;
   String? get mobileNumber => throw _privateConstructorUsedError;
   String? get countryCode => throw _privateConstructorUsedError;
-  num? get dateOfBirth => throw _privateConstructorUsedError;
+  int? get dateOfBirth => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,7 +51,7 @@ abstract class $UserCopyWith<$Res> {
       String? profilePicture,
       String? mobileNumber,
       String? countryCode,
-      num? dateOfBirth});
+      int? dateOfBirth});
 }
 
 /// @nodoc
@@ -110,7 +110,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as int?,
     ) as $Val);
   }
 }
@@ -130,7 +130,7 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? profilePicture,
       String? mobileNumber,
       String? countryCode,
-      num? dateOfBirth});
+      int? dateOfBirth});
 }
 
 /// @nodoc
@@ -186,7 +186,7 @@ class __$$UserImplCopyWithImpl<$Res>
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
-              as num?,
+              as int?,
     ));
   }
 }
@@ -226,7 +226,7 @@ class _$UserImpl implements _User {
   @override
   final String? countryCode;
   @override
-  final num? dateOfBirth;
+  final int? dateOfBirth;
 
   @override
   String toString() {
@@ -284,7 +284,7 @@ abstract class _User implements User {
       final String? profilePicture,
       final String? mobileNumber,
       final String? countryCode,
-      final num? dateOfBirth}) = _$UserImpl;
+      final int? dateOfBirth}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -303,7 +303,7 @@ abstract class _User implements User {
   @override
   String? get countryCode;
   @override
-  num? get dateOfBirth;
+  int? get dateOfBirth;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

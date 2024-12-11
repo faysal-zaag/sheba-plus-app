@@ -10,6 +10,7 @@ class MessageContainer extends StatelessWidget {
   final bool forOrderStatusMessage;
   final bool orderDelivered;
   final Color backgroundColor;
+  final Color borderColor;
   final CrossAxisAlignment crossAxisAlignment;
 
   const MessageContainer(
@@ -18,15 +19,17 @@ class MessageContainer extends StatelessWidget {
       this.backgroundColor = AppColors.primaryLight,
       this.forOrderStatusMessage = false,
       this.crossAxisAlignment = CrossAxisAlignment.center,
-      this.orderDelivered = false});
+      this.orderDelivered = false,
+      this.borderColor = AppColors.primary});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: AppBorderRadius.circularRadius4,
-          border: Border.all(color: AppColors.primary)),
+        color: backgroundColor,
+        borderRadius: AppBorderRadius.circularRadius4,
+        border: Border.all(color: borderColor),
+      ),
       child: Padding(
         padding: AppPaddings.messagePadding,
         child: Row(
@@ -46,14 +49,14 @@ class MessageContainer extends StatelessWidget {
                   if (orderDelivered)
                     Container(
                         margin: const EdgeInsets.only(bottom: 16.0),
-                        child: Image.asset(AppImages.delivered, width: 80,)),
+                        child: Image.asset(
+                          AppImages.delivered,
+                          width: 80,
+                        )),
                   Text(
                     message,
                     textAlign: orderDelivered ? TextAlign.center : TextAlign.start,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(color: AppColors.subtext),
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.subtext),
                   ),
                 ],
               ),

@@ -13,7 +13,7 @@ class User with _$User {
     String? profilePicture,
     String? mobileNumber,
     String? countryCode,
-    num? dateOfBirth,
+    int? dateOfBirth,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

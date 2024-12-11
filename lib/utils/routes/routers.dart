@@ -9,7 +9,7 @@ import 'package:sheba_plus/view/auth/forget-password/reset_password_email_verifi
 import 'package:sheba_plus/view/auth/forget-password/set_new_password_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/email_verification_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/referral_screen/referral_screen.dart';
-import 'package:sheba_plus/view/auth/register_screen/register-addres/register_adress_screen.dart';
+import 'package:sheba_plus/view/auth/register_screen/register-address/register_adress_screen.dart';
 import 'package:sheba_plus/view/auth/register_screen/register_screen.dart';
 import 'package:sheba_plus/view/auth/sign_in_screen/sign_in_screen.dart';
 import 'package:sheba_plus/view/cart/cart_details_screen.dart';

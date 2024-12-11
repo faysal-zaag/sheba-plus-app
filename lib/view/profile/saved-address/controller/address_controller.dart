@@ -28,6 +28,19 @@ class AddressController extends GetxController {
   final addressSelectedCountry = "".obs;
   final addressAdditionalInfo = TextEditingController().obs;
 
+  final newAddressTitle = "".obs;
+  final newAddressMobileNumber = "".obs;
+  final newAddressCountryCode = "".obs;
+  final newAddressCountryIso = "".obs;
+  final newAddressMobileNumberLength = 10.obs;
+  final newAddressStreetController = TextEditingController().obs;
+  final newAddressStreet2Controller = TextEditingController().obs;
+  final newAddressCityController = TextEditingController().obs;
+  final newAddressSelectedState = "".obs;
+  final newAddressZipCodeController = TextEditingController().obs;
+  final newAddressSelectedCountry = "".obs;
+  final newAddressAdditionalInfo = TextEditingController().obs;
+
   // void methods
   void resetAddressFields() {
     addressTitle.value = "";

@@ -76,7 +76,7 @@ class _SignInFormState extends State<SignInForm> {
                   )
                 ],
               ),
-              if(storageService.getLanguage() == "en")
+              if(storageService.getLanguage() != "bn")
               GestureDetector(
                 onTap: () {
                   Get.toNamed(Routes.forgetPassword);

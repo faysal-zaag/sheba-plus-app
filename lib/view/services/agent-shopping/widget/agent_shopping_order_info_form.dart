@@ -6,6 +6,10 @@ import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/formatters/date_formatters.dart';
+import 'package:sheba_plus/utils/formatters/date_formatters.dart';
+import 'package:sheba_plus/utils/formatters/date_formatters.dart';
+import 'package:sheba_plus/utils/formatters/date_formatters.dart';
 import 'package:sheba_plus/utils/formatters/input_formatters.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
@@ -134,8 +138,9 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
               CustomPrimaryButton(
                   label: GlobalTexts.next,
                   onClick: () {
-                    // if (_formKey.currentState!.validate()) {}
-                    Get.toNamed(Routes.partialCheckoutScreen);
+                    if (_formKey.currentState!.validate()) {
+                      Get.toNamed(Routes.partialCheckoutScreen);
+                    }
                   })
             ],
           )),
@@ -160,46 +165,19 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
 
   void setTime(DateTime selectedDateTime, bool canadianTime) {
     if (canadianTime) {
-      agentShoppingController.agentShoppingEasternTimeController.value.text = getFormattedDateTime(
+      agentShoppingController.agentShoppingEasternTimeController.value.text = DateFormatters.getFormattedDateTime(
         selectedDateTime: selectedDateTime,
       );
-      agentShoppingController.agentShoppingBDTimeController.value.text = getFormattedDateTimeInBD(
+      agentShoppingController.agentShoppingBDTimeController.value.text = DateFormatters.getFormattedDateTimeInBD(
         selectedDateTime: selectedDateTime,
       );
     } else {
-      agentShoppingController.agentShoppingBDTimeController.value.text = getFormattedDateTime(
+      agentShoppingController.agentShoppingBDTimeController.value.text = DateFormatters.getFormattedDateTime(
         selectedDateTime: selectedDateTime,
       );
-      agentShoppingController.agentShoppingEasternTimeController.value.text = getFormattedDateTimeInCanada(
+      agentShoppingController.agentShoppingEasternTimeController.value.text = DateFormatters.getFormattedDateTimeInCanada(
         selectedDateTime: selectedDateTime,
       );
     }
-  }
-
-  String getFormattedDateTime({required DateTime? selectedDateTime}) {
-    if (selectedDateTime == null) return "No Date Selected";
-    return DateFormat('yyyy-MM-dd hh:mm:ss a').format(selectedDateTime);
-  }
-
-  String getFormattedDateTimeInCanada({required DateTime? selectedDateTime}) {
-    if (selectedDateTime == null) return "No Date Selected";
-    return DateFormat('yyyy-MM-dd hh:mm:ss a').format(selectedDateTime.toUtc().add(const Duration(hours: -5)));
-  }
-
-  String getFormattedDateTimeInBD({required DateTime? selectedDateTime}) {
-    if (selectedDateTime == null) return "No Date Selected";
-
-    // Define time offsets
-    const Duration canadaOffset = Duration(hours: -5);
-    const Duration bdOffset = Duration(hours: 6);
-
-    // Treat selectedDateTime as being in Canada time, adjust to UTC
-    DateTime utcTime = selectedDateTime.subtract(canadaOffset);
-
-    // Convert UTC time to Bangladesh time
-    DateTime bdTime = utcTime.add(bdOffset);
-
-    // Format the BD time
-    return DateFormat('yyyy-MM-dd hh:mm:ss a').format(bdTime);
   }
 }

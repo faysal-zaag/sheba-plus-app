@@ -47,15 +47,14 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
     super.dispose();
   }
 
+  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.detached) {
-      // Perform operation when app is terminated
       performOperationOnTerminate();
     }
   }
 
   void performOperationOnTerminate() {
-    Log.info("App terminated");
     if(authController.keepLoggedIn.isFalse){
       StorageService().removeAuthToken();
     }

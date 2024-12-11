@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/formatters/date_formatters.dart';
 import 'package:sheba_plus/utils/helpers/image_uploader.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/utils.dart';
@@ -29,6 +29,16 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
   final authController = Get.find<AuthController>();
   final profileController = Get.find<ProfileController>();
   final globalController = Get.find<GlobalController>();
+
+  @override
+  void dispose() {
+    profileController.profileEditable(false);
+    if(profileController.user.value.dateOfBirth == null || profileController.user.value.dateOfBirth == 0){
+      profileController.userDateOfBirthController.value.clear();
+      profileController.userDateOfBirthInMilliseconds(0);
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +166,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
 
   void setDateOfBirth(DateTime selectedDate) {
     profileController.userDateOfBirthInMilliseconds.value = selectedDate.millisecondsSinceEpoch;
-    profileController.userDateOfBirthController.value.text = DateFormat('yyyy-MM-dd').format(selectedDate);
+    profileController.userDateOfBirthController.value.text = DateFormatters.convertDateTimeToYYYYMMDD(dateTime: selectedDate);
   }
 
   void showImageUploaderDialog() async {

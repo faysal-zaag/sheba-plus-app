@@ -3,12 +3,15 @@ import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/view/auth/register_screen/register-address/widget/register_address_form.dart';
+import 'package:sheba_plus/view/auth/register_screen/register-address/widget/register_new_address_form.dart';
 import 'package:sheba_plus/view/components/custom_header_container.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/message_container.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/two_options_radio_row.dart';
 import 'package:sheba_plus/view/home/home_screen_texts.dart';
+import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 import 'package:sheba_plus/view/services/partial_checkout_texts.dart';
 import 'package:sheba_plus/view/services/widget/order_summary.dart';
@@ -19,6 +22,7 @@ class PartialCheckoutScreen extends StatelessWidget {
   PartialCheckoutScreen({super.key});
 
   final agentShoppingController = Get.find<AgentShoppingController>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,44 +59,56 @@ class PartialCheckoutScreen extends StatelessWidget {
                       8.kH,
                       Text(
                         PartialCheckoutTexts.dropOffServiceDescription,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleSmall
-                            ?.copyWith(color: AppColors.hintText),
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),
                       ),
                       24.kH,
                       Obx(
                         () => TwoOptionsRadioRow(
-                          selectedValue: agentShoppingController
-                              .agentShoppingDropOffService.value,
-                          onChanged:
-                              agentShoppingController.toggleDropOffService,
+                          selectedValue: agentShoppingController.agentShoppingDropOffService.value,
+                          onChanged: agentShoppingController.toggleDropOffService,
                         ),
                       ),
                     ],
                   ),
                 ),
                 16.kH,
+                // ask if the delivery address is same as home address if user want drop off service
                 Padding(
-                  padding: AppPaddings.horizontal16,
-                  child: Column(
-                    children: [
-                      Text(PartialCheckoutTexts.isSameAsHomeAddress,
-                          style: Theme.of(context).textTheme.labelLarge),
-                      24.kH,
-                      Obx(
-                        () => TwoOptionsRadioRow(
-                          selectedValue:
-                              agentShoppingController.sameAsHomeAddress.value,
-                          onChanged:
-                              agentShoppingController.toggleSaveAsHomeAddress,
-                        ),
-                      ),
-                    ],
-                  ),
+                    padding: AppPaddings.horizontal16,
+                    child: Obx(
+                      () => agentShoppingController.agentShoppingDropOffService.isTrue
+                          ? Column(
+                              children: [
+                                Text(PartialCheckoutTexts.isSameAsHomeAddress, style: Theme.of(context).textTheme.labelLarge),
+                                24.kH,
+                                Obx(
+                                  () => TwoOptionsRadioRow(
+                                    selectedValue: agentShoppingController.sameAsHomeAddress.value,
+                                    onChanged: agentShoppingController.toggleSaveAsHomeAddress,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : MessageContainer(
+                              message: AgentShoppingTexts.dropOffServiceNotEnabledMessage,
+                              backgroundColor: AppColors.primary25,
+                              borderColor: AppColors.primary50,
+                            ),
+                    )),
+                Obx(
+                  () => agentShoppingController.sameAsHomeAddress.isFalse
+                      ? Container(
+                          margin: const EdgeInsets.only(top: 16.0),
+                          color: AppColors.white,
+                          padding: AppPaddings.screenPadding,
+                          child: RegisterNewAddressForm(
+                            formKey: formKey,
+                          ),
+                        )
+                      : const SizedBox(),
                 ),
                 16.kH,
-                const OrderSummary(),
+                OrderSummary(),
                 Container(
                   padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
                   color: AppColors.white,
@@ -101,18 +117,12 @@ class PartialCheckoutScreen extends StatelessWidget {
                     children: [
                       Text(
                         HomeScreenText.paymentMethod,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall
-                            ?.copyWith(fontWeight: FontWeight.w600),
+                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       16.kH,
                       Obx(
                         () => PaymentMethodSelection(
-                            onChange: (method) => agentShoppingController
-                                .togglePaymentMethod(method: method),
-                            selectedPaymentMethod:
-                                agentShoppingController.paymentMethod.value),
+                            onChange: (method) => agentShoppingController.togglePaymentMethod(method: method), selectedPaymentMethod: agentShoppingController.paymentMethod.value),
                       ),
                     ],
                   ),
@@ -124,7 +134,15 @@ class PartialCheckoutScreen extends StatelessWidget {
       ),
       bottomNavigationBar: Padding(
         padding: AppPaddings.allPadding16,
-        child: CustomPrimaryButton(label: PartialCheckoutTexts.makePaymentAndConfirm, onClick: (){}),
+        child: CustomPrimaryButton(
+            label: PartialCheckoutTexts.makePaymentAndConfirm,
+            onClick: () {
+              if (agentShoppingController.sameAsHomeAddress.isFalse) {
+                if (formKey.currentState!.validate()) {
+                  print("Valid form");
+                }
+              }
+            }),
       ),
     );
   }

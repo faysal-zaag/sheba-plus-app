@@ -14,6 +14,7 @@ class AgentShoppingTexts{
   static String serviceDuration ({required int hourlyRates}) => "How many hours of service would you like to book with the agent? (CAD $hourlyRates/hour)".tr;
   static String serviceDurationHintText = "Enter shopping hour".tr;
   static String serviceDurationCostHintText = "Enter agent fee".tr;
+  static String dropOffServiceNotEnabledMessage = "Since you didn’t select a drop-off option, you will need to collect your product from our Canada office. Once your product arrives, we will notify you, and you can pick it up at your convenience.".tr;
 
   // shopping details
   static String shopName = "Shop Name".tr;

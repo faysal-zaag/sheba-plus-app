@@ -25,43 +25,39 @@ class RegisterAddressForm extends StatefulWidget {
   final bool forUpdate;
   final int? addressId;
 
-  const RegisterAddressForm(
-      {super.key,
-      this.withPhoneField = false,
-      this.forUpdate = false,
-      this.addressId});
+  const RegisterAddressForm({
+    super.key,
+    this.withPhoneField = false,
+    this.forUpdate = false,
+    this.addressId,
+  });
 
   @override
   State<RegisterAddressForm> createState() => _RegisterAddressFormState();
 }
 
 class _RegisterAddressFormState extends State<RegisterAddressForm> {
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   final addressController = Get.find<AddressController>();
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: _formKey,
       child: Column(
         children: [
           if (widget.withPhoneField)
             Obx(() {
-              int validationNumberLength =
-                  addressController.addressMobileNumberLength.value;
+              int validationNumberLength = addressController.addressMobileNumberLength.value;
 
               return CustomPhoneField(
                 onCountryChanged: (Country country) {
-                  addressController.addressMobileNumberLength.value =
-                      country.minLength;
+                  addressController.addressMobileNumberLength.value = country.minLength;
                 },
                 onChanged: (PhoneNumber phoneNumber) {
-                  addressController.addressMobileNumber.value =
-                      phoneNumber.number;
-                  addressController.addressCountryCode.value =
-                      phoneNumber.countryCode;
-                  addressController.addressCountryIso.value =
-                      phoneNumber.countryISOCode;
+                  addressController.addressMobileNumber.value = phoneNumber.number;
+                  addressController.addressCountryCode.value = phoneNumber.countryCode;
+                  addressController.addressCountryIso.value = phoneNumber.countryISOCode;
                 },
                 validator: (value) {
                   if (value != null && value.number.isEmpty) {
@@ -77,9 +73,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           CustomTextField(
               controller: addressController.addressStreetController.value,
               hintText: "${AuthScreenText.streetAddress}*",
-              validator: (value) => InputValidators.generalValidator(
-                  value: value,
-                  message: AuthScreenText.streetAddressValidatorText)),
+              validator: (value) => InputValidators.generalValidator(value: value, message: AuthScreenText.streetAddressValidatorText)),
           16.kH,
           CustomTextField(
             controller: addressController.addressStreet2Controller.value,
@@ -89,14 +83,12 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           CustomTextField(
               controller: addressController.addressCityController.value,
               hintText: "${AuthScreenText.cityTown}*",
-              validator: (value) => InputValidators.generalValidator(
-                  value: value, message: AuthScreenText.cityTownValidatorText)),
+              validator: (value) => InputValidators.generalValidator(value: value, message: AuthScreenText.cityTownValidatorText)),
           16.kH,
           Obx(
             () => CustomDropdown(
               items: const ["Bangladesh", "Canada", "USA"],
-              onChanged: (value) =>
-                  addressController.addressSelectedCountry(value),
+              onChanged: (value) => addressController.addressSelectedCountry(value),
               selectedValue: addressController.addressSelectedCountry.value,
               borderColor: AppColors.border,
               hintText: "${AuthScreenText.country}*",
@@ -112,8 +104,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           Obx(
             () => CustomDropdown(
               items: const ["State 1", "State B", "State D"],
-              onChanged: (value) =>
-                  addressController.addressSelectedState(value),
+              onChanged: (value) => addressController.addressSelectedState(value),
               selectedValue: addressController.addressSelectedState.value,
               borderColor: AppColors.border,
               hintText: "${AuthScreenText.state}*",
@@ -130,8 +121,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
             controller: addressController.addressZipCodeController.value,
             hintText: "${AuthScreenText.postalOrZip}*",
             textInputType: TextInputType.number,
-            validator: (value) => InputValidators.generalValidator(
-                value: value, message: AuthScreenText.postalOrZipValidatorText),
+            validator: (value) => InputValidators.generalValidator(value: value, message: AuthScreenText.postalOrZipValidatorText),
           ),
           16.kH,
           TextField(
@@ -147,14 +137,10 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           24.kH,
           Obx(
             () => CustomPrimaryButton(
-              loading: widget.forUpdate
-                  ? addressController.addressUpdateLoading.isTrue
-                  : addressController.addressCreateLoading.isTrue,
-              label: widget.forUpdate
-                  ? ProfileScreenTexts.updateAddress
-                  : GlobalTexts.saveAndContinue,
+              loading: widget.forUpdate ? addressController.addressUpdateLoading.isTrue : addressController.addressCreateLoading.isTrue,
+              label: widget.forUpdate ? ProfileScreenTexts.updateAddress : GlobalTexts.saveAndContinue,
               onClick: () {
-                if (formKey.currentState!.validate()) {
+                if (_formKey.currentState!.validate()) {
                   if (widget.forUpdate) {
                     updateAddress(addressId: widget.addressId ?? 0);
                   } else {
@@ -170,8 +156,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
   }
 
   void saveAddress() async {
-    final response =
-        await addressController.createAddress(title: "Home Address");
+    final response = await addressController.createAddress(title: "Home Address");
     if (response) {
       addressController.resetAddressFields();
       Get.offAndToNamed(Routes.referral);
@@ -180,8 +165,7 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
   }
 
   void updateAddress({required int addressId}) async {
-    final response =
-        await addressController.updateAddress(addressId: addressId);
+    final response = await addressController.updateAddress(addressId: addressId);
     if (response) {
       addressController.resetAddressFields();
       Get.back();
