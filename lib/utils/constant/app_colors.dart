@@ -7,6 +7,7 @@ class AppColors{
   static const Color primary25 = Color(0xffFFF9F5);
   static const Color primary30 = Color(0xffFBFFFB);
   static const Color primary50 = Color(0xffFFF4EB);
+  static const Color secondary500 = Color(0xffD4F4DD);
   static const Color background = Color(0xffF4F4F1);
   static const Color background2 = Color(0xffFAFAFA);
   static const Color cardBg = Color(0xffFAFBFB);
@@ -33,4 +34,7 @@ class AppColors{
   static const Color neutral50 = Color(0xffF5F5F5);
   static const Color neutral70 = Color(0xffCCCCCC);
 
+  //shimmer
+  static const Color shimmerBase = Color(0xFFE0E0E0); // Light gray
+  static const Color shimmerHighlight = Color(0xFFF5F5F5); // White or lighter gray
 }

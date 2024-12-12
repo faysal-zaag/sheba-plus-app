@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sheba_plus/models/display_service/product_size.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 
 import '../../../../utils/constant/app_colors.dart';
 
 class ProductSizeWidget extends StatelessWidget {
-  final List<String> productSizeList;
+  final List<ProductSize> productSizeList;
   final Function onTapSize;
-  final String selectedSize;
+  final ProductSize selectedSize;
 
   const ProductSizeWidget(
       {super.key,
@@ -64,7 +65,8 @@ class ProductSizeWidget extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      productSizeList[index],
+                      productSizeList[index].name ?? ''
+                          '',
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                   ),

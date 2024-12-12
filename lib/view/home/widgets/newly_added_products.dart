@@ -70,7 +70,7 @@ class NewlyAddedProducts extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: 10, // Number of products (for example, 10 products)
                 itemBuilder: (context, index) {
-                  return ProductCard(productModel: product,);
+                  return ProductCard(product: product,);
                 },
               ),
             ),

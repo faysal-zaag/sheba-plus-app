@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sheba_plus/models/notification/notification.dart';
 import 'package:sheba_plus/view/profile/account-management/change_password_screen.dart';
 import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
 import 'package:sheba_plus/view/cart/cart_details_screen.dart';
@@ -33,7 +34,7 @@ class AppRouters {
     ),
     GetPage(
       name: Routes.home,
-      page: () => HomeScreen(),
+      page: () => const HomeScreen(),
     ),
     GetPage(
       name: Routes.profile,
@@ -93,7 +94,10 @@ class AppRouters {
     ),
     GetPage(
       name: Routes.notificationDetails,
-      page: () => const NotificationDetailsScreen(),
+      page: () {
+        final notification = Get.arguments as UserNotification;
+        return NotificationDetailsScreen(notification: notification);
+      },
     ),
     GetPage(
       name: Routes.displayCenterServiceProductDetailsScreen,

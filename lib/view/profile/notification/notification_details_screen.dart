@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sheba_plus/models/notification/notification.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/view/components/custom_header_container.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/vertical_bordered_text_container.dart';
+import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/notification/widget/meeting_waiting_container.dart';
 import 'package:sheba_plus/view/profile/notification/widget/order-review/order_review_questions.dart';
 import 'package:sheba_plus/view/profile/notification/widget/shopping-details/shopping_details.dart';
@@ -12,16 +15,37 @@ import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/profile/notification/widget/order_status_tracks.dart';
 import 'package:sheba_plus/view/styles.dart';
 
-class NotificationDetailsScreen extends StatelessWidget {
-  const NotificationDetailsScreen({super.key});
+class NotificationDetailsScreen extends StatefulWidget {
+  final UserNotification notification;
+
+  const NotificationDetailsScreen({super.key, required this.notification});
+
+  @override
+  State<NotificationDetailsScreen> createState() => _NotificationDetailsScreenState();
+}
+
+class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
+  final notificationController = Get.find<NotificationController>();
+
+  void _initCall() async {
+    await notificationController.markAsRead(notificationId: widget.notification.id);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _initCall();
+  }
 
   @override
   Widget build(BuildContext context) {
+    UserNotification notification = widget.notification;
+
     return PrimaryScaffold(
         body: Column(
       children: [
-        CustomHeaderContainer(
-            title: "${ProfileScreenTexts.ticketNumber} #DC1452080"),
+        if (notification.ticketNo != null) CustomHeaderContainer(title: "${ProfileScreenTexts.ticketNumber} #${notification.ticketNo}"),
         VerticalBorderedContainer(
           child: Text(
             ProfileScreenTexts.notificationDetailsHeader,
@@ -31,14 +55,16 @@ class NotificationDetailsScreen extends StatelessWidget {
         Expanded(
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: AppPaddings.allPadding16,
                   child: Container(
+                    width: double.infinity,
                     decoration: Styles.roundedWhite,
                     padding: AppPaddings.allPadding16,
                     child: Text(
-                      "Hi Ms Lessa,\n\nYou have purchased 5 Hours AGENT SERVICE to assist you for shopping at Basundhara Shopping Centre. Your shopping time will start on July 08, 2024 at 11PM (ET time) OR July 09, 2024 at 9AM (BD time).\n\nA Count-Down Clock (i.e., CDC) and Video Communication System (i.e., VCS) have already been installed at your track ticket details page, the CDC will guide about your time.\n\nRETURN & You will get a Notification as well as Alarming Signal on CDC when your time will be running out. You can extend your shopping time then or it will terminate by itself. At any point, you can terminate your shopping by CLICKING STOP.\n\nHope you enjoy your shopping with our AGENT.\n\nRegards\nDS.Com Team",
+                      notification.details,
                       style: Theme.of(context).textTheme.labelMedium,
                     ),
                   ),
@@ -60,10 +86,7 @@ class NotificationDetailsScreen extends StatelessWidget {
                           ),
                           Text(
                             ProfileScreenTexts.startMeeting,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(color: AppColors.neutral70),
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.neutral70),
                           ),
                         ],
                       ),
@@ -78,10 +101,7 @@ class NotificationDetailsScreen extends StatelessWidget {
                           MeetingWaitingContainer(
                             height: 41,
                             onlyTime: true,
-                            textStyle: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(color: AppColors.white),
+                            textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.white),
                           ),
                         ],
                       ),
@@ -92,10 +112,7 @@ class NotificationDetailsScreen extends StatelessWidget {
                         children: [
                           Text(
                             ProfileScreenTexts.extendMeetingTime,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge
-                                ?.copyWith(
+                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
                                   color: AppColors.primary,
                                 ),
                           ),

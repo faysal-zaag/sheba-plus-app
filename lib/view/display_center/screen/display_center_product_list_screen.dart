@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/controllers/navigation_controller.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/utils/routes/routers.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/view/components/custom_loader.dart';
+import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 import 'package:sheba_plus/view/display_center/screen/display_center_product_details_screen.dart';
 import 'package:sheba_plus/view/display_center/widgets/custom_bottom_nav_bar_widget.dart';
 
-import '../../../data/mock_data.dart';
 import '../../components/primary_scaffold.dart';
 import '../widgets/display_service_header_widget.dart';
 import '../widgets/product_view_widget.dart';
@@ -23,12 +23,18 @@ class DisplayCenterProductListScreen extends StatefulWidget {
 class _DisplayCenterProductListScreenState
     extends State<DisplayCenterProductListScreen> {
   final navigationController = Get.find<NavigationController>();
+  final displayCenterServiceController =
+      Get.find<DisplayCenterServiceController>();
 
+  _initCall() async {
+    navigationController.selectedIndex(1);
+    displayCenterServiceController.getAllDisplayCenterServiceProducts();
+  }
 
   @override
   void initState() {
     // TODO: implement initState
-    navigationController.selectedIndex(1);
+    _initCall();
     super.initState();
   }
 
@@ -44,11 +50,20 @@ class _DisplayCenterProductListScreenState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 DisplayServiceHeaderWidget(),
-                ProductViewWidget(
-                  productList: mockProductList,
-                  onTapProduct: (product) {
-                    Get.toNamed(Routes.displayCenterServiceProductDetailsScreen, arguments: DisplayCenterProductDetailsScreen(productId: product.id));
-                  },
+                Obx(
+                  () => displayCenterServiceController
+                          .loadingAllDisplayCenterServiceProducts.value
+                      ? const CustomLoader()
+                      : ProductViewWidget(
+                          productList: displayCenterServiceController
+                              .displayServiceProductList,
+                          onTapProduct: (product) {
+                            Get.toNamed(
+                                Routes.displayCenterServiceProductDetailsScreen,
+                                arguments: DisplayCenterProductDetailsScreen(
+                                    productId: product.id));
+                          },
+                        ),
                 ),
                 65.kH,
               ],

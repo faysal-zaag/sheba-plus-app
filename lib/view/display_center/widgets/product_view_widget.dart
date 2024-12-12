@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sheba_plus/models/display_service/display_service_product.dart';
 import 'package:sheba_plus/view/components/product_card.dart';
 
 import '../../../models/product/product.model.dart';
 
 class ProductViewWidget extends StatelessWidget {
-  final List<ProductModel> productList;
+  final List<DisplayServiceProduct> productList;
   final Function onTapProduct;
 
   const ProductViewWidget(
@@ -26,7 +27,7 @@ class ProductViewWidget extends StatelessWidget {
               onTapProduct(productList[index]);
             },
             child: ProductCard(
-              productModel: productList[index],
+              product: productList[index],
             ),
           );
         },

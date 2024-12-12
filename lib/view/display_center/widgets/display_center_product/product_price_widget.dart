@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:sheba_plus/models/product/product.model.dart';
+import 'package:get/get.dart';
+import 'package:sheba_plus/models/display_service/display_service_product.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 
 class ProductPriceWidget extends StatelessWidget {
-  final ProductModel product;
+  final DisplayServiceProduct product;
 
-  const ProductPriceWidget({Key? key, required this.product}) : super(key: key);
+  ProductPriceWidget({Key? key, required this.product}) : super(key: key);
+
+  final displayServiceProductController =
+      Get.find<DisplayCenterServiceController>();
 
   @override
   Widget build(BuildContext context) {
@@ -14,24 +19,34 @@ class ProductPriceWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         children: [
-          Text(
-            '\$ ${product.price}',
-            style: Theme.of(context)
-                .textTheme
-                .headlineMedium
-                ?.copyWith(fontWeight: FontWeight.w500),
-          ),
+          product.discountPrice > 0
+              ? Text(
+                  '\$ ${displayServiceProductController.calculatePriceAfterDiscount(price: product.price, discountPrice: product.discountPrice)}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium
+                      ?.copyWith(fontWeight: FontWeight.w500),
+                )
+              : Text(
+                  '\$ ${product.price}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium
+                      ?.copyWith(fontWeight: FontWeight.w500),
+                ),
+          if (product.discountPrice > 0) ...[
+            5.kW,
+            Text(
+              '\$ ${product.price}',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.grey,
+                  decoration: TextDecoration.lineThrough,
+                  decorationColor: AppColors.grey),
+            ),
+          ],
           5.kW,
           Text(
-            '\$ ${product.price}',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.grey,
-                decoration: TextDecoration.lineThrough,
-                decorationColor: AppColors.grey),
-          ),
-          5.kW,
-          Text(
-            '25% off',
+            '${product.discountPercentage}% off',
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium

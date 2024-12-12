@@ -34,6 +34,12 @@ class ApiUrls {
   static const String addressApiUrl = "$securedApiUrl/addresses";
   static const String updateAddressApiUrl = "$addressApiUrl/update/id";
 
+  // notification
+  static const String notificationApiUrl = "$securedApiUrl/user-notifications";
+  static const String getNotificationApiUrl = "$notificationApiUrl/id";
+  static const String markAsReadApiUrl = "$notificationApiUrl/mark-as-read/id";
+  static const String markAllAsReadApiUrl = "$notificationApiUrl/all/mark-as-read";
+
   // customer
   static const String applyReferral = "$securedApiUrl/customers/apply-referral";
   static const String changePassword = "$securedApiUrl/customers/reset-password";
@@ -42,4 +48,10 @@ class ApiUrls {
   static const String createDeviceToken = "$baseApiUrl/firebase/device/token/create";
   static const String removeDeviceToken = "$baseApiUrl/firebase/device/token/remove";
 
+  //Display Service
+  static const String getAllDisplayServiceProductsApiUrl = "$baseApiUrl/products";
+
+  // Category
+  static const String getAllCategoryApiUrl = "$baseApiUrl/categories";
+  static const String getAllSubCategoryApiUrl = "$baseApiUrl/sub-categories";
 }

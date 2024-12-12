@@ -41,6 +41,7 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
       child: Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFieldWithLabel(
                 controller: agentShoppingController.agentShoppingMeetingLocationController.value,
@@ -133,6 +134,7 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
                     ),
                   ),
                 ),
+                validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
                 textInputType: TextInputType.number,
                 inputFormatters: [InputFormatters.numberOnly],
                 onChange: (value) {

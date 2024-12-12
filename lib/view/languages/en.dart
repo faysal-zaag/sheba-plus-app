@@ -235,4 +235,5 @@ final Map<String, String> en = {
   'question6': "Are you satisfied with our agent service?",
   'question7': "Are you satisfied with our products in the display center?",
   'additionalCustomerComment': "Additional Customer Comment (If Any)",
+  'reviewCriticismMessage': "Any constructive criticism will be appreciated and rewarded with points.",
 };
