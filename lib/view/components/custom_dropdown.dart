@@ -43,7 +43,10 @@ class CustomDropdown extends StatelessWidget {
     this.borderColor,
     this.hintText = 'Select Item',
     this.validator,
-    this.readOnly = false, this.disableBorder = false, this.customButton, this.padding,
+    this.readOnly = false,
+    this.disableBorder = false,
+    this.customButton,
+    this.padding,
   });
 
   @override
@@ -52,8 +55,10 @@ class CustomDropdown extends StatelessWidget {
       child: DropdownButtonFormField2<String>(
         customButton: customButton,
         decoration: Styles.getTextFieldInputDecoration(
-                context: context, fillColor: backgroundColor)
-            .copyWith(
+          context: context,
+          fillColor: backgroundColor,
+          borderColor: borderColor,
+        ).copyWith(
           contentPadding: EdgeInsets.zero,
           prefix: const Padding(
             padding: EdgeInsets.only(left: 0),
@@ -69,30 +74,25 @@ class CustomDropdown extends StatelessWidget {
         isExpanded: true,
         hint: Text(
           hintText,
-          style: Theme.of(context)
-              .textTheme
-              .titleSmall
-              ?.copyWith(color: AppColors.hintText),
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.hintText),
         ),
         items: items
             .asMap()
             .entries
             .map(
               (entry) => DropdownMenuItem<String>(
-                value: entry.value, // The item value
+                value: entry.value,
                 child: Row(
                   children: [
                     if (prefixIcon)
                       Icon(
                         icons[entry.key],
-                        // Accessing icon using index
                         size: 20,
                       ),
                     8.kW,
                     Text(
-                      entry.value, // The item text
-                      style:
-                          labelStyle ?? Theme.of(context).textTheme.labelLarge,
+                      entry.value,
+                      style: labelStyle ?? Theme.of(context).textTheme.titleSmall,
                     ),
                   ],
                 ),
@@ -102,18 +102,13 @@ class CustomDropdown extends StatelessWidget {
         value: selectedValue.isEmpty ? null : selectedValue,
         onChanged: onChanged,
         buttonStyleData: ButtonStyleData(
-          // decoration: BoxDecoration(
-          //     color: backgroundColor,
-          //     border: Border.all(color: borderColor ?? Colors.transparent),
-          //     borderRadius: BorderRadius.circular(borderRadius)),
           padding: padding ?? EdgeInsets.symmetric(horizontal: selectedValue.isEmpty ? 16 : 6),
           height: height,
           width: width,
         ),
         dropdownStyleData: DropdownStyleData(
-            decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: BorderRadius.circular(borderRadius))),
+          decoration: BoxDecoration(color: backgroundColor, borderRadius: BorderRadius.circular(borderRadius)),
+        ),
         menuItemStyleData: const MenuItemStyleData(
           height: 56,
         ),

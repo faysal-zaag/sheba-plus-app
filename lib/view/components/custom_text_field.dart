@@ -4,7 +4,7 @@ import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/view/styles.dart';
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String? title;
   final String? hintText;
   final bool readOnly;
@@ -27,8 +27,7 @@ class CustomTextField extends StatelessWidget {
   final AutovalidateMode? autoValidateMode;
 
   const CustomTextField(
-      {super.key,
-      required this.controller,
+      {super.key, this.controller,
       this.title,
       this.hintText,
       this.readOnly = false,
@@ -73,7 +72,7 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       keyboardType: textInputType,
       inputFormatters: inputFormatters,
-      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
+      style: Theme.of(context).textTheme.titleSmall,
       maxLines: maxLine,
     );
   }

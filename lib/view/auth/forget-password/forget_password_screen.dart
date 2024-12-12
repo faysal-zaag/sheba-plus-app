@@ -42,8 +42,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   Column(
                     children: [
                       CommonVerificationHeader(
-                        heading: AuthScreenText.forgetPasswordHeadline,
-                        description: "",
+                        heading: AuthScreenText.forgotPassword,
+                        description: AuthScreenText.forgetPasswordHeadline,
                         headerImage: Image.asset(
                           AppImages.forgetPassword,
                           width: 250,
@@ -51,6 +51,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       ),
                     ],
                   ),
+                  24.kH,
                   TextFieldWithLabel(
                     controller:
                         authController.forgetPasswordEmailController.value,
@@ -58,7 +59,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     hintText: AuthScreenText.emailIdHintText,
                     validator: (value) => InputValidators.emailValidator(value),
                   ),
-                  80.kH,
+                  60.kH,
                   Obx(
                     () => CustomPrimaryButton(
                       loading:

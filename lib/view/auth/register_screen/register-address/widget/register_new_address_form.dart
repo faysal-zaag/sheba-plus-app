@@ -30,7 +30,8 @@ class RegisterNewAddressForm extends StatefulWidget {
     super.key,
     this.withPhoneField = false,
     this.forUpdate = false,
-    this.addressId, required this.formKey,
+    this.addressId,
+    required this.formKey,
   });
 
   @override
@@ -47,29 +48,17 @@ class _RegisterNewAddressFormState extends State<RegisterNewAddressForm> {
       child: Column(
         children: [
           if (widget.withPhoneField)
-            Obx(() {
-              int validationNumberLength = addressController.newAddressMobileNumberLength.value;
-
-              return CustomPhoneField(
-                onCountryChanged: (Country country) {
-                  addressController.newAddressMobileNumber("");
-                  addressController.newAddressMobileNumberLength.value = country.minLength;
-                },
-                onChanged: (PhoneNumber phoneNumber) {
-                  addressController.newAddressMobileNumber.value = phoneNumber.number;
-                  addressController.newAddressCountryCode.value = phoneNumber.countryCode;
-                  addressController.newAddressCountryIso.value = phoneNumber.countryISOCode;
-                },
-                validator: (value) {
-                  if (value != null && value.number.isEmpty) {
-                    return "Phone number required";
-                  } else if (value?.number.length != validationNumberLength) {
-                    return "Phone number should container $validationNumberLength digits";
-                  }
+            Obx(
+              () => CustomPhoneField(
+                onChange: (mobileNumber) {
+                  addressController.newAddressMobileNumber.value = mobileNumber!;
                   return null;
                 },
-              );
-            }),
+                onCountryChanged: (dialCode) {
+                  addressController.newAddressCountryCode.value = dialCode;
+                },
+              ),
+            ),
           if (widget.withPhoneField) 16.kH,
           CustomTextField(
               controller: addressController.newAddressStreetController.value,

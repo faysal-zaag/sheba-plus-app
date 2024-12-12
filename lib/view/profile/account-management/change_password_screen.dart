@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
-import 'package:sheba_plus/utils/constant/app_images.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/utils.dart';
-import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
-import 'package:sheba_plus/view/auth/widgets/otp_verify_screen_header.dart';
-import 'package:sheba_plus/view/components/custom_appbar.dart';
 import 'package:sheba_plus/view/components/custom_password_field.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
-import 'package:sheba_plus/view/components/text_field_with_label.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 import 'package:sheba_plus/view/styles.dart';
 

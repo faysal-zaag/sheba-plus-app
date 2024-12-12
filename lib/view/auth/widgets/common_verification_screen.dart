@@ -28,10 +28,12 @@ class CommonVerificationScreen extends StatefulWidget {
   final Function() bottomLeftLabelOnClick;
   final Function(String) onChanged;
   final VoidCallback onClick;
-  final Function? resendEmailOtp;
+  final VoidCallback onTimerFinish;
+  final VoidCallback resendEmailOtp;
   final String? phoneNumber;
   final bool? loading;
   final bool? forEmail;
+  final bool visibleResendCode;
 
   const CommonVerificationScreen({
     super.key,
@@ -45,31 +47,21 @@ class CommonVerificationScreen extends StatefulWidget {
     this.phoneNumber,
     this.loading = false,
     this.forEmail,
-    this.resendEmailOtp,
+    required this.resendEmailOtp,
     required this.onChanged,
+    required this.visibleResendCode,
+    required this.onTimerFinish,
   });
 
   @override
-  State<CommonVerificationScreen> createState() =>
-      _CommonVerificationScreenState();
+  State<CommonVerificationScreen> createState() => _CommonVerificationScreenState();
 }
 
 class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
   final authController = Get.find<AuthController>();
-  final _formKey =
-      GlobalKey<FormState>(); // Add a GlobalKey for form validation
+  final _formKey = GlobalKey<FormState>(); // Add a GlobalKey for form validation
 
   bool showSendAgain = false;
-
-  void resendOTP() async {
-    DialogHelper.showLoading();
-    final status = await authController.resendOtp();
-    DialogHelper.hideLoading();
-    if (status) {
-      Get.offAndToNamed(Routes.emailVerification);
-      Utils.showSuccessToast(message: AuthScreenText.otpSentMessage);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +74,7 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
           : Padding(
               padding: const EdgeInsets.all(16.0),
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 32),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 32),
                 decoration: Styles.roundedWhite,
                 child: SingleChildScrollView(
                   child: Column(
@@ -99,31 +90,16 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
                         children: [
                           Text(
                             AuthScreenText.verificationCode,
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.copyWith(
-                                    color: AppColors.hintText, fontSize: 14),
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.hintText, fontSize: 14),
                           ),
-                          Obx(
-                            () => authController.registerResendCode.isTrue
-                                ? TextButton(
-                                    onPressed: () {
-                                      authController.registerResendCode(
-                                          !authController
-                                              .registerResendCode.value);
-                                      resendOTP();
-                                    },
-                                    child: Text(
-                                      AuthScreenText.resendCode,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge
-                                          ?.copyWith(fontSize: 14),
-                                    ),
-                                  )
-                                : const SizedBox(),
-                          )
+                          if (widget.visibleResendCode)
+                            TextButton(
+                              onPressed: widget.resendEmailOtp,
+                              child: Text(
+                                AuthScreenText.resendCode,
+                                style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14, color: AppColors.primary),
+                              ),
+                            )
                         ],
                       ),
                       CustomOtpFields(
@@ -137,30 +113,21 @@ class _CommonVerificationScreenState extends State<CommonVerificationScreen> {
                             onTap: widget.bottomLeftLabelOnClick,
                             child: Text(
                               widget.bottomLeftLabel,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelLarge
-                                  ?.copyWith(fontSize: 14),
+                              style: Theme.of(context).textTheme.labelLarge?.copyWith(fontSize: 14, color: AppColors.primary),
                             ),
                           ),
-                          Obx(
-                            () => authController.registerResendCode.isFalse
-                                ? CountDownTimer(
-                                    verificationPage: true,
-                                    startTimeMilliseconds: AuthUtils.getVerificationTime(),
-                                    onTimerFinish: () => authController
-                                        .registerResendCode(!authController
-                                            .registerResendCode.value),
-                                  )
-                                : const SizedBox(),
-                          )
+                          if (!widget.visibleResendCode)
+                            CountDownTimer(
+                              verificationPage: true,
+                              startTimeMilliseconds: AuthUtils.getVerificationTime(),
+                              onTimerFinish: widget.onTimerFinish,
+                            )
                         ],
                       ),
                       24.kH,
                       Obx(
                         () => CustomPrimaryButton(
-                          loading: authController
-                              .otpVerificationProcessLoading.value,
+                          loading: authController.otpVerificationProcessLoading.value,
                           label: widget.buttonLabel,
                           onClick: () {
                             if (_formKey.currentState!.validate()) {

@@ -42,8 +42,8 @@ class _ResetPasswordEmailScreenState extends State<ResetPasswordEmailScreen> {
                   Column(
                     children: [
                       CommonVerificationHeader(
-                        heading: AuthScreenText.forgetPasswordHeadline,
-                        description: "",
+                        heading: AuthScreenText.forgotPasswordQ,
+                        description: AuthScreenText.forgetPasswordHeadline,
                         headerImage: Image.asset(
                           AppImages.forgetPassword,
                           width: 250,

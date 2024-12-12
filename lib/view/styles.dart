@@ -26,6 +26,7 @@ class Styles {
     bool readOnly = false,
     BorderRadius? customBorder,
     Border? border,
+    Color? borderColor,
     double borderRadius = 6.0,
     required Color fillColor,
     String? hintText,
@@ -36,10 +37,10 @@ class Styles {
         focusedBorder: readOnly == true
             ? OutlineInputBorder(
                 borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
-                borderSide: const BorderSide(color: AppColors.border, width: 1.0),
+                borderSide: BorderSide(color: borderColor ?? AppColors.border, width: 1.0),
               )
             : OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.primary, width: 1.0),
+                borderSide: BorderSide(color: borderColor ?? AppColors.primary, width: 1.0),
                 borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
               ),
         focusedErrorBorder: OutlineInputBorder(
@@ -48,7 +49,7 @@ class Styles {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: customBorder ?? BorderRadius.circular(borderRadius),
-          borderSide: BorderSide(color: const Color(0xff000000).withOpacity(0.1), width: 1.0),
+          borderSide: BorderSide(color: borderColor ?? const Color(0xff000000).withOpacity(0.1), width: 1.0),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: customBorder ?? BorderRadius.circular(borderRadius),

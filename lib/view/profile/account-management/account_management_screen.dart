@@ -112,29 +112,21 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
               ),
             ),
             Obx(
-              (){
-                int validationNumberLength = profileController.userPhoneNumberValidationLength.value;
-
-                return AbsorbPointer(
-                  absorbing: profileController.profileEditable.isFalse,
-                  child: CustomPhoneField(
-                    required: profileController.profileEditable.isTrue,
-                    controller: profileController.userPhoneNumberController.value,
-                    initialCountryCode: AppConstants.countries.firstWhere((country) => country.countryCode == profileController.user.value.countryCode).isoCode,
-                    onCountryChanged: (Country country) {
-                      profileController.userPhoneNumberController.value.clear();
-                      profileController.userPhoneNumberValidationLength.value =
-                          country.minLength;
-                    },
-                    label: AuthScreenText.phoneNumber,
-                    onChanged: (value) {
-                      profileController.userPhoneNumberController.value.text = value.number;
-                      profileController.userPhoneNumberCountryCode.value = value.countryCode;
-                    },
-                    validator: (value) => InputValidators.phoneNumberValidator(value: value, validationNumberLength: validationNumberLength),
-                  ),
-                );
-              },
+              () => AbsorbPointer(
+                absorbing: profileController.profileEditable.isFalse,
+                child: CustomPhoneField(
+                  controller: profileController.userPhoneNumberController.value,
+                  onChange: (mobileNumber) {
+                    profileController.userPhoneNumberController.value.text = mobileNumber!;
+                    return null;
+                  },
+                  onCountryChanged: (dialCode) {
+                    profileController.userPhoneNumberCountryCode.value = dialCode;
+                  },
+                  required: profileController.profileEditable.isTrue,
+                  label: AuthScreenText.phoneNumber,
+                ),
+              ),
             ),
             16.kH,
             Obx(

@@ -41,24 +41,15 @@ class _ReferralFormState extends State<ReferralForm> {
                 authController.referralPhoneNumberLength.value;
 
             return CustomPhoneField(
-              onCountryChanged: (Country country) {
-                authController.referralPhoneNumberLength.value =
-                    country.minLength;
+              onChange: (mobileNumber) {
+                  authController.referralPhoneNumber.value = mobileNumber!;
+                  return null;
+              },
+              onCountryChanged: (dialCode){
+                authController.referralCountryCode.value = dialCode;
               },
               label: AuthScreenText.existingUserPhoneNumber,
-              onChanged: (value) {
-                authController.referralPhoneNumber.value = value.number;
-                authController.referralCountryCode.value = value.countryCode;
-              },
-              validator: (value) {
-                if (value != null && value.number.isEmpty) {
-                  return AuthScreenText.mobileNumberValidatorText;
-                } else if (value?.number.length != validationNumberLength) {
-                  return AuthScreenText.numberShouldContains(
-                      validationNumberLength);
-                }
-                return null;
-              },
+              validatorNumberLength: validationNumberLength,
             );
           }),
           24.kH,

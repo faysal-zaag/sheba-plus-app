@@ -47,6 +47,9 @@ class AuthController extends GetxController {
   final confirmNewPasswordController = TextEditingController().obs;
 
   final registerResendCode = false.obs;
+  final forgetPasswordResendCode = false.obs;
+  final changePasswordResendCode = true.obs;
+
   final registerOtpCode = "".obs;
   final resetPasswordByEmailOtpCode = "".obs;
 

@@ -16,6 +16,7 @@ class AppColors{
   static const Color blackTitle = Color(0xff262626);
   static const Color blue = Color(0xff0F62FE);
   static const Color error = Color(0xffE91C24);
+  static const Color success = Color(0xff28A745);
 
   // Widget Colors
   static const Color hintText = Color(0xff565656);

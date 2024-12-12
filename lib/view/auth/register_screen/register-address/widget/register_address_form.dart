@@ -48,47 +48,17 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
       child: Column(
         children: [
           if (widget.withPhoneField)
-            Obx(() {
-              int validationNumberLength = addressController.addressMobileNumberLength.value;
-
-              return FormField<PhoneNumber>(
-                initialValue: PhoneNumber(
-                  countryCode: addressController.addressCountryCode.value,
-                  number: addressController.addressMobileNumber.value,
-                  countryISOCode: AppConstants.countries.firstWhere((country) => country.countryCode == addressController.addressCountryCode.value).isoCode,
-                ),
-                validator: (value) {
-                  // Use the same validator you were using before
-                  return InputValidators.phoneNumberValidator(value: value, validationNumberLength: validationNumberLength);
+            Obx(
+              () => CustomPhoneField(
+                onChange: (mobileNumber) {
+                  addressController.addressMobileNumber.value = mobileNumber!;
+                  return null;
                 },
-                builder: (state) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomPhoneField(
-                        onCountryChanged: (Country country) {
-                          addressController.addressMobileNumberLength.value = country.minLength;
-                        },
-                        onChanged: (PhoneNumber phoneNumber) {
-                          addressController.addressMobileNumber.value = phoneNumber.number;
-                          addressController.addressCountryCode.value = phoneNumber.countryCode;
-                          addressController.addressCountryIso.value = phoneNumber.countryISOCode;
-                        },
-                        validator: (value) {
-                          // Pass the validator from the FormField
-                          return state.hasError ? state.errorText : null;
-                        },
-                      ),
-                      if (state.hasError)
-                        Text(
-                          state.errorText ?? '',
-                          style: Theme.of(context).textTheme.labelSmall?.copyWith(color: AppColors.error),
-                        ),
-                    ],
-                  );
+                onCountryChanged: (dialCode) {
+                  addressController.addressCountryCode.value = dialCode;
                 },
-              );
-            }),
+              ),
+            ),
           if (widget.withPhoneField) 16.kH,
           CustomTextField(
             controller: addressController.addressStreetController.value,
@@ -149,13 +119,16 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           ),
           16.kH,
           TextField(
-            maxLines: 10, // Allows multiple lines
-            minLines: 5, // Minimum height
+            maxLines: 10,
+            // Allows multiple lines
+            minLines: 5,
+            // Minimum height
             decoration: Styles.getTextFieldInputDecoration(
               context: context,
               fillColor: AppColors.white,
               hintText: AuthScreenText.additionalInfo,
             ),
+            style: Theme.of(context).textTheme.titleSmall,
             controller: addressController.addressAdditionalInfo.value,
           ),
           24.kH,
@@ -164,9 +137,6 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
               loading: widget.forUpdate ? addressController.addressUpdateLoading.isTrue : addressController.addressCreateLoading.isTrue,
               label: widget.forUpdate ? ProfileScreenTexts.updateAddress : GlobalTexts.saveAndContinue,
               onClick: () {
-                // if(addressController.addressMobileNumber.isEmpty){
-                //   return Utils.showErrorToast(message: "Phone number is required");
-                // }
                 if (_formKey.currentState!.validate()) {
                   if (widget.forUpdate) {
                     updateAddress(addressId: widget.addressId ?? 0);

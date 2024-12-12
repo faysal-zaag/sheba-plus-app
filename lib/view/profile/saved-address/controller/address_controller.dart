@@ -17,8 +17,8 @@ class AddressController extends GetxController {
 
   final addressTitle = "".obs;
   final addressMobileNumber = "".obs;
-  final addressCountryCode = "".obs;
-  final addressCountryIso = "".obs;
+  final addressCountryCode = "+880".obs;
+  final addressCountryIso = "BD".obs;
   final addressMobileNumberLength = 10.obs;
   final addressStreetController = TextEditingController().obs;
   final addressStreet2Controller = TextEditingController().obs;
@@ -104,7 +104,6 @@ class AddressController extends GetxController {
     try {
       addressCreateLoading(true);
       Address address = getAddressData(title: title);
-
       await _addressRepository.createAddress(addressData: address);
       await getAllAddress();
       addressCreateLoading(false);

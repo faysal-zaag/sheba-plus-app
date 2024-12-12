@@ -82,7 +82,7 @@ class _SignInFormState extends State<SignInForm> {
                   Get.toNamed(Routes.forgetPassword);
                 },
                 child: Text(
-                  AuthScreenText.forgotPassword,
+                  AuthScreenText.forgotPasswordQ,
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge
@@ -98,7 +98,7 @@ class _SignInFormState extends State<SignInForm> {
                 Get.toNamed(Routes.forgetPassword);
               },
               child: Text(
-                AuthScreenText.forgotPassword,
+                AuthScreenText.forgotPasswordQ,
                 style: Theme.of(context)
                     .textTheme
                     .titleLarge

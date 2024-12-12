@@ -47,11 +47,11 @@ class InputValidators {
   }
 
   static String? phoneNumberValidator
-        ({required PhoneNumber? value, required int validationNumberLength}) {
-      if (value != null && value.number.isEmpty) {
+        ({required String? value, required int validationNumberLength}) {
+      if (value != null && value.isEmpty) {
         return "Phone number required";
-      } else if (value?.number.length != validationNumberLength) {
-        return "Phone number should container $validationNumberLength digits";
+      } else if (value?.length != validationNumberLength) {
+        return "Phone number should contains $validationNumberLength digits";
       }
       return null;
     }
