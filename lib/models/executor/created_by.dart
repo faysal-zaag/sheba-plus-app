@@ -3,19 +3,19 @@
  * Author: Md Mahabub Hossain Shozib
  */
 
-class CreatedBy {
+class Executor {
   final String firstName;
   final String lastName;
   final String email;
 
-  CreatedBy({
+  Executor({
     required this.firstName,
     required this.lastName,
     required this.email,
   });
 
-  factory CreatedBy.fromJson(Map<String, dynamic> json) {
-    return CreatedBy(
+  factory Executor.fromJson(Map<String, dynamic> json) {
+    return Executor(
       firstName: json['firstName'],
       lastName: json['lastName'],
       email: json['email'],

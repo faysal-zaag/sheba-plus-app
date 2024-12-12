@@ -121,11 +121,6 @@ class TermsAndConditionSheet extends StatelessWidget {
                               serviceIndex == 2) {
                             Get.toNamed(
                                 Routes.displayCenterServiceProductListScreen);
-                          } else if (globalController.termsAccepted.isTrue &&
-                              serviceIndex == 2) {
-                            Get.toNamed(
-                                Routes.displayCenterServiceProductListScreen);
-                            globalController.termsAccepted(false);
                           }
                         } else {
                           Utils.showErrorToast(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sheba_plus/models/category/category.dart';
+import 'package:sheba_plus/utils/utils.dart';
 
 import '../../../utils/logger.dart';
 import '../../../view_model/repositories/category_repository.dart';
@@ -15,6 +17,7 @@ class CategoryController extends GetxController {
   CategoryController(this._categoryRepository);
 
   final loadingAllCategories = false.obs;
+  final allCategories = <Category>[].obs;
 
   // ================ Public Api call ==============
   Future<void> getAllCategories() async {
@@ -22,7 +25,11 @@ class CategoryController extends GetxController {
       loadingAllCategories(true);
 
       final response = await _categoryRepository.getAllCategories();
-      debugPrint("all display products: ${response.data}", wrapWidth: 1024);
+      var categoryList = (response.data['content'] as List)
+          .map((e) => Category.fromJson(e))
+          .toList();
+      allCategories(categoryList);
+      Utils.prettifyJson('${response.data}', 'get all categories');
     } catch (err) {
       Log.error(err.toString());
     } finally {

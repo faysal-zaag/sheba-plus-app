@@ -42,8 +42,6 @@ class _DisplayCenterProductDetailsScreenState
   _initCall() async {
     await displayCenterServiceController.getDisplayCenterServiceProductById(
         id: widget.productId);
-    // displayCenterServiceController.getDisplayServiceProductById(
-    //     id: widget.productId);
   }
 
   @override
@@ -63,8 +61,7 @@ class _DisplayCenterProductDetailsScreenState
           Obx(
             () => CustomHeaderContainer(
               title: displayCenterServiceController
-                      .currentDisplayServiceProduct.value.name ??
-                  '',
+                      .currentDisplayServiceProduct.value.name,
             ),
           ),
           Expanded(

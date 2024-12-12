@@ -28,7 +28,7 @@ class DisplayServiceProduct {
   final List<ProductColor> colorList;
   final List<ProductSize> sizeList;
   final List<ProductImage> images;
-  final CreatedBy? createdBy;
+  final Executor? createdBy;
   final int createdAt;
   final int updatedAt;
 
@@ -82,7 +82,7 @@ class DisplayServiceProduct {
       images: json['images'] != null  ? (json['images'] as List)
           .map((item) => ProductImage.fromJson(item))
           .toList() : [],
-      createdBy: CreatedBy.fromJson(json['createdBy']),
+      createdBy: Executor.fromJson(json['createdBy']),
       createdAt: json['createdAt'],
       updatedAt: json['updatedAt'],
     );
