@@ -28,6 +28,7 @@ mixin _$UserNotification {
   int? get dataId => throw _privateConstructorUsedError;
   String? get dataTable => throw _privateConstructorUsedError;
   String? get notificationType => throw _privateConstructorUsedError;
+  User? get user => throw _privateConstructorUsedError;
 
   /// Serializes this UserNotification to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -53,7 +54,10 @@ abstract class $UserNotificationCopyWith<$Res> {
       String? ticketNo,
       int? dataId,
       String? dataTable,
-      String? notificationType});
+      String? notificationType,
+      User? user});
+
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -79,6 +83,7 @@ class _$UserNotificationCopyWithImpl<$Res, $Val extends UserNotification>
     Object? dataId = freezed,
     Object? dataTable = freezed,
     Object? notificationType = freezed,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -113,7 +118,25 @@ class _$UserNotificationCopyWithImpl<$Res, $Val extends UserNotification>
           ? _value.notificationType
           : notificationType // ignore: cast_nullable_to_non_nullable
               as String?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
     ) as $Val);
+  }
+
+  /// Create a copy of UserNotification
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UserCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
   }
 }
 
@@ -133,7 +156,11 @@ abstract class _$$UserNotificationImplCopyWith<$Res>
       String? ticketNo,
       int? dataId,
       String? dataTable,
-      String? notificationType});
+      String? notificationType,
+      User? user});
+
+  @override
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -157,6 +184,7 @@ class __$$UserNotificationImplCopyWithImpl<$Res>
     Object? dataId = freezed,
     Object? dataTable = freezed,
     Object? notificationType = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$UserNotificationImpl(
       id: null == id
@@ -191,6 +219,10 @@ class __$$UserNotificationImplCopyWithImpl<$Res>
           ? _value.notificationType
           : notificationType // ignore: cast_nullable_to_non_nullable
               as String?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
     ));
   }
 }
@@ -206,7 +238,8 @@ class _$UserNotificationImpl implements _UserNotification {
       this.ticketNo,
       this.dataId,
       this.dataTable,
-      this.notificationType});
+      this.notificationType,
+      this.user});
 
   factory _$UserNotificationImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserNotificationImplFromJson(json);
@@ -231,10 +264,12 @@ class _$UserNotificationImpl implements _UserNotification {
   final String? dataTable;
   @override
   final String? notificationType;
+  @override
+  final User? user;
 
   @override
   String toString() {
-    return 'UserNotification(id: $id, title: $title, details: $details, readStats: $readStats, ticketNo: $ticketNo, dataId: $dataId, dataTable: $dataTable, notificationType: $notificationType)';
+    return 'UserNotification(id: $id, title: $title, details: $details, readStats: $readStats, ticketNo: $ticketNo, dataId: $dataId, dataTable: $dataTable, notificationType: $notificationType, user: $user)';
   }
 
   @override
@@ -253,13 +288,14 @@ class _$UserNotificationImpl implements _UserNotification {
             (identical(other.dataTable, dataTable) ||
                 other.dataTable == dataTable) &&
             (identical(other.notificationType, notificationType) ||
-                other.notificationType == notificationType));
+                other.notificationType == notificationType) &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, details, readStats,
-      ticketNo, dataId, dataTable, notificationType);
+      ticketNo, dataId, dataTable, notificationType, user);
 
   /// Create a copy of UserNotification
   /// with the given fields replaced by the non-null parameter values.
@@ -287,7 +323,8 @@ abstract class _UserNotification implements UserNotification {
       final String? ticketNo,
       final int? dataId,
       final String? dataTable,
-      final String? notificationType}) = _$UserNotificationImpl;
+      final String? notificationType,
+      final User? user}) = _$UserNotificationImpl;
 
   factory _UserNotification.fromJson(Map<String, dynamic> json) =
       _$UserNotificationImpl.fromJson;
@@ -308,6 +345,8 @@ abstract class _UserNotification implements UserNotification {
   String? get dataTable;
   @override
   String? get notificationType;
+  @override
+  User? get user;
 
   /// Create a copy of UserNotification
   /// with the given fields replaced by the non-null parameter values.

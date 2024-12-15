@@ -153,8 +153,8 @@ class AuthController extends GetxController {
       signInProcedureLoading(true);
       final response = await _authRepository.login(
         loginRequest: LoginRequest(
-          email: signInEmailController.value.text,
-          password: signInPasswordController.value.text,
+          email: signInEmailController.value.text.trim(),
+          password: signInPasswordController.value.text.trim(),
         ),
       );
       String accessToken = response.data["token"]["access"];
@@ -180,10 +180,10 @@ class AuthController extends GetxController {
       registerProcedureLoading(true);
       await _authRepository.register(
         registerRequest: RegisterRequest(
-          firstName: registerFirstNameController.value.text,
-          lastName: registerLastNameController.value.text,
-          email: registerEmailController.value.text,
-          password: registerPasswordController.value.text,
+          firstName: registerFirstNameController.value.text.trim(),
+          lastName: registerLastNameController.value.text.trim(),
+          email: registerEmailController.value.text.trim(),
+          password: registerPasswordController.value.text.trim(),
         ),
       );
 

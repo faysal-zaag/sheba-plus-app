@@ -7,10 +7,10 @@ class NotificationRepository {
 
   NotificationRepository(this._dio);
 
-  Future<Response> readAllNotification({bool? readStatus}) async {
+  Future<Response> readAllNotification({bool? readStatus, int page = 0}) async {
     return await _dio.get(
       ApiUrls.notificationApiUrl,
-      queryParameters: readStatus != null ? {"readStatus": readStatus} : null,
+      queryParameters: readStatus != null ? {"readStatus": readStatus, "page" : page} : null,
     );
   }
 

@@ -11,6 +11,7 @@ final Map<String, String> bn = {
   "next": "পরবর্তী",
   "yes": "হ্যাঁ",
   "no": "না",
+  "noData": "কোন ডাটা নেই",
   "pending": "পেন্ডিং",
   "saveAndContinue": "সংরক্ষণ করুন এবং চালিয়ে যান",
   "termsAndCondition": "শর্তাবলী",
@@ -199,6 +200,7 @@ final Map<String, String> bn = {
   'startMeeting': "মিটিং শুরু করুন",
   'meetingWillStart': "এজেন্ট মিটিং শুরু হবে",
   'clickToStartMeeting': "এখন মিটিং শুরু করতে 'Start Meeting' বোতামে ক্লিক করুন",
+  'noNotificationFound': "কোন নোটিফিকেশন পাওয়া যায় নি",
 
   // Saved address
   'country': "দেশ",

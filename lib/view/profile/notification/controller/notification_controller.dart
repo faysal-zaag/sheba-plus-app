@@ -13,31 +13,47 @@ class NotificationController extends GetxController {
   final expandedNotifications = <int>[].obs;
 
   final getNotificationsLoading = false.obs;
+  final getMoreNotificationsLoading = false.obs;
   final markAsReadLoading = false.obs;
   final markAllAsReadLoading = false.obs;
 
   final notifications = <UserNotification>[].obs;
   final unReadNotifications = 0.obs;
 
-  Future<void> getNotifications({bool? readStatus}) async {
+  Future<void> getNotifications({bool? readStatus, int page = 0}) async {
     try {
-      getNotificationsLoading(true);
-      final response = await _notificationRepository.readAllNotification(readStatus: readStatus);
+      // Set loading states based on the page
+      if (page == 0) {
+        getNotificationsLoading(true);
+      } else {
+        getMoreNotificationsLoading(true);
+      }
 
-      var notificationListData = response.data["content"] as List;
-      unReadNotifications(0);
+      // Fetch notifications from the repository
+      final response = await _notificationRepository.readAllNotification(readStatus: readStatus, page: page);
+      final notificationListData = response.data["content"] as List;
 
-      var notificationList = notificationListData.map((notification) {
-        UserNotification userNotification = UserNotification.fromJson(notification);
-        if (userNotification.readStats == false) unReadNotifications(unReadNotifications.value + 1);
+      // Parse notifications and update unread count
+      final newNotifications = notificationListData.map((notification) {
+        final userNotification = UserNotification.fromJson(notification);
+        if (!userNotification.readStats) {
+          unReadNotifications.value++;
+        }
         return userNotification;
       }).toList();
 
-      notifications(notificationList);
+      // Update notifications list based on page
+      if (page == 0) {
+        notifications(newNotifications);
+      } else {
+        notifications.addAll(newNotifications);
+      }
     } catch (err) {
       Log.error(err.toString());
     } finally {
+      // Reset loading states
       getNotificationsLoading(false);
+      getMoreNotificationsLoading(false);
     }
   }
 

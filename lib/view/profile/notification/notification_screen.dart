@@ -4,6 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
+import 'package:sheba_plus/view/components/paginated_listview.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/notification/widget/notification_card.dart';
@@ -22,8 +23,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
   final notificationController = Get.find<NotificationController>();
   final profileController = Get.find<ProfileController>();
 
+  int currentPage = 0;
+
   void _initCall() async {
-    await notificationController.getNotifications();
+    await notificationController.getNotifications(page: currentPage);
   }
 
   @override
@@ -80,21 +83,31 @@ class _NotificationScreenState extends State<NotificationScreen> {
           child: Obx(
             () => notificationController.getNotificationsLoading.isTrue
                 ? const NotificationsLoading()
-                : ListView.separated(
+                : PaginatedListview(
                     itemBuilder: (_, index) => Obx(
                       () => NotificationCard(
                         notification: notificationController.notifications[index],
-                        user: profileController.user.value,
                         readMoreOnTap: () => notificationController.readMoreOnTap(index),
                         readMoreOn: notificationController.expandedNotifications.contains(index),
                       ),
                     ),
-                    separatorBuilder: (_, index) => 12.kH,
                     itemCount: notificationController.notifications.length,
+                    onRefresh: onRefresh,
+                    onFetchNextPage: onFetchNextPage,
+                    fetchingMoreDataLoading: notificationController.getMoreNotificationsLoading.value,
+                    noDataMessage: ProfileScreenTexts.noNotificationFound,
                   ),
           ),
         ),
       ],
     );
+  }
+
+  Future<void> onRefresh() async {
+    return await notificationController.getNotifications();
+  }
+
+  Future<void> onFetchNextPage() async {
+    return await notificationController.getNotifications();
   }
 }

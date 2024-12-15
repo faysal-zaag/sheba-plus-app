@@ -41,6 +41,7 @@ class ProfileScreenTexts {
   static String get startMeeting => "startMeeting".tr;
   static String get meetingWillStart => "meetingWillStart".tr;
   static String get clickToStartMeeting => "clickToStartMeeting".tr;
+  static String get noNotificationFound => "noNotificationFound".tr;
 
   // Saved address
   static String get country => "country".tr;

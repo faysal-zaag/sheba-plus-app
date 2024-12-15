@@ -17,6 +17,9 @@ _$UserNotificationImpl _$$UserNotificationImplFromJson(
       dataId: (json['dataId'] as num?)?.toInt(),
       dataTable: json['dataTable'] as String?,
       notificationType: json['notificationType'] as String?,
+      user: json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$UserNotificationImplToJson(
@@ -30,4 +33,5 @@ Map<String, dynamic> _$$UserNotificationImplToJson(
       'dataId': instance.dataId,
       'dataTable': instance.dataTable,
       'notificationType': instance.notificationType,
+      'user': instance.user,
     };

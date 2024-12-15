@@ -32,7 +32,7 @@ class CustomPhoneField extends StatelessWidget {
     required this.onChange,
     this.controller,
     this.selectedCountryCode = "+880",
-    this.validatorNumberLength  = 10,
+    this.validatorNumberLength = 10,
   });
 
   @override
@@ -44,11 +44,7 @@ class CustomPhoneField extends StatelessWidget {
             children: [
               Text(
                 label ?? "",
-                style: labelStyle ?? Theme
-                    .of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(color: AppColors.blackTitle, fontSize: 14),
+                style: labelStyle ?? Theme.of(context).textTheme.labelLarge?.copyWith(color: AppColors.blackTitle, fontSize: 14),
               ),
               if (required == true)
                 const Text(

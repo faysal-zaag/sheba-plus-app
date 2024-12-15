@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sheba_plus/models/user/user.dart';
 import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
@@ -13,11 +12,10 @@ import 'package:sheba_plus/models/notification/notification.dart';
 
 class NotificationCard extends StatelessWidget {
   final UserNotification notification;
-  final User user;
   final VoidCallback readMoreOnTap;
   final bool readMoreOn;
 
-  const NotificationCard({super.key, required this.readMoreOnTap, required this.readMoreOn, required this.notification, required this.user});
+  const NotificationCard({super.key, required this.readMoreOnTap, required this.readMoreOn, required this.notification,});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +60,7 @@ class NotificationCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelSmall,
                   children: [
                     TextSpan(
-                      text: user.firstName,
+                      text: notification.user?.firstName,
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),

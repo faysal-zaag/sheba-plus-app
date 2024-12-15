@@ -13,6 +13,7 @@ final Map<String, String> en = {
   "next": "Next",
   "yes": "Yes",
   "no": "No",
+  "noData": "No data",
   "pending": "Pending",
   "saveAndContinue": "Save and Continue",
   "termsAndCondition": "Terms & Condition",
@@ -209,6 +210,7 @@ final Map<String, String> en = {
   'startMeeting': "Start Meeting",
   'meetingWillStart': "Agent meeting will start in",
   'clickToStartMeeting': "Click the 'Start Meeting' button to start meeting now",
+  'noNotificationFound': "No notification found",
 
   // Saved address
   'country': "Country",

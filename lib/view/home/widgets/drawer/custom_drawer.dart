@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
@@ -6,7 +7,6 @@ import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/app_images.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/utils/extensions.dart';
 import 'package:sheba_plus/view/components/custom_close_button.dart';
 import 'package:sheba_plus/view/components/custom_dropdown.dart';
 import 'package:sheba_plus/view/components/project_branding.dart';
@@ -17,7 +17,6 @@ import 'package:sheba_plus/view/home/widgets/drawer/drawer_menu_item.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/drawer_social_icons.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/footer_text.dart';
 import 'package:sheba_plus/view/home/widgets/drawer/payment_methods.dart';
-import 'package:collection/collection.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -53,8 +52,12 @@ class CustomDrawer extends StatelessWidget {
                     ...AppConstants.drawerMenuItems.mapIndexed((index, menuItem) => Column(
                           children: [
                             GestureDetector(
-                              onTap: (){
-                                Get.offAndToNamed(AppConstants.drawerMenuRoutes[index]);
+                              onTap: () {
+                                if (Get.currentRoute == AppConstants.drawerMenuRoutes[index]) {
+                                  Scaffold.of(context).closeDrawer();
+                                } else {
+                                  Get.offAndToNamed(AppConstants.drawerMenuRoutes[index]);
+                                }
                               },
                               child: DrawerMenuItem(
                                 title: AppConstants.drawerMenuItems[index].tr,
@@ -83,7 +86,7 @@ class CustomDrawer extends StatelessWidget {
                                     : const SizedBox(),
                               ),
                             ),
-                            if(index != 4)const Divider()
+                            if (index != 4) const Divider()
                           ],
                         ))
                   ],
@@ -95,7 +98,9 @@ class CustomDrawer extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ProjectBranding(textStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.white),),
+                    ProjectBranding(
+                      textStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(color: AppColors.white),
+                    ),
                     16.kH,
                     Text(
                       HomeScreenText.companyAddress,

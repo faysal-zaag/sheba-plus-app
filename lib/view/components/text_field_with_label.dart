@@ -69,7 +69,7 @@ class TextFieldWithLabel extends StatelessWidget {
         style: labelStyle ??
             Theme.of(context)
                 .textTheme
-                .bodyMedium
+                .labelLarge
                 ?.copyWith(color: AppColors.blackTitle, fontSize: 14),
         children: [
           TextSpan(text: label), // Regular label text
