@@ -33,7 +33,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _initCall();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initCall();
+    });
   }
 
   @override

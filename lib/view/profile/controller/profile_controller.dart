@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sheba_plus/models/user/user.dart';
-import 'package:sheba_plus/models/verification/verification_model.dart';
 import 'package:sheba_plus/services/file_service.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/logger.dart';
@@ -10,7 +9,6 @@ import 'package:sheba_plus/view/profile/account-management/account_management_sc
 import 'package:sheba_plus/view/profile/notification/notification_screen.dart';
 import 'package:sheba_plus/view/profile/order-history/order_history_screen.dart';
 import 'package:sheba_plus/view/profile/reward-points/reward_points_screen.dart';
-import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 import 'package:sheba_plus/view/profile/saved-address/saved_address_screen.dart';
 import 'package:sheba_plus/view_model/repositories/profile.repository.dart';
 
@@ -46,6 +44,14 @@ class ProfileController extends GetxController {
   final newPasswordObscure = true.obs;
   final confirmNewPasswordObscure = true.obs;
 
+  final List<Widget> screens = [
+    const AccountManagementScreen(),
+    SavedAddressScreen(),
+    const OrderHistoryScreen(),
+    const RewardPointsScreen(),
+    const NotificationScreen(),
+  ];
+
   void resetChangePasswordFields() {
     oldPasswordController.value.clear();
     newPasswordController.value.clear();
@@ -62,6 +68,10 @@ class ProfileController extends GetxController {
 
   void onConfirmNewPasswordObscureTap() {
     confirmNewPasswordObscure(!confirmNewPasswordObscure.value);
+  }
+
+  Widget getCurrentScreen(){
+    return screens[selectedProfileMenuIndex.value];
   }
 
   Future<bool> updateUserInfo() async {
