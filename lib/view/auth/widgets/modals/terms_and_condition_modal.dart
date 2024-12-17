@@ -112,8 +112,8 @@ class TermsAndConditionSheet extends StatelessWidget {
                           } else if (serviceIndex == 3) {
                             Get.offAndToNamed(Routes.thirdPartyShopAndItemDetailsScreen);
                           }
-                          globalController.termsAccepted(false);
                         }
+                        globalController.termsAccepted(false);
                       },
                     ),
                   ),

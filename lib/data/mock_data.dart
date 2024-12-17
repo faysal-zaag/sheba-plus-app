@@ -18,7 +18,7 @@ DisplayServiceProduct product = DisplayServiceProduct(
   totalSellCount: 12,
   subCategoryList: [],
   colorList: [],
-  createdBy: CreatedBy(firstName: '', lastName: '', email: ''),
+  createdBy: Executor(firstName: '', lastName: '', email: ''),
   createdAt: 1000000000,
   updatedAt: 100000000000, // Provided value
   // imageUrl and isFavorite are omitted, so they will use default values
