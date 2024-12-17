@@ -15,10 +15,20 @@ class DateFormatters{
     if (selectedDateTime == null) return "No Date Selected";
     return DateFormat('yyyy-MM-dd hh:mm:ss a').format(getCanadianTime(selectedDateTime));
   }
-  
+
+  static String getFormattedDateTimeInCanada2({required DateTime? selectedDateTime}) {
+    if (selectedDateTime == null) return "No Date Selected";
+    return DateFormat("MMMM dd, yyyy 'at' hha").format(getCanadianTime(selectedDateTime));
+  }
+
   static String getFormattedDateTimeInBD({required DateTime? selectedDateTime}) {
     if (selectedDateTime == null) return "No Date Selected";
     return DateFormat('yyyy-MM-dd hh:mm:ss a').format(getBDTime(selectedDateTime));
+  }
+
+  static String getFormattedDateTimeInBD2({required DateTime? selectedDateTime}) {
+    if (selectedDateTime == null) return "No Date Selected";
+    return DateFormat("MMMM dd, yyyy 'at' hha").format(getBDTime(selectedDateTime));
   }
 
   static DateTime getCanadianTime(DateTime dateTime){

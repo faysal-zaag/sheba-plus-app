@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sheba_plus/models/notification/notification.dart';
+import 'package:sheba_plus/models/notification/user_notification.dart';
 import 'package:sheba_plus/view/profile/account-management/change_password_screen.dart';
 import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
 import 'package:sheba_plus/view/cart/cart_details_screen.dart';

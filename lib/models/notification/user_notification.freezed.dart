@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'notification.dart';
+part of 'user_notification.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -25,6 +25,7 @@ mixin _$UserNotification {
   String get details => throw _privateConstructorUsedError;
   bool get readStats => throw _privateConstructorUsedError;
   String? get ticketNo => throw _privateConstructorUsedError;
+  NotificationBody? get body => throw _privateConstructorUsedError;
   int? get dataId => throw _privateConstructorUsedError;
   String? get dataTable => throw _privateConstructorUsedError;
   String? get notificationType => throw _privateConstructorUsedError;
@@ -52,11 +53,13 @@ abstract class $UserNotificationCopyWith<$Res> {
       String details,
       bool readStats,
       String? ticketNo,
+      NotificationBody? body,
       int? dataId,
       String? dataTable,
       String? notificationType,
       User? user});
 
+  $NotificationBodyCopyWith<$Res>? get body;
   $UserCopyWith<$Res>? get user;
 }
 
@@ -80,6 +83,7 @@ class _$UserNotificationCopyWithImpl<$Res, $Val extends UserNotification>
     Object? details = null,
     Object? readStats = null,
     Object? ticketNo = freezed,
+    Object? body = freezed,
     Object? dataId = freezed,
     Object? dataTable = freezed,
     Object? notificationType = freezed,
@@ -106,6 +110,10 @@ class _$UserNotificationCopyWithImpl<$Res, $Val extends UserNotification>
           ? _value.ticketNo
           : ticketNo // ignore: cast_nullable_to_non_nullable
               as String?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as NotificationBody?,
       dataId: freezed == dataId
           ? _value.dataId
           : dataId // ignore: cast_nullable_to_non_nullable
@@ -123,6 +131,20 @@ class _$UserNotificationCopyWithImpl<$Res, $Val extends UserNotification>
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
     ) as $Val);
+  }
+
+  /// Create a copy of UserNotification
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $NotificationBodyCopyWith<$Res>? get body {
+    if (_value.body == null) {
+      return null;
+    }
+
+    return $NotificationBodyCopyWith<$Res>(_value.body!, (value) {
+      return _then(_value.copyWith(body: value) as $Val);
+    });
   }
 
   /// Create a copy of UserNotification
@@ -154,11 +176,14 @@ abstract class _$$UserNotificationImplCopyWith<$Res>
       String details,
       bool readStats,
       String? ticketNo,
+      NotificationBody? body,
       int? dataId,
       String? dataTable,
       String? notificationType,
       User? user});
 
+  @override
+  $NotificationBodyCopyWith<$Res>? get body;
   @override
   $UserCopyWith<$Res>? get user;
 }
@@ -181,6 +206,7 @@ class __$$UserNotificationImplCopyWithImpl<$Res>
     Object? details = null,
     Object? readStats = null,
     Object? ticketNo = freezed,
+    Object? body = freezed,
     Object? dataId = freezed,
     Object? dataTable = freezed,
     Object? notificationType = freezed,
@@ -207,6 +233,10 @@ class __$$UserNotificationImplCopyWithImpl<$Res>
           ? _value.ticketNo
           : ticketNo // ignore: cast_nullable_to_non_nullable
               as String?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as NotificationBody?,
       dataId: freezed == dataId
           ? _value.dataId
           : dataId // ignore: cast_nullable_to_non_nullable
@@ -236,6 +266,7 @@ class _$UserNotificationImpl implements _UserNotification {
       this.details = "",
       this.readStats = false,
       this.ticketNo,
+      this.body,
       this.dataId,
       this.dataTable,
       this.notificationType,
@@ -259,6 +290,8 @@ class _$UserNotificationImpl implements _UserNotification {
   @override
   final String? ticketNo;
   @override
+  final NotificationBody? body;
+  @override
   final int? dataId;
   @override
   final String? dataTable;
@@ -269,7 +302,7 @@ class _$UserNotificationImpl implements _UserNotification {
 
   @override
   String toString() {
-    return 'UserNotification(id: $id, title: $title, details: $details, readStats: $readStats, ticketNo: $ticketNo, dataId: $dataId, dataTable: $dataTable, notificationType: $notificationType, user: $user)';
+    return 'UserNotification(id: $id, title: $title, details: $details, readStats: $readStats, ticketNo: $ticketNo, body: $body, dataId: $dataId, dataTable: $dataTable, notificationType: $notificationType, user: $user)';
   }
 
   @override
@@ -284,6 +317,7 @@ class _$UserNotificationImpl implements _UserNotification {
                 other.readStats == readStats) &&
             (identical(other.ticketNo, ticketNo) ||
                 other.ticketNo == ticketNo) &&
+            (identical(other.body, body) || other.body == body) &&
             (identical(other.dataId, dataId) || other.dataId == dataId) &&
             (identical(other.dataTable, dataTable) ||
                 other.dataTable == dataTable) &&
@@ -295,7 +329,7 @@ class _$UserNotificationImpl implements _UserNotification {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, details, readStats,
-      ticketNo, dataId, dataTable, notificationType, user);
+      ticketNo, body, dataId, dataTable, notificationType, user);
 
   /// Create a copy of UserNotification
   /// with the given fields replaced by the non-null parameter values.
@@ -321,6 +355,7 @@ abstract class _UserNotification implements UserNotification {
       final String details,
       final bool readStats,
       final String? ticketNo,
+      final NotificationBody? body,
       final int? dataId,
       final String? dataTable,
       final String? notificationType,
@@ -339,6 +374,8 @@ abstract class _UserNotification implements UserNotification {
   bool get readStats;
   @override
   String? get ticketNo;
+  @override
+  NotificationBody? get body;
   @override
   int? get dataId;
   @override

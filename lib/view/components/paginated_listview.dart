@@ -41,19 +41,19 @@ class _PaginatedListviewState extends State<PaginatedListview> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.itemCount == 0
-        ? Center(child: Text(widget.noDataMessage ?? GlobalTexts.noData))
-        : RefreshIndicator(
-            color: AppColors.primary,
-            displacement: 50,
-            onRefresh: widget.onRefresh,
-            child: ListView.separated(
+    return RefreshIndicator(
+      color: AppColors.primary,
+      displacement: 50,
+      onRefresh: widget.onRefresh,
+      child: widget.itemCount == 0
+          ? Center(child: Text(widget.noDataMessage ?? GlobalTexts.noData))
+          : ListView.separated(
               itemBuilder: widget.itemBuilder,
               separatorBuilder: (_, index) => const SizedBox(
                 height: 12,
               ),
               itemCount: widget.itemCount,
             ),
-          );
+    );
   }
 }

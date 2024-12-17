@@ -18,6 +18,10 @@ class NotificationRepository {
     return await _dio.put("${ApiUrls.markAsReadApiUrl}/$notificationId");
   }
 
+  Future<Response> getLatestNotification({required int dataId}) async {
+    return await _dio.get("${ApiUrls.getLatestNotificationApiUrl}/$dataId");
+  }
+
   Future<Response> markAllAsRead() async {
     return await _dio.put(ApiUrls.markAllAsReadApiUrl);
   }

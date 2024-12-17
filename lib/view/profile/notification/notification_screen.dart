@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/view/components/custom_loader.dart';
 import 'package:sheba_plus/view/components/paginated_listview.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/notification/widget/notification_card.dart';
 import 'package:sheba_plus/view/profile/notification/widget/notifications_loading.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
+
 import '../../components/custom_tab.dart';
 
 class NotificationScreen extends StatefulWidget {
@@ -26,7 +26,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   int currentPage = 0;
 
   void _initCall() async {
-    await notificationController.getNotifications(page: currentPage);
+    if(notificationController.notificationAlreadyLoaded.isFalse){
+      await notificationController.getNotifications(page: currentPage);
+    }
   }
 
   @override

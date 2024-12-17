@@ -39,6 +39,7 @@ class ApiUrls {
   static const String getNotificationApiUrl = "$notificationApiUrl/id";
   static const String markAsReadApiUrl = "$notificationApiUrl/mark-as-read/id";
   static const String markAllAsReadApiUrl = "$notificationApiUrl/all/mark-as-read";
+  static const String getLatestNotificationApiUrl = "$notificationApiUrl/data-id";
 
   // customer
   static const String applyReferral = "$securedApiUrl/customers/apply-referral";

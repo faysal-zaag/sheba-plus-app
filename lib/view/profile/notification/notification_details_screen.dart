@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sheba_plus/models/notification/notification.dart';
+import 'package:sheba_plus/models/notification/user_notification.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/view/components/custom_header_container.dart';
+import 'package:sheba_plus/view/components/custom_loader.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/vertical_bordered_text_container.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
@@ -28,6 +29,7 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
   final notificationController = Get.find<NotificationController>();
 
   void _initCall() async {
+    await notificationController.getLatestNotification(dataId: widget.notification.dataId ?? 0);
     await notificationController.markAsRead(notificationId: widget.notification.id);
   }
 
@@ -39,97 +41,124 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    notificationController.latestNotification(null);
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
-    UserNotification notification = widget.notification;
-
     return PrimaryScaffold(
-        body: Column(
-      children: [
-        if (notification.ticketNo != null) CustomHeaderContainer(title: "${ProfileScreenTexts.ticketNumber} #${notification.ticketNo}"),
-        VerticalBorderedContainer(
-          child: Text(
-            ProfileScreenTexts.notificationDetailsHeader,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: AppPaddings.allPadding16,
-                  child: Container(
-                    width: double.infinity,
-                    decoration: Styles.roundedWhite,
-                    padding: AppPaddings.allPadding16,
-                    child: Text(
-                      notification.details,
-                      style: Theme.of(context).textTheme.labelMedium,
-                    ),
-                  ),
-                ),
-                const ShoppingDetails(),
-                const Divider(),
-                const ShoppingDetails(),
-                const ShoppingSummary(),
-                const OrderStatusTracks(),
-                const OrderReviewQuestions(),
-                Column(
-                  children: [
-                    VerticalBorderedContainer(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            ProfileScreenTexts.agentOnlineMeeting,
-                          ),
-                          Text(
-                            ProfileScreenTexts.startMeeting,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.neutral70),
-                          ),
-                        ],
-                      ),
-                    ),
-                    VerticalBorderedContainer(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "${ProfileScreenTexts.meetingTimeLeft}:",
-                          ),
-                          MeetingWaitingContainer(
-                            height: 41,
-                            onlyTime: true,
-                            textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                    VerticalBorderedContainer(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            ProfileScreenTexts.extendMeetingTime,
-                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                  color: AppColors.primary,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Padding(
-                      padding: AppPaddings.allPadding16,
-                      child: MeetingWaitingContainer(),
-                    )
-                  ],
+      body: Obx(
+        () {
+          UserNotification? latestNotification = notificationController.latestNotification.value;
+
+          return notificationController.getLatestNotificationLoading.isTrue
+              ? const Center(
+                  child: CustomLoader(),
                 )
-              ],
-            ),
-          ),
-        )
-      ],
-    ));
+              : latestNotification.dataId == null
+                  ? const Center(
+                      child: Text("Error occurred"),
+                    )
+                  : Column(
+                      children: [
+                        if (latestNotification.ticketNo != null) CustomHeaderContainer(title: "${ProfileScreenTexts.ticketNumber} #${latestNotification.ticketNo}"),
+                        VerticalBorderedContainer(
+                          child: Text(
+                            ProfileScreenTexts.notificationDetailsHeader,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if(latestNotification.notificationType == AgentOrderNotificationType.PURCHASE_AGENT_SERVICE.name)
+                                Padding(
+                                  padding: AppPaddings.allPadding16,
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: Styles.roundedWhite,
+                                    padding: AppPaddings.allPadding16,
+                                    child: Text(
+                                      notificationController.getPurchaseAgentService(notification: latestNotification),
+                                      style: Theme.of(context).textTheme.labelMedium,
+                                    ),
+                                  ),
+                                ),
+                                if(latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name)
+                                const ShoppingDetails(),
+                                if(latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name)
+                                const Divider(),
+                                if(latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name)
+                                const ShoppingDetails(),
+                                if(latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name)
+                                const ShoppingSummary(),
+                                if(latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name)
+                                const OrderStatusTracks(),
+                                if(latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name)
+                                const OrderReviewQuestions(),
+                                if(latestNotification.notificationType == AgentOrderNotificationType.MEETING_STARTED.name)
+                                Column(
+                                  children: [
+                                    VerticalBorderedContainer(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            ProfileScreenTexts.agentOnlineMeeting,
+                                          ),
+                                          Text(
+                                            ProfileScreenTexts.startMeeting,
+                                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.neutral70),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    VerticalBorderedContainer(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "${ProfileScreenTexts.meetingTimeLeft}:",
+                                          ),
+                                          MeetingWaitingContainer(
+                                            height: 41,
+                                            onlyTime: true,
+                                            textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.white),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    VerticalBorderedContainer(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            ProfileScreenTexts.extendMeetingTime,
+                                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                                  color: AppColors.primary,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const Padding(
+                                      padding: AppPaddings.allPadding16,
+                                      child: MeetingWaitingContainer(),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    );
+        },
+      ),
+    );
   }
 }

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'notification.dart';
+part of 'user_notification.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -14,6 +14,9 @@ _$UserNotificationImpl _$$UserNotificationImplFromJson(
       details: json['details'] as String? ?? "",
       readStats: json['readStats'] as bool? ?? false,
       ticketNo: json['ticketNo'] as String?,
+      body: json['body'] == null
+          ? null
+          : NotificationBody.fromJson(json['body'] as Map<String, dynamic>),
       dataId: (json['dataId'] as num?)?.toInt(),
       dataTable: json['dataTable'] as String?,
       notificationType: json['notificationType'] as String?,
@@ -30,6 +33,7 @@ Map<String, dynamic> _$$UserNotificationImplToJson(
       'details': instance.details,
       'readStats': instance.readStats,
       'ticketNo': instance.ticketNo,
+      'body': instance.body,
       'dataId': instance.dataId,
       'dataTable': instance.dataTable,
       'notificationType': instance.notificationType,

@@ -8,7 +8,7 @@ import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/styles.dart';
-import 'package:sheba_plus/models/notification/notification.dart';
+import 'package:sheba_plus/models/notification/user_notification.dart';
 
 class NotificationCard extends StatelessWidget {
   final UserNotification notification;

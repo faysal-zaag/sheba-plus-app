@@ -1,8 +1,24 @@
 import 'package:get/get.dart';
-import 'package:sheba_plus/models/notification/notification.dart';
+import 'package:sheba_plus/models/notification/user_notification.dart';
+import 'package:sheba_plus/utils/formatters/date_formatters.dart';
 import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view_model/repositories/notification.repository.dart';
+
+enum AgentOrderNotificationType {
+  PURCHASE_AGENT_SERVICE,
+  AGENT_SERVICE_INVALID,
+  AGENT_SERVICE_UPDATED,
+  TIME_LEFT,
+  MEETING_STARTED,
+  MEETING_EXTENDED,
+  AGENT_SHOPPING_COMPLETED,
+  SHOPPING_ITEM_DETAILS,
+  TRANSACTION_COMPLETED,
+  ORDER_STATUS,
+  ORDER_DELIVERED,
+  COMMON_USER_NOTIFICATION,
+}
 
 class NotificationController extends GetxController {
   final NotificationRepository _notificationRepository;
@@ -15,10 +31,13 @@ class NotificationController extends GetxController {
   final getNotificationsLoading = false.obs;
   final getMoreNotificationsLoading = false.obs;
   final markAsReadLoading = false.obs;
+  final getLatestNotificationLoading = false.obs;
   final markAllAsReadLoading = false.obs;
+  final notificationAlreadyLoaded = false.obs;
 
   final notifications = <UserNotification>[].obs;
   final unReadNotifications = 0.obs;
+  final latestNotification = const UserNotification().obs;
 
   Future<void> getNotifications({bool? readStatus, int page = 0}) async {
     try {
@@ -32,6 +51,8 @@ class NotificationController extends GetxController {
       // Fetch notifications from the repository
       final response = await _notificationRepository.readAllNotification(readStatus: readStatus, page: page);
       final notificationListData = response.data["content"] as List;
+
+      unReadNotifications(0);
 
       // Parse notifications and update unread count
       final newNotifications = notificationListData.map((notification) {
@@ -54,6 +75,7 @@ class NotificationController extends GetxController {
       // Reset loading states
       getNotificationsLoading(false);
       getMoreNotificationsLoading(false);
+      notificationAlreadyLoaded(true);
     }
   }
 
@@ -68,6 +90,23 @@ class NotificationController extends GetxController {
       return false;
     } finally {
       markAsReadLoading(false);
+    }
+  }
+
+  Future<void> getLatestNotification({required int dataId}) async {
+    try {
+      getLatestNotificationLoading(true);
+
+      final response = await _notificationRepository.getLatestNotification(dataId: dataId);
+
+      UserNotification? notification = UserNotification.fromJson(response.data);
+      latestNotification(notification);
+
+    } catch (err) {
+      Log.error(err.toString());
+      latestNotification(const UserNotification());
+    } finally {
+      getLatestNotificationLoading(false);
     }
   }
 
@@ -88,5 +127,19 @@ class NotificationController extends GetxController {
     } else {
       expandedNotifications.add(index);
     }
+  }
+
+  String getPurchaseAgentService({required UserNotification notification}) {
+    return "Hi ${notification.user?.firstName},"
+        "\n\nYou have purchased ${notification.body?.agentPurchaseHour} Hours AGENT SERVICE to assist you for shopping at ${notification.body?.shoppingArea}. "
+        "Your shopping time will start on "
+        "${DateFormatters.getFormattedDateTimeInCanada2(selectedDateTime: DateTime.fromMillisecondsSinceEpoch(int.parse(notification.body?.meetingTime ?? "0")))} (ET time) "
+        "OR "
+        "${DateFormatters.getFormattedDateTimeInBD2(selectedDateTime: DateTime.fromMillisecondsSinceEpoch(int.parse(notification.body?.meetingTime ?? "0")))} (BD time)."
+        "\n\nA Count-Down Clock (i.e., CDC) and Video Communication System (i.e., VCS) have already been installed at your track ticket details page, the CDC will guide about your time."
+        "\n\nRETURN & You will get a Notification as well as Alarming Signal on CDC when your time will be running out. "
+        "You can extend your shopping time then or it will terminate by itself. At any point, you can terminate your shopping by CLICKING STOP."
+        "\n\nHope you enjoy your shopping with our AGENT."
+        "\n\nRegards,\nDS.ComTeam";
   }
 }
