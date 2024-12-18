@@ -44,6 +44,7 @@ class ProfileScreenTexts {
   static String get noNotificationFound => "noNotificationFound".tr;
   static String get pleaseReschedule => "pleaseReschedule".tr;
   static String get updateSchedule => "updateSchedule".tr;
+  static String get viewNotification => "viewNotification".tr;
 
   // Saved address
   static String get country => "country".tr;

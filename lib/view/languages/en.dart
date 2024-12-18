@@ -213,6 +213,7 @@ final Map<String, String> en = {
   'noNotificationFound': "No notification found",
   'pleaseReschedule': "Please reschedule your shopping session?",
   'updateSchedule': "Update your schedule",
+  'viewNotification': "View Notification",
 
   // Saved address
   'country': "Country",

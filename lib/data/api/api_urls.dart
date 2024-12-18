@@ -49,6 +49,10 @@ class ApiUrls {
   static const String createDeviceToken = "$baseApiUrl/firebase/device/token/create";
   static const String removeDeviceToken = "$baseApiUrl/firebase/device/token/remove";
 
+  //Agent Booking service
+  static const String createAgentBooking = "$securedApiUrl/orders/create/agent-booking";
+  static const String updateAgentBookingSchedule = "$securedApiUrl/orders/schedule/update/id";
+
   //Display Service
   static const String getAllDisplayServiceProductsApiUrl = "$baseApiUrl/products";
 

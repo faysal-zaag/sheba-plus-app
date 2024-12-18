@@ -20,13 +20,11 @@ AgentOrderDTO _$AgentOrderDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AgentOrderDTO {
-  String get meetingLocation => throw _privateConstructorUsedError;
-  int get easternTime => throw _privateConstructorUsedError;
-  int get bdTime => throw _privateConstructorUsedError;
-  int get shoppingAmount => throw _privateConstructorUsedError;
-  double get shoppingHour => throw _privateConstructorUsedError;
-  double get agentFee => throw _privateConstructorUsedError;
-  Address get address => throw _privateConstructorUsedError;
+  List<String> get meetingLocations => throw _privateConstructorUsedError;
+  num get meetingTime => throw _privateConstructorUsedError;
+  num get estimatedBudget => throw _privateConstructorUsedError;
+  num get hourBooked => throw _privateConstructorUsedError;
+  Address get deliveryAddress => throw _privateConstructorUsedError;
   bool get dropOffService => throw _privateConstructorUsedError;
 
   /// Serializes this AgentOrderDTO to a JSON map.
@@ -46,16 +44,14 @@ abstract class $AgentOrderDTOCopyWith<$Res> {
       _$AgentOrderDTOCopyWithImpl<$Res, AgentOrderDTO>;
   @useResult
   $Res call(
-      {String meetingLocation,
-      int easternTime,
-      int bdTime,
-      int shoppingAmount,
-      double shoppingHour,
-      double agentFee,
-      Address address,
+      {List<String> meetingLocations,
+      num meetingTime,
+      num estimatedBudget,
+      num hourBooked,
+      Address deliveryAddress,
       bool dropOffService});
 
-  $AddressCopyWith<$Res> get address;
+  $AddressCopyWith<$Res> get deliveryAddress;
 }
 
 /// @nodoc
@@ -73,43 +69,33 @@ class _$AgentOrderDTOCopyWithImpl<$Res, $Val extends AgentOrderDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? meetingLocation = null,
-    Object? easternTime = null,
-    Object? bdTime = null,
-    Object? shoppingAmount = null,
-    Object? shoppingHour = null,
-    Object? agentFee = null,
-    Object? address = null,
+    Object? meetingLocations = null,
+    Object? meetingTime = null,
+    Object? estimatedBudget = null,
+    Object? hourBooked = null,
+    Object? deliveryAddress = null,
     Object? dropOffService = null,
   }) {
     return _then(_value.copyWith(
-      meetingLocation: null == meetingLocation
-          ? _value.meetingLocation
-          : meetingLocation // ignore: cast_nullable_to_non_nullable
-              as String,
-      easternTime: null == easternTime
-          ? _value.easternTime
-          : easternTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      bdTime: null == bdTime
-          ? _value.bdTime
-          : bdTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      shoppingAmount: null == shoppingAmount
-          ? _value.shoppingAmount
-          : shoppingAmount // ignore: cast_nullable_to_non_nullable
-              as int,
-      shoppingHour: null == shoppingHour
-          ? _value.shoppingHour
-          : shoppingHour // ignore: cast_nullable_to_non_nullable
-              as double,
-      agentFee: null == agentFee
-          ? _value.agentFee
-          : agentFee // ignore: cast_nullable_to_non_nullable
-              as double,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
+      meetingLocations: null == meetingLocations
+          ? _value.meetingLocations
+          : meetingLocations // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      meetingTime: null == meetingTime
+          ? _value.meetingTime
+          : meetingTime // ignore: cast_nullable_to_non_nullable
+              as num,
+      estimatedBudget: null == estimatedBudget
+          ? _value.estimatedBudget
+          : estimatedBudget // ignore: cast_nullable_to_non_nullable
+              as num,
+      hourBooked: null == hourBooked
+          ? _value.hourBooked
+          : hourBooked // ignore: cast_nullable_to_non_nullable
+              as num,
+      deliveryAddress: null == deliveryAddress
+          ? _value.deliveryAddress
+          : deliveryAddress // ignore: cast_nullable_to_non_nullable
               as Address,
       dropOffService: null == dropOffService
           ? _value.dropOffService
@@ -122,9 +108,9 @@ class _$AgentOrderDTOCopyWithImpl<$Res, $Val extends AgentOrderDTO>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $AddressCopyWith<$Res> get address {
-    return $AddressCopyWith<$Res>(_value.address, (value) {
-      return _then(_value.copyWith(address: value) as $Val);
+  $AddressCopyWith<$Res> get deliveryAddress {
+    return $AddressCopyWith<$Res>(_value.deliveryAddress, (value) {
+      return _then(_value.copyWith(deliveryAddress: value) as $Val);
     });
   }
 }
@@ -138,17 +124,15 @@ abstract class _$$AgentOrderDTOImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String meetingLocation,
-      int easternTime,
-      int bdTime,
-      int shoppingAmount,
-      double shoppingHour,
-      double agentFee,
-      Address address,
+      {List<String> meetingLocations,
+      num meetingTime,
+      num estimatedBudget,
+      num hourBooked,
+      Address deliveryAddress,
       bool dropOffService});
 
   @override
-  $AddressCopyWith<$Res> get address;
+  $AddressCopyWith<$Res> get deliveryAddress;
 }
 
 /// @nodoc
@@ -164,43 +148,33 @@ class __$$AgentOrderDTOImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? meetingLocation = null,
-    Object? easternTime = null,
-    Object? bdTime = null,
-    Object? shoppingAmount = null,
-    Object? shoppingHour = null,
-    Object? agentFee = null,
-    Object? address = null,
+    Object? meetingLocations = null,
+    Object? meetingTime = null,
+    Object? estimatedBudget = null,
+    Object? hourBooked = null,
+    Object? deliveryAddress = null,
     Object? dropOffService = null,
   }) {
     return _then(_$AgentOrderDTOImpl(
-      meetingLocation: null == meetingLocation
-          ? _value.meetingLocation
-          : meetingLocation // ignore: cast_nullable_to_non_nullable
-              as String,
-      easternTime: null == easternTime
-          ? _value.easternTime
-          : easternTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      bdTime: null == bdTime
-          ? _value.bdTime
-          : bdTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      shoppingAmount: null == shoppingAmount
-          ? _value.shoppingAmount
-          : shoppingAmount // ignore: cast_nullable_to_non_nullable
-              as int,
-      shoppingHour: null == shoppingHour
-          ? _value.shoppingHour
-          : shoppingHour // ignore: cast_nullable_to_non_nullable
-              as double,
-      agentFee: null == agentFee
-          ? _value.agentFee
-          : agentFee // ignore: cast_nullable_to_non_nullable
-              as double,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
+      meetingLocations: null == meetingLocations
+          ? _value._meetingLocations
+          : meetingLocations // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      meetingTime: null == meetingTime
+          ? _value.meetingTime
+          : meetingTime // ignore: cast_nullable_to_non_nullable
+              as num,
+      estimatedBudget: null == estimatedBudget
+          ? _value.estimatedBudget
+          : estimatedBudget // ignore: cast_nullable_to_non_nullable
+              as num,
+      hourBooked: null == hourBooked
+          ? _value.hourBooked
+          : hourBooked // ignore: cast_nullable_to_non_nullable
+              as num,
+      deliveryAddress: null == deliveryAddress
+          ? _value.deliveryAddress
+          : deliveryAddress // ignore: cast_nullable_to_non_nullable
               as Address,
       dropOffService: null == dropOffService
           ? _value.dropOffService
@@ -214,46 +188,46 @@ class __$$AgentOrderDTOImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AgentOrderDTOImpl implements _AgentOrderDTO {
   const _$AgentOrderDTOImpl(
-      {this.meetingLocation = "",
-      this.easternTime = 0,
-      this.bdTime = 0,
-      this.shoppingAmount = 0,
-      this.shoppingHour = 0.0,
-      this.agentFee = 0.0,
-      this.address = const Address(),
-      this.dropOffService = false});
+      {final List<String> meetingLocations = const [],
+      this.meetingTime = 0,
+      this.estimatedBudget = 0,
+      this.hourBooked = 0,
+      this.deliveryAddress = const Address(),
+      this.dropOffService = false})
+      : _meetingLocations = meetingLocations;
 
   factory _$AgentOrderDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$AgentOrderDTOImplFromJson(json);
 
+  final List<String> _meetingLocations;
   @override
   @JsonKey()
-  final String meetingLocation;
+  List<String> get meetingLocations {
+    if (_meetingLocations is EqualUnmodifiableListView)
+      return _meetingLocations;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_meetingLocations);
+  }
+
   @override
   @JsonKey()
-  final int easternTime;
+  final num meetingTime;
   @override
   @JsonKey()
-  final int bdTime;
+  final num estimatedBudget;
   @override
   @JsonKey()
-  final int shoppingAmount;
+  final num hourBooked;
   @override
   @JsonKey()
-  final double shoppingHour;
-  @override
-  @JsonKey()
-  final double agentFee;
-  @override
-  @JsonKey()
-  final Address address;
+  final Address deliveryAddress;
   @override
   @JsonKey()
   final bool dropOffService;
 
   @override
   String toString() {
-    return 'AgentOrderDTO(meetingLocation: $meetingLocation, easternTime: $easternTime, bdTime: $bdTime, shoppingAmount: $shoppingAmount, shoppingHour: $shoppingHour, agentFee: $agentFee, address: $address, dropOffService: $dropOffService)';
+    return 'AgentOrderDTO(meetingLocations: $meetingLocations, meetingTime: $meetingTime, estimatedBudget: $estimatedBudget, hourBooked: $hourBooked, deliveryAddress: $deliveryAddress, dropOffService: $dropOffService)';
   }
 
   @override
@@ -261,26 +235,30 @@ class _$AgentOrderDTOImpl implements _AgentOrderDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AgentOrderDTOImpl &&
-            (identical(other.meetingLocation, meetingLocation) ||
-                other.meetingLocation == meetingLocation) &&
-            (identical(other.easternTime, easternTime) ||
-                other.easternTime == easternTime) &&
-            (identical(other.bdTime, bdTime) || other.bdTime == bdTime) &&
-            (identical(other.shoppingAmount, shoppingAmount) ||
-                other.shoppingAmount == shoppingAmount) &&
-            (identical(other.shoppingHour, shoppingHour) ||
-                other.shoppingHour == shoppingHour) &&
-            (identical(other.agentFee, agentFee) ||
-                other.agentFee == agentFee) &&
-            (identical(other.address, address) || other.address == address) &&
+            const DeepCollectionEquality()
+                .equals(other._meetingLocations, _meetingLocations) &&
+            (identical(other.meetingTime, meetingTime) ||
+                other.meetingTime == meetingTime) &&
+            (identical(other.estimatedBudget, estimatedBudget) ||
+                other.estimatedBudget == estimatedBudget) &&
+            (identical(other.hourBooked, hourBooked) ||
+                other.hourBooked == hourBooked) &&
+            (identical(other.deliveryAddress, deliveryAddress) ||
+                other.deliveryAddress == deliveryAddress) &&
             (identical(other.dropOffService, dropOffService) ||
                 other.dropOffService == dropOffService));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, meetingLocation, easternTime,
-      bdTime, shoppingAmount, shoppingHour, agentFee, address, dropOffService);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_meetingLocations),
+      meetingTime,
+      estimatedBudget,
+      hourBooked,
+      deliveryAddress,
+      dropOffService);
 
   /// Create a copy of AgentOrderDTO
   /// with the given fields replaced by the non-null parameter values.
@@ -300,32 +278,26 @@ class _$AgentOrderDTOImpl implements _AgentOrderDTO {
 
 abstract class _AgentOrderDTO implements AgentOrderDTO {
   const factory _AgentOrderDTO(
-      {final String meetingLocation,
-      final int easternTime,
-      final int bdTime,
-      final int shoppingAmount,
-      final double shoppingHour,
-      final double agentFee,
-      final Address address,
+      {final List<String> meetingLocations,
+      final num meetingTime,
+      final num estimatedBudget,
+      final num hourBooked,
+      final Address deliveryAddress,
       final bool dropOffService}) = _$AgentOrderDTOImpl;
 
   factory _AgentOrderDTO.fromJson(Map<String, dynamic> json) =
       _$AgentOrderDTOImpl.fromJson;
 
   @override
-  String get meetingLocation;
+  List<String> get meetingLocations;
   @override
-  int get easternTime;
+  num get meetingTime;
   @override
-  int get bdTime;
+  num get estimatedBudget;
   @override
-  int get shoppingAmount;
+  num get hourBooked;
   @override
-  double get shoppingHour;
-  @override
-  double get agentFee;
-  @override
-  Address get address;
+  Address get deliveryAddress;
   @override
   bool get dropOffService;
 
@@ -334,240 +306,5 @@ abstract class _AgentOrderDTO implements AgentOrderDTO {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AgentOrderDTOImplCopyWith<_$AgentOrderDTOImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-Address _$AddressFromJson(Map<String, dynamic> json) {
-  return _Address.fromJson(json);
-}
-
-/// @nodoc
-mixin _$Address {
-  String get street => throw _privateConstructorUsedError;
-  String get city => throw _privateConstructorUsedError;
-  String get state => throw _privateConstructorUsedError;
-  String get zipCode => throw _privateConstructorUsedError;
-  String get country => throw _privateConstructorUsedError;
-
-  /// Serializes this Address to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $AddressCopyWith<Address> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AddressCopyWith<$Res> {
-  factory $AddressCopyWith(Address value, $Res Function(Address) then) =
-      _$AddressCopyWithImpl<$Res, Address>;
-  @useResult
-  $Res call(
-      {String street,
-      String city,
-      String state,
-      String zipCode,
-      String country});
-}
-
-/// @nodoc
-class _$AddressCopyWithImpl<$Res, $Val extends Address>
-    implements $AddressCopyWith<$Res> {
-  _$AddressCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? street = null,
-    Object? city = null,
-    Object? state = null,
-    Object? zipCode = null,
-    Object? country = null,
-  }) {
-    return _then(_value.copyWith(
-      street: null == street
-          ? _value.street
-          : street // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: null == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String,
-      zipCode: null == zipCode
-          ? _value.zipCode
-          : zipCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$AddressImplCopyWith<$Res> implements $AddressCopyWith<$Res> {
-  factory _$$AddressImplCopyWith(
-          _$AddressImpl value, $Res Function(_$AddressImpl) then) =
-      __$$AddressImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String street,
-      String city,
-      String state,
-      String zipCode,
-      String country});
-}
-
-/// @nodoc
-class __$$AddressImplCopyWithImpl<$Res>
-    extends _$AddressCopyWithImpl<$Res, _$AddressImpl>
-    implements _$$AddressImplCopyWith<$Res> {
-  __$$AddressImplCopyWithImpl(
-      _$AddressImpl _value, $Res Function(_$AddressImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? street = null,
-    Object? city = null,
-    Object? state = null,
-    Object? zipCode = null,
-    Object? country = null,
-  }) {
-    return _then(_$AddressImpl(
-      street: null == street
-          ? _value.street
-          : street // ignore: cast_nullable_to_non_nullable
-              as String,
-      city: null == city
-          ? _value.city
-          : city // ignore: cast_nullable_to_non_nullable
-              as String,
-      state: null == state
-          ? _value.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as String,
-      zipCode: null == zipCode
-          ? _value.zipCode
-          : zipCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      country: null == country
-          ? _value.country
-          : country // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$AddressImpl implements _Address {
-  const _$AddressImpl(
-      {this.street = "",
-      this.city = "",
-      this.state = "",
-      this.zipCode = "",
-      this.country = ""});
-
-  factory _$AddressImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AddressImplFromJson(json);
-
-  @override
-  @JsonKey()
-  final String street;
-  @override
-  @JsonKey()
-  final String city;
-  @override
-  @JsonKey()
-  final String state;
-  @override
-  @JsonKey()
-  final String zipCode;
-  @override
-  @JsonKey()
-  final String country;
-
-  @override
-  String toString() {
-    return 'Address(street: $street, city: $city, state: $state, zipCode: $zipCode, country: $country)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddressImpl &&
-            (identical(other.street, street) || other.street == street) &&
-            (identical(other.city, city) || other.city == city) &&
-            (identical(other.state, state) || other.state == state) &&
-            (identical(other.zipCode, zipCode) || other.zipCode == zipCode) &&
-            (identical(other.country, country) || other.country == country));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, street, city, state, zipCode, country);
-
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddressImplCopyWith<_$AddressImpl> get copyWith =>
-      __$$AddressImplCopyWithImpl<_$AddressImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AddressImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _Address implements Address {
-  const factory _Address(
-      {final String street,
-      final String city,
-      final String state,
-      final String zipCode,
-      final String country}) = _$AddressImpl;
-
-  factory _Address.fromJson(Map<String, dynamic> json) = _$AddressImpl.fromJson;
-
-  @override
-  String get street;
-  @override
-  String get city;
-  @override
-  String get state;
-  @override
-  String get zipCode;
-  @override
-  String get country;
-
-  /// Create a copy of Address
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddressImplCopyWith<_$AddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

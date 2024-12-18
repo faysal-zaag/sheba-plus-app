@@ -19,6 +19,7 @@ import 'package:sheba_plus/view/profile/saved-address/controller/address_control
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 import 'package:sheba_plus/view/third_party/controller/third_party_service_controller.dart';
 import 'package:sheba_plus/view_model/repositories/address.repository.dart';
+import 'package:sheba_plus/view_model/repositories/agent_shopping.repository.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
 import 'package:sheba_plus/view_model/repositories/category_repository.dart';
 import 'package:sheba_plus/view_model/repositories/display_center_repository.dart';
@@ -39,6 +40,7 @@ class MyBindings implements Bindings {
     Get.lazyPut<AuthRepository>(() => AuthRepository(Get.find<Dio>()));
     Get.lazyPut<ProfileRepository>(() => ProfileRepository(Get.find<Dio>()));
     Get.lazyPut<AddressRepository>(() => AddressRepository(Get.find<Dio>()));
+    Get.lazyPut<AgentShoppingRepository>(() => AgentShoppingRepository(Get.find<Dio>()));
     Get.lazyPut<DisplayCenterServiceRepository>(() => DisplayCenterServiceRepository(Get.find<Dio>()));
     Get.lazyPut<CategoryRepository>(() => CategoryRepository(Get.find<Dio>()));
     Get.lazyPut<NotificationRepository>(() => NotificationRepository(Get.find<Dio>()));
@@ -55,7 +57,7 @@ class MyBindings implements Bindings {
     Get.put(AddressController(Get.find<AddressRepository>()));
     Get.put(DisplayCenterServiceController(Get.find<DisplayCenterServiceRepository>()));
     Get.put(CategoryController(Get.find<CategoryRepository>()));
-    Get.put(AgentShoppingController());
+    Get.put(AgentShoppingController(Get.find<AgentShoppingRepository>(), Get.find<AddressController>(), Get.find<NotificationController>()));
     Get.put(CartController());
     Get.put(ThirdPartyServiceController());
 

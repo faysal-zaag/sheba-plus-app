@@ -47,19 +47,6 @@ class _RegisterNewAddressFormState extends State<RegisterNewAddressForm> {
       key: widget.formKey,
       child: Column(
         children: [
-          if (widget.withPhoneField)
-            Obx(
-              () => CustomPhoneField(
-                onChange: (mobileNumber) {
-                  addressController.newAddressMobileNumber.value = mobileNumber!;
-                  return null;
-                },
-                onCountryChanged: (dialCode) {
-                  addressController.newAddressCountryCode.value = dialCode;
-                },
-              ),
-            ),
-          if (widget.withPhoneField) 16.kH,
           CustomTextField(
               controller: addressController.newAddressStreetController.value,
               hintText: "${AuthScreenText.streetAddress}*",

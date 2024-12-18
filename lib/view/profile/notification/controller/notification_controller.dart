@@ -32,6 +32,7 @@ class NotificationController extends GetxController {
   final getNotificationsLoading = false.obs;
   final getMoreNotificationsLoading = false.obs;
   final markAsReadLoading = false.obs;
+  final getSingleNotificationDetailsLoading = false.obs;
   final getLatestNotificationLoading = false.obs;
   final markAllAsReadLoading = false.obs;
   final notificationAlreadyLoaded = false.obs;
@@ -46,6 +47,7 @@ class NotificationController extends GetxController {
   final rescheduledEasternTime = 0.obs;
   final rescheduledBDTimeController = TextEditingController().obs;
   final rescheduledBDTime = 0.obs;
+  final rescheduledUtcTime = 0.obs;
 
   Future<void> getNotifications({bool? readStatus, int page = 0}) async {
     try {
@@ -109,12 +111,27 @@ class NotificationController extends GetxController {
 
       UserNotification? notification = UserNotification.fromJson(response.data);
       latestNotification(notification);
-
     } catch (err) {
       Log.error(err.toString());
       latestNotification(const UserNotification());
     } finally {
       getLatestNotificationLoading(false);
+    }
+  }
+
+  Future<void> getSingleNotificationDetails({required int id}) async {
+    try {
+      getSingleNotificationDetailsLoading(true);
+
+      final response = await _notificationRepository.getSingleNotification(id: id);
+
+      UserNotification? notification = UserNotification.fromJson(response.data);
+      latestNotification(notification);
+    } catch (err) {
+      Log.error(err.toString());
+      latestNotification(const UserNotification());
+    } finally {
+      getSingleNotificationDetailsLoading(false);
     }
   }
 
@@ -137,9 +154,12 @@ class NotificationController extends GetxController {
     }
   }
 
-  String getPurchaseAgentServiceNotificationMessage({required UserNotification notification}) {
-    return "Hi ${notification.user?.firstName},"
-        "\n\nYou have purchased ${notification.body?.agentPurchaseHour} Hours AGENT SERVICE to assist you for shopping at ${notification.body?.shoppingArea}. "
+  String headerFooter({required UserNotification notification, required String body}){
+    return "Hi ${notification.user?.firstName}, $body \n\nRegards,\nDS.ComTeam";
+  }
+
+  String commonMessage({required UserNotification notification}) {
+    return "\n\nYou have purchased ${notification.body?.agentPurchaseHour} Hours AGENT SERVICE to assist you for shopping at ${notification.body?.shoppingArea}. "
         "Your shopping time will start on "
         "${DateFormatters.getFormattedDateTimeInCanada2(selectedDateTime: DateTime.fromMillisecondsSinceEpoch(int.parse(notification.body?.meetingTime ?? "0")))} (ET time) "
         "OR "
@@ -147,12 +167,18 @@ class NotificationController extends GetxController {
         "\n\nA Count-Down Clock (i.e., CDC) and Video Communication System (i.e., VCS) have already been installed at your track ticket details page, the CDC will guide about your time."
         "\n\nRETURN & You will get a Notification as well as Alarming Signal on CDC when your time will be running out. "
         "You can extend your shopping time then or it will terminate by itself. At any point, you can terminate your shopping by CLICKING STOP."
-        "\n\nHope you enjoy your shopping with our AGENT."
-        "\n\nRegards,\nDS.ComTeam";
+        "\n\nHope you enjoy your shopping with our AGENT.";
+  }
+
+  String getPurchaseAgentServiceNotificationMessage({required UserNotification notification}) {
+    return headerFooter(notification: notification, body: commonMessage(notification: notification));
   }
 
   String getInvalidNotificationMessage({required UserNotification notification}) {
-    return "Hi ${notification.user?.firstName},"
-        "\n\nThe shopping hours that you chose is INVALID ${notification.body?.message}";
+    return headerFooter(notification: notification, body: "\n\nThe shopping hours that you chose is INVALID ${notification.body?.message}");
+  }
+
+  String getAgentServiceUpdatedNotificationMessage({required UserNotification notification}) {
+    return headerFooter(notification: notification, body: "\n\nYour AGENT SERVICE meeting schedule has been updated successfully. ${commonMessage(notification: notification)}") ;
   }
 }

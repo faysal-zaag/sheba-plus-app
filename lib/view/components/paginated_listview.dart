@@ -33,7 +33,7 @@ class _PaginatedListviewState extends State<PaginatedListview> {
   void initState() {
     super.initState();
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent && widget.fetchingMoreDataLoading) {
+      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent) {
         widget.onFetchNextPage();
       }
     });
@@ -48,6 +48,7 @@ class _PaginatedListviewState extends State<PaginatedListview> {
       child: widget.itemCount == 0
           ? Center(child: Text(widget.noDataMessage ?? GlobalTexts.noData))
           : ListView.separated(
+              controller: _scrollController,
               itemBuilder: widget.itemBuilder,
               separatorBuilder: (_, index) => const SizedBox(
                 height: 12,

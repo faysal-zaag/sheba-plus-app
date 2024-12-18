@@ -188,6 +188,7 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
   void setTime(DateTime selectedDateTime, bool canadianTime) {
     agentShoppingController.agentShoppingEasternTime.value = DateFormatters.getCanadianTime(selectedDateTime).millisecondsSinceEpoch;
     agentShoppingController.agentShoppingBDTime.value = DateFormatters.getBDTime(selectedDateTime).millisecondsSinceEpoch;
+    agentShoppingController.agentShoppingUtcTime.value = selectedDateTime.toUtc().millisecondsSinceEpoch;
 
     if (canadianTime) {
       agentShoppingController.agentShoppingEasternTimeController.value.text = DateFormatters.getFormattedDateTime(

@@ -8,11 +8,13 @@ import 'package:sheba_plus/view/styles.dart';
 
 class MeetingWaitingContainer extends StatelessWidget {
   final double? height;
-  final bool onlyTime;
+  // final bool onlyTime;
+  final int meetingTime;
+  final bool scheduleConfirmed;
   final TextStyle? textStyle;
 
   const MeetingWaitingContainer(
-      {super.key, this.height, this.onlyTime = false, this.textStyle});
+      {super.key, this.height, this.textStyle, this.scheduleConfirmed = false, required this.meetingTime});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class MeetingWaitingContainer extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (!onlyTime)
+            if (scheduleConfirmed)
               Text(
                 ProfileScreenTexts.meetingWillStart,
                 style: Theme.of(context)
@@ -32,19 +34,18 @@ class MeetingWaitingContainer extends StatelessWidget {
                     .titleSmall
                     ?.copyWith(color: AppColors.white),
               ),
+            if(scheduleConfirmed)
             Container(
-              margin: EdgeInsets.only(top: onlyTime ? 0 : 10.0),
+              margin: EdgeInsets.only(top: scheduleConfirmed ? 10 : 10.0),
               child: CountDownTimer(
-                startTimeMilliseconds: DateTime.now()
-                    .add(const Duration(days: 3))
-                    .millisecondsSinceEpoch,
+                startTimeMilliseconds: meetingTime,
                 textStyle: textStyle ?? Theme.of(context)
                     .textTheme
                     .headlineSmall
                     ?.copyWith(color: AppColors.white),
               ),
             ),
-            if (!onlyTime)
+            if (!scheduleConfirmed)
               Text(
                 ProfileScreenTexts.clickToStartMeeting,
                 textAlign: TextAlign.center,
@@ -53,7 +54,7 @@ class MeetingWaitingContainer extends StatelessWidget {
                     .titleSmall
                     ?.copyWith(color: AppColors.white),
               ),
-            if(!onlyTime)
+            if(!scheduleConfirmed)
             Container(
               margin: const EdgeInsets.only(top: 24.0),
               child: CustomPrimaryButton(

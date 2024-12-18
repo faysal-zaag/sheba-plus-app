@@ -48,16 +48,14 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
       child: Column(
         children: [
           if (widget.withPhoneField)
-            Obx(
-              () => CustomPhoneField(
-                onChange: (mobileNumber) {
-                  addressController.addressMobileNumber.value = mobileNumber!;
-                  return null;
-                },
-                onCountryChanged: (dialCode) {
-                  addressController.addressCountryCode.value = dialCode;
-                },
-              ),
+            CustomPhoneField(
+              onChange: (mobileNumber) {
+                addressController.addressMobileNumber.value = mobileNumber!;
+                return null;
+              },
+              onCountryChanged: (dialCode) {
+                addressController.addressCountryCode.value = dialCode;
+              },
             ),
           if (widget.withPhoneField) 16.kH,
           CustomTextField(

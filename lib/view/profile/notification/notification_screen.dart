@@ -112,6 +112,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 
   Future<void> onFetchNextPage() async {
-    return await notificationController.getNotifications();
+    currentPage++;
+    print("Current page => $currentPage");
+
+    return await notificationController.getNotifications(page: currentPage);
   }
 }

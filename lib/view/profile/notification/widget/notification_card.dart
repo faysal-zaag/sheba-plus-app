@@ -6,6 +6,7 @@ import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/styles.dart';
 import 'package:sheba_plus/models/notification/user_notification.dart';
@@ -15,7 +16,12 @@ class NotificationCard extends StatelessWidget {
   final VoidCallback readMoreOnTap;
   final bool readMoreOn;
 
-  const NotificationCard({super.key, required this.readMoreOnTap, required this.readMoreOn, required this.notification,});
+  const NotificationCard({
+    super.key,
+    required this.readMoreOnTap,
+    required this.readMoreOn,
+    required this.notification,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +106,7 @@ class NotificationCard extends StatelessWidget {
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               child: Text(
-                ProfileScreenTexts.trackThisOrder,
+                notification.notificationType == AgentOrderNotificationType.COMMON_USER_NOTIFICATION.name ? ProfileScreenTexts.viewNotification : ProfileScreenTexts.trackThisOrder,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.primary),
               ),
             ),

@@ -7,12 +7,18 @@ class NotificationRepository {
 
   NotificationRepository(this._dio);
 
-  Future<Response> readAllNotification({bool? readStatus, int page = 0}) async {
+  Future<Response> readAllNotification({bool? readStatus, int page = 0, String? userId, String? type}) async {
+    Map<String, dynamic> filter = {"page": page};
+    if (readStatus != null) {
+      filter["readStatus"] = readStatus;
+    }
+
     return await _dio.get(
       ApiUrls.notificationApiUrl,
-      queryParameters: readStatus != null ? {"readStatus": readStatus, "page" : page} : null,
+      queryParameters: filter,
     );
   }
+
 
   Future<Response> markAsRead({required int notificationId}) async {
     return await _dio.put("${ApiUrls.markAsReadApiUrl}/$notificationId");
@@ -20,6 +26,10 @@ class NotificationRepository {
 
   Future<Response> getLatestNotification({required int dataId}) async {
     return await _dio.get("${ApiUrls.getLatestNotificationApiUrl}/$dataId");
+  }
+
+  Future<Response> getSingleNotification({required int id}) async {
+    return await _dio.get("${ApiUrls.getNotificationApiUrl}/$id");
   }
 
   Future<Response> markAllAsRead() async {

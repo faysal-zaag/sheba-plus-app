@@ -32,6 +32,7 @@ class ShoppingRescheduleForm extends StatefulWidget {
 
 class _ShoppingRescheduleFormState extends State<ShoppingRescheduleForm> {
   final _formKey = GlobalKey<FormState>();
+  final agentShoppingController = Get.find<AgentShoppingController>();
   final notificationController = Get.find<NotificationController>();
   final globalController = Get.find<GlobalController>();
 
@@ -97,7 +98,7 @@ class _ShoppingRescheduleFormState extends State<ShoppingRescheduleForm> {
                   label: ProfileScreenTexts.updateSchedule,
                   onClick: () {
                     if (_formKey.currentState!.validate()) {
-                      //TODO: Update schedule function
+                      updateAgentBookingSchedule();
                     }
                   })
             ],
@@ -105,9 +106,17 @@ class _ShoppingRescheduleFormState extends State<ShoppingRescheduleForm> {
     );
   }
 
+  void updateAgentBookingSchedule() async {
+    final response = await agentShoppingController.updateAgentBookingSchedule(orderId: notificationController.latestNotification.value.dataId ?? 0);
+    if(response){
+
+    }
+  }
+
   void setTime(DateTime selectedDateTime, bool canadianTime) {
     notificationController.rescheduledEasternTime.value = DateFormatters.getCanadianTime(selectedDateTime).millisecondsSinceEpoch;
     notificationController.rescheduledBDTime.value = DateFormatters.getBDTime(selectedDateTime).millisecondsSinceEpoch;
+    notificationController.rescheduledUtcTime.value = selectedDateTime.toUtc().millisecondsSinceEpoch;
 
     if (canadianTime) {
       notificationController.rescheduledEasternTimeController.value.text = DateFormatters.getFormattedDateTime(

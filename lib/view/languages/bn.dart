@@ -203,6 +203,7 @@ final Map<String, String> bn = {
   'noNotificationFound': "কোন নোটিফিকেশন পাওয়া যায় নি",
   'pleaseReschedule': "আপনার শপিং সেশন পুনঃনির্ধারণ করুন?",
   'updateSchedule': "আপনার সময়সূচি আপডেট করুন",
+  'viewNotification': "বিজ্ঞপ্তি দেখুন",
 
 
   // Saved address

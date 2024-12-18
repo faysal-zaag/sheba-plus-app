@@ -28,11 +28,6 @@ class AddressController extends GetxController {
   final addressSelectedCountry = "".obs;
   final addressAdditionalInfo = TextEditingController().obs;
 
-  final newAddressTitle = "".obs;
-  final newAddressMobileNumber = "".obs;
-  final newAddressCountryCode = "".obs;
-  final newAddressCountryIso = "".obs;
-  final newAddressMobileNumberLength = 10.obs;
   final newAddressStreetController = TextEditingController().obs;
   final newAddressStreet2Controller = TextEditingController().obs;
   final newAddressCityController = TextEditingController().obs;
@@ -55,6 +50,16 @@ class AddressController extends GetxController {
     addressZipCodeController.value.clear();
     addressSelectedCountry.value = "";
     addressAdditionalInfo.value.clear();
+  }
+
+  void resetNewAddressFields() {
+    newAddressStreetController.value.clear();
+    newAddressStreet2Controller.value.clear();
+    newAddressCityController.value.clear();
+    newAddressSelectedState.value = "";
+    newAddressZipCodeController.value.clear();
+    newAddressSelectedCountry.value = "";
+    newAddressAdditionalInfo.value.clear();
   }
 
   void setAddressFieldsData({required Address address}) {
