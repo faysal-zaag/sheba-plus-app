@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/countries.dart';
+import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
@@ -22,6 +23,7 @@ class ReferralForm extends StatefulWidget {
 class _ReferralFormState extends State<ReferralForm> {
   final _referralFormKey = GlobalKey<FormState>();
   final authController = Get.find<AuthController>();
+  final globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +93,7 @@ class _ReferralFormState extends State<ReferralForm> {
       if (response) {
         authController.resetReferralFields();
         if (authController.isLoggedIn.isTrue) {
-          Get.offAndToNamed(Routes.home);
+          Get.offAndToNamed(globalController.redirectScreen.value);
         } else {
           Get.offAndToNamed(Routes.signIn);
         }

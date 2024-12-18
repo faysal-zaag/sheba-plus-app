@@ -24,6 +24,7 @@ mixin _$NotificationBody {
   String get shoppingArea => throw _privateConstructorUsedError;
   String get meetingTime => throw _privateConstructorUsedError;
   String get ticketNumber => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
 
   /// Serializes this NotificationBody to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,7 +46,8 @@ abstract class $NotificationBodyCopyWith<$Res> {
       {String agentPurchaseHour,
       String shoppingArea,
       String meetingTime,
-      String ticketNumber});
+      String ticketNumber,
+      String message});
 }
 
 /// @nodoc
@@ -67,6 +69,7 @@ class _$NotificationBodyCopyWithImpl<$Res, $Val extends NotificationBody>
     Object? shoppingArea = null,
     Object? meetingTime = null,
     Object? ticketNumber = null,
+    Object? message = null,
   }) {
     return _then(_value.copyWith(
       agentPurchaseHour: null == agentPurchaseHour
@@ -85,6 +88,10 @@ class _$NotificationBodyCopyWithImpl<$Res, $Val extends NotificationBody>
           ? _value.ticketNumber
           : ticketNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -101,7 +108,8 @@ abstract class _$$NotificationBodyImplCopyWith<$Res>
       {String agentPurchaseHour,
       String shoppingArea,
       String meetingTime,
-      String ticketNumber});
+      String ticketNumber,
+      String message});
 }
 
 /// @nodoc
@@ -121,6 +129,7 @@ class __$$NotificationBodyImplCopyWithImpl<$Res>
     Object? shoppingArea = null,
     Object? meetingTime = null,
     Object? ticketNumber = null,
+    Object? message = null,
   }) {
     return _then(_$NotificationBodyImpl(
       agentPurchaseHour: null == agentPurchaseHour
@@ -139,6 +148,10 @@ class __$$NotificationBodyImplCopyWithImpl<$Res>
           ? _value.ticketNumber
           : ticketNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -150,7 +163,8 @@ class _$NotificationBodyImpl implements _NotificationBody {
       {this.agentPurchaseHour = '',
       this.shoppingArea = '',
       this.meetingTime = '',
-      this.ticketNumber = ''});
+      this.ticketNumber = '',
+      this.message = ''});
 
   factory _$NotificationBodyImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotificationBodyImplFromJson(json);
@@ -167,10 +181,13 @@ class _$NotificationBodyImpl implements _NotificationBody {
   @override
   @JsonKey()
   final String ticketNumber;
+  @override
+  @JsonKey()
+  final String message;
 
   @override
   String toString() {
-    return 'NotificationBody(agentPurchaseHour: $agentPurchaseHour, shoppingArea: $shoppingArea, meetingTime: $meetingTime, ticketNumber: $ticketNumber)';
+    return 'NotificationBody(agentPurchaseHour: $agentPurchaseHour, shoppingArea: $shoppingArea, meetingTime: $meetingTime, ticketNumber: $ticketNumber, message: $message)';
   }
 
   @override
@@ -185,13 +202,14 @@ class _$NotificationBodyImpl implements _NotificationBody {
             (identical(other.meetingTime, meetingTime) ||
                 other.meetingTime == meetingTime) &&
             (identical(other.ticketNumber, ticketNumber) ||
-                other.ticketNumber == ticketNumber));
+                other.ticketNumber == ticketNumber) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, agentPurchaseHour, shoppingArea, meetingTime, ticketNumber);
+  int get hashCode => Object.hash(runtimeType, agentPurchaseHour, shoppingArea,
+      meetingTime, ticketNumber, message);
 
   /// Create a copy of NotificationBody
   /// with the given fields replaced by the non-null parameter values.
@@ -215,7 +233,8 @@ abstract class _NotificationBody implements NotificationBody {
       {final String agentPurchaseHour,
       final String shoppingArea,
       final String meetingTime,
-      final String ticketNumber}) = _$NotificationBodyImpl;
+      final String ticketNumber,
+      final String message}) = _$NotificationBodyImpl;
 
   factory _NotificationBody.fromJson(Map<String, dynamic> json) =
       _$NotificationBodyImpl.fromJson;
@@ -228,6 +247,8 @@ abstract class _NotificationBody implements NotificationBody {
   String get meetingTime;
   @override
   String get ticketNumber;
+  @override
+  String get message;
 
   /// Create a copy of NotificationBody
   /// with the given fields replaced by the non-null parameter values.

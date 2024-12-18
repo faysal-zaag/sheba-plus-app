@@ -211,6 +211,8 @@ final Map<String, String> en = {
   'meetingWillStart': "Agent meeting will start in",
   'clickToStartMeeting': "Click the 'Start Meeting' button to start meeting now",
   'noNotificationFound': "No notification found",
+  'pleaseReschedule': "Please reschedule your shopping session?",
+  'updateSchedule': "Update your schedule",
 
   // Saved address
   'country': "Country",

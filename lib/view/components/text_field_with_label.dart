@@ -18,6 +18,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final TextInputType? textInputType;
   final List<TextInputFormatter>? inputFormatters;
   final bool readOnly;
+  final bool asterisk;
   final VoidCallback? onTap;
   final String? Function(String?)? onChange;
 
@@ -35,7 +36,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.textInputType,
     this.readOnly = false,
     this.onTap,
-    this.onChange, this.inputFormatters,
+    this.onChange, this.inputFormatters, this.asterisk = false,
   });
 
   @override
@@ -73,7 +74,7 @@ class TextFieldWithLabel extends StatelessWidget {
                 ?.copyWith(color: AppColors.blackTitle, fontSize: 14),
         children: [
           TextSpan(text: label), // Regular label text
-          if (required == true && readOnly == false)
+          if (required == true && (readOnly == false || asterisk))
             const TextSpan(
               text: " *", // Required marker
               style: TextStyle(color: AppColors.error), // Error color for the "*"

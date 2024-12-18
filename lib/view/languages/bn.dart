@@ -201,6 +201,9 @@ final Map<String, String> bn = {
   'meetingWillStart': "এজেন্ট মিটিং শুরু হবে",
   'clickToStartMeeting': "এখন মিটিং শুরু করতে 'Start Meeting' বোতামে ক্লিক করুন",
   'noNotificationFound': "কোন নোটিফিকেশন পাওয়া যায় নি",
+  'pleaseReschedule': "আপনার শপিং সেশন পুনঃনির্ধারণ করুন?",
+  'updateSchedule': "আপনার সময়সূচি আপডেট করুন",
+
 
   // Saved address
   'country': "দেশ",

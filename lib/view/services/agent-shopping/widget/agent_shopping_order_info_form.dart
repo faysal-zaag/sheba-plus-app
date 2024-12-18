@@ -14,6 +14,8 @@ import 'package:sheba_plus/utils/formatters/date_formatters.dart';
 import 'package:sheba_plus/utils/formatters/input_formatters.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
+import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
+import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
@@ -30,8 +32,10 @@ class AgentShoppingOrderInfoForm extends StatefulWidget {
 
 class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm> {
   final _formKey = GlobalKey<FormState>();
+  final authController = Get.find<AuthController>();
   final agentShoppingController = Get.find<AgentShoppingController>();
   final globalController = Get.find<GlobalController>();
+  final addressController = Get.find<AddressController>();
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +153,15 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
                   label: GlobalTexts.next,
                   onClick: () {
                     if (_formKey.currentState!.validate()) {
-                      Get.toNamed(Routes.partialCheckoutScreen);
+                      if (authController.isLoggedIn.isTrue) {
+                        if (addressController.hasSavedAddress.isFalse) {
+                          Get.toNamed(Routes.registerAddress);
+                        } else {
+                          Get.toNamed(Routes.partialCheckoutScreen);
+                        }
+                      } else {
+                        Get.toNamed(Routes.signIn);
+                      }
                     }
                   })
             ],

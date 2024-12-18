@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sheba_plus/models/setting/setting.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/logger.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/auth/widgets/modals/terms_and_condition_modal.dart';
 import 'package:sheba_plus/view/styles.dart';
 import 'package:sheba_plus/view_model/repositories/global.repository.dart';
@@ -20,6 +21,8 @@ class GlobalController extends GetxController {
   final termsAccepted = false.obs;
   final appSetting = const Setting().obs;
   final getDefaultSettingLoading = true.obs;
+
+  final redirectScreen = Routes.home.obs;
 
   void showTermsAndConditionSheet(
       {required BuildContext context, required int serviceIndex}) {

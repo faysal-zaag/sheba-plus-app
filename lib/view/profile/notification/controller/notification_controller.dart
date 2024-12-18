@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/models/notification/user_notification.dart';
 import 'package:sheba_plus/utils/formatters/date_formatters.dart';
@@ -38,6 +39,13 @@ class NotificationController extends GetxController {
   final notifications = <UserNotification>[].obs;
   final unReadNotifications = 0.obs;
   final latestNotification = const UserNotification().obs;
+
+  // reschedule meeting controllers
+  final rescheduledMeetingLocationController = TextEditingController().obs;
+  final rescheduledEasternTimeController = TextEditingController().obs;
+  final rescheduledEasternTime = 0.obs;
+  final rescheduledBDTimeController = TextEditingController().obs;
+  final rescheduledBDTime = 0.obs;
 
   Future<void> getNotifications({bool? readStatus, int page = 0}) async {
     try {
@@ -129,7 +137,7 @@ class NotificationController extends GetxController {
     }
   }
 
-  String getPurchaseAgentService({required UserNotification notification}) {
+  String getPurchaseAgentServiceNotificationMessage({required UserNotification notification}) {
     return "Hi ${notification.user?.firstName},"
         "\n\nYou have purchased ${notification.body?.agentPurchaseHour} Hours AGENT SERVICE to assist you for shopping at ${notification.body?.shoppingArea}. "
         "Your shopping time will start on "
@@ -141,5 +149,10 @@ class NotificationController extends GetxController {
         "You can extend your shopping time then or it will terminate by itself. At any point, you can terminate your shopping by CLICKING STOP."
         "\n\nHope you enjoy your shopping with our AGENT."
         "\n\nRegards,\nDS.ComTeam";
+  }
+
+  String getInvalidNotificationMessage({required UserNotification notification}) {
+    return "Hi ${notification.user?.firstName},"
+        "\n\nThe shopping hours that you chose is INVALID ${notification.body?.message}";
   }
 }

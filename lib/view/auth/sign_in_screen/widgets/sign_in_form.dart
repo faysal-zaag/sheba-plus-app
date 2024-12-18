@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
@@ -26,6 +27,7 @@ class _SignInFormState extends State<SignInForm> {
   final authController = Get.find<AuthController>();
   final storageService = Get.find<StorageService>();
   final addressController = Get.find<AddressController>();
+  final globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +126,7 @@ class _SignInFormState extends State<SignInForm> {
       if (response) {
         authController.cleanSignInData();
         if(addressController.hasSavedAddress.isTrue) {
-          Get.offAndToNamed(Routes.home);
+          Get.offAndToNamed(globalController.redirectScreen.value);
         } else {
           Get.offAndToNamed(Routes.registerAddress);
         }
