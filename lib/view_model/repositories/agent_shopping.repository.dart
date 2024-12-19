@@ -10,6 +10,10 @@ class AgentShoppingRepository{
     return await _dio.post(ApiUrls.createAgentBooking, data: agentOrderInfo.toJson());
   }
 
+  Future<Response> getOrderDetails({required int orderId})async{
+    return await _dio.get("${ApiUrls.getOrderApiUrl}/$orderId");
+  }
+
   Future<Response> updateAgentBookingSchedule({required int orderId, required List<String> meetingLocations, required int meetingTime})async{
     return await _dio.put("${ApiUrls.updateAgentBookingSchedule}/$orderId", data: {
       "meetingLocations": meetingLocations,

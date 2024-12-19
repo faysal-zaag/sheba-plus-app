@@ -1,5 +1,6 @@
 class ApiUrls {
   static const String baseApiUrl = "http://192.168.10.13:7010/api/1.0.0";
+
   // static const String baseApiUrl = "https://sheba-plus-api.ems24.co/api/1.0.0";
   static const String securedApiUrl = "$baseApiUrl/secured";
   static const String customerAuthApiUrl = "$baseApiUrl/auth/customer";
@@ -7,7 +8,7 @@ class ApiUrls {
 
   // settings
   static const String publicSettingApiUrl = "$baseApiUrl/settings/get-default";
-  
+
   // services
   static const String servicesApiUrl = "$baseApiUrl/modules";
 
@@ -17,12 +18,9 @@ class ApiUrls {
   static const String verifyOtpApiUrl = "$customersApiUrl/verify/otp";
   static const String verifyForgetPasswordApiUrl = "$customersApiUrl/verify/forget-password";
   static const String socialLoginApiUrl = "$baseApiUrl/customer/social/login";
-  static const String verifyEmailApiUrl =
-      "$customersApiUrl/verify/email-verification";
-  static const String verifyResetPasswordByEmail =
-      "$customersApiUrl/verify/reset-password-by-email";
-  static const String requestResetPasswordByEmail =
-      "$customersApiUrl/request/reset-password-by-email";
+  static const String verifyEmailApiUrl = "$customersApiUrl/verify/email-verification";
+  static const String verifyResetPasswordByEmail = "$customersApiUrl/verify/reset-password-by-email";
+  static const String requestResetPasswordByEmail = "$customersApiUrl/request/reset-password-by-email";
 
   // Profile
   static const String getProfileApiUrl = "$securedApiUrl/users/profile";
@@ -59,4 +57,8 @@ class ApiUrls {
   // Category
   static const String getAllCategoryApiUrl = "$baseApiUrl/categories";
   static const String getAllSubCategoryApiUrl = "$baseApiUrl/sub-categories";
+
+  //orders
+  static const String getOrderApiUrl = "$securedApiUrl/orders/id";
+
 }

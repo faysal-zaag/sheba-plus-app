@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/models/address/address.dart';
 import 'package:sheba_plus/models/agent-order/agent_order.dto.dart';
+import 'package:sheba_plus/models/shopping-deatils/shopping_details.dart';
 import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/view/components/custom_common_modal_sheet_parent_widget.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
@@ -34,6 +35,9 @@ class AgentShoppingController extends GetxController {
 
   final createAgentBookingLoading = false.obs;
   final updateAgentBookingScheduleLoading = false.obs;
+  final getOrderDetailsLoading = false.obs;
+
+  final shoppingDetailsList = const <ShoppingDetails>[].obs;
 
   void resetFields() {
     agentShoppingMeetingLocationController.value.clear();
@@ -126,6 +130,29 @@ class AgentShoppingController extends GetxController {
       return false;
     } finally {
       updateAgentBookingScheduleLoading(false);
+    }
+  }
+
+  Future<void> getOrderDetails({required int orderId}) async {
+    try {
+      getOrderDetailsLoading(true);
+
+      final response = await _agentShoppingRepository.getOrderDetails(
+        orderId: orderId,
+      );
+
+      var shoppingDetailsListData = response.data["shoppingDetailsList"] as List;
+
+      var shoppingDetailsResponseList = shoppingDetailsListData.map((shoppingDetails) {
+        return ShoppingDetails.fromJson(shoppingDetails);
+      }).toList();
+
+      shoppingDetailsList(shoppingDetailsResponseList);
+
+    } catch (e) {
+      Log.error(e.toString());
+    } finally {
+      getOrderDetailsLoading(false);
     }
   }
 

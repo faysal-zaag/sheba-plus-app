@@ -11,9 +11,10 @@ import 'package:sheba_plus/view/profile/notification/widget/notification-types/a
 import 'package:sheba_plus/view/profile/notification/widget/notification-types/agent_shopping_completed.dart';
 import 'package:sheba_plus/view/profile/notification/widget/notification-types/meeting_started.dart';
 import 'package:sheba_plus/view/profile/notification/widget/notification-types/purchase_agent_service.dart';
+import 'package:sheba_plus/view/profile/notification/widget/notification-types/shopping_item_details.dart';
 import 'package:sheba_plus/view/profile/notification/widget/order-review/order_review_questions.dart';
 import 'package:sheba_plus/view/profile/notification/widget/order_status_tracks.dart';
-import 'package:sheba_plus/view/profile/notification/widget/shopping-details/shopping_details.dart';
+import 'package:sheba_plus/view/profile/notification/widget/shopping-details/shopping_details_container.dart';
 import 'package:sheba_plus/view/profile/notification/widget/shopping-details/sopping_summary.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
@@ -32,12 +33,15 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
   final agentShoppingController = Get.find<AgentShoppingController>();
 
   void _initCall() async {
-    if (widget.notification.notificationType != AgentOrderNotificationType.COMMON_USER_NOTIFICATION.name) {
-      await notificationController.getLatestNotification(dataId: widget.notification.dataId ?? 0);
-    } else {
+    if (widget.notification.notificationType == AgentOrderNotificationType.COMMON_USER_NOTIFICATION.name) {
       await notificationController.getSingleNotificationDetails(id: widget.notification.id);
+    } else {
+      final notificationType = await notificationController.getLatestNotification(dataId: widget.notification.dataId ?? 0);
+      if (notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) {
+        await agentShoppingController.getOrderDetails(orderId: widget.notification.dataId ?? 0);
+      }
     }
-    await notificationController.markAsRead(notificationId: widget.notification.id);
+    if(!widget.notification.readStats) await notificationController.markAsRead(notificationId: widget.notification.id);
   }
 
   @override
@@ -113,9 +117,14 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
                                         meetingEndTime: int.parse(latestNotification.body?.meetingEndTime ?? "0"),
                                         showExtendMeetingTimeSheet: () => agentShoppingController.showExtendMeetingTimeSheet(context: context, orderId: latestNotification.dataId ?? 0),
                                       ),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) const ShoppingDetails(),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) const Divider(),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) const ShoppingDetails(),
+                                    if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name)
+                                      Obx(
+                                        () => agentShoppingController.getOrderDetailsLoading.isTrue
+                                            ? const CustomLoader()
+                                            : ShoppingItemDetails(
+                                                shoppingDetailsList: agentShoppingController.shoppingDetailsList,
+                                              ),
+                                      ),
                                     if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) const ShoppingSummary(),
                                     if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) const OrderStatusTracks(),
                                     if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) const OrderReviewQuestions(),

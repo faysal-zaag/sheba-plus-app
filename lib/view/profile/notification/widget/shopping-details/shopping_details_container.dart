@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sheba_plus/models/shopping-deatils/shopping_details.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
@@ -6,8 +7,10 @@ import 'package:sheba_plus/view/profile/notification/widget/shopping-details/sho
 import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
 import 'package:sheba_plus/view/services/widget/summary_row.dart';
 
-class ShoppingDetails extends StatelessWidget {
-  const ShoppingDetails({super.key});
+class ShoppingDetailsContainer extends StatelessWidget {
+  final ShoppingDetails shoppingDetails;
+
+  const ShoppingDetailsContainer({super.key, required this.shoppingDetails});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class ShoppingDetails extends StatelessWidget {
             style: subTextStyle,
           ),
           Text(
-            "Arong",
+            shoppingDetails.shopName,
             style: lightTextStyle,
           ),
           16.kH,
@@ -37,26 +40,16 @@ class ShoppingDetails extends StatelessWidget {
             header: true,
           ),
           6.kH,
-          const ShoppingDetailsRow(
-              title1: "Cotton T-shirt",
-              title2: "1",
-              title3: "BDT 120",
-              title4: "BDT 850"),
-          6.kH,
-          const ShoppingDetailsRow(
-              title1: "Cotton T-shirt",
-              title2: "1",
-              title3: "BDT 120",
-              title4: "BDT 850"),
-          6.kH,
-          const ShoppingDetailsRow(
-              title1: "Cotton T-shirt",
-              title2: "1",
-              title3: "BDT 120",
-              title4: "BDT 850"),
+          ...shoppingDetails.shoppingItemDetailsList.map(
+            (shoppingItemDetails) => ShoppingDetailsRow(
+              title1: shoppingItemDetails.id.toString(),
+              title2: shoppingItemDetails.quantity.toString(),
+              title3: shoppingItemDetails.price.toString(),
+              title4: (shoppingItemDetails.price * shoppingItemDetails.quantity).toString(),
+            ),
+          ),
           const Divider(),
-          SummaryRow(
-              title: AgentShoppingTexts.totalItemPrice, value: "BDT 12000"),
+          SummaryRow(title: AgentShoppingTexts.totalItemPrice, value: "BDT ${shoppingDetails.totalItemPrice}"),
         ],
       ),
     );

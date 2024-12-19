@@ -108,7 +108,7 @@ class NotificationController extends GetxController {
     }
   }
 
-  Future<void> getLatestNotification({required int dataId}) async {
+  Future<String?> getLatestNotification({required int dataId}) async {
     try {
       getLatestNotificationLoading(true);
 
@@ -116,9 +116,11 @@ class NotificationController extends GetxController {
 
       UserNotification? notification = UserNotification.fromJson(response.data);
       latestNotification(notification);
+      return notification.notificationType;
     } catch (err) {
       Log.error(err.toString());
       latestNotification(const UserNotification());
+      return null;
     } finally {
       getLatestNotificationLoading(false);
     }
