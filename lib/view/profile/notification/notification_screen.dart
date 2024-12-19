@@ -23,11 +23,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   final notificationController = Get.find<NotificationController>();
   final profileController = Get.find<ProfileController>();
 
-  int currentPage = 0;
-
   void _initCall() async {
     if(notificationController.notificationAlreadyLoaded.isFalse){
-      await notificationController.getNotifications(page: currentPage);
+      await notificationController.getNotifications();
     }
   }
 
@@ -95,6 +93,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         readMoreOn: notificationController.expandedNotifications.contains(index),
                       ),
                     ),
+                    totalPages: notificationController.totalPages.value,
+                    currentPage: notificationController.currentPage.value,
                     itemCount: notificationController.notifications.length,
                     onRefresh: onRefresh,
                     onFetchNextPage: onFetchNextPage,
@@ -112,9 +112,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
   }
 
   Future<void> onFetchNextPage() async {
-    currentPage++;
-    print("Current page => $currentPage");
-
-    return await notificationController.getNotifications(page: currentPage);
+    return await notificationController.getNotifications(page: notificationController.currentPage.value + 1);
   }
 }

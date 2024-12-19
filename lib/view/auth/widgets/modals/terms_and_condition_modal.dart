@@ -8,6 +8,7 @@ import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/utils.dart';
+import 'package:sheba_plus/view/components/bottom_sheet_header.dart';
 import 'package:sheba_plus/view/components/custom_close_button.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/global_texts.dart';
@@ -30,16 +31,7 @@ class TermsAndConditionSheet extends StatelessWidget {
         children: [
           Padding(
             padding: AppPaddings.allPadding16,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  GlobalTexts.termsAndCondition,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w600),
-                ),
-                CustomCloseButton(onPressed: () => Get.back())
-              ],
-            ),
+            child: BottomSheetHeader(title: GlobalTexts.termsAndCondition),
           ),
           8.kH,
           Padding(

@@ -8,12 +8,15 @@ import 'package:sheba_plus/view/components/vertical_bordered_text_container.dart
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/notification/widget/notification-types/agent_service_invalid.dart';
 import 'package:sheba_plus/view/profile/notification/widget/notification-types/agent_service_updated.dart';
+import 'package:sheba_plus/view/profile/notification/widget/notification-types/agent_shopping_completed.dart';
+import 'package:sheba_plus/view/profile/notification/widget/notification-types/meeting_started.dart';
 import 'package:sheba_plus/view/profile/notification/widget/notification-types/purchase_agent_service.dart';
 import 'package:sheba_plus/view/profile/notification/widget/order-review/order_review_questions.dart';
 import 'package:sheba_plus/view/profile/notification/widget/order_status_tracks.dart';
 import 'package:sheba_plus/view/profile/notification/widget/shopping-details/shopping_details.dart';
 import 'package:sheba_plus/view/profile/notification/widget/shopping-details/sopping_summary.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
+import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 
 class NotificationDetailsScreen extends StatefulWidget {
   final UserNotification notification;
@@ -26,12 +29,12 @@ class NotificationDetailsScreen extends StatefulWidget {
 
 class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
   final notificationController = Get.find<NotificationController>();
+  final agentShoppingController = Get.find<AgentShoppingController>();
 
   void _initCall() async {
     if (widget.notification.notificationType != AgentOrderNotificationType.COMMON_USER_NOTIFICATION.name) {
       await notificationController.getLatestNotification(dataId: widget.notification.dataId ?? 0);
-    }
-    else {
+    } else {
       await notificationController.getSingleNotificationDetails(id: widget.notification.id);
     }
     await notificationController.markAsRead(notificationId: widget.notification.id);
@@ -48,13 +51,12 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
   void dispose() {
     // TODO: implement dispose
     notificationController.latestNotification(null);
+    agentShoppingController.resetFields();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print(widget.notification.notificationType);
-    
     return PrimaryScaffold(
       body: Obx(
         () {
@@ -86,10 +88,6 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.COMMON_USER_NOTIFICATION.name)
-                                      PurchaseAgentService(
-                                        message: latestNotification.details,
-                                      ),
                                     if (latestNotification.notificationType == AgentOrderNotificationType.PURCHASE_AGENT_SERVICE.name)
                                       PurchaseAgentService(
                                         message: notificationController.getPurchaseAgentServiceNotificationMessage(notification: latestNotification),
@@ -108,12 +106,23 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
                                         message: notificationController.getAgentServiceUpdatedNotificationMessage(notification: latestNotification),
                                         meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
                                       ),
+                                    if (latestNotification.notificationType == AgentOrderNotificationType.MEETING_STARTED.name)
+                                      MeetingStarted(
+                                        message: notificationController.getMeetingStartedNotificationMessage(notification: latestNotification),
+                                        meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
+                                        meetingEndTime: int.parse(latestNotification.body?.meetingEndTime ?? "0"),
+                                        showExtendMeetingTimeSheet: () => agentShoppingController.showExtendMeetingTimeSheet(context: context, orderId: latestNotification.dataId ?? 0),
+                                      ),
                                     if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) const ShoppingDetails(),
                                     if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) const Divider(),
                                     if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) const ShoppingDetails(),
                                     if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) const ShoppingSummary(),
                                     if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) const OrderStatusTracks(),
                                     if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) const OrderReviewQuestions(),
+                                    if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SHOPPING_COMPLETED.name)
+                                      AgentShoppingCompleted(
+                                        message: notificationController.getAgentShoppingCompletedMessage(notification: latestNotification),
+                                      ),
                                   ],
                                 ),
                               ),

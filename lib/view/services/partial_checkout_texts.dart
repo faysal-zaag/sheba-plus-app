@@ -19,4 +19,5 @@ class PartialCheckoutTexts {
   static String dropOffService = "Drop-OFF Service".tr;
   static String orderTotal = "Order Total".tr;
   static String makePaymentAndConfirm = "Make Payment & Confirm".tr;
+  static String makePayment = "Make Payment".tr;
 }

@@ -38,6 +38,7 @@ class NotificationController extends GetxController {
   final notificationAlreadyLoaded = false.obs;
 
   final notifications = <UserNotification>[].obs;
+  final totalPages = 0.obs;
   final unReadNotifications = 0.obs;
   final latestNotification = const UserNotification().obs;
 
@@ -48,6 +49,7 @@ class NotificationController extends GetxController {
   final rescheduledBDTimeController = TextEditingController().obs;
   final rescheduledBDTime = 0.obs;
   final rescheduledUtcTime = 0.obs;
+  final currentPage = 0.obs;
 
   Future<void> getNotifications({bool? readStatus, int page = 0}) async {
     try {
@@ -55,12 +57,15 @@ class NotificationController extends GetxController {
       if (page == 0) {
         getNotificationsLoading(true);
       } else {
+        currentPage(page);
         getMoreNotificationsLoading(true);
       }
 
       // Fetch notifications from the repository
       final response = await _notificationRepository.readAllNotification(readStatus: readStatus, page: page);
       final notificationListData = response.data["content"] as List;
+
+      totalPages(response.data["totalPages"]);
 
       unReadNotifications(0);
 
@@ -180,5 +185,15 @@ class NotificationController extends GetxController {
 
   String getAgentServiceUpdatedNotificationMessage({required UserNotification notification}) {
     return headerFooter(notification: notification, body: "\n\nYour AGENT SERVICE meeting schedule has been updated successfully. ${commonMessage(notification: notification)}") ;
+  }
+
+  String getMeetingStartedNotificationMessage({required UserNotification notification}) {
+    return headerFooter(notification: notification, body: "\n\n${notification.details}") ;
+  }
+
+  String getAgentShoppingCompletedMessage({required UserNotification notification}) {
+    return "Thank you ${notification.user?.firstName}!!"
+        "\nYou have completed your transaction. Your parcel is int he process of shipment. "
+        "We will update the shipment status time to time. However, you can also track your parcel as well";
   }
 }

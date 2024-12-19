@@ -6,9 +6,31 @@ class CountDownTimer extends StatefulWidget {
   final int startTimeMilliseconds;
   final Function()? onTimerFinish;
   final TextStyle? textStyle;
+  final bool day;
+  final bool hour;
+  final bool min;
+  final bool sec;
+  final String dayString;
+  final String hourString;
+  final String minString;
+  final String secString;
   final bool verificationPage;
 
-  const CountDownTimer({super.key, required this.startTimeMilliseconds, this.onTimerFinish, this.textStyle, this.verificationPage = false});
+  const CountDownTimer({
+    super.key,
+    required this.startTimeMilliseconds,
+    this.onTimerFinish,
+    this.textStyle,
+    this.verificationPage = false,
+    this.day = true,
+    this.hour = true,
+    this.min = true,
+    this.sec = true,
+    this.dayString = "d",
+    this.hourString = "h",
+    this.minString = "m",
+    this.secString = "s",
+  });
 
   @override
   CountDownTimerState createState() => CountDownTimerState();
@@ -50,9 +72,20 @@ class CountDownTimerState extends State<CountDownTimer> {
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
     String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
 
-    return widget.verificationPage ? '${twoDigitMinutes}m : ${twoDigitSeconds}s' : '$twoDigitDays d : $twoDigitHours h : ${twoDigitMinutes}m : ${twoDigitSeconds}s';
+    String time = "";
+    if (widget.verificationPage) {
+      return '${twoDigitMinutes}m : ${twoDigitSeconds}s';
+    } else {
+      if (widget.day) time += "$twoDigitDays ${widget.dayString}";
+      if (widget.day && widget.hour) time += " : ";
+      if (widget.hour) time += "$twoDigitHours ${widget.hourString}";
+      if (widget.min) time += " : ";
+      if (widget.min) time += "$twoDigitMinutes ${widget.minString}";
+      if (widget.sec) time += " : ";
+      if (widget.sec) time += "$twoDigitSeconds ${widget.secString}";
+    }
+    return time;
   }
-
 
   @override
   Widget build(BuildContext context) {

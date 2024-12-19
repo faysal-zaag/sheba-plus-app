@@ -9,6 +9,7 @@ class NotificationBody with _$NotificationBody {
     @Default('') String agentPurchaseHour,
     @Default('') String shoppingArea,
     @Default('') String meetingTime,
+    @Default('') String meetingEndTime,
     @Default('') String ticketNumber,
     @Default('') String message,
   }) = _NotificationBody;

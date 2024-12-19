@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/models/address/address.dart';
 import 'package:sheba_plus/models/agent-order/agent_order.dto.dart';
 import 'package:sheba_plus/utils/logger.dart';
+import 'package:sheba_plus/view/components/custom_common_modal_sheet_parent_widget.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
+import 'package:sheba_plus/view/profile/notification/widget/extend_meeting_time_bottom_sheet.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 import 'package:sheba_plus/view_model/repositories/agent_shopping.repository.dart';
 
@@ -76,24 +79,25 @@ class AgentShoppingController extends GetxController {
     try {
       createAgentBookingLoading(true);
       AgentOrderDTO agentOrderInfo = AgentOrderDTO(
-          meetingLocations: [agentShoppingMeetingLocationController.value.text],
-          dropOffService: agentShoppingDropOffService.value,
-          estimatedBudget: num.parse(agentShoppingSpendAmountController.value.text),
-          hourBooked: num.parse(agentShoppingServiceDurationController.value.text),
-          meetingTime: agentShoppingUtcTime.value,
-          deliveryAddress: sameAsHomeAddress.isTrue
-              ? _addressController.addresses[0]
-              : Address(
-                  city: _addressController.newAddressCityController.value.text,
-                  country: _addressController.newAddressSelectedCountry.value,
-                  state: _addressController.newAddressSelectedState.value,
-                  street: _addressController.newAddressStreetController.value.text,
-                  streetAlternative: _addressController.newAddressStreet2Controller.value.text.isEmpty ? null : _addressController.newAddressStreet2Controller.value.text,
-                  addressDesc: _addressController.newAddressAdditionalInfo.value.text.isEmpty ? null : _addressController.newAddressAdditionalInfo.value.text,
-                  zipCode: int.parse(
-                    _addressController.newAddressZipCodeController.value.text,
-                  ),
-                ));
+        meetingLocations: [agentShoppingMeetingLocationController.value.text],
+        dropOffService: agentShoppingDropOffService.value,
+        estimatedBudget: num.parse(agentShoppingSpendAmountController.value.text),
+        hourBooked: num.parse(agentShoppingServiceDurationController.value.text),
+        meetingTime: agentShoppingUtcTime.value,
+        deliveryAddress: sameAsHomeAddress.isTrue
+            ? _addressController.addresses[0]
+            : Address(
+                city: _addressController.newAddressCityController.value.text,
+                country: _addressController.newAddressSelectedCountry.value,
+                state: _addressController.newAddressSelectedState.value,
+                street: _addressController.newAddressStreetController.value.text,
+                streetAlternative: _addressController.newAddressStreet2Controller.value.text.isEmpty ? null : _addressController.newAddressStreet2Controller.value.text,
+                addressDesc: _addressController.newAddressAdditionalInfo.value.text.isEmpty ? null : _addressController.newAddressAdditionalInfo.value.text,
+                zipCode: int.parse(
+                  _addressController.newAddressZipCodeController.value.text,
+                ),
+              ),
+      );
 
       await _agentShoppingRepository.createAgentBooking(agentOrderInfo: agentOrderInfo);
 
@@ -123,5 +127,16 @@ class AgentShoppingController extends GetxController {
     } finally {
       updateAgentBookingScheduleLoading(false);
     }
+  }
+
+  void showExtendMeetingTimeSheet({required BuildContext context, required int orderId}) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return const ExtendMeetingTimeBottomSheet();
+      },
+    );
   }
 }

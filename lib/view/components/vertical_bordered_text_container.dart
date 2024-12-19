@@ -4,7 +4,8 @@ import 'package:sheba_plus/utils/constant/app_paddings.dart';
 
 class VerticalBorderedContainer extends StatelessWidget {
   final Widget child;
-  const VerticalBorderedContainer({super.key, required this.child});
+  final double padding;
+  const VerticalBorderedContainer({super.key, required this.child, this.padding = 16});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class VerticalBorderedContainer extends StatelessWidget {
           bottom: BorderSide(color: AppColors.borderE6),
         ),
       ),
-      padding: AppPaddings.allPadding16,
+      padding: EdgeInsets.all(padding),
       child: child,
     );
   }

@@ -23,6 +23,7 @@ mixin _$NotificationBody {
   String get agentPurchaseHour => throw _privateConstructorUsedError;
   String get shoppingArea => throw _privateConstructorUsedError;
   String get meetingTime => throw _privateConstructorUsedError;
+  String get meetingEndTime => throw _privateConstructorUsedError;
   String get ticketNumber => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
 
@@ -46,6 +47,7 @@ abstract class $NotificationBodyCopyWith<$Res> {
       {String agentPurchaseHour,
       String shoppingArea,
       String meetingTime,
+      String meetingEndTime,
       String ticketNumber,
       String message});
 }
@@ -68,6 +70,7 @@ class _$NotificationBodyCopyWithImpl<$Res, $Val extends NotificationBody>
     Object? agentPurchaseHour = null,
     Object? shoppingArea = null,
     Object? meetingTime = null,
+    Object? meetingEndTime = null,
     Object? ticketNumber = null,
     Object? message = null,
   }) {
@@ -83,6 +86,10 @@ class _$NotificationBodyCopyWithImpl<$Res, $Val extends NotificationBody>
       meetingTime: null == meetingTime
           ? _value.meetingTime
           : meetingTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      meetingEndTime: null == meetingEndTime
+          ? _value.meetingEndTime
+          : meetingEndTime // ignore: cast_nullable_to_non_nullable
               as String,
       ticketNumber: null == ticketNumber
           ? _value.ticketNumber
@@ -108,6 +115,7 @@ abstract class _$$NotificationBodyImplCopyWith<$Res>
       {String agentPurchaseHour,
       String shoppingArea,
       String meetingTime,
+      String meetingEndTime,
       String ticketNumber,
       String message});
 }
@@ -128,6 +136,7 @@ class __$$NotificationBodyImplCopyWithImpl<$Res>
     Object? agentPurchaseHour = null,
     Object? shoppingArea = null,
     Object? meetingTime = null,
+    Object? meetingEndTime = null,
     Object? ticketNumber = null,
     Object? message = null,
   }) {
@@ -143,6 +152,10 @@ class __$$NotificationBodyImplCopyWithImpl<$Res>
       meetingTime: null == meetingTime
           ? _value.meetingTime
           : meetingTime // ignore: cast_nullable_to_non_nullable
+              as String,
+      meetingEndTime: null == meetingEndTime
+          ? _value.meetingEndTime
+          : meetingEndTime // ignore: cast_nullable_to_non_nullable
               as String,
       ticketNumber: null == ticketNumber
           ? _value.ticketNumber
@@ -163,6 +176,7 @@ class _$NotificationBodyImpl implements _NotificationBody {
       {this.agentPurchaseHour = '',
       this.shoppingArea = '',
       this.meetingTime = '',
+      this.meetingEndTime = '',
       this.ticketNumber = '',
       this.message = ''});
 
@@ -180,6 +194,9 @@ class _$NotificationBodyImpl implements _NotificationBody {
   final String meetingTime;
   @override
   @JsonKey()
+  final String meetingEndTime;
+  @override
+  @JsonKey()
   final String ticketNumber;
   @override
   @JsonKey()
@@ -187,7 +204,7 @@ class _$NotificationBodyImpl implements _NotificationBody {
 
   @override
   String toString() {
-    return 'NotificationBody(agentPurchaseHour: $agentPurchaseHour, shoppingArea: $shoppingArea, meetingTime: $meetingTime, ticketNumber: $ticketNumber, message: $message)';
+    return 'NotificationBody(agentPurchaseHour: $agentPurchaseHour, shoppingArea: $shoppingArea, meetingTime: $meetingTime, meetingEndTime: $meetingEndTime, ticketNumber: $ticketNumber, message: $message)';
   }
 
   @override
@@ -201,6 +218,8 @@ class _$NotificationBodyImpl implements _NotificationBody {
                 other.shoppingArea == shoppingArea) &&
             (identical(other.meetingTime, meetingTime) ||
                 other.meetingTime == meetingTime) &&
+            (identical(other.meetingEndTime, meetingEndTime) ||
+                other.meetingEndTime == meetingEndTime) &&
             (identical(other.ticketNumber, ticketNumber) ||
                 other.ticketNumber == ticketNumber) &&
             (identical(other.message, message) || other.message == message));
@@ -209,7 +228,7 @@ class _$NotificationBodyImpl implements _NotificationBody {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, agentPurchaseHour, shoppingArea,
-      meetingTime, ticketNumber, message);
+      meetingTime, meetingEndTime, ticketNumber, message);
 
   /// Create a copy of NotificationBody
   /// with the given fields replaced by the non-null parameter values.
@@ -233,6 +252,7 @@ abstract class _NotificationBody implements NotificationBody {
       {final String agentPurchaseHour,
       final String shoppingArea,
       final String meetingTime,
+      final String meetingEndTime,
       final String ticketNumber,
       final String message}) = _$NotificationBodyImpl;
 
@@ -245,6 +265,8 @@ abstract class _NotificationBody implements NotificationBody {
   String get shoppingArea;
   @override
   String get meetingTime;
+  @override
+  String get meetingEndTime;
   @override
   String get ticketNumber;
   @override

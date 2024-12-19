@@ -66,11 +66,13 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
                   color: AppColors.primary,
                 ),
                 onTap: () {
+                  print("CAD TIME => ${agentShoppingController.agentShoppingEasternTime.value}");
                   globalController.showDateTimePicker(
-                      context: context,
-                      canadianTime: true,
-                      onPicked: setTime,
-                      initialDate: agentShoppingController.agentShoppingEasternTime.value != 0 ? DateTime.fromMillisecondsSinceEpoch(agentShoppingController.agentShoppingEasternTime.value) : null);
+                    context: context,
+                    canadianTime: true,
+                    onPicked: setTime,
+                    initialDate: agentShoppingController.agentShoppingEasternTime.value != 0 ? DateTime.fromMillisecondsSinceEpoch(agentShoppingController.agentShoppingEasternTime.value) : null,
+                  );
                 },
                 validator: (value) => InputValidators.generalValidator(
                   value: value,
@@ -87,8 +89,10 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
                 ),
                 validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
                 onTap: () {
+                  print("BD TIME => ${agentShoppingController.agentShoppingBDTime.value}");
                   globalController.showDateTimePicker(
                       context: context,
+                      canadianTime: false,
                       onPicked: setTime,
                       initialDate: agentShoppingController.agentShoppingBDTime.value != 0 ? DateTime.fromMillisecondsSinceEpoch(agentShoppingController.agentShoppingBDTime.value) : null);
                 },
@@ -186,8 +190,14 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
   }
 
   void setTime(DateTime selectedDateTime, bool canadianTime) {
-    agentShoppingController.agentShoppingEasternTime.value = DateFormatters.getCanadianTime(selectedDateTime).millisecondsSinceEpoch;
-    agentShoppingController.agentShoppingBDTime.value = DateFormatters.getBDTime(selectedDateTime).millisecondsSinceEpoch;
+    DateFormat dateFormat = DateFormat("yyyy-MM-dd hh:mm:ss a");
+
+    String canadianDateFormat = DateFormatters.getFormattedDateTimeInCanada(
+      selectedDateTime: selectedDateTime,
+    );
+
+    agentShoppingController.agentShoppingEasternTime.value = canadianTime ? selectedDateTime.millisecondsSinceEpoch : dateFormat.parse(canadianDateFormat).millisecondsSinceEpoch;
+    agentShoppingController.agentShoppingBDTime.value = canadianTime ? DateFormatters.getBDTime(selectedDateTime).millisecondsSinceEpoch : selectedDateTime.millisecondsSinceEpoch;
     agentShoppingController.agentShoppingUtcTime.value = selectedDateTime.toUtc().millisecondsSinceEpoch;
 
     if (canadianTime) {
@@ -198,7 +208,6 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
         selectedDateTime: selectedDateTime,
       );
     } else {
-      agentShoppingController.agentShoppingEasternTime.value = selectedDateTime.millisecondsSinceEpoch;
       agentShoppingController.agentShoppingBDTimeController.value.text = DateFormatters.getFormattedDateTime(
         selectedDateTime: selectedDateTime,
       );
