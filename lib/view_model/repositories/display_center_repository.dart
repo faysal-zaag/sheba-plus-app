@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:sheba_plus/view_model/repositories/category_repository.dart';
 
 import '../../data/api/api_urls.dart';
 
@@ -13,9 +12,27 @@ class DisplayCenterServiceRepository {
 
   DisplayCenterServiceRepository(this._dio);
 
-  Future<Response> getAllDisplayServiceProducts() async {
+  Future<Response> getAllDisplayServiceProducts(
+      {List<num>? categoryIdList,
+        List<num>? subCategoryIdList,
+      String? name,
+      String? sort,
+      num? priceFrom,
+      num? priceTo,
+      bool? available}) async {
+    final queryParameters = <String, dynamic>{
+      if (categoryIdList != null) 'categoryIds': categoryIdList,
+      if (subCategoryIdList != null) 'subCategoryIds': subCategoryIdList,
+      if (name != null) 'name': name,
+      if (sort != null) 'sort': sort,
+      if (priceFrom != null) 'priceFrom': priceFrom,
+      if (priceTo != null) 'priceTo': priceTo,
+      if (available != null) 'available': available,
+    };
+
     return await _dio.get(
       ApiUrls.getAllDisplayServiceProductsApiUrl,
+      queryParameters: queryParameters,
       options: Options(
         headers: {"Content-Type": "application/json"},
       ),

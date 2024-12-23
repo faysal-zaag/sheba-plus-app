@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/data/mock_data.dart';
@@ -26,6 +27,7 @@ class DisplayCenterServiceController extends GetxController {
   final selectProductDetailsType = 'DESCRIPTION'.obs;
   final totalDisplayServiceProduct = 0.obs;
   final displayServiceProductList = <DisplayServiceProduct>[].obs;
+  final productNameSearchController = TextEditingController().obs;
 
   var currentDisplayServiceProduct = DisplayServiceProduct(
           id: 0,
@@ -61,43 +63,39 @@ class DisplayCenterServiceController extends GetxController {
     return discountPrice;
   }
 
-  num calculatePriceAfterDiscount({required num price, num? discountPrice}){
+  num calculatePriceAfterDiscount({required num price, num? discountPrice}) {
     num finalPrice = ((price) - (discountPrice ?? 0));
     return finalPrice;
   }
 
-  // void getDisplayServiceProductById({required int id}) {
-  //   try {
-  //     loadingCurrentDisplayServiceProduct(true);
-  //     var currentProduct =
-  //         mockProductList.firstWhere((product) => product.id == id);
-  //     currentDisplayServiceProduct.value = currentProduct;
-  //     debugPrint(
-  //         '====>> current display center product: ${currentDisplayServiceProduct.toJson()}',
-  //         wrapWidth: 1024);
-  //   } catch (e) {
-  //     Utils.showErrorToast(message: 'Product not found by id');
-  //   } finally {
-  //     loadingCurrentDisplayServiceProduct(false);
-  //   }
-  // }
-
   // ================ Public Api call ==============
-  Future<void> getAllDisplayCenterServiceProducts() async {
+  Future<void> getAllDisplayCenterServiceProducts(
+      {List<num>? categoryIdList,
+      List<num>? subCategoryIdList,
+      String? name,
+      String? sort,
+      num? priceFrom,
+      num? priceTo,
+      bool? available}) async {
     try {
       loadingAllDisplayCenterServiceProducts(true);
 
       final response =
-          await _displayCenterServiceRepository.getAllDisplayServiceProducts();
+          await _displayCenterServiceRepository.getAllDisplayServiceProducts(
+              name: name,
+              available: available,
+              categoryIdList: categoryIdList,
+              priceFrom: priceFrom,
+              priceTo: priceTo,
+              sort: sort,
+              subCategoryIdList: subCategoryIdList);
 
       var list = (response.data['content'] as List)
           .map((e) => DisplayServiceProduct.fromJson(e))
           .toList();
       displayServiceProductList(list);
       totalDisplayServiceProduct(response.data['totalElements']);
-      debugPrint(
-          "all display products: ${response.data}",
-          wrapWidth: 1024);
+      debugPrint("all display products: ${response.data}", wrapWidth: 1024);
     } catch (err) {
       Log.error(err.toString());
     } finally {
@@ -116,8 +114,7 @@ class DisplayCenterServiceController extends GetxController {
           productPrice: currentDisplayServiceProduct.value.price,
           discountPercentage:
               currentDisplayServiceProduct.value.discountPercentage);
-      Utils.prettifyJson(response.data,
-          'Single product response data');
+      Utils.prettifyJson(response.data, 'Single product response data');
     } catch (err) {
       Log.error(err.toString());
     } finally {

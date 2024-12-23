@@ -7,6 +7,7 @@ import 'package:sheba_plus/view/category/controller/category_controller.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/custom_text_field.dart';
+import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 
 import '../../../utils/constant/app_colors.dart';
 
@@ -19,21 +20,25 @@ class ProductFilteringWidget extends StatefulWidget {
 
 class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
   final categoryController = Get.find<CategoryController>();
-
-  //=======================
-  double _startValue = 0.00;
-  double _endValue = 10000.00;
-  final TextEditingController minPriceEditingController =
-      TextEditingController();
-  final TextEditingController maxPriceEditingController =
-      TextEditingController();
-
-  //=======================
+  final displayServiceController = Get.find<DisplayCenterServiceController>();
 
   _initCall() async {
     categoryController.getAllCategories();
     categoryController.getAllSubCategories();
     categoryController.resetData();
+  }
+
+  _getProductByFilter() async {
+    displayServiceController.getAllDisplayCenterServiceProducts(
+        subCategoryIdList: categoryController.subCategoryIds,
+        categoryIdList: categoryController.categoryIds,
+        available:
+            categoryController.selectProductAvailability.value == 'In-stock'
+                ? true
+                : false,
+        sort: categoryController.selectedSortBy.value,
+        priceTo: categoryController.startValue.value,
+        priceFrom: categoryController.endValue.value);
   }
 
   @override
@@ -75,24 +80,26 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
                 : Expanded(
                     child: ListView(
                       children: [
-                        ExpansionTile(
-                          shape: Border.all(color: AppColors.neutral65),
-                          iconColor: AppColors.black,
-                          title: Text(
-                            'Categories${categoryController.categoryIds.isNotEmpty ? ' (${categoryController.categoryIds.length})' : ''}',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          children: [
-                            ...List.generate(
-                              categoryController.showAllCategories.isTrue
-                                  ? categoryController.allCategories.length
-                                  : 2,
-                              (index) {
-                                return Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
+                        if (categoryController.allCategories.isNotEmpty)
+                          ExpansionTile(
+                            shape: Border.all(color: AppColors.neutral65),
+                            iconColor: AppColors.black,
+                            title: Text(
+                              'Categories${categoryController.categoryIds.isNotEmpty ? ' (${categoryController.categoryIds.length})' : ''}',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            children: [
+                              ...List.generate(
+                                categoryController.showAllCategories.isTrue
+                                    ? categoryController.allCategories.length
+                                    : 2,
+                                (index) {
+                                  return Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
                                           if (categoryController.categoryIds
                                               .contains(categoryController
                                                   .allCategories[index].id)) {
@@ -104,72 +111,73 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
                                                 categoryController
                                                     .allCategories[index].id);
                                           }
-                                      },
-                                      icon: Icon(
-                                        categoryController.categoryIds.contains(
-                                                categoryController
-                                                    .allCategories[index].id)
-                                            ? PhosphorIcons.checkSquare(
-                                          PhosphorIconsStyle.fill
-                                        )
-                                            : PhosphorIcons.square(),
-                                        color: categoryController.categoryIds.contains(
-                                            categoryController
-                                                .allCategories[index].id)
-                                            ? AppColors.primary
-                                            : AppColors.black,
+                                        },
+                                        icon: Icon(
+                                          categoryController.categoryIds
+                                                  .contains(categoryController
+                                                      .allCategories[index].id)
+                                              ? PhosphorIcons.checkSquare(
+                                                  PhosphorIconsStyle.fill)
+                                              : PhosphorIcons.square(),
+                                          color: categoryController.categoryIds
+                                                  .contains(categoryController
+                                                      .allCategories[index].id)
+                                              ? AppColors.primary
+                                              : AppColors.black,
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      categoryController
-                                          .allCategories[index].name,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall,
-                                    ),
-                                  ],
-                                );
-                              },
-                            ),
-                            if (categoryController.allCategories.length > 2)
-                              ListTile(
-                                title: Text(
-                                  categoryController.showAllCategories.value
-                                      ? 'Show less'
-                                      : '+ View more',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelMedium
-                                      ?.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
+                                      Text(
+                                        categoryController
+                                            .allCategories[index].name,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleSmall,
                                       ),
-                                ),
-                                onTap: () {
-                                  categoryController.showAllCategories.value =
-                                      !categoryController
-                                          .showAllCategories.value;
+                                    ],
+                                  );
                                 },
                               ),
-                          ],
-                        ),
-                        ExpansionTile(
-                          shape: Border.all(color: AppColors.neutral65),
-                          iconColor: AppColors.black,
-                          title: Text(
-                            'Sub Categories${categoryController.subCategoryIds.isNotEmpty ? ' (${categoryController.subCategoryIds.length})' : ''}',
-                            style: Theme.of(context).textTheme.bodyMedium,
+                              if (categoryController.allCategories.length > 2)
+                                ListTile(
+                                  title: Text(
+                                    categoryController.showAllCategories.value
+                                        ? 'Show less'
+                                        : '+ View more',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium
+                                        ?.copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                  ),
+                                  onTap: () {
+                                    categoryController.showAllCategories.value =
+                                        !categoryController
+                                            .showAllCategories.value;
+                                  },
+                                ),
+                            ],
                           ),
-                          children: [
-                            ...List.generate(
-                                categoryController.showAllSubCategories.isTrue
-                                    ? categoryController.allSubCategories.length
-                                    : 2, (index) {
-                              return Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  IconButton(
-                                    onPressed: () {
+                        if (categoryController.allSubCategories.isNotEmpty)
+                          ExpansionTile(
+                            shape: Border.all(color: AppColors.neutral65),
+                            iconColor: AppColors.black,
+                            title: Text(
+                              'Sub Categories${categoryController.subCategoryIds.isNotEmpty ? ' (${categoryController.subCategoryIds.length})' : ''}',
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                            children: [
+                              ...List.generate(
+                                  categoryController.showAllSubCategories.isTrue
+                                      ? categoryController
+                                          .allSubCategories.length
+                                      : 2, (index) {
+                                return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
                                         if (categoryController.subCategoryIds
                                             .contains(categoryController
                                                 .allSubCategories[index].id)) {
@@ -181,51 +189,53 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
                                               categoryController
                                                   .allSubCategories[index].id);
                                         }
-                                    },
-                                    icon: Icon(
-                                      categoryController.subCategoryIds
-                                              .contains(categoryController
-                                                  .allSubCategories[index].id)
-                                          ? PhosphorIcons.checkSquare(
-                                              PhosphorIconsStyle.fill)
-                                          : PhosphorIcons.square(),
-                                      color: categoryController.subCategoryIds
-                                              .contains(categoryController
-                                                  .allSubCategories[index].id)
-                                          ? AppColors.primary
-                                          : AppColors.black,
+                                      },
+                                      icon: Icon(
+                                        categoryController.subCategoryIds
+                                                .contains(categoryController
+                                                    .allSubCategories[index].id)
+                                            ? PhosphorIcons.checkSquare(
+                                                PhosphorIconsStyle.fill)
+                                            : PhosphorIcons.square(),
+                                        color: categoryController.subCategoryIds
+                                                .contains(categoryController
+                                                    .allSubCategories[index].id)
+                                            ? AppColors.primary
+                                            : AppColors.black,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    categoryController
-                                        .allSubCategories[index].name,
-                                    style:
-                                        Theme.of(context).textTheme.titleSmall,
-                                  ),
-                                ],
-                              );
-                            }),
-                            ListTile(
-                              title: Text(
-                                categoryController.showAllSubCategories.value
-                                    ? 'Show less'
-                                    : '+ View more',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelMedium
-                                    ?.copyWith(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
+                                    Text(
+                                      categoryController
+                                          .allSubCategories[index].name,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall,
                                     ),
+                                  ],
+                                );
+                              }),
+                              ListTile(
+                                title: Text(
+                                  categoryController.showAllSubCategories.value
+                                      ? 'Show less'
+                                      : '+ View more',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelMedium
+                                      ?.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                ),
+                                onTap: () {
+                                  categoryController
+                                          .showAllSubCategories.value =
+                                      !categoryController
+                                          .showAllSubCategories.value;
+                                },
                               ),
-                              onTap: () {
-                                categoryController.showAllSubCategories.value =
-                                    !categoryController
-                                        .showAllSubCategories.value;
-                              },
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
                         ExpansionTile(
                           shape: Border.all(color: AppColors.neutral65),
                           iconColor: AppColors.black,
@@ -248,7 +258,7 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
                                                   .productAvailability[index]);
                                     },
                                     icon: Icon(
-                                      categoryController
+                                       categoryController
                                                   .selectProductAvailability
                                                   .value ==
                                               categoryController
@@ -318,15 +328,19 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
                               activeColor: AppColors.primary,
                               min: 0.00,
                               max: 99999.00,
-                              values: RangeValues(_startValue, _endValue),
+                              values: RangeValues(
+                                  categoryController.startValue.value,
+                                  categoryController.endValue.value),
                               onChanged: (values) {
                                 setState(() {
-                                  _startValue = values.start;
-                                  _endValue = values.end;
-                                  minPriceEditingController.text =
-                                      '\$ ${_startValue.toStringAsFixed(2)}';
-                                  maxPriceEditingController.text =
-                                      '\$ ${_endValue.toStringAsFixed(2)}';
+                                  categoryController.startValue(values.start);
+                                  categoryController.endValue(values.end);
+                                  categoryController.minPriceEditingController
+                                          .value.text =
+                                      '\$ ${categoryController.startValue.toStringAsFixed(2)}';
+                                  categoryController.maxPriceEditingController
+                                          .value.text =
+                                      '\$ ${categoryController.endValue.toStringAsFixed(2)}';
                                 });
                               },
                             ),
@@ -337,14 +351,16 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
                                 children: [
                                   Expanded(
                                     child: CustomTextField(
-                                      controller: minPriceEditingController,
+                                      controller: categoryController
+                                          .minPriceEditingController.value,
                                       textInputType: TextInputType.number,
                                     ),
                                   ),
                                   15.kW,
                                   Expanded(
                                     child: CustomTextField(
-                                        controller: maxPriceEditingController,
+                                        controller: categoryController
+                                            .maxPriceEditingController.value,
                                         textInputType: TextInputType.number),
                                   ),
                                 ],
@@ -361,22 +377,31 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
             padding: const EdgeInsets.all(10),
             child: Row(
               children: [
-                Expanded(
-                  child: CustomPrimaryButton(
-                    label: 'Reset ()',
-                    onClick: () {
-                      categoryController.resetData();
-                    },
-                    color: AppColors.primary30,
-                    borderColor: AppColors.border,
-                    labelColor: AppColors.blackTitle,
+                Obx(
+                  () => Expanded(
+                    child: CustomPrimaryButton(
+                      disabled: categoryController.selectedFilteringCount() == 0
+                          ? true
+                          : false,
+                      label:
+                          'Reset ${categoryController.selectedFilteringCount() > 0 ? '(${categoryController.selectedFilteringCount()})' : ''}',
+                      onClick: () {
+                        categoryController.resetData();
+                      },
+                      color: AppColors.primary30,
+                      borderColor: AppColors.border,
+                      labelColor: AppColors.blackTitle,
+                    ),
                   ),
                 ),
                 20.kW,
                 Expanded(
                   child: CustomPrimaryButton(
                     label: 'Apply',
-                    onClick: () {},
+                    onClick: () {
+                      _getProductByFilter();
+                      Get.back();
+                    },
                   ),
                 ),
               ],

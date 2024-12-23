@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/controllers/navigation_controller.dart';
+import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
@@ -25,10 +28,24 @@ class _DisplayCenterProductListScreenState
   final navigationController = Get.find<NavigationController>();
   final displayCenterServiceController =
       Get.find<DisplayCenterServiceController>();
+  Timer? _debounce;
 
   _initCall() async {
     navigationController.selectedIndex(1);
     displayCenterServiceController.getAllDisplayCenterServiceProducts();
+  }
+
+  getSearchProduct() {
+    displayCenterServiceController.getAllDisplayCenterServiceProducts(
+        name: displayCenterServiceController
+            .productNameSearchController.value.text);
+  }
+
+  onSearchProduct() {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 300), () async {
+      getSearchProduct();
+    });
   }
 
   @override
@@ -49,21 +66,61 @@ class _DisplayCenterProductListScreenState
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                DisplayServiceHeaderWidget(),
+                DisplayServiceHeaderWidget(
+                  searchOnChange: (value) {
+                    getSearchProduct();
+                  },
+                  suffixWidget: GestureDetector(
+                    onTap: () {
+                      if (displayCenterServiceController
+                          .productNameSearchController.value.text.isNotEmpty) {
+                        displayCenterServiceController
+                            .productNameSearchController.value
+                            .clear();
+                        getSearchProduct();
+                        displayCenterServiceController
+                            .productNameSearchController
+                            .refresh();
+                      }
+                    },
+                    child: Obx(
+                      () => displayCenterServiceController
+                              .productNameSearchController.value.text.isEmpty
+                          ? const Icon(
+                              Icons.search,
+                              color: AppColors.hintText,
+                            )
+                          : const Icon(
+                              Icons.close,
+                              color: AppColors.error,
+                            ),
+                    ),
+                  ),
+                ),
                 Obx(
                   () => displayCenterServiceController
                           .loadingAllDisplayCenterServiceProducts.value
                       ? const CustomLoader()
-                      : ProductViewWidget(
-                          productList: displayCenterServiceController
-                              .displayServiceProductList,
-                          onTapProduct: (product) {
-                            Get.toNamed(
-                                Routes.displayCenterServiceProductDetailsScreen,
-                                arguments: DisplayCenterProductDetailsScreen(
-                                    productId: product.id));
-                          },
-                        ),
+                      : displayCenterServiceController
+                              .displayServiceProductList.isEmpty
+                          ? Center(
+                              child: Text(
+                                'No list found',
+                                style: Theme.of(context).textTheme.bodySmall,
+                              ),
+                            )
+                          : ProductViewWidget(
+                              productList: displayCenterServiceController
+                                  .displayServiceProductList,
+                              onTapProduct: (product) {
+                                Get.toNamed(
+                                    Routes
+                                        .displayCenterServiceProductDetailsScreen,
+                                    arguments:
+                                        DisplayCenterProductDetailsScreen(
+                                            productId: product.id));
+                              },
+                            ),
                 ),
                 65.kH,
               ],
