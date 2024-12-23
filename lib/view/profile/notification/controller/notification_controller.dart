@@ -161,7 +161,7 @@ class NotificationController extends GetxController {
     }
   }
 
-  String headerFooter({required UserNotification notification, required String body}){
+  String headerFooter({required UserNotification notification, required String body}) {
     return "Hi ${notification.user?.firstName}, $body \n\nRegards,\nDS.ComTeam";
   }
 
@@ -186,11 +186,20 @@ class NotificationController extends GetxController {
   }
 
   String getAgentServiceUpdatedNotificationMessage({required UserNotification notification}) {
-    return headerFooter(notification: notification, body: "\n\nYour AGENT SERVICE meeting schedule has been updated successfully. ${commonMessage(notification: notification)}") ;
+    return headerFooter(notification: notification, body: "\n\nYour AGENT SERVICE meeting schedule has been updated successfully. ${commonMessage(notification: notification)}");
   }
 
   String getMeetingStartedNotificationMessage({required UserNotification notification}) {
-    return headerFooter(notification: notification, body: "\n\n${notification.details}") ;
+    return headerFooter(notification: notification, body: "\n\n${notification.details}");
+  }
+
+  String getShoppingDetailsNotificationMessage({required UserNotification notification}) {
+    return headerFooter(
+        notification: notification,
+        body: "\n\nYour shopping session with the agent has been successfully completed. "
+            "To finalize your purchase, please proceed with the payment of the total shopping amount. "
+            "Once the payment is confirmed, our agent will complete the purchase on your behalf. "
+            "Thank you for using our service!");
   }
 
   String getAgentShoppingCompletedMessage({required UserNotification notification}) {

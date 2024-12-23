@@ -43,6 +43,7 @@ _$ShoppingItemDetailsImpl _$$ShoppingItemDetailsImplFromJson(
         Map<String, dynamic> json) =>
     _$ShoppingItemDetailsImpl(
       id: (json['id'] as num?)?.toInt() ?? 0,
+      name: json['name'] as String? ?? "Unknown",
       price: (json['price'] as num?)?.toInt() ?? 0,
       quantity: (json['quantity'] as num?)?.toInt() ?? 0,
       totalPrice: (json['totalPrice'] as num?)?.toInt() ?? 0,
@@ -52,6 +53,7 @@ Map<String, dynamic> _$$ShoppingItemDetailsImplToJson(
         _$ShoppingItemDetailsImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'name': instance.name,
       'price': instance.price,
       'quantity': instance.quantity,
       'totalPrice': instance.totalPrice,

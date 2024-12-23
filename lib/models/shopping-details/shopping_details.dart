@@ -25,6 +25,7 @@ class ShoppingDetails with _$ShoppingDetails {
 class ShoppingItemDetails with _$ShoppingItemDetails {
   const factory ShoppingItemDetails({
     @Default(0) int id,
+    @Default("Unknown") String name,
     @Default(0) int price,
     @Default(0) int quantity,
     @Default(0) int totalPrice,

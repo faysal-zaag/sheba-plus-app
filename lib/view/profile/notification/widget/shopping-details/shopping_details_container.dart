@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sheba_plus/models/shopping-deatils/shopping_details.dart';
+import 'package:sheba_plus/models/setting/config.dart';
+import 'package:sheba_plus/models/shopping-details/shopping_details.dart';
+import 'package:sheba_plus/services/product_services.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
@@ -9,8 +11,9 @@ import 'package:sheba_plus/view/services/widget/summary_row.dart';
 
 class ShoppingDetailsContainer extends StatelessWidget {
   final ShoppingDetails shoppingDetails;
+  final Config config;
 
-  const ShoppingDetailsContainer({super.key, required this.shoppingDetails});
+  const ShoppingDetailsContainer({super.key, required this.shoppingDetails, required this.config});
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +45,14 @@ class ShoppingDetailsContainer extends StatelessWidget {
           6.kH,
           ...shoppingDetails.shoppingItemDetailsList.map(
             (shoppingItemDetails) => ShoppingDetailsRow(
-              title1: shoppingItemDetails.id.toString(),
+              title1: shoppingItemDetails.name,
               title2: shoppingItemDetails.quantity.toString(),
-              title3: shoppingItemDetails.price.toString(),
-              title4: (shoppingItemDetails.price * shoppingItemDetails.quantity).toString(),
+              title3: ProductServices.getAmount(price: shoppingItemDetails.price * config.currencyConversionRate),
+              title4: ProductServices.getAmount(price: shoppingItemDetails.price * config.currencyConversionRate * shoppingItemDetails.quantity),
             ),
           ),
           const Divider(),
-          SummaryRow(title: AgentShoppingTexts.totalItemPrice, value: "BDT ${shoppingDetails.totalItemPrice}"),
+          SummaryRow(title: AgentShoppingTexts.totalItemPrice, value: "BDT ${ProductServices.getAmount(price: shoppingDetails.totalItemPrice * config.currencyConversionRate)}"),
         ],
       ),
     );

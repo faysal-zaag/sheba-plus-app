@@ -17,7 +17,7 @@ class ProductViewWidget extends StatelessWidget {
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
-            mainAxisExtent: 320,
+            mainAxisExtent: 258,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10),
         itemCount: productList.length,
@@ -28,6 +28,7 @@ class ProductViewWidget extends StatelessWidget {
             },
             child: ProductCard(
               product: productList[index],
+              imageHeight: 152,
             ),
           );
         },

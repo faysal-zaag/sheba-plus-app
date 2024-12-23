@@ -68,11 +68,11 @@ class CustomDrawer extends StatelessWidget {
                                           height: 24,
                                           icon: Icons.arrow_drop_down,
                                           onChanged: (value) {
-                                            if (value == "English") {
+                                            if (value == "English" && storageService.getLanguage() == "bn") {
                                               Get.updateLocale(const Locale('en', 'US'));
                                               storageService.saveLanguage("en");
                                               profileController.selectedProfileMenu(AppConstants.profileMenuListBangla[profileController.selectedProfileMenu.value]?.tr);
-                                            } else {
+                                            } else if(value == "বাংলা" && storageService.getLanguage() == "en") {
                                               Get.updateLocale(const Locale('bn', 'BD'));
                                               storageService.saveLanguage("bn");
                                               profileController.selectedProfileMenu(profileController.selectedProfileMenu.value.camelCase?.tr);

@@ -1,5 +1,10 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sheba_plus/controllers/global_controller.dart';
+import 'package:sheba_plus/models/invoice/invoice.dart';
+import 'package:sheba_plus/models/setting/config.dart';
+import 'package:sheba_plus/services/product_services.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
@@ -11,12 +16,18 @@ import 'package:sheba_plus/view/services/widget/summary_column.dart';
 import 'package:sheba_plus/view/services/widget/summary_row.dart';
 
 class ShoppingSummary extends StatelessWidget {
-  const ShoppingSummary({super.key});
+  final Invoice invoice;
+  final Config config;
+
+  ShoppingSummary({super.key, required this.invoice, required this.config});
+
+  final globalController = Get.find<GlobalController>();
 
   @override
   Widget build(BuildContext context) {
     final lightTextStyle = Theme.of(context).textTheme.titleSmall;
     final subTextStyle = lightTextStyle?.copyWith(color: AppColors.hintText);
+    double currencyConversionRate = config.currencyConversionRate;
 
     return Container(
       color: AppColors.background2,
@@ -34,16 +45,16 @@ class ShoppingSummary extends StatelessWidget {
                   style: subTextStyle,
                 ),
                 4.kH,
-                const Text("BDT 12000"),
+                Text("BDT ${ProductServices.getAmount(price: invoice.shippingCost)}"),
                 4.kH,
                 Row(
                   children: [
                     Text(
-                      "(1CAD=120BDT)",
+                      "(1CAD=$currencyConversionRate BDT)",
                       style: subTextStyle,
                     ),
                     Text(
-                      " CAD 150",
+                      " CAD ${ProductServices.getAmount(price: invoice.shoppingCost / currencyConversionRate)}",
                       style: lightTextStyle,
                     ),
                   ],
@@ -55,23 +66,20 @@ class ShoppingSummary extends StatelessWidget {
           12.kH,
           SummaryRow(
             titleColor: AppColors.black,
-            title: AgentShoppingTexts.shoppingCost,
-            customValue: SummaryColumn(
-                title: AgentShoppingTexts.totalItemPrice, value: "CAD 12000"),
+            title: AgentShoppingTexts.shippingCost,
+            customValue: SummaryColumn(title: AgentShoppingTexts.totalShippingCost, value: "CAD ${ProductServices.getAmount(price: invoice.shippingCost)}"),
           ),
           12.kH,
           SummaryRow(
             titleColor: AppColors.black,
             title: AgentShoppingTexts.tax,
-            customValue: SummaryColumn(
-                title: AgentShoppingTexts.totalItemPrice, value: "CAD 12000"),
+            customValue: SummaryColumn(title: AgentShoppingTexts.totalTax, value: "CAD ${ProductServices.getAmount(price: invoice.totalTax)}"),
           ),
           12.kH,
           SummaryRow(
             titleColor: AppColors.black,
             title: AgentShoppingTexts.vat,
-            customValue: SummaryColumn(
-                title: AgentShoppingTexts.totalItemPrice, value: "CAD 12000"),
+            customValue: SummaryColumn(title: AgentShoppingTexts.totalVat, value: "CAD ${invoice.totalVat}"),
           ),
           12.kH,
           SummaryRow(
@@ -96,28 +104,31 @@ class ShoppingSummary extends StatelessWidget {
           SummaryRow(
             titleColor: AppColors.black,
             title: PartialCheckoutTexts.dropOffService,
-            value: "CAD 150",
+            value: "CAD ${invoice.dropOffCost}",
           ),
           const DashedDivider(),
           12.kH,
           SummaryRow(
             titleColor: AppColors.black,
             title: AgentShoppingTexts.totalExpenditure,
-            value: "CAD 1350",
+            value: "CAD ${invoice.exactFinalPrice}",
           ),
           SummaryRow(
             titleColor: AppColors.black,
             title: AgentShoppingTexts.alreadyPaid,
-            value: "(-) CAD 1200",
+            value: "(-) CAD ${invoice.paidAmount}",
             valueColor: AppColors.error,
           ),
           SummaryRow(
             titleColor: AppColors.black,
             title: AgentShoppingTexts.existingDues,
-            value: "CAD 150",
+            value: "CAD ${invoice.exactFinalPrice}",
           ),
           12.kH,
-          const MessageContainer(message: "Approximate Time: 15 days (SHIPMENT+DROP-OFF), You can Track your parcel by using your Ticket Number", backgroundColor: AppColors.primary30,)
+          const MessageContainer(
+            message: "Approximate Time: 15 days (SHIPMENT+DROP-OFF), You can Track your parcel by using your Ticket Number",
+            backgroundColor: AppColors.primary30,
+          )
         ],
       ),
     );

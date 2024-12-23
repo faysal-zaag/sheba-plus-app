@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sheba_plus/models/setting/setting.dart';
+import 'package:sheba_plus/models/setting/config.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
@@ -19,13 +19,12 @@ class GlobalController extends GetxController {
   GlobalController(this._globalRepository);
 
   final termsAccepted = false.obs;
-  final appSetting = const Setting().obs;
+  final globalConfig = const Config().obs;
   final getDefaultSettingLoading = true.obs;
 
   final redirectScreen = Routes.home.obs;
 
-  void showTermsAndConditionSheet(
-      {required BuildContext context, required int serviceIndex}) {
+  void showTermsAndConditionSheet({required BuildContext context, required int serviceIndex}) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -45,7 +44,7 @@ class GlobalController extends GetxController {
   Future<void> getDefaultSetting() async {
     try {
       final response = await _globalRepository.getDefaultSetting();
-      appSetting(Setting.fromJson(response.data));
+      globalConfig(Config.fromJson(response.data));
     } catch (e) {
       Log.error(e.toString());
     } finally {
@@ -53,10 +52,7 @@ class GlobalController extends GetxController {
     }
   }
 
-  showRedeemPointModalSheet(
-      {required BuildContext context,
-      required double totalDue,
-      required int totalRedeemPoints}) {
+  showRedeemPointModalSheet({required BuildContext context, required double totalDue, required int totalRedeemPoints}) {
     showModalBottomSheet(
         context: context,
         isScrollControlled: true,
@@ -78,13 +74,7 @@ class GlobalController extends GetxController {
   }
 
   Future<void> showDateTimePicker(
-      {required BuildContext context,
-        bool canadianTime = false,
-        DateTime? initialDate,
-        DateTime? firstDate,
-        DateTime? lastDate,
-        required Function(DateTime, bool) onPicked
-      }) async {
+      {required BuildContext context, bool canadianTime = false, DateTime? initialDate, DateTime? firstDate, DateTime? lastDate, required Function(DateTime, bool) onPicked}) async {
     DateTime now = DateTime.now();
 
     // Show Date Picker
@@ -124,13 +114,7 @@ class GlobalController extends GetxController {
     }
   }
 
-  Future<void> showDatePickerOnly(
-      {required BuildContext context,
-        DateTime? initialDate,
-        DateTime? firstDate,
-        DateTime? lastDate,
-        required Function(DateTime) onPicked
-      }) async {
+  Future<void> showDatePickerOnly({required BuildContext context, DateTime? initialDate, DateTime? firstDate, DateTime? lastDate, required Function(DateTime) onPicked}) async {
     DateTime now = DateTime.now();
 
     // Show Date Picker
@@ -158,8 +142,7 @@ class GlobalController extends GetxController {
       },
     );
 
-    if(pickedDate != null)
-    {
+    if (pickedDate != null) {
       onPicked(pickedDate);
     }
   }

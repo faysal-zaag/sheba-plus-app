@@ -39,11 +39,11 @@ class ShoppingDetailsRow extends StatelessWidget {
         ),
         Expanded(
           flex: 2,
-          child: Text(title2, style: textStyle),
+          child: Text(title2, style: textStyle, textAlign: TextAlign.center,),
         ),
         Expanded(
           flex: 2,
-          child: Text(title3, style: textStyle),
+          child: Text(title3, style: textStyle, textAlign: TextAlign.center),
         ),
         Expanded(
           flex: 3,

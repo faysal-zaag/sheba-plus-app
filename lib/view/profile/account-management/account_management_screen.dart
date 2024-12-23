@@ -144,7 +144,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
               ),
             ),
             Obx(
-              () => CustomPrimaryButton(
+              () => profileController.profileEditable.isFalse ? CustomPrimaryButton(
                 loading: authController.forgetPasswordProcedureLoading.isTrue,
                 label: AuthScreenText.changePassword,
                 onClick: () async {
@@ -153,13 +153,13 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                 color: AppColors.white,
                 borderColor: AppColors.black,
                 labelColor: AppColors.black,
-              ),
+              ) : const SizedBox.shrink(),
             ),
             16.kH,
             Obx(
               () => CustomPrimaryButton(
                 loading: profileController.loadingUpdatingUserInfo.isTrue,
-                label: profileController.profileEditable.isTrue ? ProfileScreenTexts.saveChanges : ProfileScreenTexts.updateInformation,
+                label: profileController.profileEditable.isTrue ? ProfileScreenTexts.updateInformation : ProfileScreenTexts.editInformation,
                 onClick: () async {
                   if (profileController.profileEditable.isTrue) {
                     final response = await profileController.updateUserInfo();

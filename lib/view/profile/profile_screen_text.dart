@@ -13,7 +13,7 @@ class ProfileScreenTexts {
   static String get logOut => "logOut".tr;
   static String get dateOfBirth => "dateOfBirth".tr;
   static String get updateInformation => "updateInformation".tr;
-  static String get saveChanges => "saveChanges".tr;
+  static String get editInformation => "editInformation".tr;
   static String get profileUpdated => "profileUpdated".tr;
 
   // Order history screen texts

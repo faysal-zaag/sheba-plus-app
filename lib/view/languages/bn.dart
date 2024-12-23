@@ -172,7 +172,7 @@ final Map<String, String> bn = {
   'logOut': "লগ আউট",
   'dateOfBirth': "জন্ম তারিখ",
   'updateInformation': "তথ্য আপডেট করুন",
-  'saveChanges': "পরিবর্তন সংরক্ষণ করুন",
+  'editInformation': "তথ্য সম্পাদনা করুন",
   'profileUpdated': "ব্যবহারকারীর তথ্য সফলভাবে আপডেট হয়েছে।",
 
   // Order history screen texts

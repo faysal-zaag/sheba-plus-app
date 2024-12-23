@@ -9,12 +9,17 @@ class NotificationCardShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final roundedDecoration = BoxDecoration(
+      color: AppColors.hintText,
+      borderRadius: AppBorderRadius.circularRadius8,
+    );
+
     return Shimmer.fromColors(
       baseColor: AppColors.shimmerBase,
       highlightColor: AppColors.shimmerHighlight,
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.cardBg,
+          border: Border.all(color: AppColors.border),
           borderRadius: AppBorderRadius.circularRadius8,
         ),
         padding: AppPaddings.allPadding16.copyWith(bottom: 8),
@@ -27,13 +32,13 @@ class NotificationCardShimmer extends StatelessWidget {
                 Container(
                   height: 16,
                   width: 80,
-                  color: AppColors.hintText,
+                  decoration: roundedDecoration,
                 ),
                 const SizedBox(width: 8),
                 Container(
                   height: 16,
                   width: 60,
-                  color: AppColors.hintText,
+                  decoration: roundedDecoration,
                 ),
               ],
             ),
@@ -42,33 +47,35 @@ class NotificationCardShimmer extends StatelessWidget {
             Container(
               height: 12,
               width: double.infinity,
-              color: AppColors.shimmerBase,
+              decoration: roundedDecoration,
             ),
             const SizedBox(height: 8),
             Container(
               height: 12,
               width: double.infinity,
-              color: AppColors.shimmerBase,
+              decoration: roundedDecoration,
             ),
             const SizedBox(height: 8),
             Container(
               height: 12,
               width: MediaQuery.of(context).size.width * 0.8,
-              color: AppColors.shimmerBase,
+              decoration: roundedDecoration,
             ),
             const SizedBox(height: 16),
             // Divider Shimmer
             Container(
               height: 1,
               width: double.infinity,
-              color: AppColors.shimmerBase,
+              decoration: roundedDecoration,
             ),
             const SizedBox(height: 16),
             // Button Shimmer
-            Container(
-              height: 32,
-              width: 120,
-              color: AppColors.shimmerBase,
+            Center(
+              child: Container(
+                height: 32,
+                width: 200,
+                decoration: roundedDecoration,
+              ),
             ),
           ],
         ),

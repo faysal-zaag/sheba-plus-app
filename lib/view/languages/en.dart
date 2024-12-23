@@ -182,7 +182,7 @@ final Map<String, String> en = {
   'logOut': "Logout",
   'dateOfBirth': "Date of birth",
   'updateInformation': "Update Information",
-  'saveChanges': "Save Changes",
+  'editInformation': "Save Changes",
   'profileUpdated': "User information updated successfully",
 
   // Order history screen texts

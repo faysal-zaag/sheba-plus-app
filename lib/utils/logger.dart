@@ -4,25 +4,31 @@ import 'package:logger/logger.dart';
 
 class Log {
   static final Logger _logger = Logger(
+    filter: null,
     printer: PrettyPrinter(
-      methodCount: 2, // Number of stack frames to display
-      errorMethodCount: 8, // Number of stack frames for errors
-      lineLength: 120, // Log line length
-      colors: true, // Colorful logs
-      printEmojis: true, // Include emojis
-      dateTimeFormat: DateTimeFormat.onlyTimeAndSinceStart,
+      colors: true,
+      printEmojis: true,
     ),
+    output: null,
   );
 
   static void info(String message, {dynamic data}) {
     if (data != null) {
-      // Convert the data to JSON format (string) if it's not already a string
       String jsonString = jsonEncode(data);
-      _logger.i("$message - Data: $jsonString");
+      _logger.i("$message - Data (truncated):");
+      _logInChunks(jsonString);
     } else {
       _logger.i(message);
     }
   }
+
+  static void _logInChunks(String data) {
+    const chunkSize = 1000; // Adjust size based on your logger's limits
+    for (var i = 0; i < data.length; i += chunkSize) {
+      _logger.i(data.substring(i, i + chunkSize > data.length ? data.length : i + chunkSize));
+    }
+  }
+
   static void error(String message, {dynamic error}) {
     _logger.e(message, error: error);
   }

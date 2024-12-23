@@ -15,6 +15,8 @@ import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/global_texts.dart';
 import 'package:toastification/toastification.dart';
 
+GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
@@ -39,6 +41,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ToastificationWrapper(
       child: GetMaterialApp(
+        navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         initialBinding: MyBindings(),
         locale: Utils.getInitialLocal(),

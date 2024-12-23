@@ -108,12 +108,12 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
               ),
               Obx(
                 () => Text(
-                  AgentShoppingTexts.prePaymentWarningMessage(maxValue: globalController.appSetting.value.maxBudget ?? 0),
+                  AgentShoppingTexts.prePaymentWarningMessage(maxValue: globalController.globalConfig.value.maxBudget ?? 0),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
                 ),
               ),
               12.kH,
-              Obx(() => Text(AgentShoppingTexts.serviceDuration(hourlyRates: globalController.appSetting.value.hourlyRates ?? 0))),
+              Obx(() => Text(AgentShoppingTexts.serviceDuration(hourlyRates: globalController.globalConfig.value.hourlyRates ?? 0))),
               12.kH,
               CustomTextField(
                 controller: agentShoppingController.agentShoppingServiceDurationController.value,
@@ -175,11 +175,11 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
 
   void setTotalCost({String? value}) {
     agentShoppingController.agentShoppingServiceTotalCostController.value.text =
-        "${num.parse(value ?? agentShoppingController.agentShoppingServiceDurationController.value.text) * (globalController.appSetting.value.hourlyRates ?? 0)}";
+        "${num.parse(value ?? agentShoppingController.agentShoppingServiceDurationController.value.text) * (globalController.globalConfig.value.hourlyRates ?? 0)}";
   }
 
   void setServiceDuration({String? value}) {
-    final hourlyRate = globalController.appSetting.value.hourlyRates ?? 0;
+    final hourlyRate = globalController.globalConfig.value.hourlyRates ?? 0;
 
     if (hourlyRate > 0) {
       // Ensure hourlyRate is not zero to avoid division by zero

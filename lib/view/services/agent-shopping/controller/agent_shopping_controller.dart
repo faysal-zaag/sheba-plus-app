@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/models/address/address.dart';
 import 'package:sheba_plus/models/agent-order/agent_order.dto.dart';
-import 'package:sheba_plus/models/shopping-deatils/shopping_details.dart';
+import 'package:sheba_plus/models/invoice/invoice.dart';
+import 'package:sheba_plus/models/shopping-details/shopping_details.dart';
 import 'package:sheba_plus/utils/logger.dart';
-import 'package:sheba_plus/view/components/custom_common_modal_sheet_parent_widget.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/notification/widget/extend_meeting_time_bottom_sheet.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
@@ -37,6 +36,7 @@ class AgentShoppingController extends GetxController {
   final updateAgentBookingScheduleLoading = false.obs;
   final getOrderDetailsLoading = false.obs;
 
+  final invoice = const Invoice().obs;
   final shoppingDetailsList = const <ShoppingDetails>[].obs;
 
   void resetFields() {
@@ -142,6 +142,7 @@ class AgentShoppingController extends GetxController {
       );
 
       var shoppingDetailsListData = response.data["shoppingDetailsList"] as List;
+      invoice(Invoice.fromJson(response.data["invoice"]));
 
       var shoppingDetailsResponseList = shoppingDetailsListData.map((shoppingDetails) {
         return ShoppingDetails.fromJson(shoppingDetails);

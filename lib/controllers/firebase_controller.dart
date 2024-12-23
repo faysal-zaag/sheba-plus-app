@@ -1,8 +1,17 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
+import 'package:sheba_plus/models/notification/user_notification.dart';
 import 'package:sheba_plus/utils/logger.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
+import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
+
+import '../main.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
   Log.info(message.toString());
@@ -42,7 +51,8 @@ class FirebaseController {
 
     FirebaseMessaging.onMessage.listen((message) async {
       final notification = message.notification;
-      Log.info("Notification response = ${message.data}");
+
+      Log.debug(message.data.toString());
 
       if (notification == null) return;
 
@@ -71,7 +81,6 @@ class FirebaseController {
 
     await _localNotifications.initialize(initializationSettings, onDidReceiveNotificationResponse: (notificationResponse) {
       final String? payload = notificationResponse.payload;
-      Log.info("Notification response = ${notificationResponse.payload}");
       if (payload != null) {
         final message = RemoteMessage.fromMap(jsonDecode(payload));
 
@@ -83,13 +92,17 @@ class FirebaseController {
   void handleMessage(RemoteMessage? message) {
     if (message == null) return;
 
-    // if (message.data['notificationType'] == ORDER_REQUEST) {
-    //   String orderId = message.data['dataId'];
-    //
-    //   Get.toNamed(
-    //     orderDetailsScreen,
-    //     arguments: OrderDetailsScreen(orderId: convertStringToInt(orderId)),
-    //   );
-    // }
+    if (message.data['notificationType'] != AgentOrderNotificationType.COMMON_USER_NOTIFICATION.name) {
+      UserNotification notification = UserNotification.fromJson(message.data).copyWith(readStats: false);
+
+      Navigator.push(
+        navigatorKey.currentState!.context,
+        MaterialPageRoute(
+          builder: (context) => NotificationDetailsScreen(
+            notification: notification,
+          ),
+        ),
+      );
+    }
   }
 }

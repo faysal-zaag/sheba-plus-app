@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/models/notification/user_notification.dart';
 import 'package:sheba_plus/view/components/custom_header_container.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
@@ -31,6 +32,7 @@ class NotificationDetailsScreen extends StatefulWidget {
 class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
   final notificationController = Get.find<NotificationController>();
   final agentShoppingController = Get.find<AgentShoppingController>();
+  final globalController = Get.find<GlobalController>();
 
   void _initCall() async {
     if (widget.notification.notificationType == AgentOrderNotificationType.COMMON_USER_NOTIFICATION.name) {
@@ -41,7 +43,7 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
         await agentShoppingController.getOrderDetails(orderId: widget.notification.dataId ?? 0);
       }
     }
-    if(!widget.notification.readStats) await notificationController.markAsRead(notificationId: widget.notification.id);
+    if (!widget.notification.readStats) await notificationController.markAsRead(notificationId: widget.notification.id);
   }
 
   @override
@@ -89,51 +91,7 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
                             ),
                             Expanded(
                               child: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.PURCHASE_AGENT_SERVICE.name)
-                                      PurchaseAgentService(
-                                        message: notificationController.getPurchaseAgentServiceNotificationMessage(notification: latestNotification),
-                                      ),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SERVICE_INVALID.name)
-                                      AgentServiceInvalid(
-                                        message: notificationController.getInvalidNotificationMessage(notification: latestNotification),
-                                      ),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SERVICE_UPDATED.name)
-                                      AgentServiceUpdated(
-                                        message: notificationController.getAgentServiceUpdatedNotificationMessage(notification: latestNotification),
-                                        meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
-                                      ),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.TIME_LEFT.name)
-                                      AgentServiceUpdated(
-                                        message: notificationController.getAgentServiceUpdatedNotificationMessage(notification: latestNotification),
-                                        meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
-                                      ),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.MEETING_STARTED.name)
-                                      MeetingStarted(
-                                        message: notificationController.getMeetingStartedNotificationMessage(notification: latestNotification),
-                                        meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
-                                        meetingEndTime: int.parse(latestNotification.body?.meetingEndTime ?? "0"),
-                                        showExtendMeetingTimeSheet: () => agentShoppingController.showExtendMeetingTimeSheet(context: context, orderId: latestNotification.dataId ?? 0),
-                                      ),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name)
-                                      Obx(
-                                        () => agentShoppingController.getOrderDetailsLoading.isTrue
-                                            ? const CustomLoader()
-                                            : ShoppingItemDetails(
-                                                shoppingDetailsList: agentShoppingController.shoppingDetailsList,
-                                              ),
-                                      ),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) const ShoppingSummary(),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) const OrderStatusTracks(),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) const OrderReviewQuestions(),
-                                    if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SHOPPING_COMPLETED.name)
-                                      AgentShoppingCompleted(
-                                        message: notificationController.getAgentShoppingCompletedMessage(notification: latestNotification),
-                                      ),
-                                  ],
-                                ),
+                                child: buildNotificationWidget(latestNotification),
                               ),
                             )
                           ],
@@ -141,5 +99,66 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
         },
       ),
     );
+  }
+
+  Widget buildNotificationWidget(UserNotification latestNotification) {
+    if (latestNotification.notificationType == AgentOrderNotificationType.PURCHASE_AGENT_SERVICE.name) {
+      return PurchaseAgentService(
+        message: notificationController.getPurchaseAgentServiceNotificationMessage(notification: latestNotification),
+      );
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SERVICE_INVALID.name) {
+      return AgentServiceInvalid(
+        message: notificationController.getInvalidNotificationMessage(notification: latestNotification),
+      );
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SERVICE_UPDATED.name) {
+      return AgentServiceUpdated(
+        message: notificationController.getAgentServiceUpdatedNotificationMessage(notification: latestNotification),
+        meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
+      );
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.TIME_LEFT.name) {
+      return AgentServiceUpdated(
+        message: notificationController.getAgentServiceUpdatedNotificationMessage(notification: latestNotification),
+        meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
+      );
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.MEETING_STARTED.name) {
+      return MeetingStarted(
+        message: notificationController.getMeetingStartedNotificationMessage(notification: latestNotification),
+        meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
+        meetingEndTime: int.parse(latestNotification.body?.meetingEndTime ?? "0"),
+        showExtendMeetingTimeSheet: () => agentShoppingController.showExtendMeetingTimeSheet(
+          context: context,
+          orderId: latestNotification.dataId ?? 0,
+        ),
+      );
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) {
+      return Obx(
+        () => agentShoppingController.getOrderDetailsLoading.isTrue
+            ? const SizedBox(
+                height: 400,
+                child: Center(
+                  child: CustomLoader(),
+                ),
+              )
+            : ShoppingItemDetails(
+                message: notificationController.getShoppingDetailsNotificationMessage(notification: latestNotification),
+                shoppingDetailsList: agentShoppingController.shoppingDetailsList,
+                invoice: agentShoppingController.invoice.value,
+                config: globalController.globalConfig.value,
+              ),
+      );
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) {
+      return const Column(
+        children: [
+          OrderStatusTracks(),
+          OrderReviewQuestions(),
+        ],
+      );
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SHOPPING_COMPLETED) {
+      return AgentShoppingCompleted(
+        message: notificationController.getAgentShoppingCompletedMessage(notification: latestNotification),
+      );
+    } else {
+      return const Center(child: Text("Unknown notification type"));
+    }
   }
 }

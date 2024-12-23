@@ -13,7 +13,7 @@ class NewlyAddedProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Create a ScrollController to control the horizontal scroll
-    final ScrollController _controller = ScrollController();
+    final ScrollController controller = ScrollController();
 
     return Container(
       color: AppColors.background,
@@ -35,8 +35,8 @@ class NewlyAddedProducts extends StatelessWidget {
                   NavigatorIcon(
                     onPressed: () {
                       // Smooth scroll left by a fixed distance
-                      _controller.animateTo(
-                        _controller.offset - 200, // Scroll left by 200 pixels
+                      controller.animateTo(
+                        controller.offset - 200, // Scroll left by 200 pixels
                         duration: const Duration(milliseconds: 300), // Animation duration
                         curve: Curves.easeInOut, // Smooth curve for the animation
                       );
@@ -47,8 +47,8 @@ class NewlyAddedProducts extends StatelessWidget {
                   NavigatorIcon(
                     onPressed: () {
                       // Smooth scroll right by a fixed distance
-                      _controller.animateTo(
-                        _controller.offset + 200, // Scroll right by 200 pixels
+                      controller.animateTo(
+                        controller.offset + 200, // Scroll right by 200 pixels
                         duration: const Duration(milliseconds: 300), // Animation duration
                         curve: Curves.easeInOut, // Smooth curve for the animation
                       );
@@ -65,7 +65,7 @@ class NewlyAddedProducts extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: ListView.separated(
-                controller: _controller,
+                controller: controller,
                 separatorBuilder: (_, index) => 16.kW,
                 scrollDirection: Axis.horizontal,
                 itemCount: 10, // Number of products (for example, 10 products)

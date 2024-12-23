@@ -369,6 +369,7 @@ ShoppingItemDetails _$ShoppingItemDetailsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ShoppingItemDetails {
   int get id => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   int get totalPrice => throw _privateConstructorUsedError;
@@ -389,7 +390,7 @@ abstract class $ShoppingItemDetailsCopyWith<$Res> {
           ShoppingItemDetails value, $Res Function(ShoppingItemDetails) then) =
       _$ShoppingItemDetailsCopyWithImpl<$Res, ShoppingItemDetails>;
   @useResult
-  $Res call({int id, int price, int quantity, int totalPrice});
+  $Res call({int id, String name, int price, int quantity, int totalPrice});
 }
 
 /// @nodoc
@@ -408,6 +409,7 @@ class _$ShoppingItemDetailsCopyWithImpl<$Res, $Val extends ShoppingItemDetails>
   @override
   $Res call({
     Object? id = null,
+    Object? name = null,
     Object? price = null,
     Object? quantity = null,
     Object? totalPrice = null,
@@ -417,6 +419,10 @@ class _$ShoppingItemDetailsCopyWithImpl<$Res, $Val extends ShoppingItemDetails>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -441,7 +447,7 @@ abstract class _$$ShoppingItemDetailsImplCopyWith<$Res>
       __$$ShoppingItemDetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, int price, int quantity, int totalPrice});
+  $Res call({int id, String name, int price, int quantity, int totalPrice});
 }
 
 /// @nodoc
@@ -458,6 +464,7 @@ class __$$ShoppingItemDetailsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? name = null,
     Object? price = null,
     Object? quantity = null,
     Object? totalPrice = null,
@@ -467,6 +474,10 @@ class __$$ShoppingItemDetailsImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -487,7 +498,11 @@ class __$$ShoppingItemDetailsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ShoppingItemDetailsImpl implements _ShoppingItemDetails {
   const _$ShoppingItemDetailsImpl(
-      {this.id = 0, this.price = 0, this.quantity = 0, this.totalPrice = 0});
+      {this.id = 0,
+      this.name = "Unknown",
+      this.price = 0,
+      this.quantity = 0,
+      this.totalPrice = 0});
 
   factory _$ShoppingItemDetailsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ShoppingItemDetailsImplFromJson(json);
@@ -495,6 +510,9 @@ class _$ShoppingItemDetailsImpl implements _ShoppingItemDetails {
   @override
   @JsonKey()
   final int id;
+  @override
+  @JsonKey()
+  final String name;
   @override
   @JsonKey()
   final int price;
@@ -507,7 +525,7 @@ class _$ShoppingItemDetailsImpl implements _ShoppingItemDetails {
 
   @override
   String toString() {
-    return 'ShoppingItemDetails(id: $id, price: $price, quantity: $quantity, totalPrice: $totalPrice)';
+    return 'ShoppingItemDetails(id: $id, name: $name, price: $price, quantity: $quantity, totalPrice: $totalPrice)';
   }
 
   @override
@@ -516,6 +534,7 @@ class _$ShoppingItemDetailsImpl implements _ShoppingItemDetails {
         (other.runtimeType == runtimeType &&
             other is _$ShoppingItemDetailsImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.quantity, quantity) ||
                 other.quantity == quantity) &&
@@ -525,7 +544,8 @@ class _$ShoppingItemDetailsImpl implements _ShoppingItemDetails {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, price, quantity, totalPrice);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, price, quantity, totalPrice);
 
   /// Create a copy of ShoppingItemDetails
   /// with the given fields replaced by the non-null parameter values.
@@ -547,6 +567,7 @@ class _$ShoppingItemDetailsImpl implements _ShoppingItemDetails {
 abstract class _ShoppingItemDetails implements ShoppingItemDetails {
   const factory _ShoppingItemDetails(
       {final int id,
+      final String name,
       final int price,
       final int quantity,
       final int totalPrice}) = _$ShoppingItemDetailsImpl;
@@ -556,6 +577,8 @@ abstract class _ShoppingItemDetails implements ShoppingItemDetails {
 
   @override
   int get id;
+  @override
+  String get name;
   @override
   int get price;
   @override
