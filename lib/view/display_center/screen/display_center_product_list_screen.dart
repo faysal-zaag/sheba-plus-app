@@ -6,6 +6,7 @@ import 'package:sheba_plus/controllers/navigation_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/view/category/controller/category_controller.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
 import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 import 'package:sheba_plus/view/display_center/screen/display_center_product_details_screen.dart';
@@ -28,11 +29,16 @@ class _DisplayCenterProductListScreenState
   final navigationController = Get.find<NavigationController>();
   final displayCenterServiceController =
       Get.find<DisplayCenterServiceController>();
+  final categoryController = Get.find<CategoryController>();
   Timer? _debounce;
 
   _initCall() async {
     navigationController.selectedIndex(1);
-    displayCenterServiceController.getAllDisplayCenterServiceProducts();
+    Future.wait([
+      displayCenterServiceController.getAllDisplayCenterServiceProducts(),
+      categoryController.getAllCategories(),
+      categoryController.getAllSubCategories()
+    ]);
   }
 
   getSearchProduct() {

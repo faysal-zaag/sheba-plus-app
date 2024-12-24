@@ -44,7 +44,7 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
   @override
   void initState() {
     // TODO: implement initState
-    _initCall();
+    // _initCall();
     super.initState();
   }
 
