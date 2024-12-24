@@ -43,133 +43,134 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
       color: AppColors.white,
       padding: AppPaddings.allPadding16,
       child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextFieldWithLabel(
-                controller: agentShoppingController.agentShoppingMeetingLocationController.value,
-                label: AgentShoppingTexts.meetingLocation,
-                hintText: AgentShoppingTexts.meetingLocationHintText,
-                validator: (value) => InputValidators.generalValidator(
-                  value: value,
-                  message: GlobalTexts.thisFieldIsRequired,
-                ),
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFieldWithLabel(
+              controller: agentShoppingController.agentShoppingMeetingLocationController.value,
+              label: AgentShoppingTexts.meetingLocation,
+              hintText: AgentShoppingTexts.meetingLocationHintText,
+              validator: (value) => InputValidators.generalValidator(
+                value: value,
+                message: GlobalTexts.thisFieldIsRequired,
               ),
-              TextFieldWithLabel(
-                readOnly: true,
-                controller: agentShoppingController.agentShoppingEasternTimeController.value,
-                label: AgentShoppingTexts.easternTime,
-                hintText: AgentShoppingTexts.easternTimeHintText,
-                suffixIcon: Icon(
-                  PhosphorIcons.calendarDots(),
-                  color: AppColors.primary,
-                ),
-                onTap: () {
-                  print("CAD TIME => ${agentShoppingController.agentShoppingEasternTime.value}");
-                  globalController.showDateTimePicker(
+            ),
+            TextFieldWithLabel(
+              readOnly: true,
+              controller: agentShoppingController.agentShoppingEasternTimeController.value,
+              label: AgentShoppingTexts.easternTime,
+              hintText: AgentShoppingTexts.easternTimeHintText,
+              suffixIcon: Icon(
+                PhosphorIcons.calendarDots(),
+                color: AppColors.primary,
+              ),
+              onTap: () {
+                globalController.showDateTimePicker(
+                  context: context,
+                  canadianTime: true,
+                  onPicked: setTime,
+                  initialDate: agentShoppingController.agentShoppingEasternTime.value != 0 ? DateTime.fromMillisecondsSinceEpoch(agentShoppingController.agentShoppingEasternTime.value) : null,
+                );
+              },
+              validator: (value) => InputValidators.generalValidator(
+                value: value,
+                message: GlobalTexts.thisFieldIsRequired,
+              ),
+            ),
+            CustomTextField(
+              readOnly: true,
+              controller: agentShoppingController.agentShoppingBDTimeController.value,
+              hintText: AgentShoppingTexts.bdTimeHintText,
+              suffixIcon: Icon(
+                PhosphorIcons.calendarDots(),
+                color: AppColors.primary,
+              ),
+              validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
+              onTap: () {
+                globalController.showDateTimePicker(
                     context: context,
-                    canadianTime: true,
+                    canadianTime: false,
                     onPicked: setTime,
-                    initialDate: agentShoppingController.agentShoppingEasternTime.value != 0 ? DateTime.fromMillisecondsSinceEpoch(agentShoppingController.agentShoppingEasternTime.value) : null,
-                  );
-                },
-                validator: (value) => InputValidators.generalValidator(
-                  value: value,
-                  message: GlobalTexts.thisFieldIsRequired,
-                ),
+                    initialDate: agentShoppingController.agentShoppingBDTime.value != 0 ? DateTime.fromMillisecondsSinceEpoch(agentShoppingController.agentShoppingBDTime.value) : null);
+              },
+            ),
+            12.kH,
+            TextFieldWithLabel(
+              textInputType: TextInputType.number,
+              inputFormatters: [InputFormatters.numberOnly],
+              controller: agentShoppingController.agentShoppingSpendAmountController.value,
+              label: AgentShoppingTexts.spendAmount,
+              hintText: AgentShoppingTexts.spendAmountHintText,
+              validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
+            ),
+            Obx(
+              () => Text(
+                AgentShoppingTexts.prePaymentWarningMessage(maxValue: globalController.globalConfig.value.maxBudget ?? 0),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
               ),
-              CustomTextField(
-                readOnly: true,
-                controller: agentShoppingController.agentShoppingBDTimeController.value,
-                hintText: AgentShoppingTexts.bdTimeHintText,
-                suffixIcon: Icon(
-                  PhosphorIcons.calendarDots(),
-                  color: AppColors.primary,
-                ),
-                validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
-                onTap: () {
-                  print("BD TIME => ${agentShoppingController.agentShoppingBDTime.value}");
-                  globalController.showDateTimePicker(
-                      context: context,
-                      canadianTime: false,
-                      onPicked: setTime,
-                      initialDate: agentShoppingController.agentShoppingBDTime.value != 0 ? DateTime.fromMillisecondsSinceEpoch(agentShoppingController.agentShoppingBDTime.value) : null);
-                },
-              ),
-              12.kH,
-              TextFieldWithLabel(
-                textInputType: TextInputType.number,
-                inputFormatters: [InputFormatters.numberOnly],
-                controller: agentShoppingController.agentShoppingSpendAmountController.value,
-                label: AgentShoppingTexts.spendAmount,
-                hintText: AgentShoppingTexts.spendAmountHintText,
-                validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
-              ),
-              Obx(
-                () => Text(
-                  AgentShoppingTexts.prePaymentWarningMessage(maxValue: globalController.globalConfig.value.maxBudget ?? 0),
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
-                ),
-              ),
-              12.kH,
-              Obx(() => Text(AgentShoppingTexts.serviceDuration(hourlyRates: globalController.globalConfig.value.hourlyRates ?? 0))),
-              12.kH,
-              CustomTextField(
-                controller: agentShoppingController.agentShoppingServiceDurationController.value,
-                hintText: AgentShoppingTexts.serviceDurationHintText,
-                textInputType: TextInputType.number,
-                inputFormatters: [InputFormatters.numberOnly],
-                onChange: (value) {
-                  if (value != null) {
-                    setTotalCost(value: value.isEmpty ? "0" : null);
-                  }
-                  return null;
-                },
-                validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
-              ),
-              12.kH,
-              CustomTextField(
-                controller: agentShoppingController.agentShoppingServiceTotalCostController.value,
-                hintText: AgentShoppingTexts.serviceDurationCostHintText,
-                suffixIcon: const SizedBox(
-                  width: 100,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 16.0),
-                      child: Text("(CAD)"),
-                    ),
+            ),
+            12.kH,
+            Obx(() => Text(AgentShoppingTexts.serviceDuration(hourlyRates: globalController.globalConfig.value.hourlyRates ?? 0))),
+            12.kH,
+            CustomTextField(
+              controller: agentShoppingController.agentShoppingServiceDurationController.value,
+              hintText: AgentShoppingTexts.serviceDurationHintText,
+              textInputType: TextInputType.number,
+              inputFormatters: [InputFormatters.numberOnly],
+              onChange: (value) {
+                if (value != null) {
+                  setTotalCost(value: value.isEmpty ? "0" : null);
+                }
+                return null;
+              },
+              validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
+            ),
+            12.kH,
+            CustomTextField(
+              controller: agentShoppingController.agentShoppingServiceTotalCostController.value,
+              hintText: AgentShoppingTexts.serviceDurationCostHintText,
+              suffixIcon: const SizedBox(
+                width: 100,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 16.0),
+                    child: Text("(CAD)"),
                   ),
                 ),
-                validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
-                textInputType: TextInputType.number,
-                inputFormatters: [InputFormatters.numberOnly],
-                onChange: (value) {
-                  if (value != null) {
-                    setServiceDuration(value: value.isEmpty ? "0" : null);
-                  }
-                  return null;
-                },
               ),
-              24.kH,
-              CustomPrimaryButton(
-                  label: GlobalTexts.next,
-                  onClick: () {
-                    if (_formKey.currentState!.validate()) {
-                      if (authController.isLoggedIn.isTrue) {
-                        if (addressController.hasSavedAddress.isFalse) {
-                          Get.toNamed(Routes.registerAddress);
-                        } else {
-                          Get.toNamed(Routes.partialCheckoutScreen);
-                        }
+              validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
+              textInputType: TextInputType.number,
+              inputFormatters: [InputFormatters.numberOnly],
+              onChange: (value) {
+                if (value != null) {
+                  setServiceDuration(value: value.isEmpty ? "0" : null);
+                }
+                return null;
+              },
+            ),
+            24.kH,
+            CustomPrimaryButton(
+                label: GlobalTexts.next,
+                onClick: () {
+                  if (_formKey.currentState!.validate()) {
+                    if (authController.isLoggedIn.isTrue) {
+                      if (addressController.hasSavedAddress.isFalse) {
+                        Get.toNamed(Routes.registerAddress);
+                        globalController.redirectScreen(Routes.agentShoppingOrderInfoScreen);
                       } else {
-                        Get.toNamed(Routes.signIn);
+                        Get.toNamed(Routes.partialCheckoutScreen);
                       }
+                    } else {
+                      globalController.redirectScreen(Routes.agentShoppingOrderInfoScreen);
+                      Get.toNamed(Routes.signIn);
                     }
-                  })
-            ],
-          )),
+                  }
+                })
+          ],
+        ),
+      ),
     );
   }
 

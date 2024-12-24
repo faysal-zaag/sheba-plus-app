@@ -45,7 +45,7 @@ class ShoppingSummary extends StatelessWidget {
                   style: subTextStyle,
                 ),
                 4.kH,
-                Text("BDT ${ProductServices.getAmount(price: invoice.shippingCost)}"),
+                Text("BDT ${ProductServices.getAmount(price: invoice.shoppingCost * currencyConversionRate)}"),
                 4.kH,
                 Row(
                   children: [
@@ -54,7 +54,7 @@ class ShoppingSummary extends StatelessWidget {
                       style: subTextStyle,
                     ),
                     Text(
-                      " CAD ${ProductServices.getAmount(price: invoice.shoppingCost / currencyConversionRate)}",
+                      " CAD ${ProductServices.getAmount(price: invoice.shoppingCost)}",
                       style: lightTextStyle,
                     ),
                   ],
@@ -104,25 +104,25 @@ class ShoppingSummary extends StatelessWidget {
           SummaryRow(
             titleColor: AppColors.black,
             title: PartialCheckoutTexts.dropOffService,
-            value: "CAD ${invoice.dropOffCost}",
+            value: "CAD ${ProductServices.getAmount(price: invoice.dropOffCost)}",
           ),
           const DashedDivider(),
           12.kH,
           SummaryRow(
             titleColor: AppColors.black,
             title: AgentShoppingTexts.totalExpenditure,
-            value: "CAD ${invoice.exactFinalPrice}",
+            value: "CAD ${ProductServices.getAmount(price: invoice.finalPrice)}",
           ),
           SummaryRow(
             titleColor: AppColors.black,
             title: AgentShoppingTexts.alreadyPaid,
-            value: "(-) CAD ${invoice.paidAmount}",
+            value: "(-) CAD ${ProductServices.getAmount(price: invoice.paidAmount)}",
             valueColor: AppColors.error,
           ),
           SummaryRow(
             titleColor: AppColors.black,
             title: AgentShoppingTexts.existingDues,
-            value: "CAD ${invoice.exactFinalPrice}",
+            value: "CAD ${ProductServices.getAmount(price: invoice.finalPrice - invoice.paidAmount)}",
           ),
           12.kH,
           const MessageContainer(

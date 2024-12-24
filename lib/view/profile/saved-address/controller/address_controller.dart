@@ -23,7 +23,8 @@ class AddressController extends GetxController {
   final addressStreetController = TextEditingController().obs;
   final addressStreet2Controller = TextEditingController().obs;
   final addressCityController = TextEditingController().obs;
-  final addressSelectedState = "".obs;
+  final addressStateController = TextEditingController().obs;
+  // final addressSelectedState = "".obs;
   final addressZipCodeController = TextEditingController().obs;
   final addressSelectedCountry = "".obs;
   final addressAdditionalInfo = TextEditingController().obs;
@@ -46,7 +47,8 @@ class AddressController extends GetxController {
     addressStreetController.value.clear();
     addressStreet2Controller.value.clear();
     addressCityController.value.clear();
-    addressSelectedState.value = "";
+    addressStateController.value.clear();
+    // addressSelectedState.value = "";
     addressZipCodeController.value.clear();
     addressSelectedCountry.value = "";
     addressAdditionalInfo.value.clear();
@@ -67,7 +69,8 @@ class AddressController extends GetxController {
     addressSelectedCountry.value = address.country;
     addressStreetController.value.text = address.street;
     addressCityController.value.text = address.city;
-    addressSelectedState.value = address.state;
+    addressStateController.value.text = address.state;
+    // addressSelectedState.value = address.state;
     if (address.zipCode != null) {
       addressZipCodeController.value.text = address.zipCode.toString();
     }
@@ -126,7 +129,7 @@ class AddressController extends GetxController {
       Address address = getAddressData();
 
       await _addressRepository.updateAddress(
-          addressId: addressId, address: address);
+          addressId: addressId, address: address.copyWith(mobileNumber: null, countryCode: null));
       await getAllAddress();
       return true;
     } catch (err) {
@@ -142,7 +145,8 @@ class AddressController extends GetxController {
       title: title ?? addressTitle.value,
       city: addressCityController.value.text,
       country: addressSelectedCountry.value,
-      state: addressSelectedState.value,
+      state: addressStateController.value.text,
+      // state: addressSelectedState.value,
       street: addressStreetController.value.text,
       streetAlternative: addressStreet2Controller.value.text.isEmpty ? null : addressStreet2Controller.value.text,
       addressDesc: addressAdditionalInfo.value.text.isEmpty ? null : addressAdditionalInfo.value.text,

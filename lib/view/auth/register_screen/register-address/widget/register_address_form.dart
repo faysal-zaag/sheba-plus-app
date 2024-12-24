@@ -73,9 +73,10 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
           ),
           16.kH,
           CustomTextField(
-              controller: addressController.addressCityController.value,
-              hintText: "${AuthScreenText.cityTown}*",
-              validator: (value) => InputValidators.generalValidator(value: value, message: AuthScreenText.cityTownValidatorText)),
+            controller: addressController.addressCityController.value,
+            hintText: "${AuthScreenText.cityTown}*",
+            validator: (value) => InputValidators.generalValidator(value: value, message: AuthScreenText.cityTownValidatorText),
+          ),
           16.kH,
           Obx(
             () => CustomDropdown(
@@ -93,21 +94,25 @@ class _RegisterAddressFormState extends State<RegisterAddressForm> {
             ),
           ),
           16.kH,
-          Obx(
-            () => CustomDropdown(
-              items: const ["State 1", "State B", "State D"],
-              onChanged: (value) => addressController.addressSelectedState(value),
-              selectedValue: addressController.addressSelectedState.value,
-              borderColor: AppColors.border,
+          // Obx(
+          //   () => CustomDropdown(
+          //     items: const ["State 1", "State B", "State D"],
+          //     onChanged: (value) => addressController.addressSelectedState(value),
+          //     selectedValue: addressController.addressSelectedState.value,
+          //     borderColor: AppColors.border,
+          //     hintText: "${AuthScreenText.state}*",
+          //     validator: (value) {
+          //       if (addressController.addressSelectedState.isEmpty) {
+          //         return AuthScreenText.stateValidatorText;
+          //       }
+          //       return null;
+          //     },
+          //   ),
+          // ),
+          CustomTextField(
+              controller: addressController.addressStateController.value,
               hintText: "${AuthScreenText.state}*",
-              validator: (value) {
-                if (addressController.addressSelectedState.isEmpty) {
-                  return AuthScreenText.stateValidatorText;
-                }
-                return null;
-              },
-            ),
-          ),
+              validator: (value) => InputValidators.generalValidator(value: value, message: AuthScreenText.stateValidatorText)),
           16.kH,
           CustomTextField(
             controller: addressController.addressZipCodeController.value,

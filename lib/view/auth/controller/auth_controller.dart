@@ -63,7 +63,7 @@ class AuthController extends GetxController {
   final referralNameController = TextEditingController().obs;
   final referralPhoneNumber = "".obs;
   final referralPhoneNumberLength = 10.obs;
-  final referralCountryCode = "".obs;
+  final referralCountryCode = "+880".obs;
 
   void onSignInObscureTap() {
     signInPasswordObscure(!signInPasswordObscure.value);

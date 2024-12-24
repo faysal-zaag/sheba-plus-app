@@ -3,6 +3,7 @@ import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/country_picker_dialog.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
+import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
@@ -13,6 +14,7 @@ import 'package:sheba_plus/view/styles.dart';
 
 class CustomPhoneField extends StatelessWidget {
   final bool? required;
+  final bool readOnly;
   final String? label;
   final TextStyle? labelStyle;
   final TextEditingController? controller;
@@ -33,6 +35,7 @@ class CustomPhoneField extends StatelessWidget {
     this.controller,
     this.selectedCountryCode = "+880",
     this.validatorNumberLength = 10,
+    this.readOnly = false,
   });
 
   @override
@@ -54,29 +57,34 @@ class CustomPhoneField extends StatelessWidget {
             ],
           ),
         8.kH,
-        CustomTextField(
-          prefixIcon: Container(
-            margin: const EdgeInsets.all(1.0),
-            height: 48,
-            width: 80,
-            decoration: const BoxDecoration(
-              border: Border(
-                right: BorderSide(color: AppColors.border),
+        Stack(
+          children: [
+            CustomTextField(
+              readOnly: readOnly,
+              prefixIcon: Container(
+                margin: const EdgeInsets.all(1.0),
+                height: 48,
+                width: 80,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    right: BorderSide(color: AppColors.border),
+                  ),
+                ),
+                child: CustomDropdown(
+                  borderColor: Colors.transparent,
+                  selectedValue: selectedCountryCode,
+                  items: AppConstants.countryCodeList,
+                  onChanged: (String? dialCode) {
+                    onCountryChanged(dialCode!);
+                  },
+                ),
               ),
+              textInputType: TextInputType.number,
+              validator: (value) => InputValidators.phoneNumberValidator(value: value, validationNumberLength: validatorNumberLength),
+              onChange: onChange,
+              controller: controller,
             ),
-            child: CustomDropdown(
-              borderColor: Colors.transparent,
-              selectedValue: selectedCountryCode,
-              items: AppConstants.countryCodeList,
-              onChanged: (String? dialCode) {
-                onCountryChanged(dialCode!);
-              },
-            ),
-          ),
-          textInputType: TextInputType.number,
-          validator: (value) => InputValidators.phoneNumberValidator(value: value, validationNumberLength: validatorNumberLength),
-          onChange: onChange,
-          controller: controller,
+          ],
         ),
       ],
     );

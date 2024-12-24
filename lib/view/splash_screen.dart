@@ -21,6 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _initCall() async {
     await globalController.getDefaultSetting();
+    await FirebaseController().initNotifications();
 
     await authController.isAuthenticated(accessToken: storageService.getAuthToken());
     Get.offAndToNamed(Routes.home);

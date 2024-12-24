@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
@@ -24,6 +25,7 @@ class PartialCheckoutScreen extends StatelessWidget {
   PartialCheckoutScreen({super.key});
 
   final agentShoppingController = Get.find<AgentShoppingController>();
+  final globalController = Get.find<GlobalController>();
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -159,6 +161,7 @@ class PartialCheckoutScreen extends StatelessWidget {
     final response = await agentShoppingController.createAgentBooking();
     if(response){
       agentShoppingController.resetFields();
+      globalController.redirectScreen(Routes.home);
       Get.offAllNamed(Routes.home);
     }
   }

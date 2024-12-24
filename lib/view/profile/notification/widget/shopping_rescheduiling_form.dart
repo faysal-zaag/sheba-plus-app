@@ -94,13 +94,16 @@ class _ShoppingRescheduleFormState extends State<ShoppingRescheduleForm> {
                 },
               ),
               24.kH,
-              CustomPrimaryButton(
-                  label: ProfileScreenTexts.updateSchedule,
-                  onClick: () {
-                    if (_formKey.currentState!.validate()) {
-                      updateAgentBookingSchedule();
-                    }
-                  })
+              Obx(
+                () => CustomPrimaryButton(
+                    loading: agentShoppingController.updateAgentBookingScheduleLoading.isTrue,
+                    label: ProfileScreenTexts.updateSchedule,
+                    onClick: () {
+                      if (_formKey.currentState!.validate()) {
+                        updateAgentBookingSchedule();
+                      }
+                    }),
+              )
             ],
           )),
     );
@@ -108,8 +111,8 @@ class _ShoppingRescheduleFormState extends State<ShoppingRescheduleForm> {
 
   void updateAgentBookingSchedule() async {
     final response = await agentShoppingController.updateAgentBookingSchedule(orderId: notificationController.latestNotification.value.dataId ?? 0);
-    if(response){
-
+    if (response) {
+      Get.back();
     }
   }
 

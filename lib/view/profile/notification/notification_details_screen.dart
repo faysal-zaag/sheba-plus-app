@@ -153,7 +153,7 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
           OrderReviewQuestions(),
         ],
       );
-    } else if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SHOPPING_COMPLETED) {
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SHOPPING_COMPLETED.name) {
       return AgentShoppingCompleted(
         message: notificationController.getAgentShoppingCompletedMessage(notification: latestNotification),
       );

@@ -29,7 +29,7 @@ class ShopAndItemInformationCard extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.only(left: 16.0, right: 4),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -102,23 +102,26 @@ class ShopAndItemInformationCard extends StatelessWidget {
               10.kH,
               TextButton(
                   onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(
-                        PhosphorIcons.plus(),
-                        color: AppColors.primary,
-                      ),
-                      4.kW,
-                      Text(
-                        'Add New Item',
-                        style:
-                            Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.primary,
-                                ),
-                      ),
-                    ],
+                  child: SizedBox(
+                    width: 123,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          PhosphorIcons.plus(),
+                          color: AppColors.primary,
+                        ),
+                        4.kW,
+                        Text(
+                          'Add New Item',
+                          style:
+                              Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.primary,
+                                  ),
+                        ),
+                      ],
+                    ),
                   )),
               5.kH,
               Text(

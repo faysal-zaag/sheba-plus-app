@@ -19,8 +19,8 @@ class CustomDropdown extends StatelessWidget {
   final Color iconColor;
   final bool prefixIcon;
   final bool disableBorder;
-  final EdgeInsets? padding;
   final bool readOnly;
+  final EdgeInsets? padding;
   final List<PhosphorIconData> icons;
   final TextStyle? labelStyle;
   final Widget? customButton;

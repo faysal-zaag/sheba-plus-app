@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/models/notification/user_notification.dart';
 import 'package:sheba_plus/utils/logger.dart';
-import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
 
@@ -19,6 +18,7 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
 }
 
 class FirebaseController {
+  final notificationController = Get.find<NotificationController>();
   final _firebaseMessaging = FirebaseMessaging.instance;
 
   final _androidChannel = const AndroidNotificationChannel(
@@ -55,6 +55,8 @@ class FirebaseController {
       Log.debug(message.data.toString());
 
       if (notification == null) return;
+
+      notificationController.getNotifications();
 
       _localNotifications.show(
           notification.hashCode,

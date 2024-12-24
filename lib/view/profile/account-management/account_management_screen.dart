@@ -19,6 +19,7 @@ import 'package:sheba_plus/view/components/custom_phone_number_field.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/image/custom_image.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
+import 'package:sheba_plus/view/global_texts.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/styles.dart';
@@ -115,6 +116,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
               () => AbsorbPointer(
                 absorbing: profileController.profileEditable.isFalse,
                 child: CustomPhoneField(
+                  readOnly: profileController.profileEditable.isFalse,
                   controller: profileController.userPhoneNumberController.value,
                   onChange: (mobileNumber) {
                     profileController.userPhoneNumberController.value.text = mobileNumber!;
@@ -149,6 +151,18 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                 label: AuthScreenText.changePassword,
                 onClick: () async {
                   Get.toNamed(Routes.changePassword);
+                },
+                color: AppColors.white,
+                borderColor: AppColors.black,
+                labelColor: AppColors.black,
+              ) : const SizedBox.shrink(),
+            ),
+            Obx(
+                  () => profileController.profileEditable.isTrue ? CustomPrimaryButton(
+                loading: authController.forgetPasswordProcedureLoading.isTrue,
+                label: GlobalTexts.cancel,
+                onClick: () async {
+                  profileController.profileEditable(false);
                 },
                 color: AppColors.white,
                 borderColor: AppColors.black,

@@ -57,7 +57,7 @@ class CustomTextField extends StatelessWidget {
       cursorColor: AppColors.primary,
       decoration: Styles.getTextFieldInputDecoration(
         context: context,
-        fillColor: color,
+        fillColor: readOnly ? AppColors.hintText.withOpacity(0.1) : color,
         borderRadius: borderRadius,
         customBorder: customBorder,
         hintText: hintText,
@@ -72,7 +72,7 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       keyboardType: textInputType,
       inputFormatters: inputFormatters,
-      style: Theme.of(context).textTheme.titleSmall,
+      style: Theme.of(context).textTheme.titleSmall?.copyWith(color: readOnly ? AppColors.hintText.withOpacity(0.5) : AppColors.black),
       maxLines: maxLine,
     );
   }

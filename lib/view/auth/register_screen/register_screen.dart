@@ -18,95 +18,83 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return PrimaryScaffold(body: SingleChildScrollView(
-      child: Padding(
-        padding: AppPaddings.screenPadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: screenWidth,
-              padding: const EdgeInsets.all(16.0),
-              decoration: Styles.decorationWithBoxShadow,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    AuthScreenText.registerAccount,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium
-                        ?.copyWith(fontWeight: FontWeight.w600),
-                  ),
-                  4.kH,
-                  Text(
-                    AuthScreenText.signInNotice,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleSmall
-                        ?.copyWith(color: AppColors.paragraph),
-                  ),
-                  24.kH,
-                  const RegisterForm(),
-                  12.kH,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+    return PrimaryScaffold(
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: AppPaddings.screenPadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: screenWidth,
+                  padding: const EdgeInsets.all(16.0),
+                  decoration: Styles.decorationWithBoxShadow,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Expanded(
-                          child: Divider(
+                      Text(
+                        AuthScreenText.registerAccount,
+                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      4.kH,
+                      Text(
+                        AuthScreenText.signInNotice,
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.paragraph),
+                      ),
+                      24.kH,
+                      const RegisterForm(),
+                      12.kH,
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Expanded(
+                              child: Divider(
                             color: AppColors.border,
                           )),
-                      12.kW,
-                      Text(
-                        AuthScreenText.or,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleSmall
-                            ?.copyWith(color: AppColors.paragraph),
-                      ),
-                      12.kW,
-                      const Expanded(
-                          child: Divider(
+                          12.kW,
+                          Text(
+                            AuthScreenText.or,
+                            style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.paragraph),
+                          ),
+                          12.kW,
+                          const Expanded(
+                              child: Divider(
                             color: AppColors.border,
                           ))
-                    ],
-                  ),
-                  12.kH,
-                  SocialLoginOptions(),
-                  24.kH,
-                  Center(
-                    child: RichText(
-                      text: TextSpan(
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleSmall, // Default text style
-                        children: [
-                          TextSpan(
-                            text: "${AuthScreenText.alreadyHaveAnAccount} ",
-                          ),
-                          TextSpan(
-                            text: AuthScreenText.signIn,
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelLarge
-                                ?.copyWith(color: AppColors.primary),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.offAndToNamed(
-                                  Routes.signIn,
-                                );
-                              },
-                          ),
                         ],
                       ),
-                    ),
+                      12.kH,
+                      SocialLoginOptions(),
+                      24.kH,
+                      Center(
+                        child: RichText(
+                          text: TextSpan(
+                            style: Theme.of(context).textTheme.titleSmall, // Default text style
+                            children: [
+                              TextSpan(
+                                text: "${AuthScreenText.alreadyHaveAnAccount} ",
+                              ),
+                              TextSpan(
+                                text: AuthScreenText.signIn,
+                                style: Theme.of(context).textTheme.labelLarge?.copyWith(color: AppColors.primary),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    Get.offAndToNamed(
+                                      Routes.signIn,
+                                    );
+                                  },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    ));
+          ),
+        ));
   }
 }

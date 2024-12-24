@@ -28,7 +28,7 @@ class AgentShoppingController extends GetxController {
   final agentShoppingSpendAmountController = TextEditingController().obs;
   final agentShoppingServiceDurationController = TextEditingController().obs;
   final agentShoppingServiceTotalCostController = TextEditingController().obs;
-  final agentShoppingDropOffService = true.obs;
+  final agentShoppingDropOffService = false.obs;
   final sameAsHomeAddress = true.obs;
   final paymentMethod = PaymentMethod.td.obs;
 

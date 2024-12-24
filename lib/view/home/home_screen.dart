@@ -11,6 +11,7 @@ import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/device/device_utility.dart';
 import 'package:sheba_plus/utils/logger.dart';
+import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/components/confirmation_model.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
@@ -56,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver{
 
   void performOperationOnTerminate() {
     if(authController.keepLoggedIn.isFalse){
+      globalController.redirectScreen(Routes.home);
       StorageService().removeAuthToken();
     }
   }

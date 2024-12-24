@@ -20,20 +20,20 @@ Invoice _$InvoiceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Invoice {
-  int get agentFee => throw _privateConstructorUsedError;
-  int get shoppingCost => throw _privateConstructorUsedError;
-  int get shippingCost => throw _privateConstructorUsedError;
-  int get dropOffCost => throw _privateConstructorUsedError;
-  int get totalVat => throw _privateConstructorUsedError;
-  int get totalTax => throw _privateConstructorUsedError;
-  int get totalProduct => throw _privateConstructorUsedError;
-  int get totalProductPrice => throw _privateConstructorUsedError;
-  int get totalAppliedPoint => throw _privateConstructorUsedError;
-  int get totalAppliedPointAmount => throw _privateConstructorUsedError;
-  int get totalPrice => throw _privateConstructorUsedError;
-  int get paidAmount => throw _privateConstructorUsedError;
-  int get finalPrice => throw _privateConstructorUsedError;
-  int get exactFinalPrice => throw _privateConstructorUsedError;
+  num get agentFee => throw _privateConstructorUsedError;
+  num get shoppingCost => throw _privateConstructorUsedError;
+  num get shippingCost => throw _privateConstructorUsedError;
+  num get dropOffCost => throw _privateConstructorUsedError;
+  num get totalVat => throw _privateConstructorUsedError;
+  num get totalTax => throw _privateConstructorUsedError;
+  num get totalProduct => throw _privateConstructorUsedError;
+  num get totalProductPrice => throw _privateConstructorUsedError;
+  num get totalAppliedPoint => throw _privateConstructorUsedError;
+  num get totalAppliedPointAmount => throw _privateConstructorUsedError;
+  num get totalPrice => throw _privateConstructorUsedError;
+  num get paidAmount => throw _privateConstructorUsedError;
+  num get finalPrice => throw _privateConstructorUsedError;
+  num get exactFinalPrice => throw _privateConstructorUsedError;
 
   /// Serializes this Invoice to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,20 +50,20 @@ abstract class $InvoiceCopyWith<$Res> {
       _$InvoiceCopyWithImpl<$Res, Invoice>;
   @useResult
   $Res call(
-      {int agentFee,
-      int shoppingCost,
-      int shippingCost,
-      int dropOffCost,
-      int totalVat,
-      int totalTax,
-      int totalProduct,
-      int totalProductPrice,
-      int totalAppliedPoint,
-      int totalAppliedPointAmount,
-      int totalPrice,
-      int paidAmount,
-      int finalPrice,
-      int exactFinalPrice});
+      {num agentFee,
+      num shoppingCost,
+      num shippingCost,
+      num dropOffCost,
+      num totalVat,
+      num totalTax,
+      num totalProduct,
+      num totalProductPrice,
+      num totalAppliedPoint,
+      num totalAppliedPointAmount,
+      num totalPrice,
+      num paidAmount,
+      num finalPrice,
+      num exactFinalPrice});
 }
 
 /// @nodoc
@@ -100,59 +100,59 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
       agentFee: null == agentFee
           ? _value.agentFee
           : agentFee // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       shoppingCost: null == shoppingCost
           ? _value.shoppingCost
           : shoppingCost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       shippingCost: null == shippingCost
           ? _value.shippingCost
           : shippingCost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       dropOffCost: null == dropOffCost
           ? _value.dropOffCost
           : dropOffCost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalVat: null == totalVat
           ? _value.totalVat
           : totalVat // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalTax: null == totalTax
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalProduct: null == totalProduct
           ? _value.totalProduct
           : totalProduct // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalProductPrice: null == totalProductPrice
           ? _value.totalProductPrice
           : totalProductPrice // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalAppliedPoint: null == totalAppliedPoint
           ? _value.totalAppliedPoint
           : totalAppliedPoint // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalAppliedPointAmount: null == totalAppliedPointAmount
           ? _value.totalAppliedPointAmount
           : totalAppliedPointAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       paidAmount: null == paidAmount
           ? _value.paidAmount
           : paidAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       finalPrice: null == finalPrice
           ? _value.finalPrice
           : finalPrice // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       exactFinalPrice: null == exactFinalPrice
           ? _value.exactFinalPrice
           : exactFinalPrice // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
     ) as $Val);
   }
 }
@@ -165,20 +165,20 @@ abstract class _$$InvoiceImplCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int agentFee,
-      int shoppingCost,
-      int shippingCost,
-      int dropOffCost,
-      int totalVat,
-      int totalTax,
-      int totalProduct,
-      int totalProductPrice,
-      int totalAppliedPoint,
-      int totalAppliedPointAmount,
-      int totalPrice,
-      int paidAmount,
-      int finalPrice,
-      int exactFinalPrice});
+      {num agentFee,
+      num shoppingCost,
+      num shippingCost,
+      num dropOffCost,
+      num totalVat,
+      num totalTax,
+      num totalProduct,
+      num totalProductPrice,
+      num totalAppliedPoint,
+      num totalAppliedPointAmount,
+      num totalPrice,
+      num paidAmount,
+      num finalPrice,
+      num exactFinalPrice});
 }
 
 /// @nodoc
@@ -213,59 +213,59 @@ class __$$InvoiceImplCopyWithImpl<$Res>
       agentFee: null == agentFee
           ? _value.agentFee
           : agentFee // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       shoppingCost: null == shoppingCost
           ? _value.shoppingCost
           : shoppingCost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       shippingCost: null == shippingCost
           ? _value.shippingCost
           : shippingCost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       dropOffCost: null == dropOffCost
           ? _value.dropOffCost
           : dropOffCost // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalVat: null == totalVat
           ? _value.totalVat
           : totalVat // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalTax: null == totalTax
           ? _value.totalTax
           : totalTax // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalProduct: null == totalProduct
           ? _value.totalProduct
           : totalProduct // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalProductPrice: null == totalProductPrice
           ? _value.totalProductPrice
           : totalProductPrice // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalAppliedPoint: null == totalAppliedPoint
           ? _value.totalAppliedPoint
           : totalAppliedPoint // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalAppliedPointAmount: null == totalAppliedPointAmount
           ? _value.totalAppliedPointAmount
           : totalAppliedPointAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       totalPrice: null == totalPrice
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       paidAmount: null == paidAmount
           ? _value.paidAmount
           : paidAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       finalPrice: null == finalPrice
           ? _value.finalPrice
           : finalPrice // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       exactFinalPrice: null == exactFinalPrice
           ? _value.exactFinalPrice
           : exactFinalPrice // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
     ));
   }
 }
@@ -294,46 +294,46 @@ class _$InvoiceImpl implements _Invoice {
 
   @override
   @JsonKey()
-  final int agentFee;
+  final num agentFee;
   @override
   @JsonKey()
-  final int shoppingCost;
+  final num shoppingCost;
   @override
   @JsonKey()
-  final int shippingCost;
+  final num shippingCost;
   @override
   @JsonKey()
-  final int dropOffCost;
+  final num dropOffCost;
   @override
   @JsonKey()
-  final int totalVat;
+  final num totalVat;
   @override
   @JsonKey()
-  final int totalTax;
+  final num totalTax;
   @override
   @JsonKey()
-  final int totalProduct;
+  final num totalProduct;
   @override
   @JsonKey()
-  final int totalProductPrice;
+  final num totalProductPrice;
   @override
   @JsonKey()
-  final int totalAppliedPoint;
+  final num totalAppliedPoint;
   @override
   @JsonKey()
-  final int totalAppliedPointAmount;
+  final num totalAppliedPointAmount;
   @override
   @JsonKey()
-  final int totalPrice;
+  final num totalPrice;
   @override
   @JsonKey()
-  final int paidAmount;
+  final num paidAmount;
   @override
   @JsonKey()
-  final int finalPrice;
+  final num finalPrice;
   @override
   @JsonKey()
-  final int exactFinalPrice;
+  final num exactFinalPrice;
 
   @override
   String toString() {
@@ -413,51 +413,51 @@ class _$InvoiceImpl implements _Invoice {
 
 abstract class _Invoice implements Invoice {
   const factory _Invoice(
-      {final int agentFee,
-      final int shoppingCost,
-      final int shippingCost,
-      final int dropOffCost,
-      final int totalVat,
-      final int totalTax,
-      final int totalProduct,
-      final int totalProductPrice,
-      final int totalAppliedPoint,
-      final int totalAppliedPointAmount,
-      final int totalPrice,
-      final int paidAmount,
-      final int finalPrice,
-      final int exactFinalPrice}) = _$InvoiceImpl;
+      {final num agentFee,
+      final num shoppingCost,
+      final num shippingCost,
+      final num dropOffCost,
+      final num totalVat,
+      final num totalTax,
+      final num totalProduct,
+      final num totalProductPrice,
+      final num totalAppliedPoint,
+      final num totalAppliedPointAmount,
+      final num totalPrice,
+      final num paidAmount,
+      final num finalPrice,
+      final num exactFinalPrice}) = _$InvoiceImpl;
 
   factory _Invoice.fromJson(Map<String, dynamic> json) = _$InvoiceImpl.fromJson;
 
   @override
-  int get agentFee;
+  num get agentFee;
   @override
-  int get shoppingCost;
+  num get shoppingCost;
   @override
-  int get shippingCost;
+  num get shippingCost;
   @override
-  int get dropOffCost;
+  num get dropOffCost;
   @override
-  int get totalVat;
+  num get totalVat;
   @override
-  int get totalTax;
+  num get totalTax;
   @override
-  int get totalProduct;
+  num get totalProduct;
   @override
-  int get totalProductPrice;
+  num get totalProductPrice;
   @override
-  int get totalAppliedPoint;
+  num get totalAppliedPoint;
   @override
-  int get totalAppliedPointAmount;
+  num get totalAppliedPointAmount;
   @override
-  int get totalPrice;
+  num get totalPrice;
   @override
-  int get paidAmount;
+  num get paidAmount;
   @override
-  int get finalPrice;
+  num get finalPrice;
   @override
-  int get exactFinalPrice;
+  num get exactFinalPrice;
 
   /// Create a copy of Invoice
   /// with the given fields replaced by the non-null parameter values.
