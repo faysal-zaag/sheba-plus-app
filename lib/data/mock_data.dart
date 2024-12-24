@@ -2,7 +2,7 @@ import 'package:sheba_plus/models/display_service/display_service_product.dart';
 import 'package:sheba_plus/models/executor/created_by.dart';
 import 'package:sheba_plus/models/product/product.model.dart';
 
-DisplayServiceProduct product = DisplayServiceProduct(
+DisplayCenterProduct product = DisplayCenterProduct(
   id: 123,
   // Provided value
   name: 'Cool Product',

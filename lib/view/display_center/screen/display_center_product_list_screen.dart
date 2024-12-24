@@ -55,6 +55,13 @@ class _DisplayCenterProductListScreenState
     super.initState();
   }
 
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   displayCenterServiceController.productNameSearchController.value.dispose();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return PrimaryScaffold(

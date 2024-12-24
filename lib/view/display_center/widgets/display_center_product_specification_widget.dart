@@ -19,6 +19,7 @@ class DisplayCenterProductSpecificationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         10.kH,
         SingleChildScrollView(
@@ -61,11 +62,9 @@ class DisplayCenterProductSpecificationWidget extends StatelessWidget {
         10.kH,
         Container(
             padding: const EdgeInsets.all(80),
-            child: Center(
-              child: Text(
-                itemText,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
+            child: Text(
+              itemText,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
       ],

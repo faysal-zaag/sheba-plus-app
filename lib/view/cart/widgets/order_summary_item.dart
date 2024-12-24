@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:sheba_plus/models/display_service/display_service_product.dart';
 import 'package:sheba_plus/models/product/product.model.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 
 class OrderSummaryItem extends StatelessWidget {
-  final ProductModel product;
+  final DisplayCenterProduct product;
+  final int quantity;
 
-  const OrderSummaryItem({super.key, required this.product});
+  const OrderSummaryItem({super.key, required this.product, required this.quantity});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class OrderSummaryItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${product.name}',
+                  product.name,
                   style: Theme.of(context).textTheme.labelMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -30,13 +32,13 @@ class OrderSummaryItem extends StatelessWidget {
                   children: [
                     //TODO implement for dynamic quantity
                     Text(
-                      '2 x',
+                      '$quantity x',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           fontWeight: FontWeight.w500, color: Colors.green),
                     ),
                     5.kW,
                     Text(
-                      'CAD ${(product.price ?? 0) * 2}',
+                      '\$ ${(product.price)}',
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                             fontWeight: FontWeight.w500,
                           ),
@@ -51,7 +53,7 @@ class OrderSummaryItem extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerRight,
               child: Text(
-                'CAD ${product.price}',
+                '\$ ${(product.price) * quantity}',
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),

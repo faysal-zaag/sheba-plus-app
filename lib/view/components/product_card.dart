@@ -7,7 +7,7 @@ import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
 
 class ProductCard extends StatelessWidget {
-  final DisplayServiceProduct product;
+  final DisplayCenterProduct product;
 
   const ProductCard({super.key, required this.product});
 
@@ -32,8 +32,8 @@ class ProductCard extends StatelessWidget {
                     topRight: Radius.circular(4), // Top-right corner radius
                   ),
                   child: Image.network(
-                    product.thumbnailImage.isNotEmpty
-                        ? product.thumbnailImage
+                    product.thumbnailImage != null
+                        ? product.thumbnailImage ?? ''
                         : "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                     height: 190,
                     width: 200,

@@ -26,10 +26,10 @@ class DisplayCenterServiceController extends GetxController {
   final carouselCurrentIndex = 0.obs;
   final selectProductDetailsType = 'DESCRIPTION'.obs;
   final totalDisplayServiceProduct = 0.obs;
-  final displayServiceProductList = <DisplayServiceProduct>[].obs;
+  final displayServiceProductList = <DisplayCenterProduct>[].obs;
   final productNameSearchController = TextEditingController().obs;
 
-  var currentDisplayServiceProduct = DisplayServiceProduct(
+  var currentDisplayServiceProduct = DisplayCenterProduct(
           id: 0,
           name: '',
           description: '',
@@ -50,7 +50,6 @@ class DisplayCenterServiceController extends GetxController {
     'DESCRIPTION',
     'SPECIFICATION',
     'ADDITIONAL',
-    'EXTERNAL',
   ];
 
   void onCarouselChange(int index) {
@@ -91,7 +90,7 @@ class DisplayCenterServiceController extends GetxController {
               subCategoryIdList: subCategoryIdList);
 
       var list = (response.data['content'] as List)
-          .map((e) => DisplayServiceProduct.fromJson(e))
+          .map((e) => DisplayCenterProduct.fromJson(e))
           .toList();
       displayServiceProductList(list);
       totalDisplayServiceProduct(response.data['totalElements']);
@@ -109,7 +108,7 @@ class DisplayCenterServiceController extends GetxController {
       final response =
           await _displayCenterServiceRepository.getProductById(id: id);
       currentDisplayServiceProduct(
-          DisplayServiceProduct.fromJson(response.data));
+          DisplayCenterProduct.fromJson(response.data));
       currentDisplayServiceProduct.value.discountPrice = calculateDiscountPrice(
           productPrice: currentDisplayServiceProduct.value.price,
           discountPercentage:
