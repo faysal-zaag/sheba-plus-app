@@ -4,6 +4,7 @@ import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/view/components/custom_loader.dart';
 
 class ProductCard extends StatelessWidget {
   final double imageHeight;
@@ -40,6 +41,13 @@ class ProductCard extends StatelessWidget {
                     height: imageHeight,
                     width: double.infinity,
                     fit: BoxFit.cover,
+                    loadingBuilder: (context, child, event) {
+                      if (event == null) {
+                        return child;
+                      } else {
+                        return const Center(child: CustomLoader());
+                      }
+                    },
                   ),
                 ),
               ),

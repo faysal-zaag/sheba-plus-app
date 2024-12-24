@@ -28,6 +28,10 @@ class CategoryController extends GetxController {
   final selectProductAvailability = ''.obs;
   final productSortByItems = <String>['Newest', 'Price : Low to high', 'Price : High to low'];
   final selectedSortBy = ''.obs;
+  final  minPriceEditingController =  TextEditingController().obs;
+  final maxPriceEditingController =  TextEditingController().obs;
+  final startValue = 0.00.obs;
+  final endValue = 10000.00.obs;
 
   // ================ Public Api call ==============
   Future<void> getAllCategories() async {
@@ -64,6 +68,15 @@ class CategoryController extends GetxController {
     }
   }
 
+  int selectedFilteringCount() {
+    int count = 0;
+    if(categoryIds.isNotEmpty) count++;
+    if(subCategoryIds.isNotEmpty) count++;
+    if(selectProductAvailability.isNotEmpty) count++;
+    if(selectedSortBy.isNotEmpty) count++;
+    return count;
+  }
+
   void resetData() {
     showAllCategories(false);
     showAllSubCategories(false);
@@ -71,5 +84,9 @@ class CategoryController extends GetxController {
     subCategoryIds([]);
     selectProductAvailability('');
     selectedSortBy('');
+    minPriceEditingController.value.clear();
+    maxPriceEditingController.value.clear();
+    startValue(0.0);
+    endValue(10000.0);
   }
 }

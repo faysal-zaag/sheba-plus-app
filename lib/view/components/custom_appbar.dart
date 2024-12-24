@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
@@ -18,7 +17,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool hasCart;
   final bool displayCenter;
 
-  CustomAppBar({super.key, this.userIcon = false, this.hasCart = false, this.displayCenter = false});
+  CustomAppBar(
+      {super.key,
+      this.userIcon = false,
+      this.hasCart = false,
+      this.displayCenter = false});
 
   final authController = Get.find<AuthController>();
   final addressController = Get.find<AddressController>();
@@ -129,12 +132,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       }),
               )
             ]
-          : displayCenter && authController.isLoggedIn.isFalse
+          : displayCenter && authController.isLoggedIn.isFalse && hasCart
               ? [const DisplayCenterAppBarCartWidget()]
-          : hasCart && authController.isLoggedIn.isFalse
-              ? [
-        const DisplayCenterAppBarCartWidget()
-                ]
               : null,
     );
   }
