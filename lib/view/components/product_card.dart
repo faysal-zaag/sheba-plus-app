@@ -10,7 +10,7 @@ class ProductCard extends StatelessWidget {
   final double imageHeight;
   final DisplayServiceProduct product;
 
-  const ProductCard({super.key, required this.product, this.imageHeight = 212});
+  const ProductCard({super.key, required this.product, this.imageHeight = 210});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,6 @@ class ProductCard extends StatelessWidget {
       children: [
         Container(
           width: 225,
-          height: 320,
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: AppBorderRadius.circularRadius8,

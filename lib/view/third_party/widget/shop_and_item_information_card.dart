@@ -1,7 +1,10 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/third_party/controller/third_party_service_controller.dart';
 import 'package:sheba_plus/view/third_party/widget/shop_item_information_card.dart';
 
@@ -13,14 +16,27 @@ class ShopAndItemInformationCard extends StatelessWidget {
   final TextEditingController shopNameController;
   final TextEditingController shopAddressController;
   final TextEditingController contactNumberController;
+  final TextEditingController howMuchNeedToPay;
+  final bool alreadyPaid;
+  final bool pickUpService;
   final TextEditingController unPaidTextEditingController;
+  final List<ShopItem> items;
+  final int shopIndex;
+  final GlobalKey<FormState> formKey;
 
-  ShopAndItemInformationCard(
-      {super.key,
-      required this.shopNameController,
-      required this.shopAddressController,
-      required this.contactNumberController,
-      required this.unPaidTextEditingController});
+  ShopAndItemInformationCard({
+    super.key,
+    required this.shopNameController,
+    required this.shopAddressController,
+    required this.contactNumberController,
+    required this.unPaidTextEditingController,
+    required this.items,
+    required this.shopIndex,
+    required this.formKey,
+    required this.howMuchNeedToPay,
+    required this.alreadyPaid,
+    required this.pickUpService,
+  });
 
   final thirdPartyServiceController = Get.find<ThirdPartyServiceController>();
 
@@ -35,13 +51,12 @@ class ShopAndItemInformationCard extends StatelessWidget {
             children: [
               Text(
                 'Shop and Item Information',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  thirdPartyServiceController.deleteShop(shopIndex: shopIndex);
+                },
                 child: Row(
                   children: [
                     Icon(
@@ -51,10 +66,7 @@ class ShopAndItemInformationCard extends StatelessWidget {
                     3.kW,
                     Text(
                       'Delete Shop',
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelMedium
-                          ?.copyWith(color: AppColors.error),
+                      style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.error),
                     )
                   ],
                 ),
@@ -63,8 +75,6 @@ class ShopAndItemInformationCard extends StatelessWidget {
           ),
         ),
         Container(
-          // width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.circular(2.0),
@@ -72,165 +82,169 @@ class ShopAndItemInformationCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Shop Information',
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-              10.kH,
-              CustomTextField(
-                controller: shopNameController,
-                hintText: 'Enter shop name',
-              ),
-              10.kH,
-              CustomTextField(
-                  controller: shopAddressController,
-                  hintText: 'Enter shop address'),
-              10.kH,
-              CustomTextField(
-                  controller: contactNumberController,
-                  hintText: 'Enter contact person number'),
-              20.kH,
-              Text(
-                'Item Information',
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-              10.kH,
-              ShopItemInformationCard(
-                itemNameController: shopNameController,
-                quantity: 1,
-              ),
-              10.kH,
-              TextButton(
-                  onPressed: () {},
-                  child: SizedBox(
-                    width: 123,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Icon(
-                          PhosphorIcons.plus(),
-                          color: AppColors.primary,
-                        ),
-                        4.kW,
-                        Text(
-                          'Add New Item',
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.primary,
-                                  ),
-                        ),
-                      ],
-                    ),
-                  )),
-              5.kH,
-              Text(
-                'Have You Already Paid?',
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-              10.kH,
-              Obx(
-                () => TwoOptionsRadioRow(
-                  selectedValue: thirdPartyServiceController.alreadyPaid.value,
-                  onChanged: thirdPartyServiceController.togglePaidOrNot,
-                ),
-              ),
-              10.kH,
-              Obx(
-                () => thirdPartyServiceController.alreadyPaid.isTrue
-                    ? Container(
-                        padding: const EdgeInsets.all(10),
-                        width: MediaQuery.of(context).size.width * .4,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Already Paid',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium
-                                  ?.copyWith(color: AppColors.white),
-                            ),
-                            5.kW,
-                            const Icon(
-                              Icons.check_circle,
-                              color: AppColors.white,
-                            )
-                          ],
-                        ),
-                      )
-                    : Column(
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Shop Information',
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                      10.kH,
+                      CustomTextField(
+                        controller: shopNameController,
+                        hintText: 'Enter shop name',
+                        validator: (value) => InputValidators.generalValidator(value: value, message: "Shop name is required"),
+                      ),
+                      10.kH,
+                      CustomTextField(
+                        controller: shopAddressController,
+                        hintText: 'Enter shop address',
+                        validator: (value) => InputValidators.generalValidator(value: value, message: "Shop address is required"),
+                      ),
+                      10.kH,
+                      CustomTextField(
+                        controller: contactNumberController,
+                        hintText: 'Enter contact person number',
+                        validator: (value) => InputValidators.generalValidator(value: value, message: "Contact number is required"),
+                      ),
+                      20.kH,
+                      Text(
+                        'Item Information',
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                      10.kH,
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'How much we need to pay*',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                          8.kH,
-                          CustomTextField(
-                            controller: unPaidTextEditingController,
-                            textInputType: TextInputType.number,
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.only(top: 15.0),
-                              child: Text(
-                                '(BDT)',
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
+                          ...items.mapIndexed(
+                            (index, itemController) => ShopItemInformationCard(
+                              shopIndex: shopIndex,
+                              itemIndex: index,
+                              itemNameController: itemController.itemNameController,
+                              quantity: itemController.quantity.value,
                             ),
                           )
                         ],
-                      ),
+                      )
+                    ],
+                  ),
+                ),
               ),
-              15.kH,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Do you want pick-up service?',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.w600),
-                  ),
-                  8.kH,
-                  Text(
-                    thirdPartyServiceController.pickUpServiceText,
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  10.kH,
-                  Obx(
-                    () => TwoOptionsRadioRow(
-                      selectedValue:
-                          thirdPartyServiceController.needPickUpService.value,
-                      onChanged:
-                          thirdPartyServiceController.needPickUpServiceYesOrNot,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 4.0),
+                    child: TextButton(
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          thirdPartyServiceController.addNewItem(shopIndex: shopIndex);
+                        }
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            PhosphorIcons.plus(),
+                            color: AppColors.primary,
+                            size: 15,
+                          ),
+                          4.kW,
+                          Text(
+                            'Add New Item',
+                            style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                                  color: AppColors.primary,
+                                ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
-              )
-            ],
-          ),
-        ),
-        10.kH,
-        TextButton(
-          onPressed: () {},
-          child: Row(
-            children: [
-              Icon(
-                PhosphorIcons.plusCircle(),
-                color: AppColors.primary,
               ),
-              5.kW,
-              Text(
-                'Add New Shop',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.primary,
+              5.kH,
+              Padding(
+                padding: AppPaddings.allPadding16,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Have You Already Paid?', style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
+                    10.kH,
+                    TwoOptionsRadioRow(
+                      selectedValue: alreadyPaid,
+                      onChanged: (value) => thirdPartyServiceController.togglePaidOrNot(shopIndex: shopIndex),
                     ),
+                    10.kH,
+                    alreadyPaid
+                        ? Container(
+                      padding: const EdgeInsets.all(10),
+                      width: MediaQuery.of(context).size.width * .4,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Already Paid',
+                            style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.white),
+                          ),
+                          10.kW,
+                          const Icon(
+                            Icons.check_circle,
+                            color: AppColors.white,
+                          )
+                        ],
+                      ),
+                    )
+                        : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'How much we need to pay*',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                        8.kH,
+                        CustomTextField(
+                          controller: howMuchNeedToPay,
+                          textInputType: TextInputType.number,
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(top: 15.0),
+                            child: Text(
+                              '(BDT)',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    15.kH,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Do you want pick-up service?',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                        ),
+                        8.kH,
+                        Text(
+                          thirdPartyServiceController.pickUpServiceText,
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                        10.kH,
+                        TwoOptionsRadioRow(
+                          selectedValue: pickUpService,
+                          onChanged: (value) => thirdPartyServiceController.needPickUpServiceYesOrNot(shopIndex: shopIndex),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               )
             ],
           ),
