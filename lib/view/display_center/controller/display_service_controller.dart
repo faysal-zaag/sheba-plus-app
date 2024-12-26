@@ -98,7 +98,7 @@ class DisplayCenterServiceController extends GetxController {
           .toList();
       displayServiceProductList(list);
       totalDisplayServiceProduct(response.data['totalElements']);
-      debugPrint("all display products: ${response.data}", wrapWidth: 1024);
+      // debugPrint("all display products: ${response.data}", wrapWidth: 1024);
     } catch (err) {
       Log.error(err.toString());
     } finally {

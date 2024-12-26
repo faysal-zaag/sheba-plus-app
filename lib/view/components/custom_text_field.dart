@@ -25,6 +25,7 @@ class CustomTextField extends StatelessWidget {
   final BorderRadius? customBorder;
   final VoidCallback? onTap;
   final AutovalidateMode? autoValidateMode;
+  final FocusNode? focusNode;
 
   const CustomTextField(
       {super.key, this.controller,
@@ -47,7 +48,7 @@ class CustomTextField extends StatelessWidget {
       this.maxLength = 100,
       this.onTap,
       this.autoValidateMode,
-      this.prefixIcon});
+      this.prefixIcon, this.focusNode});
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +56,7 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscure ?? false,
       autovalidateMode: autoValidateMode ?? AutovalidateMode.onUserInteraction,
       cursorColor: AppColors.primary,
+      focusNode: focusNode,
       decoration: Styles.getTextFieldInputDecoration(
         context: context,
         fillColor: color,

@@ -39,6 +39,7 @@ class _DisplayCenterProductListScreenState
       RefreshController(initialRefresh: false);
   int currentImageIndex = 0;
   bool screenLoading = false;
+  final FocusNode searchFocusNode = FocusNode();
 
   _initCall() async {
     _startLoading();
@@ -93,10 +94,21 @@ class _DisplayCenterProductListScreenState
     });
   }
 
+  focusOnOff() {
+    if (navigationController.selectedIndex.value == 2) {
+      Future.delayed(Duration.zero, () {
+        searchFocusNode.requestFocus();
+      });
+    } else {
+      Future.delayed(Duration.zero, () {
+        searchFocusNode.unfocus();
+      });
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
-    print('=========>>> ');
     _initCall();
     super.initState();
   }
@@ -165,6 +177,11 @@ class _DisplayCenterProductListScreenState
                             ),
                           ),
                           banner: bannerController.banners[currentImageIndex],
+                          showSearchField:
+                              navigationController.selectedIndex.value == 2
+                                  ? false
+                                  : true,
+                          searchFocusNode: searchFocusNode,
                         ),
                         Obx(
                           () => displayCenterServiceController
@@ -206,12 +223,9 @@ class _DisplayCenterProductListScreenState
                       child: CustomBottomNavBarWidget(
                         currentIndex: navigationController.selectedIndex.value,
                         onTap: (index) {
-                          setState(
-                            () {
-                              navigationController.selectedIndex(index);
-                            },
-                          );
+                          navigationController.selectedIndex(index);
                           navigationController.onChangeNavigationTap(index);
+                          focusOnOff();
                         },
                       ),
                     ),

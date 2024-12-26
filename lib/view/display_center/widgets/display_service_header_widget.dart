@@ -12,12 +12,14 @@ class DisplayServiceHeaderWidget extends StatelessWidget {
   final Function searchOnChange;
   final Widget suffixWidget;
   final banner_model.Banner banner;
+  final bool showSearchField;
+  final FocusNode searchFocusNode;
 
   DisplayServiceHeaderWidget({
     super.key,
     required this.searchOnChange,
     required this.suffixWidget,
-    required this.banner,
+    required this.banner, required this.showSearchField, required this.searchFocusNode,
   });
 
   final displayCenterServiceController =
@@ -28,7 +30,7 @@ class DisplayServiceHeaderWidget extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        ClipRRect(
+        if(showSearchField)...[ClipRRect(
           borderRadius: BorderRadius.circular(4.0),
           child: Image.network(
             // 'assets/images/sale_banner.png',
@@ -37,10 +39,11 @@ class DisplayServiceHeaderWidget extends StatelessWidget {
             fit: BoxFit.fill,
           ),
         ),
-        10.kH,
+          10.kH,],
+
         Obx(() => GestureDetector(
               onTap: () {
-                FocusScope.of(context).unfocus();
+                searchFocusNode.unfocus();
               },
               child: CustomTextField(
                 controller: displayCenterServiceController
@@ -50,6 +53,7 @@ class DisplayServiceHeaderWidget extends StatelessWidget {
                   searchOnChange(value);
                 },
                 suffixIcon: suffixWidget,
+                focusNode: searchFocusNode,
               ),
             )),
         Row(
