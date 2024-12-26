@@ -44,6 +44,7 @@ dependencies:
   flutter_local_notifications: ^18.0.1
   side_sheet: ^1.0.4
   shimmer: ^3.0.0
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:

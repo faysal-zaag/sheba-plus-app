@@ -67,6 +67,10 @@ class DisplayCenterServiceController extends GetxController {
     return finalPrice;
   }
 
+  void resetData() {
+    productNameSearchController.value.clear();
+  }
+
   // ================ Public Api call ==============
   Future<void> getAllDisplayCenterServiceProducts(
       {List<num>? categoryIdList,

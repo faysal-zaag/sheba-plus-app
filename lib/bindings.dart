@@ -7,6 +7,7 @@ import 'package:sheba_plus/data/api/config.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/services/file_service.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
+import 'package:sheba_plus/view/banner/controller/banner_controller.dart';
 import 'package:sheba_plus/view/cart/controller/cart_controller.dart';
 import 'package:sheba_plus/view/category/controller/category_controller.dart';
 import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
@@ -21,6 +22,7 @@ import 'package:sheba_plus/view/third_party/controller/third_party_service_contr
 import 'package:sheba_plus/view_model/repositories/address.repository.dart';
 import 'package:sheba_plus/view_model/repositories/agent_shopping.repository.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
+import 'package:sheba_plus/view_model/repositories/banner_repository.dart';
 import 'package:sheba_plus/view_model/repositories/category_repository.dart';
 import 'package:sheba_plus/view_model/repositories/display_center_repository.dart';
 import 'package:sheba_plus/view_model/repositories/global.repository.dart';
@@ -44,6 +46,7 @@ class MyBindings implements Bindings {
     Get.lazyPut<DisplayCenterServiceRepository>(() => DisplayCenterServiceRepository(Get.find<Dio>()));
     Get.lazyPut<CategoryRepository>(() => CategoryRepository(Get.find<Dio>()));
     Get.lazyPut<NotificationRepository>(() => NotificationRepository(Get.find<Dio>()));
+    Get.lazyPut<BannerRepository>(() => BannerRepository(Get.find<Dio>()));
 
     Get.put(GlobalController(Get.find<GlobalRepository>()));
     Get.put(HomeController(Get.find<HomeRepository>(), Get.find<StorageService>()));
@@ -60,6 +63,7 @@ class MyBindings implements Bindings {
     Get.put(AgentShoppingController(Get.find<AgentShoppingRepository>(), Get.find<AddressController>(), Get.find<NotificationController>()));
     Get.put(CartController());
     Get.put(ThirdPartyServiceController());
+    Get.put(BannerController(Get.find<BannerRepository>()));
 
     Get.put<AuthController>(AuthController(Get.find<AuthRepository>(), Get.find<StorageService>(), Get.find<ProfileController>(), Get.find<AddressController>()));
 
