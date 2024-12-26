@@ -16,12 +16,21 @@ import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dar
 
 class ShoppingItemDetails extends StatelessWidget {
   final String message;
+  final int orderId;
   final List<ShoppingDetails> shoppingDetailsList;
   final Invoice invoice;
   final double currentCadRate;
   final num hourBooked;
 
-  const ShoppingItemDetails({super.key, required this.shoppingDetailsList, required this.invoice, required this.message, required this.currentCadRate, required this.hourBooked});
+  const ShoppingItemDetails({
+    super.key,
+    required this.shoppingDetailsList,
+    required this.invoice,
+    required this.message,
+    required this.currentCadRate,
+    required this.hourBooked,
+    required this.orderId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +72,11 @@ class ShoppingItemDetails extends StatelessWidget {
                 currentCadRate: currentCadRate,
               ),
               24.kH,
-              CustomPrimaryButton(label: GlobalTexts.proceed, onClick: () {
-                Get.toNamed(Routes.finalCheckOutScreen);
-              }),
+              CustomPrimaryButton(
+                  label: GlobalTexts.proceed,
+                  onClick: () {
+                    Get.toNamed(Routes.finalCheckOutScreen);
+                  }),
             ],
           ),
         ),

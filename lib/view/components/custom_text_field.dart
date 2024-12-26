@@ -27,7 +27,8 @@ class CustomTextField extends StatelessWidget {
   final AutovalidateMode? autoValidateMode;
 
   const CustomTextField(
-      {super.key, this.controller,
+      {super.key,
+      this.controller,
       this.title,
       this.hintText,
       this.readOnly = false,

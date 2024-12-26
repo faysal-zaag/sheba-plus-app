@@ -11,7 +11,7 @@ class AgentShoppingRepository{
   }
 
   Future<Response> getOrderDetails({required int orderId})async{
-    return await _dio.get("${ApiUrls.getOrderApiUrl}/$orderId");
+    return await _dio.get("${ApiUrls.getOrderDetailsApiUrl}/$orderId");
   }
 
   Future<Response> updateAgentBookingSchedule({required int orderId, required List<String> meetingLocations, required int meetingTime})async{

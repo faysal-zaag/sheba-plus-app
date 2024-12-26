@@ -40,6 +40,7 @@ class AgentShoppingController extends GetxController {
   final currentCadRate = 0.0.obs;
   Rx<num> hourBooked = 0.obs;
   final shoppingDetailsList = const <ShoppingDetails>[].obs;
+  final dropOffAddress = const Address().obs;
 
   void resetFields() {
     agentShoppingMeetingLocationController.value.clear();
@@ -147,6 +148,7 @@ class AgentShoppingController extends GetxController {
       invoice(Invoice.fromJson(response.data["invoice"]));
       currentCadRate(response.data["currentCadRate"]);
       hourBooked(response.data["agentMeeting"]["hourBooked"]);
+      dropOffAddress(Address.fromJson(response.data["dropOffAddress"]));
 
       var shoppingDetailsResponseList = shoppingDetailsListData.map((shoppingDetails) {
         return ShoppingDetails.fromJson(shoppingDetails);

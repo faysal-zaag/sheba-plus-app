@@ -27,6 +27,7 @@ mixin _$NotificationBody {
   String get ticketNumber => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   String get orderStatus => throw _privateConstructorUsedError;
+  String get achievePoint => throw _privateConstructorUsedError;
 
   /// Serializes this NotificationBody to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,7 +52,8 @@ abstract class $NotificationBodyCopyWith<$Res> {
       String meetingEndTime,
       String ticketNumber,
       String message,
-      String orderStatus});
+      String orderStatus,
+      String achievePoint});
 }
 
 /// @nodoc
@@ -76,6 +78,7 @@ class _$NotificationBodyCopyWithImpl<$Res, $Val extends NotificationBody>
     Object? ticketNumber = null,
     Object? message = null,
     Object? orderStatus = null,
+    Object? achievePoint = null,
   }) {
     return _then(_value.copyWith(
       agentPurchaseHour: null == agentPurchaseHour
@@ -106,6 +109,10 @@ class _$NotificationBodyCopyWithImpl<$Res, $Val extends NotificationBody>
           ? _value.orderStatus
           : orderStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      achievePoint: null == achievePoint
+          ? _value.achievePoint
+          : achievePoint // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -125,7 +132,8 @@ abstract class _$$NotificationBodyImplCopyWith<$Res>
       String meetingEndTime,
       String ticketNumber,
       String message,
-      String orderStatus});
+      String orderStatus,
+      String achievePoint});
 }
 
 /// @nodoc
@@ -148,6 +156,7 @@ class __$$NotificationBodyImplCopyWithImpl<$Res>
     Object? ticketNumber = null,
     Object? message = null,
     Object? orderStatus = null,
+    Object? achievePoint = null,
   }) {
     return _then(_$NotificationBodyImpl(
       agentPurchaseHour: null == agentPurchaseHour
@@ -178,6 +187,10 @@ class __$$NotificationBodyImplCopyWithImpl<$Res>
           ? _value.orderStatus
           : orderStatus // ignore: cast_nullable_to_non_nullable
               as String,
+      achievePoint: null == achievePoint
+          ? _value.achievePoint
+          : achievePoint // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -192,7 +205,8 @@ class _$NotificationBodyImpl implements _NotificationBody {
       this.meetingEndTime = '',
       this.ticketNumber = '',
       this.message = '',
-      this.orderStatus = ''});
+      this.orderStatus = '',
+      this.achievePoint = ''});
 
   factory _$NotificationBodyImpl.fromJson(Map<String, dynamic> json) =>
       _$$NotificationBodyImplFromJson(json);
@@ -218,10 +232,13 @@ class _$NotificationBodyImpl implements _NotificationBody {
   @override
   @JsonKey()
   final String orderStatus;
+  @override
+  @JsonKey()
+  final String achievePoint;
 
   @override
   String toString() {
-    return 'NotificationBody(agentPurchaseHour: $agentPurchaseHour, shoppingArea: $shoppingArea, meetingTime: $meetingTime, meetingEndTime: $meetingEndTime, ticketNumber: $ticketNumber, message: $message, orderStatus: $orderStatus)';
+    return 'NotificationBody(agentPurchaseHour: $agentPurchaseHour, shoppingArea: $shoppingArea, meetingTime: $meetingTime, meetingEndTime: $meetingEndTime, ticketNumber: $ticketNumber, message: $message, orderStatus: $orderStatus, achievePoint: $achievePoint)';
   }
 
   @override
@@ -241,13 +258,23 @@ class _$NotificationBodyImpl implements _NotificationBody {
                 other.ticketNumber == ticketNumber) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.orderStatus, orderStatus) ||
-                other.orderStatus == orderStatus));
+                other.orderStatus == orderStatus) &&
+            (identical(other.achievePoint, achievePoint) ||
+                other.achievePoint == achievePoint));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, agentPurchaseHour, shoppingArea,
-      meetingTime, meetingEndTime, ticketNumber, message, orderStatus);
+  int get hashCode => Object.hash(
+      runtimeType,
+      agentPurchaseHour,
+      shoppingArea,
+      meetingTime,
+      meetingEndTime,
+      ticketNumber,
+      message,
+      orderStatus,
+      achievePoint);
 
   /// Create a copy of NotificationBody
   /// with the given fields replaced by the non-null parameter values.
@@ -274,7 +301,8 @@ abstract class _NotificationBody implements NotificationBody {
       final String meetingEndTime,
       final String ticketNumber,
       final String message,
-      final String orderStatus}) = _$NotificationBodyImpl;
+      final String orderStatus,
+      final String achievePoint}) = _$NotificationBodyImpl;
 
   factory _NotificationBody.fromJson(Map<String, dynamic> json) =
       _$NotificationBodyImpl.fromJson;
@@ -293,6 +321,8 @@ abstract class _NotificationBody implements NotificationBody {
   String get message;
   @override
   String get orderStatus;
+  @override
+  String get achievePoint;
 
   /// Create a copy of NotificationBody
   /// with the given fields replaced by the non-null parameter values.

@@ -7,6 +7,7 @@ import 'package:sheba_plus/utils/constant/app_paddings.dart';
 
 class MessageContainer extends StatelessWidget {
   final String message;
+  final Widget? child;
   final bool forOrderStatusMessage;
   final bool orderDelivered;
   final Color backgroundColor;
@@ -20,7 +21,7 @@ class MessageContainer extends StatelessWidget {
       this.forOrderStatusMessage = false,
       this.crossAxisAlignment = CrossAxisAlignment.center,
       this.orderDelivered = false,
-      this.borderColor = AppColors.primary});
+      this.borderColor = AppColors.primary, this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class MessageContainer extends StatelessWidget {
                           AppImages.delivered,
                           width: 80,
                         )),
-                  Text(
+                  child ?? Text(
                     message,
                     textAlign: orderDelivered ? TextAlign.center : TextAlign.start,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.subtext),

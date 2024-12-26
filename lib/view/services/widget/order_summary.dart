@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/data/api/config.dart';
+import 'package:sheba_plus/services/product_services.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
@@ -21,6 +22,10 @@ class OrderSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double shoppingAmount = double.parse(agentShoppingController.agentShoppingSpendAmountController.value.text);
+    double currencyConversionRate = globalController.globalConfig.value.currencyConversionRate;
+    String total = ProductServices.getAmount(
+        price: (double.parse(agentShoppingController.agentShoppingServiceTotalCostController.value.text) + (shoppingAmount > 25000 ? shoppingAmount : 0) / currencyConversionRate));
+
     return Container(
       color: AppColors.white,
       padding: AppPaddings.screenPadding,
@@ -48,7 +53,7 @@ class OrderSummary extends StatelessWidget {
           ),
           SummaryRow(
             title: PartialCheckoutTexts.shoppingCost,
-            value: shoppingAmount > 25000 ? "$shoppingAmount ${GlobalTexts.bdt}" : GlobalTexts.pending,
+            value: shoppingAmount > 25000 ? "${ProductServices.getAmount(price: shoppingAmount / currencyConversionRate)} ${GlobalTexts.bdt}" : GlobalTexts.pending,
             valueColor: shoppingAmount > 25000 ? AppColors.black : AppColors.error,
           ),
           SummaryRow(
@@ -66,7 +71,7 @@ class OrderSummary extends StatelessWidget {
           ),
           SummaryRow(
             title: PartialCheckoutTexts.orderTotal,
-            value: "CAD 120.00",
+            value: "CAD $total",
             valueColor: AppColors.error,
             titleStyle: Theme.of(context).textTheme.labelLarge,
             valueStyle: Theme.of(context).textTheme.labelLarge?.copyWith(color: AppColors.primary),

@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/models/address/address.dart';
+import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/view/profile/final-checkout/final_checkout_texts.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/profile/saved-address/widget/edit_address_bottom_sheet.dart';
 import 'package:sheba_plus/view/styles.dart';
 
 class AddressCard extends StatelessWidget {
   final Address address;
-  const AddressCard({super.key, required this.address});
+  final bool editable;
+  const AddressCard({super.key, required this.address, this.editable = true});
 
   @override
   Widget build(BuildContext context) {
     return  Container(
-      decoration: Styles.roundedWhite,
+      width: double.infinity,
+      decoration: Styles.roundedWhite.copyWith(borderRadius: !editable ? BorderRadius.circular(0) : AppBorderRadius.circularRadius8),
       padding: const EdgeInsets.only(top: 16, right: 8, left: 24, bottom: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          !editable ? Text(FinalCheckoutTexts.deliveryAddress, style: Theme.of(context).textTheme.headlineSmall,) :
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

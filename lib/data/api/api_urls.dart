@@ -58,6 +58,7 @@ class ApiUrls {
   static const String getAllSubCategoryApiUrl = "$baseApiUrl/sub-categories";
 
   //orders
-  static const String getOrderApiUrl = "$securedApiUrl/orders/id";
+  static const String getOrdersApiUrl = "$securedApiUrl/orders";
+  static const String getOrderDetailsApiUrl = "$getOrdersApiUrl/id";
 
 }

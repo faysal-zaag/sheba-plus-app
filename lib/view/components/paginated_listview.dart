@@ -52,11 +52,8 @@ class _PaginatedListviewState extends State<PaginatedListview> {
       child: widget.itemCount == 0
           ? SingleChildScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.8,
-                child: Center(
-                  child: Text(widget.noDataMessage ?? GlobalTexts.noData),
-                ),
+              child: Center(
+                child: Text(widget.noDataMessage ?? GlobalTexts.noData),
               ),
             )
           : ListView.separated(

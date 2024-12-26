@@ -118,7 +118,7 @@ class AppRouters {
     ),
     GetPage(
       name: Routes.finalCheckOutScreen,
-      page: () => const FinalCheckoutScreen(),
+      page: () => FinalCheckoutScreen(),
     ),
   ];
 }

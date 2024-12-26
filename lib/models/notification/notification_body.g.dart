@@ -16,6 +16,7 @@ _$NotificationBodyImpl _$$NotificationBodyImplFromJson(
       ticketNumber: json['ticketNumber'] as String? ?? '',
       message: json['message'] as String? ?? '',
       orderStatus: json['orderStatus'] as String? ?? '',
+      achievePoint: json['achievePoint'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$NotificationBodyImplToJson(
@@ -28,4 +29,5 @@ Map<String, dynamic> _$$NotificationBodyImplToJson(
       'ticketNumber': instance.ticketNumber,
       'message': instance.message,
       'orderStatus': instance.orderStatus,
+      'achievePoint': instance.achievePoint,
     };

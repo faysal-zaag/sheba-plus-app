@@ -26,6 +26,7 @@ import 'package:sheba_plus/view_model/repositories/display_center_repository.dar
 import 'package:sheba_plus/view_model/repositories/global.repository.dart';
 import 'package:sheba_plus/view_model/repositories/home.repository.dart';
 import 'package:sheba_plus/view_model/repositories/notification.repository.dart';
+import 'package:sheba_plus/view_model/repositories/order.repository.dart';
 import 'package:sheba_plus/view_model/repositories/profile.repository.dart';
 
 class MyBindings implements Bindings {
@@ -43,6 +44,7 @@ class MyBindings implements Bindings {
     Get.lazyPut<AgentShoppingRepository>(() => AgentShoppingRepository(Get.find<Dio>()));
     Get.lazyPut<DisplayCenterServiceRepository>(() => DisplayCenterServiceRepository(Get.find<Dio>()));
     Get.lazyPut<CategoryRepository>(() => CategoryRepository(Get.find<Dio>()));
+    Get.lazyPut<OrderRepository>(() => OrderRepository(Get.find<Dio>()));
     Get.lazyPut<NotificationRepository>(() => NotificationRepository(Get.find<Dio>()));
 
     Get.put(GlobalController(Get.find<GlobalRepository>()));
@@ -51,7 +53,7 @@ class MyBindings implements Bindings {
     Get.put(NavigationController());
     Get.put(AddressController(Get.find<AddressRepository>()));
     Get.put(ProfileController(Get.find<ProfileRepository>(), Get.find<FileService>()));
-    Get.put(OrderController());
+    Get.put(OrderController(Get.find<OrderRepository>()));
     Get.put(RewardController());
     Get.put(NotificationController(Get.find<NotificationRepository>()));
     Get.put(AddressController(Get.find<AddressRepository>()));

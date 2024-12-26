@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/models/notification/user_notification.dart';
+import 'package:sheba_plus/utils/constant/app_colors.dart';
+import 'package:sheba_plus/utils/constant/app_images.dart';
+import 'package:sheba_plus/utils/constant/app_paddings.dart';
+import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/components/custom_header_container.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
+import 'package:sheba_plus/view/components/message_container.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/vertical_bordered_text_container.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
@@ -140,6 +145,7 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
                 ),
               )
             : ShoppingItemDetails(
+                orderId: latestNotification.dataId ?? 0,
                 message: notificationController.getShoppingDetailsNotificationMessage(notification: latestNotification),
                 shoppingDetailsList: agentShoppingController.shoppingDetailsList,
                 invoice: agentShoppingController.invoice.value,
@@ -162,8 +168,30 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
         ),
       );
     } else if (latestNotification.notificationType == AgentOrderNotificationType.TRANSACTION_COMPLETED.name) {
-      return AgentShoppingCompleted(
-        message: notificationController.getAgentTransactionCompletedMessage(notification: latestNotification),
+      return Column(
+        children: [
+          AgentShoppingCompleted(
+            message: notificationController.getAgentTransactionCompletedMessage(notification: latestNotification),
+          ),
+          Padding(
+            padding: AppPaddings.allPadding16,
+            child: MessageContainer(
+              message: "",
+              child: Row(
+                children: [
+                  Image.asset(AppImages.giftBox, width: 24,),
+                  16.kW,
+                  Expanded(
+                    child: Text(
+                      "Congratulations you earned ${latestNotification.body?.achievePoint} Promo points!",
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.subtext),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
       );
     } else if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) {
       return Column(
