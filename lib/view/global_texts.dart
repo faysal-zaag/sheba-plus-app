@@ -18,6 +18,7 @@ class GlobalTexts {
   static String get iAcceptTermsAndCondition => "iAcceptTermsAndCondition".tr;
   static String get pleaseAcceptTermsAndCondition => "pleaseAcceptTermsAndCondition".tr;
   static String get noData => "noData".tr;
+  static String get proceed => "proceed".tr;
 
   //currencies
   static String get bdt => "bdt".tr;

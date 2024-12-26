@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:sheba_plus/models/notification/user_notification.dart';
 import 'package:sheba_plus/view/profile/account-management/change_password_screen.dart';
+import 'package:sheba_plus/view/profile/final-checkout/final_checkout_screen.dart';
 import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
 import 'package:sheba_plus/view/cart/cart_details_screen.dart';
 import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_order_info_screen.dart';
@@ -114,6 +115,10 @@ class AppRouters {
     GetPage(
       name: Routes.thirdPartyShopAndItemDetailsScreen,
       page: () => ThirdPartyShopAndItemDetailsScreen(),
+    ),
+    GetPage(
+      name: Routes.finalCheckOutScreen,
+      page: () => const FinalCheckoutScreen(),
     ),
   ];
 }

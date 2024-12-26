@@ -5,27 +5,94 @@ import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/components/dashed_divider.dart';
 import 'package:sheba_plus/view/components/message_container.dart';
+import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 
 class OrderStatusTracks extends StatelessWidget {
-  const OrderStatusTracks({super.key});
+  final String orderStatus;
+
+  const OrderStatusTracks({super.key, required this.orderStatus});
 
   @override
   Widget build(BuildContext context) {
-    Widget divider = const Expanded(
-        child: DashedDivider(
-      marginBottom: 10,
-      horizontalPadding: 4.0,
-      color: AppColors.hintText,
-      thickness: 2,
-    ));
-    Widget activeDivider = const Expanded(
-        child: DashedDivider(
-      marginBottom: 10,
-      horizontalPadding: 4.0,
-      color: AppColors.primary,
-      thickness: 2,
-    ));
+    Widget buildDivider(bool isActive) => Expanded(
+      child: DashedDivider(
+        marginBottom: 10,
+        horizontalPadding: 4.0,
+        color: isActive ? AppColors.primary : AppColors.hintText,
+        thickness: 2,
+      ),
+    );
+
+    bool isActiveForStep(String currentStatus, List<String> activeStatuses) {
+      return activeStatuses.contains(currentStatus);
+    }
+
+
+    List<Widget> statusIcons = [
+      _buildOrderStatus(
+        PhosphorIcons.buildingApartment(),
+        isActiveForStep(orderStatus, [
+          ORDER_STATUS.ORDER_PROCESSING.name,
+          ORDER_STATUS.ON_THE_WAY_TO_TORONTO_OFFICE.name,
+          ORDER_STATUS.AT_TORONTO_OFFICE.name,
+          ORDER_STATUS.ON_THE_WAY_DELIVERY.name,
+          ORDER_STATUS.DELIVERED.name
+        ]),
+      ),
+      buildDivider(isActiveForStep(orderStatus, [
+        ORDER_STATUS.ORDER_PROCESSING.name,
+        ORDER_STATUS.ON_THE_WAY_TO_TORONTO_OFFICE.name,
+        ORDER_STATUS.AT_TORONTO_OFFICE.name,
+        ORDER_STATUS.ON_THE_WAY_DELIVERY.name,
+        ORDER_STATUS.DELIVERED.name
+      ])),
+      _buildOrderStatus(
+        PhosphorIcons.airplaneTilt(),
+        isActiveForStep(orderStatus, [
+          ORDER_STATUS.ON_THE_WAY_TO_TORONTO_OFFICE.name,
+          ORDER_STATUS.AT_TORONTO_OFFICE.name,
+          ORDER_STATUS.ON_THE_WAY_DELIVERY.name,
+          ORDER_STATUS.DELIVERED.name
+        ]),
+      ),
+      buildDivider(isActiveForStep(orderStatus, [
+        ORDER_STATUS.ON_THE_WAY_TO_TORONTO_OFFICE.name,
+        ORDER_STATUS.AT_TORONTO_OFFICE.name,
+        ORDER_STATUS.ON_THE_WAY_DELIVERY.name,
+        ORDER_STATUS.DELIVERED.name
+      ])),
+      _buildOrderStatus(
+        PhosphorIcons.buildings(),
+        isActiveForStep(orderStatus, [
+          ORDER_STATUS.AT_TORONTO_OFFICE.name,
+          ORDER_STATUS.ON_THE_WAY_DELIVERY.name,
+          ORDER_STATUS.DELIVERED.name
+        ]),
+      ),
+      buildDivider(isActiveForStep(orderStatus, [
+        ORDER_STATUS.AT_TORONTO_OFFICE.name,
+        ORDER_STATUS.ON_THE_WAY_DELIVERY.name,
+        ORDER_STATUS.DELIVERED.name
+      ])),
+      _buildOrderStatus(
+        PhosphorIcons.truckTrailer(),
+        isActiveForStep(orderStatus, [
+          ORDER_STATUS.ON_THE_WAY_DELIVERY.name,
+          ORDER_STATUS.DELIVERED.name
+        ]),
+      ),
+      buildDivider(isActiveForStep(orderStatus, [
+        ORDER_STATUS.ON_THE_WAY_DELIVERY.name,
+        ORDER_STATUS.DELIVERED.name
+      ])),
+      _buildOrderStatus(
+        PhosphorIcons.package(),
+        isActiveForStep(orderStatus, [
+          ORDER_STATUS.DELIVERED.name
+        ]),
+      ),
+    ];
 
     return Container(
       color: AppColors.white,
@@ -35,86 +102,51 @@ class OrderStatusTracks extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              OrderStatus(
-                icon: PhosphorIcons.buildingApartment(),
-                active: true,
-              ),
-              activeDivider,
-              OrderStatus(
-                icon: PhosphorIcons.airplaneTilt(),
-                active: false,
-              ),
-              divider,
-              OrderStatus(
-                icon: PhosphorIcons.buildings(),
-                active: false,
-              ),
-              divider,
-              OrderStatus(
-                icon: PhosphorIcons.truckTrailer(),
-                active: false,
-              ),
-              divider,
-              OrderStatus(
-                icon: PhosphorIcons.package(),
-                active: false,
-              ),
-            ],
+            children: statusIcons,
           ),
           36.kH,
-          MessageContainer(
-            message: ProfileScreenTexts.inDhakaOffice,
-            forOrderStatusMessage: true,
-          ),
-          MessageContainer(
-            message: ProfileScreenTexts.onAir,
-            forOrderStatusMessage: true,
-          ),
-          MessageContainer(
-            message: ProfileScreenTexts.inOffice,
-            forOrderStatusMessage: true,
-            crossAxisAlignment: CrossAxisAlignment.start,
-          ),
-          MessageContainer(
-            message: ProfileScreenTexts.onTheWay,
-            forOrderStatusMessage: true,
-            crossAxisAlignment: CrossAxisAlignment.start,
-          ),
-          MessageContainer(
-            message: ProfileScreenTexts.delivered,
-            orderDelivered: true,
-            crossAxisAlignment: CrossAxisAlignment.start,
-          ),
+          _buildStatusMessage(orderStatus),
         ],
       ),
     );
   }
-}
 
-class OrderStatus extends StatelessWidget {
-  final PhosphorIconData icon;
-  final bool active;
-
-  const OrderStatus({super.key, required this.icon, required this.active});
-
-  @override
-  Widget build(BuildContext context) {
-    Color color = active ? AppColors.primary : AppColors.hintText;
+  Widget _buildOrderStatus(PhosphorIconData icon, bool isActive) {
+    Color color = isActive ? AppColors.primary : AppColors.hintText;
 
     return Column(
       children: [
-        Icon(
-          icon,
-          color: color,
-        ),
+        Icon(icon, color: color),
         8.kH,
         Icon(
           PhosphorIcons.checkCircle(
-              active ? PhosphorIconsStyle.fill : PhosphorIconsStyle.regular),
+            isActive ? PhosphorIconsStyle.fill : PhosphorIconsStyle.regular,
+          ),
           color: color,
         ),
       ],
+    );
+  }
+
+  Widget _buildStatusMessage(String orderStatus) {
+    Map<String, String> messages = {
+      ORDER_STATUS.ORDER_PROCESSING.name: ProfileScreenTexts.inDhakaOffice,
+      ORDER_STATUS.ON_THE_WAY_TO_TORONTO_OFFICE.name: ProfileScreenTexts.onAir,
+      ORDER_STATUS.AT_TORONTO_OFFICE.name: ProfileScreenTexts.inOffice,
+      ORDER_STATUS.ON_THE_WAY_DELIVERY.name: ProfileScreenTexts.onTheWay,
+      ORDER_STATUS.DELIVERED.name: ProfileScreenTexts.delivered,
+    };
+
+    String? message = messages[orderStatus];
+
+    if (message == null) return const SizedBox.shrink();
+
+    return MessageContainer(
+      backgroundColor: AppColors.primary30,
+      message: message,
+      forOrderStatusMessage: orderStatus != ORDER_STATUS.DELIVERED.name,
+      orderDelivered: orderStatus == ORDER_STATUS.DELIVERED.name,
+      crossAxisAlignment: CrossAxisAlignment.start,
     );
   }
 }

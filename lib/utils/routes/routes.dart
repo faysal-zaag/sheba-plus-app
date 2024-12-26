@@ -15,6 +15,7 @@ class Routes {
 
   // profile screens
   static const String notificationDetails = '/notification-details';
+  static const String finalCheckOutScreen = '/final-checkout';
 
   // service screens
   static const String agentShoppingOrderInfoScreen = '/agent-shopping-order-info';

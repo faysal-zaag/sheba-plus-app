@@ -14,8 +14,7 @@ class MeetingWaitingContainer extends StatelessWidget {
   final TextStyle? textStyle;
   final double borderRadius;
 
-  const MeetingWaitingContainer(
-      {super.key, this.height, this.textStyle, this.scheduleConfirmed = false, this.meetingTime = 1734628745, this.onlyTime = false, this.borderRadius = 8});
+  const MeetingWaitingContainer({super.key, this.height, this.textStyle, this.scheduleConfirmed = false, this.meetingTime = 1734628745, this.onlyTime = false, this.borderRadius = 8});
 
   @override
   Widget build(BuildContext context) {
@@ -30,43 +29,41 @@ class MeetingWaitingContainer extends StatelessWidget {
             if (scheduleConfirmed && !onlyTime)
               Text(
                 ProfileScreenTexts.meetingWillStart,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.copyWith(color: AppColors.white),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.white),
               ),
-            if(scheduleConfirmed || onlyTime)
-            Container(
-              margin: EdgeInsets.only(top: scheduleConfirmed ? 10 : onlyTime ? 0 : 10.0),
-              child: CountDownTimer(
-                day: false,
-                sec: false,
-                hourString: "hours",
-                minString: "mins",
-                startTimeMilliseconds: meetingTime,
-                textStyle: textStyle ?? Theme.of(context)
-                    .textTheme
-                    .headlineSmall
-                    ?.copyWith(color: AppColors.white),
+            if (scheduleConfirmed || onlyTime)
+              Container(
+                margin: EdgeInsets.only(
+                    top: scheduleConfirmed
+                        ? 10
+                        : onlyTime
+                            ? 0
+                            : 10.0),
+                child: CountDownTimer(
+                  day: false,
+                  sec: false,
+                  hourString: "hours",
+                  minString: "mins",
+                  startTimeMilliseconds: meetingTime,
+                  textStyle: textStyle ?? Theme.of(context).textTheme.headlineSmall?.copyWith(color: AppColors.white),
+                ),
               ),
-            ),
             if (!scheduleConfirmed && !onlyTime)
               Text(
                 ProfileScreenTexts.clickToStartMeeting,
                 textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleSmall
-                    ?.copyWith(color: AppColors.white),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.white),
               ),
-            if(!scheduleConfirmed && !onlyTime)
-            Container(
-              margin: const EdgeInsets.only(top: 24.0),
-              child: CustomPrimaryButton(
+            if (!scheduleConfirmed && !onlyTime)
+              Container(
+                margin: const EdgeInsets.only(top: 24.0),
+                child: CustomPrimaryButton(
                   height: 48,
                   width: 150,
-                  label: ProfileScreenTexts.startMeeting, onClick: (){}),
-            )
+                  label: ProfileScreenTexts.startMeeting,
+                  onClick: () {},
+                ),
+              )
           ],
         ),
       ),

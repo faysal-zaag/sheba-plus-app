@@ -11,9 +11,9 @@ import 'package:sheba_plus/view/services/widget/summary_row.dart';
 
 class ShoppingDetailsContainer extends StatelessWidget {
   final ShoppingDetails shoppingDetails;
-  final Config config;
+  final double currentCadRate;
 
-  const ShoppingDetailsContainer({super.key, required this.shoppingDetails, required this.config});
+  const ShoppingDetailsContainer({super.key, required this.shoppingDetails, required this.currentCadRate});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,6 @@ class ShoppingDetailsContainer extends StatelessWidget {
 
     return Container(
       color: AppColors.background2,
-      padding: AppPaddings.allPadding16,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -47,12 +46,12 @@ class ShoppingDetailsContainer extends StatelessWidget {
             (shoppingItemDetails) => ShoppingDetailsRow(
               title1: shoppingItemDetails.name,
               title2: shoppingItemDetails.quantity.toString(),
-              title3: ProductServices.getAmount(price: shoppingItemDetails.price * config.currencyConversionRate),
-              title4: ProductServices.getAmount(price: shoppingItemDetails.price * config.currencyConversionRate * shoppingItemDetails.quantity),
+              title3: ProductServices.getAmount(price: shoppingItemDetails.price * currentCadRate),
+              title4: ProductServices.getAmount(price: shoppingItemDetails.price * currentCadRate * shoppingItemDetails.quantity),
             ),
           ),
           const Divider(),
-          SummaryRow(title: AgentShoppingTexts.totalItemPrice, value: "BDT ${ProductServices.getAmount(price: shoppingDetails.totalItemPrice * config.currencyConversionRate)}"),
+          SummaryRow(title: AgentShoppingTexts.totalItemPrice, value: "BDT ${ProductServices.getAmount(price: shoppingDetails.totalItemPrice * currentCadRate)}"),
         ],
       ),
     );

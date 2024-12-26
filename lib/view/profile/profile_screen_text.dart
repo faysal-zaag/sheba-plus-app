@@ -45,6 +45,8 @@ class ProfileScreenTexts {
   static String get pleaseReschedule => "pleaseReschedule".tr;
   static String get updateSchedule => "updateSchedule".tr;
   static String get viewNotification => "viewNotification".tr;
+  static String get review => "review".tr;
+  static String get reviewGreetingsMessage => "reviewGreetingsMessage".tr;
 
   // Saved address
   static String get country => "country".tr;

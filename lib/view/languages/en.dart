@@ -14,6 +14,7 @@ final Map<String, String> en = {
   "yes": "Yes",
   "no": "No",
   "noData": "No data",
+  "proceed": "Proceed",
   "pending": "Pending",
   "saveAndContinue": "Save and Continue",
   "termsAndCondition": "Terms & Condition",
@@ -52,41 +53,33 @@ final Map<String, String> en = {
 
   //Home screen text
   'header1': "Our Services",
-  'headerDescription':
-  "We bring your goods from Bangladesh to Canada. In addition to that, we offer other services to the Bangladeshi diaspora in Canada. Our motto is",
+  'headerDescription': "We bring your goods from Bangladesh to Canada. In addition to that, we offer other services to the Bangladeshi diaspora in Canada. Our motto is",
   'headerMoto': "FEEL BANGLADESH IN CANADA.",
-  'serviceSelection':
-  "Please select any one of the services from below that you need in addition to shipment",
-  'dropOffMessage':
-  "We will inform about the cost of DROP-OFF service when we get all your items in our hand, and you can make your decision then about the DROP-OFF service.",
+  'serviceSelection': "Please select any one of the services from below that you need in addition to shipment",
+  'dropOffMessage': "We will inform about the cost of DROP-OFF service when we get all your items in our hand, and you can make your decision then about the DROP-OFF service.",
   'shipmentMessage':
-  "We define Shipment as bringing your items from Dhaka office to our Toronto Office. However, we also offer DROP-OFF services, i.e. if you want, we will deliver your parcel at your door.",
+      "We define Shipment as bringing your items from Dhaka office to our Toronto Office. However, we also offer DROP-OFF services, i.e. if you want, we will deliver your parcel at your door.",
 
   // Service texts
   'agentShopping': "AGENT SHOPPING",
   'agentShoppingDetails1':
-  "Our agent will contact you through real-time video communication and walk you from shop to shop and mall to mall. You will buy your items from Bangladesh. You will feel like you are shopping for Bangladesh by yourself.",
-  'agentShoppingDetails2':
-  "Please be informed that you have to deposit Agent-Service charge in advance before you start shopping.",
+      "Our agent will contact you through real-time video communication and walk you from shop to shop and mall to mall. You will buy your items from Bangladesh. You will feel like you are shopping for Bangladesh by yourself.",
+  'agentShoppingDetails2': "Please be informed that you have to deposit Agent-Service charge in advance before you start shopping.",
   'displayCenterDetails1': "Buy our products from our own display center.",
   'thirdParty': "3RD PARTY",
-  'thirdPartyDetails1':
-  "Buy items from 3rd party (i.e. any other shops or companies). We will deliver it to you.",
+  'thirdPartyDetails1': "Buy items from 3rd party (i.e. any other shops or companies). We will deliver it to you.",
   'thirdPartyDetails2':
-  "When purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping.",
-  'thirdPartyDetails3':
-  "Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh",
-  'thirdPartyDetails4':
-  "Please ensure that this address is used as the delivery destination during checkout from the store.",
+      "When purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping.",
+  'thirdPartyDetails3': "Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh",
+  'thirdPartyDetails4': "Please ensure that this address is used as the delivery destination during checkout from the store.",
   'friendsFamily': "FRIENDS & FAMILY",
   'friendsFamilyDetails1': "We will bring your items from your friends and family.",
-  'friendsFamilyDetails2':
-  "Please list all the items that we are going to receive from your friends & family in our hub center at Bangladesh. Also add how much do we need to pay to the 3rd party.",
+  'friendsFamilyDetails2': "Please list all the items that we are going to receive from your friends & family in our hub center at Bangladesh. Also add how much do we need to pay to the 3rd party.",
   'newlyAddedProducts': "Newly Added Products",
   'companyAddress': "3085-3005 Kingston Road Toronto, Ontario M1M 1P1, Canada. 1-800-SHEBA",
   'selectService': "Select Service",
   'fullTermsAndConditions':
-  "Please read the terms and condition before you agree.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping.Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.",
+      "Please read the terms and condition before you agree.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping.Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.\n\nWhen purchasing products from any shop in Bangladesh, please use our hub address as the delivery address. We will receive the product on your behalf and notify you once it's ready. You can then complete the payment for shipping. Hub Address: Deshi Sheba Hub, 1234 Dhaka Road, Gulshan, Dhaka 1212, Bangladesh Please ensure that this address is used as the delivery destination during checkout from the store.",
   'paymentMethod': "Payment Method",
 
   // Sign in Texts
@@ -120,7 +113,8 @@ final Map<String, String> en = {
 
   // Referring screen texts
   'referringHeader': "Earn Points by Referring a Friend!",
-  'referringDescription': "As a new user, you can earn points by referring a friend who is already a member! Just enter their name and phone number. Once you complete your first transaction, both of you will receive points as a reward.",
+  'referringDescription':
+      "As a new user, you can earn points by referring a friend who is already a member! Just enter their name and phone number. Once you complete your first transaction, both of you will receive points as a reward.",
   'existingUserName': "Existing User’s Name",
   'nameRequired': "Name is required",
   'existingUserNameHintText': "name of the person you're referring",
@@ -214,6 +208,9 @@ final Map<String, String> en = {
   'pleaseReschedule': "Please reschedule your shopping session?",
   'updateSchedule': "Update your schedule",
   'viewNotification': "View Notification",
+  'review': "Review",
+  'reviewGreetingsMessage':
+      "Thank you so much for buying our services from us. We hope you enjoy our service and customer support. Please go through the following questionnaire, and give your valuable feedback.",
 
   // Saved address
   'country': "Country",
@@ -227,7 +224,8 @@ final Map<String, String> en = {
   // Order status messages
   'inDhakaOffice': "Your parcel is in DHAKA OFFICE, it is under the process of SHIPMENT",
   'onAir': "The shipment is being ensured. Your parcel is on the way to Toronto Office.",
-  'inOffice': "Your parcel is at our Toronto Office. You can contact our Toronto office for the collection of your Parcel.\n\nPhone No: +1 437 333 9698,\n\nAddress: 565 BIRCHMOUNT ROAD, TORONTO M1K 1P8, CANADA",
+  'inOffice':
+      "Your parcel is at our Toronto Office. You can contact our Toronto office for the collection of your Parcel.\n\nPhone No: +1 437 333 9698,\n\nAddress: 565 BIRCHMOUNT ROAD, TORONTO M1K 1P8, CANADA",
   'onTheWay': "Your Parcel is at our TORONTO OFFICE. It will soon be dispatched to your home address.",
   'delivered': "Your Parcel is successfully delivered to your home address.",
 

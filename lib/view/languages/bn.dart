@@ -12,6 +12,7 @@ final Map<String, String> bn = {
   "yes": "হ্যাঁ",
   "no": "না",
   "noData": "কোন ডাটা নেই",
+  "proceed": "",
   "pending": "পেন্ডিং",
   "saveAndContinue": "সংরক্ষণ করুন এবং চালিয়ে যান",
   "termsAndCondition": "শর্তাবলী",
@@ -204,6 +205,7 @@ final Map<String, String> bn = {
   'pleaseReschedule': "আপনার শপিং সেশন পুনঃনির্ধারণ করুন?",
   'updateSchedule': "আপনার সময়সূচি আপডেট করুন",
   'viewNotification': "বিজ্ঞপ্তি দেখুন",
+  'review': "রিভিউ",
 
 
   // Saved address

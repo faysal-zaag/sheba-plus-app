@@ -143,19 +143,36 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
                 message: notificationController.getShoppingDetailsNotificationMessage(notification: latestNotification),
                 shoppingDetailsList: agentShoppingController.shoppingDetailsList,
                 invoice: agentShoppingController.invoice.value,
-                config: globalController.globalConfig.value,
+                currentCadRate: agentShoppingController.currentCadRate.value,
+                hourBooked: agentShoppingController.hourBooked.value,
               ),
-      );
-    } else if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) {
-      return const Column(
-        children: [
-          OrderStatusTracks(),
-          OrderReviewQuestions(),
-        ],
       );
     } else if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SHOPPING_COMPLETED.name) {
       return AgentShoppingCompleted(
         message: notificationController.getAgentShoppingCompletedMessage(notification: latestNotification),
+      );
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.MEETING_AND_BUDGET_EXTENDED.name) {
+      return MeetingStarted(
+        message: notificationController.getMeetingStartedNotificationMessage(notification: latestNotification),
+        meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
+        meetingEndTime: int.parse(latestNotification.body?.meetingEndTime ?? "0"),
+        showExtendMeetingTimeSheet: () => agentShoppingController.showExtendMeetingTimeSheet(
+          context: context,
+          orderId: latestNotification.dataId ?? 0,
+        ),
+      );
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.TRANSACTION_COMPLETED.name) {
+      return AgentShoppingCompleted(
+        message: notificationController.getAgentTransactionCompletedMessage(notification: latestNotification),
+      );
+    } else if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) {
+      return Column(
+        children: [
+          OrderStatusTracks(
+            orderStatus: latestNotification.body?.orderStatus ?? "",
+          ),
+          if (latestNotification.body?.orderStatus == ORDER_STATUS.DELIVERED.name) const OrderReviewQuestions(),
+        ],
       );
     } else {
       return const Center(child: Text("Unknown notification type"));

@@ -14,11 +14,24 @@ enum AgentOrderNotificationType {
   MEETING_STARTED,
   MEETING_EXTENDED,
   AGENT_SHOPPING_COMPLETED,
+  BUDGET_EXTENDED,
+  MEETING_AND_BUDGET_EXTENDED,
   SHOPPING_ITEM_DETAILS,
   TRANSACTION_COMPLETED,
   ORDER_STATUS,
   ORDER_DELIVERED,
   COMMON_USER_NOTIFICATION,
+}
+
+enum ORDER_STATUS {
+  ORDER_PROCESSING,
+  ON_THE_WAY_TO_TORONTO_OFFICE,
+  AT_TORONTO_OFFICE,
+  READY_FOR_DELIVERY,
+  ON_THE_WAY_DELIVERY,
+  DELIVERED,
+  CANCELLED,
+  ORDER_RETURNED,
 }
 
 class NotificationController extends GetxController {
@@ -202,9 +215,16 @@ class NotificationController extends GetxController {
             "Thank you for using our service!");
   }
 
-  String getAgentShoppingCompletedMessage({required UserNotification notification}) {
+  String getAgentTransactionCompletedMessage({required UserNotification notification}) {
     return "Thank you ${notification.user?.firstName}!!"
         "\nYou have completed your transaction. Your parcel is int he process of shipment. "
         "We will update the shipment status time to time. However, you can also track your parcel as well";
+  }
+
+  String getAgentShoppingCompletedMessage({required UserNotification notification}) {
+    return "Thank you ${notification.user?.firstName}!!"
+        "\nYou’ve successfully completed your agent shopping session! "
+        "Once we receive the products from our agent, we will send you the final bill along with shopping details, "
+        "and any additional charges for shipping, drop-off, or other services.";
   }
 }

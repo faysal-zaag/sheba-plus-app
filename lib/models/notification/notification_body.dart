@@ -12,6 +12,7 @@ class NotificationBody with _$NotificationBody {
     @Default('') String meetingEndTime,
     @Default('') String ticketNumber,
     @Default('') String message,
+    @Default('') String orderStatus,
   }) = _NotificationBody;
 
   factory NotificationBody.fromJson(Map<String, dynamic> json) => _$NotificationBodyFromJson(json);

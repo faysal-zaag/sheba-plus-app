@@ -17,9 +17,10 @@ import 'package:sheba_plus/view/services/widget/summary_row.dart';
 
 class ShoppingSummary extends StatelessWidget {
   final Invoice invoice;
-  final Config config;
+  final double currentCadRate;
+  final num hourBooked;
 
-  ShoppingSummary({super.key, required this.invoice, required this.config});
+  ShoppingSummary({super.key, required this.invoice, required this.currentCadRate, required this.hourBooked});
 
   final globalController = Get.find<GlobalController>();
 
@@ -27,11 +28,9 @@ class ShoppingSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     final lightTextStyle = Theme.of(context).textTheme.titleSmall;
     final subTextStyle = lightTextStyle?.copyWith(color: AppColors.hintText);
-    double currencyConversionRate = config.currencyConversionRate;
 
     return Container(
       color: AppColors.background2,
-      padding: AppPaddings.allPadding16,
       child: Column(
         children: [
           SummaryRow(
@@ -45,12 +44,12 @@ class ShoppingSummary extends StatelessWidget {
                   style: subTextStyle,
                 ),
                 4.kH,
-                Text("BDT ${ProductServices.getAmount(price: invoice.shoppingCost * currencyConversionRate)}"),
+                Text("BDT ${ProductServices.getAmount(price: invoice.shoppingCost * currentCadRate)}"),
                 4.kH,
                 Row(
                   children: [
                     Text(
-                      "(1CAD=$currencyConversionRate BDT)",
+                      "(1CAD=$currentCadRate BDT)",
                       style: subTextStyle,
                     ),
                     Text(
@@ -62,6 +61,18 @@ class ShoppingSummary extends StatelessWidget {
               ],
             ),
             value: "",
+          ),
+          12.kH,
+          SummaryRow(
+            titleColor: AppColors.black,
+            title: PartialCheckoutTexts.agentFee,
+            customValue: Row(
+              children: [
+                SummaryColumn(title: AgentShoppingTexts.totalHour, value: "CAD ${ProductServices.getAmount(price: hourBooked)}"),
+                24.kW,
+                SummaryColumn(title: AgentShoppingTexts.totalFee, value: "CAD ${ProductServices.getAmount(price: invoice.agentFee)}"),
+              ],
+            ),
           ),
           12.kH,
           SummaryRow(
