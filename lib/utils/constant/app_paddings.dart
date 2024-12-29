@@ -8,4 +8,6 @@ class AppPaddings{
   static const EdgeInsets allPadding12 = EdgeInsets.all(12.0);
   static const EdgeInsets allPadding16 = EdgeInsets.all(16.0);
   static const EdgeInsets horizontal16 = EdgeInsets.symmetric(horizontal: 16.0);
+  static const EdgeInsets tPadding16 = EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0);
+  static const EdgeInsets uPadding16 = EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0);
 }

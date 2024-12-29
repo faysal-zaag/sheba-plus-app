@@ -28,6 +28,7 @@ mixin _$User {
   String? get mobileNumber => throw _privateConstructorUsedError;
   String? get countryCode => throw _privateConstructorUsedError;
   int? get dateOfBirth => throw _privateConstructorUsedError;
+  String? get referralAction => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,7 +52,8 @@ abstract class $UserCopyWith<$Res> {
       String? profilePicture,
       String? mobileNumber,
       String? countryCode,
-      int? dateOfBirth});
+      int? dateOfBirth,
+      String? referralAction});
 }
 
 /// @nodoc
@@ -77,6 +79,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? mobileNumber = freezed,
     Object? countryCode = freezed,
     Object? dateOfBirth = freezed,
+    Object? referralAction = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -111,6 +114,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
               as int?,
+      referralAction: freezed == referralAction
+          ? _value.referralAction
+          : referralAction // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -130,7 +137,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? profilePicture,
       String? mobileNumber,
       String? countryCode,
-      int? dateOfBirth});
+      int? dateOfBirth,
+      String? referralAction});
 }
 
 /// @nodoc
@@ -153,6 +161,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? mobileNumber = freezed,
     Object? countryCode = freezed,
     Object? dateOfBirth = freezed,
+    Object? referralAction = freezed,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -187,6 +196,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
               as int?,
+      referralAction: freezed == referralAction
+          ? _value.referralAction
+          : referralAction // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -202,7 +215,8 @@ class _$UserImpl implements _User {
       this.profilePicture,
       this.mobileNumber,
       this.countryCode,
-      this.dateOfBirth});
+      this.dateOfBirth,
+      this.referralAction});
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
@@ -227,10 +241,12 @@ class _$UserImpl implements _User {
   final String? countryCode;
   @override
   final int? dateOfBirth;
+  @override
+  final String? referralAction;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, firstName: $firstName, lastName: $lastName, profilePicture: $profilePicture, mobileNumber: $mobileNumber, countryCode: $countryCode, dateOfBirth: $dateOfBirth)';
+    return 'User(id: $id, email: $email, firstName: $firstName, lastName: $lastName, profilePicture: $profilePicture, mobileNumber: $mobileNumber, countryCode: $countryCode, dateOfBirth: $dateOfBirth, referralAction: $referralAction)';
   }
 
   @override
@@ -251,13 +267,15 @@ class _$UserImpl implements _User {
             (identical(other.countryCode, countryCode) ||
                 other.countryCode == countryCode) &&
             (identical(other.dateOfBirth, dateOfBirth) ||
-                other.dateOfBirth == dateOfBirth));
+                other.dateOfBirth == dateOfBirth) &&
+            (identical(other.referralAction, referralAction) ||
+                other.referralAction == referralAction));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, email, firstName, lastName,
-      profilePicture, mobileNumber, countryCode, dateOfBirth);
+      profilePicture, mobileNumber, countryCode, dateOfBirth, referralAction);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -284,7 +302,8 @@ abstract class _User implements User {
       final String? profilePicture,
       final String? mobileNumber,
       final String? countryCode,
-      final int? dateOfBirth}) = _$UserImpl;
+      final int? dateOfBirth,
+      final String? referralAction}) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
@@ -304,6 +323,8 @@ abstract class _User implements User {
   String? get countryCode;
   @override
   int? get dateOfBirth;
+  @override
+  String? get referralAction;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.

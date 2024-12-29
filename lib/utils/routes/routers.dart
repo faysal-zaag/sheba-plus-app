@@ -4,6 +4,7 @@ import 'package:sheba_plus/view/profile/account-management/change_password_scree
 import 'package:sheba_plus/view/profile/final-checkout/final_checkout_screen.dart';
 import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
 import 'package:sheba_plus/view/cart/cart_details_screen.dart';
+import 'package:sheba_plus/view/profile/order-history/order_details_screen.dart';
 import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_order_info_screen.dart';
 import 'package:sheba_plus/view/auth/forget-password/forget_password_screen.dart';
 import 'package:sheba_plus/view/auth/forget-password/reset_password_email_screen.dart';
@@ -98,6 +99,13 @@ class AppRouters {
       page: () {
         final notification = Get.arguments as UserNotification;
         return NotificationDetailsScreen(notification: notification);
+      },
+    ),
+    GetPage(
+      name: Routes.orderDetailsScreen,
+      page: () {
+        final orderId = Get.arguments as int;
+        return OrderDetailsScreen(orderId: orderId);
       },
     ),
     GetPage(

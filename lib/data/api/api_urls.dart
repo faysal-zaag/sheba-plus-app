@@ -40,6 +40,7 @@ class ApiUrls {
 
   // customer
   static const String applyReferral = "$securedApiUrl/customers/apply-referral";
+  static const String skipReferral = "$securedApiUrl/customers/skip-referral";
   static const String changePassword = "$securedApiUrl/customers/reset-password";
 
   // public controller
@@ -58,7 +59,7 @@ class ApiUrls {
   static const String getAllSubCategoryApiUrl = "$baseApiUrl/sub-categories";
 
   //orders
-  static const String getOrdersApiUrl = "$securedApiUrl/orders";
-  static const String getOrderDetailsApiUrl = "$getOrdersApiUrl/id";
+  static const String getOrdersApiUrl = "$securedApiUrl/orders/customer-orders";
+  static const String getOrderDetailsApiUrl = "$securedApiUrl/orders/id";
 
 }

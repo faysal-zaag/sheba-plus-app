@@ -41,4 +41,29 @@ class DateFormatters{
     // Convert UTC time to Bangladesh time
     return utcTime.add(AppConstants.bdOffset);
   }
+
+  // 10 Jan, 2023 format
+  static String formatDateFromMilliseconds(int milliseconds) {
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(milliseconds);
+    return DateFormat('d MMM, yyyy').format(date);
+  }
+
+  // 10:30 PM
+  static String formatTimeFromMilliseconds(int milliseconds) {
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(milliseconds);
+    return DateFormat('h:mm a').format(date);
+  }
+
+  static String formatDateWithTimeZone(int milliseconds) {
+    // Convert milliseconds to DateTime
+    DateTime date = DateTime.fromMillisecondsSinceEpoch(milliseconds);
+
+    // Get the device's time zone name
+    String timeZone = date.timeZoneName;
+
+    // Format the date with time
+    String formattedDate = DateFormat('d MMM, yyyy h:mm a').format(date);
+
+    return '$formattedDate $timeZone';
+  }
 }

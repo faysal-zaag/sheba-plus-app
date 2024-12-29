@@ -22,6 +22,7 @@ class ProfileScreenTexts {
   static String get activeOrder => "activeOrder".tr;
   static String get allOrderHistory => "allOrderHistory".tr;
   static String get viewDetails => "viewDetails".tr;
+  static String get orderDetails => "orderDetails".tr;
 
   // Reward points screen texts
   static String get whichIsEquivalentTo => "whichIsEquivalentTo".tr;

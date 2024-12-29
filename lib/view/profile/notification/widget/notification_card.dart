@@ -15,12 +15,13 @@ class NotificationCard extends StatelessWidget {
   final UserNotification notification;
   final VoidCallback readMoreOnTap;
   final bool readMoreOn;
+  final VoidCallback onTap;
 
   const NotificationCard({
     super.key,
     required this.readMoreOnTap,
     required this.readMoreOn,
-    required this.notification,
+    required this.notification, required this.onTap,
   });
 
   @override
@@ -96,10 +97,19 @@ class NotificationCard extends StatelessWidget {
           Center(
             child: TextButton(
               onPressed: () {
-                Get.toNamed(
-                  Routes.notificationDetails,
-                  arguments: notification, // Serialize to JSON
-                );
+                if(notification.notificationType == AgentOrderNotificationType.COMMON_USER_NOTIFICATION.name){
+                  Get.toNamed(
+                    Routes.notificationDetails,
+                    arguments: notification,
+                  );
+                }
+                else{
+                  Get.toNamed(
+                    Routes.orderDetailsScreen,
+                    arguments: notification.dataId
+                  );
+                }
+                if(!notification.readStats) onTap();
               },
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),

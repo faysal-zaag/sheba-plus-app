@@ -14,6 +14,7 @@ class User with _$User {
     String? mobileNumber,
     String? countryCode,
     int? dateOfBirth,
+    String? referralAction,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

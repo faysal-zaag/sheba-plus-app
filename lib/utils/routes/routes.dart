@@ -14,6 +14,7 @@ class Routes {
   static const String emailVerificationForResetPassword = '/reset-password-email-verification';
 
   // profile screens
+  static const String orderDetailsScreen = '/order-details';
   static const String notificationDetails = '/notification-details';
   static const String finalCheckOutScreen = '/final-checkout';
 

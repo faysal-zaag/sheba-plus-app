@@ -9,6 +9,7 @@ import 'package:sheba_plus/view/components/paginated_listview.dart';
 import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 import 'package:sheba_plus/view/profile/order-history/controller/order_controller.dart';
 import 'package:sheba_plus/view/profile/order-history/widget/order_history_card.dart';
+import 'package:sheba_plus/view/profile/order-history/widget/orders_loading.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/styles.dart';
 
@@ -25,9 +26,11 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
 
   void _initCall() async {
     if (orderController.ordersAlreadyLoaded.isFalse) {
-      await orderController.getOrders();
+      await orderController.getOrders(onGoing: isOnGoing);
     }
   }
+
+  get isOnGoing => orderController.selectedOrderHistoryType.value == ProfileScreenTexts.activeOrder.tr;
 
   @override
   void initState() {
@@ -47,12 +50,27 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
           decoration: Styles.roundedWhite,
           child: Column(
             children: [
-              Obx(() => CustomTab(
+              Obx(
+                () => CustomTab(
                   activeItem: orderController.selectedOrderHistoryType.value,
                   tabItems: [ProfileScreenTexts.activeOrder, ProfileScreenTexts.allOrderHistory],
-                  onTap: (value) => orderController.selectedOrderHistoryType(value))),
+                  onTap: (value) async {
+                    orderController.selectedOrderHistoryType(value);
+                    if (value == ProfileScreenTexts.activeOrder.tr) {
+                      await orderController.getOrders(onGoing: true);
+                    } else {
+                      await orderController.getOrders();
+                    }
+                  },
+                ),
+              ),
               24.kH,
-              CustomSearchField(searchController: orderController.orderSearchController.value)
+              CustomSearchField(
+                searchController: orderController.orderSearchController.value,
+                onSearch: () async {
+                  await orderController.getOrders(invoiceNo: orderController.orderSearchController.value.text);
+                },
+              )
             ],
           ),
         ),
@@ -60,11 +78,12 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
         Expanded(
           child: Obx(
             () => orderController.getOrdersLoading.isTrue
-                ? const Center(
-                    child: CustomLoader(),
-                  )
+                ? const OrdersLoading()
                 : PaginatedListview(
-                    itemBuilder: (_, index) => const OrderHistoryCard(),
+                    itemBuilder: (_, index) => OrderHistoryCard(
+                      order: orderController.orders[index],
+                      user: profileController.user.value,
+                    ),
                     itemCount: orderController.orders.length,
                     onRefresh: onRefresh,
                     onFetchNextPage: onFetchNextPage,
@@ -80,7 +99,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   }
 
   Future<void> onRefresh() async {
-    return await orderController.getOrders();
+    return await orderController.getOrders(onGoing: isOnGoing);
   }
 
   Future<void> onFetchNextPage() async {

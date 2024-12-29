@@ -17,7 +17,7 @@ import 'package:sheba_plus/view/services/widget/summary_row.dart';
 
 class ShoppingSummary extends StatelessWidget {
   final Invoice invoice;
-  final double currentCadRate;
+  final num currentCadRate;
   final num hourBooked;
 
   ShoppingSummary({super.key, required this.invoice, required this.currentCadRate, required this.hourBooked});

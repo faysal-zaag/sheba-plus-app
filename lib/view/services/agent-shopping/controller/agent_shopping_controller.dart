@@ -34,13 +34,6 @@ class AgentShoppingController extends GetxController {
 
   final createAgentBookingLoading = false.obs;
   final updateAgentBookingScheduleLoading = false.obs;
-  final getOrderDetailsLoading = false.obs;
-
-  final invoice = const Invoice().obs;
-  final currentCadRate = 0.0.obs;
-  Rx<num> hourBooked = 0.obs;
-  final shoppingDetailsList = const <ShoppingDetails>[].obs;
-  final dropOffAddress = const Address().obs;
 
   void resetFields() {
     agentShoppingMeetingLocationController.value.clear();
@@ -133,33 +126,6 @@ class AgentShoppingController extends GetxController {
       return false;
     } finally {
       updateAgentBookingScheduleLoading(false);
-    }
-  }
-
-  Future<void> getOrderDetails({required int orderId}) async {
-    try {
-      getOrderDetailsLoading(true);
-
-      final response = await _agentShoppingRepository.getOrderDetails(
-        orderId: orderId,
-      );
-
-      var shoppingDetailsListData = response.data["shoppingDetailsList"] as List;
-      invoice(Invoice.fromJson(response.data["invoice"]));
-      currentCadRate(response.data["currentCadRate"]);
-      hourBooked(response.data["agentMeeting"]["hourBooked"]);
-      dropOffAddress(Address.fromJson(response.data["dropOffAddress"]));
-
-      var shoppingDetailsResponseList = shoppingDetailsListData.map((shoppingDetails) {
-        return ShoppingDetails.fromJson(shoppingDetails);
-      }).toList();
-
-      shoppingDetailsList(shoppingDetailsResponseList);
-
-    } catch (e) {
-      Log.error(e.toString());
-    } finally {
-      getOrderDetailsLoading(false);
     }
   }
 

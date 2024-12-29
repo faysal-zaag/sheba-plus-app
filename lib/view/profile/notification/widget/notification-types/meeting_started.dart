@@ -36,7 +36,7 @@ class MeetingStarted extends StatelessWidget {
               MeetingWaitingContainer(
                 height: 41,
                 onlyTime: true,
-                meetingTime: meetingEndTime,
+                meetingTime: meetingTime,
                 borderRadius: 4,
                 textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.white),
               ),

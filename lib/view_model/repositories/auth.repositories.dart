@@ -25,6 +25,12 @@ class AuthRepository {
     );
   }
 
+  Future<Response> skipReferral() async {
+    return await _dio.post(
+      ApiUrls.skipReferral,
+    );
+  }
+
   Future<Response> getProfile({String? accessToken}) async {
     final options = Options(
       headers: accessToken != null

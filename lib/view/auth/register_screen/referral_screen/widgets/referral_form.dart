@@ -35,19 +35,17 @@ class _ReferralFormState extends State<ReferralForm> {
             controller: authController.referralNameController.value,
             label: AuthScreenText.existingUserName,
             hintText: AuthScreenText.existingUserNameHintText,
-            validator: (value) => InputValidators.generalValidator(
-                value: value, message: AuthScreenText.nameRequired),
+            validator: (value) => InputValidators.generalValidator(value: value, message: AuthScreenText.nameRequired),
           ),
           Obx(() {
-            int validationNumberLength =
-                authController.referralPhoneNumberLength.value;
+            int validationNumberLength = authController.referralPhoneNumberLength.value;
 
             return CustomPhoneField(
               onChange: (mobileNumber) {
-                  authController.referralPhoneNumber.value = mobileNumber!;
-                  return null;
+                authController.referralPhoneNumber.value = mobileNumber!;
+                return null;
               },
-              onCountryChanged: (dialCode){
+              onCountryChanged: (dialCode) {
                 authController.referralCountryCode.value = dialCode;
               },
               label: AuthScreenText.existingUserPhoneNumber,
@@ -58,12 +56,15 @@ class _ReferralFormState extends State<ReferralForm> {
           Row(
             children: [
               Expanded(
-                child: CustomPrimaryButton(
-                  color: AppColors.white,
-                  borderColor: AppColors.border,
-                  labelColor: AppColors.black,
-                  label: GlobalTexts.skip,
-                  onClick: skipReferring,
+                child: Obx(
+                  () => CustomPrimaryButton(
+                    loading: authController.skipReferralLoading.isTrue,
+                    color: AppColors.white,
+                    borderColor: AppColors.border,
+                    labelColor: AppColors.black,
+                    label: GlobalTexts.skip,
+                    onClick: skipReferring,
+                  ),
                 ),
               ),
               16.kW,
@@ -84,7 +85,10 @@ class _ReferralFormState extends State<ReferralForm> {
   }
 
   void skipReferring() async {
-    Get.back();
+    final response = await authController.skipReferral();
+    if (response) {
+      Get.back();
+    }
   }
 
   void continueReferring() async {

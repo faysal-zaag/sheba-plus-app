@@ -24,7 +24,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   final profileController = Get.find<ProfileController>();
 
   void _initCall() async {
-    if(notificationController.notificationAlreadyLoaded.isFalse){
+    if (notificationController.notificationAlreadyLoaded.isFalse) {
       await notificationController.getNotifications();
     }
   }
@@ -91,6 +91,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         notification: notificationController.notifications[index],
                         readMoreOnTap: () => notificationController.readMoreOnTap(index),
                         readMoreOn: notificationController.expandedNotifications.contains(index),
+                        onTap: () {
+                          notificationController.markAsRead(notificationId: notificationController.notifications[index].id);
+                        },
                       ),
                     ),
                     totalPages: notificationController.totalPages.value,

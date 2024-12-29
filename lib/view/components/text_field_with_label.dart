@@ -18,6 +18,7 @@ class TextFieldWithLabel extends StatelessWidget {
   final TextInputType? textInputType;
   final List<TextInputFormatter>? inputFormatters;
   final bool readOnly;
+  final bool disabled;
   final bool asterisk;
   final VoidCallback? onTap;
   final String? Function(String?)? onChange;
@@ -35,6 +36,7 @@ class TextFieldWithLabel extends StatelessWidget {
     this.validator,
     this.textInputType,
     this.readOnly = false,
+    this.disabled = false,
     this.onTap,
     this.onChange, this.inputFormatters, this.asterisk = false,
   });
@@ -58,6 +60,7 @@ class TextFieldWithLabel extends StatelessWidget {
           onTap: onTap,
           inputFormatters: inputFormatters,
           onChange: onChange,
+          disabled: disabled,
         ),
         20.kH, // Custom SizedBox extension
       ],

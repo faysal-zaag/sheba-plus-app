@@ -185,6 +185,7 @@ final Map<String, String> en = {
   'activeOrder': "Active Orders",
   'allOrderHistory': "All Order History",
   'viewDetails': "View Details",
+  'orderDetails': "Order Details",
 
   // Reward points screen texts
   'whichIsEquivalentTo': "Which is equivalent to",

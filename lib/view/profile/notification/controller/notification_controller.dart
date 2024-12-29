@@ -191,10 +191,16 @@ class NotificationController extends GetxController {
   }
 
   String getPurchaseAgentServiceNotificationMessage({required UserNotification notification}) {
-    int remainingTime = getRemainingTime((int.parse(notification.body?.meetingTime ?? "0")));
     return headerFooter(
       notification: notification,
-      body: remainingTime <= 15 ? "Reminder: Only $remainingTime minutes left before the meeting starts. Please get ready to join!" : commonMessage(notification: notification),
+      body: commonMessage(notification: notification),
+    );
+  }
+
+  String getReminderMessage({required UserNotification notification, required int remainingTime}) {
+    return headerFooter(
+      notification: notification,
+      body: "\n\nReminder: Only $remainingTime minutes left before the meeting starts. Please get ready to join!",
     );
   }
 
@@ -236,7 +242,7 @@ class NotificationController extends GetxController {
     final currentTime = DateTime.now();
     final futureTime = DateTime.fromMillisecondsSinceEpoch(futureTimeMillis);
     final difference = futureTime.difference(currentTime);
-    return difference.inMinutes > 0 ? difference.inMinutes : 1;
+    return difference.inMinutes > 0 ? difference.inMinutes : 0;
   }
 
   bool isTimeInPast(int timeMillis) {

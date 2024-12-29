@@ -15,6 +15,7 @@ import 'package:sheba_plus/view/styles.dart';
 class CustomPhoneField extends StatelessWidget {
   final bool? required;
   final bool readOnly;
+  final bool disabled;
   final String? label;
   final TextStyle? labelStyle;
   final TextEditingController? controller;
@@ -35,7 +36,7 @@ class CustomPhoneField extends StatelessWidget {
     this.controller,
     this.selectedCountryCode = "+880",
     this.validatorNumberLength = 10,
-    this.readOnly = false,
+    this.readOnly = false, this.disabled = false,
   });
 
   @override
@@ -61,6 +62,7 @@ class CustomPhoneField extends StatelessWidget {
           children: [
             CustomTextField(
               readOnly: readOnly,
+              disabled: disabled,
               prefixIcon: Container(
                 margin: const EdgeInsets.all(1.0),
                 height: 48,

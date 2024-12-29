@@ -182,6 +182,7 @@ final Map<String, String> bn = {
   'activeOrder': "একটিভ অর্ডার",
   'allOrderHistory': "সকল অর্ডার ইতিহাস",
   'viewDetails': "বিস্তারিত দেখুন",
+  'orderDetails': "অর্ডারের বিস্তারিত",
 
   // Reward points screen texts
   'whichIsEquivalentTo': "যা সমানুপাতিক",

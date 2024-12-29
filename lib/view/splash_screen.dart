@@ -6,6 +6,7 @@ import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
+import 'package:sheba_plus/view/profile/controller/profile_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,6 +18,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   final storageService = Get.find<StorageService>();
   final authController = Get.find<AuthController>();
+  final profileController = Get.find<ProfileController>();
   final globalController = Get.find<GlobalController>();
 
   void _initCall() async {
@@ -24,7 +26,12 @@ class _SplashScreenState extends State<SplashScreen> {
     await FirebaseController().initNotifications();
 
     await authController.isAuthenticated(accessToken: storageService.getAuthToken());
-    Get.offAndToNamed(Routes.home);
+    if(authController.isLoggedIn.isTrue && profileController.user.value.referralAction == null){
+      Get.toNamed(Routes.referral);
+    }
+    else{
+      Get.offAndToNamed(Routes.home);
+    }
   }
 
   @override

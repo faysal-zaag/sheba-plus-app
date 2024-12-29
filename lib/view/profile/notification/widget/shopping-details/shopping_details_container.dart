@@ -11,7 +11,7 @@ import 'package:sheba_plus/view/services/widget/summary_row.dart';
 
 class ShoppingDetailsContainer extends StatelessWidget {
   final ShoppingDetails shoppingDetails;
-  final double currentCadRate;
+  final num currentCadRate;
 
   const ShoppingDetailsContainer({super.key, required this.shoppingDetails, required this.currentCadRate});
 

@@ -19,7 +19,7 @@ class ShoppingItemDetails extends StatelessWidget {
   final int orderId;
   final List<ShoppingDetails> shoppingDetailsList;
   final Invoice invoice;
-  final double currentCadRate;
+  final num currentCadRate;
   final num hourBooked;
 
   const ShoppingItemDetails({
@@ -71,12 +71,6 @@ class ShoppingItemDetails extends StatelessWidget {
                 invoice: invoice,
                 currentCadRate: currentCadRate,
               ),
-              24.kH,
-              CustomPrimaryButton(
-                  label: GlobalTexts.proceed,
-                  onClick: () {
-                    Get.toNamed(Routes.finalCheckOutScreen);
-                  }),
             ],
           ),
         ),

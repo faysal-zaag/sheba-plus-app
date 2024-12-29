@@ -94,6 +94,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                 hintText: "",
                 required: profileController.profileEditable.isTrue,
                 readOnly: profileController.profileEditable.isFalse,
+                disabled: profileController.profileEditable.isFalse,
               ),
             ),
             Obx(
@@ -102,7 +103,8 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                   label: AuthScreenText.lastName,
                   hintText: "",
                   required: profileController.profileEditable.isTrue,
-                  readOnly: profileController.profileEditable.isFalse),
+                disabled: profileController.profileEditable.isFalse,
+                  readOnly: profileController.profileEditable.isFalse, ),
             ),
             Obx(
               () => TextFieldWithLabel(
@@ -110,6 +112,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                 label: AuthScreenText.emailId,
                 hintText: "",
                 readOnly: true,
+                disabled: true,
               ),
             ),
             Obx(
@@ -117,6 +120,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                 absorbing: profileController.profileEditable.isFalse,
                 child: CustomPhoneField(
                   readOnly: profileController.profileEditable.isFalse,
+                  disabled: profileController.profileEditable.isFalse,
                   controller: profileController.userPhoneNumberController.value,
                   onChange: (mobileNumber) {
                     profileController.userPhoneNumberController.value.text = mobileNumber!;
@@ -137,6 +141,7 @@ class _AccountManagementScreenState extends State<AccountManagementScreen> {
                 label: ProfileScreenTexts.dateOfBirth,
                 hintText: "",
                 required: profileController.profileEditable.isTrue,
+                disabled: profileController.profileEditable.isFalse,
                 readOnly: true,
                 onTap: () {
                   if (profileController.profileEditable.isTrue) {

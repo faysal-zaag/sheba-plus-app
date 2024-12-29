@@ -32,6 +32,7 @@ class AuthController extends GetxController {
   final forgetPasswordProcedureLoading = false.obs;
   final setNewPasswordProcedureLoading = false.obs;
   final referralApplyingLoading = false.obs;
+  final skipReferralLoading = false.obs;
 
   final signInEmailController = TextEditingController().obs;
   final signInPasswordController = TextEditingController().obs;
@@ -133,7 +134,7 @@ class AuthController extends GetxController {
         _profileController.userPhoneNumberController.value.text = "${user.mobileNumber}";
         _profileController.userPhoneNumberCountryCode.value = "${user.countryCode}";
         _profileController.userPhoneNumberValidationLength.value = user.countryCode?.length ?? 0;
-        if(dateOfBirth != null && dateOfBirth != 0) {
+        if (dateOfBirth != null && dateOfBirth != 0) {
           _profileController.userDateOfBirthInMilliseconds.value = dateOfBirth;
           _profileController.userDateOfBirthController.value.text = DateFormatters.convertDateTimeToYYYYMMDD(dateTime: DateTime.fromMillisecondsSinceEpoch(dateOfBirth));
         }
@@ -205,15 +206,28 @@ class AuthController extends GetxController {
         mobileNumber: referralPhoneNumber.value,
       );
 
-      await _authRepository.applyReferral(
-        referral: referralData,
-      );
+      await _authRepository.applyReferral(referral: referralData);
+
       return true;
     } catch (e) {
       Log.error(e.toString());
       return false;
     } finally {
       referralApplyingLoading(false);
+    }
+  }
+
+  Future<bool> skipReferral() async {
+    try {
+      skipReferralLoading(true);
+
+      await _authRepository.skipReferral();
+      return true;
+    } catch (e) {
+      Log.error(e.toString());
+      return false;
+    } finally {
+      skipReferralLoading(false);
     }
   }
 

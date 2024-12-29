@@ -6,6 +6,7 @@ import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/vertical_bordered_text_container.dart';
 import 'package:sheba_plus/view/profile/final-checkout/widgets/final_checkout_order_summary.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
+import 'package:sheba_plus/view/profile/order-history/controller/order_controller.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/profile/saved-address/widget/address_card.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
@@ -13,7 +14,7 @@ import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shoppin
 class FinalCheckoutScreen extends StatelessWidget {
   FinalCheckoutScreen({super.key});
 
-  final agentShoppingController = Get.find<AgentShoppingController>();
+  final orderController = Get.find<OrderController>();
   final notificationController = Get.find<NotificationController>();
 
   @override
@@ -30,9 +31,9 @@ class FinalCheckoutScreen extends StatelessWidget {
           ),
         ),
         16.kH,
-        AddressCard(address: agentShoppingController.dropOffAddress.value, editable: false,),
+        AddressCard(address: orderController.orderDetails.value.dropOffAddress, editable: false,),
         16.kH,
-        FinalCheckoutOrderSummary(shoppingDetails: agentShoppingController.shoppingDetailsList,)
+        FinalCheckoutOrderSummary(shoppingDetails: orderController.orderDetails.value.shoppingDetailsList,)
       ],
     ));
   }

@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   final String? title;
   final String? hintText;
   final bool readOnly;
+  final bool disabled;
   final bool isRequired;
   final bool? obscure;
   final bool isExpand;
@@ -48,7 +49,7 @@ class CustomTextField extends StatelessWidget {
       this.maxLength = 100,
       this.onTap,
       this.autoValidateMode,
-      this.prefixIcon});
+      this.prefixIcon, this.disabled = false});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +59,7 @@ class CustomTextField extends StatelessWidget {
       cursorColor: AppColors.primary,
       decoration: Styles.getTextFieldInputDecoration(
         context: context,
-        fillColor: readOnly ? AppColors.hintText.withOpacity(0.1) : color,
+        fillColor: disabled ? AppColors.hintText.withOpacity(0.1) : color,
         borderRadius: borderRadius,
         customBorder: customBorder,
         hintText: hintText,
@@ -73,7 +74,7 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       keyboardType: textInputType,
       inputFormatters: inputFormatters,
-      style: Theme.of(context).textTheme.titleSmall?.copyWith(color: readOnly ? AppColors.hintText.withOpacity(0.5) : AppColors.black),
+      style: Theme.of(context).textTheme.titleSmall?.copyWith(color: disabled ? AppColors.hintText.withOpacity(0.5) : AppColors.black),
       maxLines: maxLine,
     );
   }
