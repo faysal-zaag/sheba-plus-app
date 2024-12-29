@@ -189,6 +189,7 @@ final Map<String, String> bn = {
   'all': "সব",
   'unread': "অপঠিত",
   'yourTotalPoints': "আপনার মোট পয়েন্ট",
+  'pointHistory': "পয়েন্ট হিস্টোরী",
 
   // Notification screen texts
   'trackThisOrder': "এই অর্ডার ট্র্যাক করুন",

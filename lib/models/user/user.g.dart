@@ -14,6 +14,9 @@ _$UserImpl _$$UserImplFromJson(Map<String, dynamic> json) => _$UserImpl(
       profilePicture: json['profilePicture'] as String?,
       mobileNumber: json['mobileNumber'] as String?,
       countryCode: json['countryCode'] as String?,
+      account: json['account'] == null
+          ? const Account()
+          : Account.fromJson(json['account'] as Map<String, dynamic>),
       dateOfBirth: (json['dateOfBirth'] as num?)?.toInt(),
       referralAction: json['referralAction'] as String?,
     );
@@ -27,6 +30,7 @@ Map<String, dynamic> _$$UserImplToJson(_$UserImpl instance) =>
       'profilePicture': instance.profilePicture,
       'mobileNumber': instance.mobileNumber,
       'countryCode': instance.countryCode,
+      'account': instance.account,
       'dateOfBirth': instance.dateOfBirth,
       'referralAction': instance.referralAction,
     };

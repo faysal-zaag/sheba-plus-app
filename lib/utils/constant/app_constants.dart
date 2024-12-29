@@ -63,4 +63,8 @@ class AppConstants {
   static List<String> countryCodeList = ["+880", "+1",];
   static const Duration canadaOffset = Duration(hours: -5);
   static const Duration bdOffset = Duration(hours: 6);
+
+
+  static String displayCenterBannerType = 'DISPLAY_CENTER_SLIDER';
+
 }

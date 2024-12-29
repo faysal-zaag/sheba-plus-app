@@ -1,16 +1,9 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/register_screen/referral_screen/widgets/referral_form.dart';
-import 'package:sheba_plus/view/auth/register_screen/widgets/register_form.dart';
-import 'package:sheba_plus/view/auth/sign_in_screen/widgets/sign_in_form.dart';
-import 'package:sheba_plus/view/auth/widgets/social_login_options.dart';
-import 'package:sheba_plus/view/components/custom_appbar.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/styles.dart';
 

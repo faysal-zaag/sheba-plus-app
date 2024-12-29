@@ -87,7 +87,7 @@ class _ReferralFormState extends State<ReferralForm> {
   void skipReferring() async {
     final response = await authController.skipReferral();
     if (response) {
-      Get.back();
+      Get.offAndToNamed(Routes.home);
     }
   }
 

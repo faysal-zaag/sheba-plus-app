@@ -32,8 +32,9 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
     displayServiceController.getAllDisplayCenterServiceProducts(
         subCategoryIdList: categoryController.subCategoryIds,
         categoryIdList: categoryController.categoryIds,
-        available:
-            categoryController.selectProductAvailability.value == 'In-stock'
+        available: categoryController.selectProductAvailability.value == ''
+            ? null
+            : categoryController.selectProductAvailability.value == 'In-stock'
                 ? true
                 : false,
         sort: categoryController.selectedSortBy.value,
@@ -44,7 +45,7 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
   @override
   void initState() {
     // TODO: implement initState
-    _initCall();
+    // _initCall();
     super.initState();
   }
 
@@ -258,7 +259,7 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
                                                   .productAvailability[index]);
                                     },
                                     icon: Icon(
-                                       categoryController
+                                      categoryController
                                                   .selectProductAvailability
                                                   .value ==
                                               categoryController

@@ -192,6 +192,7 @@ final Map<String, String> en = {
   'all': "All",
   'unread': "Unread",
   'yourTotalPoints': "Your Total Points",
+  'pointHistory': "Point History",
 
   // Notification screen texts
   'trackThisOrder': "Track this Order",

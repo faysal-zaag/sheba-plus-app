@@ -3,9 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
+import 'package:sheba_plus/view/cart/controller/cart_controller.dart';
 
 class DisplayCenterAppBarCartWidget extends StatelessWidget {
-  const DisplayCenterAppBarCartWidget({Key? key}) : super(key: key);
+  DisplayCenterAppBarCartWidget({super.key});
+
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +21,21 @@ class DisplayCenterAppBarCartWidget extends StatelessWidget {
         child: Row(
           children: [
             SvgPicture.asset('assets/icons/cart.svg'),
-            Container(
-              margin: const EdgeInsets.only(bottom: 20.0),
-              padding: const EdgeInsets.all(3.0),
-              decoration: const BoxDecoration(
-                  color: AppColors.white, shape: BoxShape.circle),
-              child: Center(
-                child: Text(
-                  '10',
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-              ),
+            Obx(
+              () => cartController.cart.value.cartDetailsList.isNotEmpty
+                  ? Container(
+                      margin: const EdgeInsets.only(bottom: 20.0),
+                      padding: const EdgeInsets.all(3.0),
+                      decoration: const BoxDecoration(
+                          color: AppColors.white, shape: BoxShape.circle),
+                      child: Center(
+                        child: Text(
+                          '${cartController.cart.value.cartDetailsList.length}',
+                          style: Theme.of(context).textTheme.labelSmall,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
             ),
           ],
         ),

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sheba_plus/data/mock_data.dart';
+import 'package:sheba_plus/models/cart/cart_details.dart';
 import 'package:sheba_plus/models/product/product.model.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/extensions.dart';
+import 'package:sheba_plus/view/cart/controller/cart_controller.dart';
 
 import 'order_summary_item.dart';
 
 class OrderSummaryItems extends StatelessWidget {
-  final List<ProductModel> productList;
+  final List<CartDetails> cartDetailsList;
 
-  const OrderSummaryItems({super.key, required this.productList});
+  OrderSummaryItems({super.key, required this.cartDetailsList});
+
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +30,8 @@ class OrderSummaryItems extends StatelessWidget {
               ?.copyWith(fontWeight: FontWeight.w600),
         ),
         20.kH,
-        ...productList.mapWithIndex((index, product) => OrderSummaryItem(
-              product: product,
+        ...cartDetailsList.mapWithIndex((index, cartDetails) => OrderSummaryItem(
+              product: cartDetails.product, quantity: cartDetails.quantity,
             )),
         10.kH,
         Row(
@@ -38,7 +43,7 @@ class OrderSummaryItems extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelMedium,
                   children: [
                     TextSpan(
-                      text: ' (18 items)',
+                      text: ' (${cartDetailsList.length})',
                       style: Theme.of(context)
                           .textTheme
                           .labelMedium
@@ -47,7 +52,7 @@ class OrderSummaryItems extends StatelessWidget {
                   ]),
             ),
             Text(
-              'CAD ${product.price}',
+              '\$ ${cartController.subTotal.value}',
               style: Theme.of(context).textTheme.labelMedium,
             ),
           ],
@@ -58,11 +63,11 @@ class OrderSummaryItems extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Item Price in CAD',
+              'Item Price in \$',
               style: Theme.of(context).textTheme.labelMedium,
             ),
             Text(
-              'CAD 19',
+              '\$ ${cartController.subTotal.value}',
               style: Theme.of(context).textTheme.labelMedium,
             ),
           ],

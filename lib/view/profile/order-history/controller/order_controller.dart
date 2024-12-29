@@ -52,13 +52,13 @@ class OrderController extends GetxController{
       } else {
         orders.addAll(newOrders);
       }
+      ordersAlreadyLoaded(true);
     } catch (err) {
       Log.error(err.toString());
     } finally {
       // Reset loading states
       getOrdersLoading(false);
       getMoreOrdersLoading(false);
-      ordersAlreadyLoaded(true);
     }
   }
 

@@ -5,7 +5,7 @@ import 'package:sheba_plus/view/components/product_card.dart';
 import '../../../models/product/product.model.dart';
 
 class ProductViewWidget extends StatelessWidget {
-  final List<DisplayServiceProduct> productList;
+  final List<DisplayCenterProduct> productList;
   final Function onTapProduct;
 
   const ProductViewWidget(

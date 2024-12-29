@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:sheba_plus/models/redem-point/redeem_point.dart';
 import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_images.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/formatters/date_formatters.dart';
 import 'package:sheba_plus/view/profile/order-history/widget/order_status.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/styles.dart';
 
 class RewardPointsCard extends StatelessWidget {
-  const RewardPointsCard({super.key});
+  final RedeemPoint redeemPoint;
+  const RewardPointsCard({super.key, required this.redeemPoint});
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +35,12 @@ class RewardPointsCard extends StatelessWidget {
                 children: [
                   // payment
                   Text(
-                    "Payment",
+                    redeemPoint.redeemedBy,
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                   8.kH,
                   // Ticker Number
+                  if(redeemPoint.invoiceNumber != null)
                   Row(
                     children: [
                       Text(
@@ -45,7 +49,7 @@ class RewardPointsCard extends StatelessWidget {
                       ),
                       4.kW,
                       Text(
-                        "#3513511",
+                        "#${redeemPoint.invoiceNumber}",
                         style: Theme.of(context)
                             .textTheme
                             .displaySmall
@@ -68,7 +72,7 @@ class RewardPointsCard extends StatelessWidget {
                       ),
                       4.kW,
                       Text(
-                        "10 Jan, 2023",
+                        DateFormatters.formatDateFromMilliseconds(redeemPoint.createdAt),
                         style: Theme.of(context)
                             .textTheme
                             .labelSmall
@@ -84,7 +88,7 @@ class RewardPointsCard extends StatelessWidget {
                           color: AppColors.paragraph, size: 18),
                       4.kW,
                       Text(
-                        "10:30 pm",
+                        DateFormatters.formatTimeFromMilliseconds(redeemPoint.createdAt),
                         style: Theme.of(context)
                             .textTheme
                             .labelSmall
@@ -112,10 +116,10 @@ class RewardPointsCard extends StatelessWidget {
               ),
               8.kW,
               Text(
-                "-100",
+                "${redeemPoint.redeemPointAction == "EARNED" ? "+" : "-"} ${redeemPoint.point}",
                 style: Theme.of(context)
                     .textTheme
-                    .labelLarge,
+                    .labelLarge?.copyWith(color: redeemPoint.redeemPointAction == "EARNED" ? AppColors.primary : AppColors.error),
               ),
             ],
           )

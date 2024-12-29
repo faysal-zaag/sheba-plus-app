@@ -3,24 +3,30 @@ import 'package:sheba_plus/data/api/api_urls.dart';
 import 'package:sheba_plus/models/user/user.dart';
 import 'package:sheba_plus/models/verification/verification_model.dart';
 
-class ProfileRepository{
+class ProfileRepository {
   final Dio _dio;
+
   ProfileRepository(this._dio);
 
   Future<Response> updateUserInfo({required User userInfo}) async {
-    return await _dio
-        .put(ApiUrls.updateUserApiUrl, data: userInfo.toJson());
+    return await _dio.put(ApiUrls.updateUserApiUrl, data: userInfo.toJson());
   }
 
   Future<Response> changeProfileImage({required String imageKey}) async {
-    return await _dio
-        .patch(ApiUrls.getProfileImageApiUrl, data: {"profilePicture": imageKey});
+    return await _dio.patch(ApiUrls.getProfileImageApiUrl, data: {"profilePicture": imageKey});
+  }
+
+  Future<Response> getRedeemPointHistories({int page = 0}) async {
+    return await _dio.get(ApiUrls.getRedeemPointsHistories, queryParameters: {"page": page});
   }
 
   Future<Response> changePassword({required String oldPassword, required String newPassword}) async {
     return await _dio.post(
       ApiUrls.changePassword,
-      data: {"oldPassword" : oldPassword, "newPassword" : newPassword,},
+      data: {
+        "oldPassword": oldPassword,
+        "newPassword": newPassword,
+      },
     );
   }
 }

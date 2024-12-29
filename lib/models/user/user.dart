@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sheba_plus/models/account/account.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
@@ -13,6 +14,7 @@ class User with _$User {
     String? profilePicture,
     String? mobileNumber,
     String? countryCode,
+    @Default(Account()) Account account,
     int? dateOfBirth,
     String? referralAction,
   }) = _User;

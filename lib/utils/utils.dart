@@ -1,13 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:sheba_plus/data/services/storage_service.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:toastification/toastification.dart';
 
-class Utils{
-  static void showToast({required String message, bool success = false, required Alignment alignment}) {
+import '../models/display_service/display_service_product.dart';
+
+class Utils {
+  static void showToast(
+      {required String message,
+      bool success = false,
+      required Alignment alignment}) {
     toastification.show(
         title: Text(success ? "Success" : "Error"),
         description: Text(message),
@@ -16,15 +20,16 @@ class Utils{
         style: ToastificationStyle.fillColored,
         type: success ? ToastificationType.success : ToastificationType.error,
         autoCloseDuration: const Duration(seconds: 3),
-        primaryColor: success ? AppColors.primary : AppColors.error
-    );
+        primaryColor: success ? AppColors.primary : AppColors.error);
   }
 
-  static void showSuccessToast({required String message, Alignment alignment = Alignment.bottomCenter}) {
+  static void showSuccessToast(
+      {required String message, Alignment alignment = Alignment.bottomCenter}) {
     showToast(message: message, success: true, alignment: alignment);
   }
 
-  static void showErrorToast({required String message, Alignment alignment = Alignment.bottomCenter}) {
+  static void showErrorToast(
+      {required String message, Alignment alignment = Alignment.bottomCenter}) {
     showToast(message: message, success: false, alignment: alignment);
   }
 
@@ -55,10 +60,29 @@ class Utils{
         wrapWidth: 1024);
   }
 
-
   static bool isKeyboardOpen(BuildContext context) {
     return MediaQuery.of(context).viewInsets.bottom > 0;
   }
 
+  static String productDetailsSpecification(
+      {required String type, required DisplayCenterProduct product}) {
+    String text = '';
+    if (type == 'DESCRIPTION') {
+      text = product.description ?? '';
+      return text;
+    }
+    if (type == 'SPECIFICATION') {
+      text = product.specification ?? '';
+      return text;
+    }
+    if (type == 'ADDITIONAL') {
+      text = product.additionalInfo ?? '';
+      return text;
+    }
+    return text;
+  }
 
+  static num getDiscountPrice({required num price, required num percent}) {
+    return (price - (price * (percent / 100))).abs();
+  }
 }

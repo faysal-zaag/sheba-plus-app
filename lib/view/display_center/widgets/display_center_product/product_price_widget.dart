@@ -6,7 +6,7 @@ import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 
 class ProductPriceWidget extends StatelessWidget {
-  final DisplayServiceProduct product;
+  final DisplayCenterProduct product;
 
   ProductPriceWidget({Key? key, required this.product}) : super(key: key);
 

@@ -1,6 +1,7 @@
 class ApiUrls {
   static const String baseApiUrl = "http://192.168.10.13:7010/api/1.0.0";
   // static const String baseApiUrl = "https://sheba-plus-api.ems24.co/api/1.0.0";
+
   static const String securedApiUrl = "$baseApiUrl/secured";
   static const String customerAuthApiUrl = "$baseApiUrl/auth/customer";
   static const String customersApiUrl = "$baseApiUrl/customers";
@@ -58,8 +59,13 @@ class ApiUrls {
   static const String getAllCategoryApiUrl = "$baseApiUrl/categories";
   static const String getAllSubCategoryApiUrl = "$baseApiUrl/sub-categories";
 
-  //orders
+  //Orders
   static const String getOrdersApiUrl = "$securedApiUrl/orders/customer-orders";
   static const String getOrderDetailsApiUrl = "$securedApiUrl/orders/id";
 
+  //Banner
+  static const String getAllBanners = "$baseApiUrl/banners";
+
+  //Redeem point
+  static const String getRedeemPointsHistories = "$securedApiUrl/redeem-point-histories";
 }

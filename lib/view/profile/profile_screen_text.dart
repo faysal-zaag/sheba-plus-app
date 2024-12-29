@@ -29,6 +29,7 @@ class ProfileScreenTexts {
   static String get all => "all".tr;
   static String get unread => "unread".tr;
   static String get yourTotalPoints => "yourTotalPoints".tr;
+  static String get pointHistory => "pointHistory".tr;
 
   // Notification screen texts
   static String get trackThisOrder => "trackThisOrder".tr;

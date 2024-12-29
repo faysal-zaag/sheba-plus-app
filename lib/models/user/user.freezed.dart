@@ -27,6 +27,7 @@ mixin _$User {
   String? get profilePicture => throw _privateConstructorUsedError;
   String? get mobileNumber => throw _privateConstructorUsedError;
   String? get countryCode => throw _privateConstructorUsedError;
+  Account get account => throw _privateConstructorUsedError;
   int? get dateOfBirth => throw _privateConstructorUsedError;
   String? get referralAction => throw _privateConstructorUsedError;
 
@@ -52,8 +53,11 @@ abstract class $UserCopyWith<$Res> {
       String? profilePicture,
       String? mobileNumber,
       String? countryCode,
+      Account account,
       int? dateOfBirth,
       String? referralAction});
+
+  $AccountCopyWith<$Res> get account;
 }
 
 /// @nodoc
@@ -78,6 +82,7 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? profilePicture = freezed,
     Object? mobileNumber = freezed,
     Object? countryCode = freezed,
+    Object? account = null,
     Object? dateOfBirth = freezed,
     Object? referralAction = freezed,
   }) {
@@ -110,6 +115,10 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String?,
+      account: null == account
+          ? _value.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as Account,
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
@@ -119,6 +128,16 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           : referralAction // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
+  }
+
+  /// Create a copy of User
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AccountCopyWith<$Res> get account {
+    return $AccountCopyWith<$Res>(_value.account, (value) {
+      return _then(_value.copyWith(account: value) as $Val);
+    });
   }
 }
 
@@ -137,8 +156,12 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? profilePicture,
       String? mobileNumber,
       String? countryCode,
+      Account account,
       int? dateOfBirth,
       String? referralAction});
+
+  @override
+  $AccountCopyWith<$Res> get account;
 }
 
 /// @nodoc
@@ -160,6 +183,7 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? profilePicture = freezed,
     Object? mobileNumber = freezed,
     Object? countryCode = freezed,
+    Object? account = null,
     Object? dateOfBirth = freezed,
     Object? referralAction = freezed,
   }) {
@@ -192,6 +216,10 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String?,
+      account: null == account
+          ? _value.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as Account,
       dateOfBirth: freezed == dateOfBirth
           ? _value.dateOfBirth
           : dateOfBirth // ignore: cast_nullable_to_non_nullable
@@ -215,6 +243,7 @@ class _$UserImpl implements _User {
       this.profilePicture,
       this.mobileNumber,
       this.countryCode,
+      this.account = const Account(),
       this.dateOfBirth,
       this.referralAction});
 
@@ -240,13 +269,16 @@ class _$UserImpl implements _User {
   @override
   final String? countryCode;
   @override
+  @JsonKey()
+  final Account account;
+  @override
   final int? dateOfBirth;
   @override
   final String? referralAction;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, firstName: $firstName, lastName: $lastName, profilePicture: $profilePicture, mobileNumber: $mobileNumber, countryCode: $countryCode, dateOfBirth: $dateOfBirth, referralAction: $referralAction)';
+    return 'User(id: $id, email: $email, firstName: $firstName, lastName: $lastName, profilePicture: $profilePicture, mobileNumber: $mobileNumber, countryCode: $countryCode, account: $account, dateOfBirth: $dateOfBirth, referralAction: $referralAction)';
   }
 
   @override
@@ -266,6 +298,7 @@ class _$UserImpl implements _User {
                 other.mobileNumber == mobileNumber) &&
             (identical(other.countryCode, countryCode) ||
                 other.countryCode == countryCode) &&
+            (identical(other.account, account) || other.account == account) &&
             (identical(other.dateOfBirth, dateOfBirth) ||
                 other.dateOfBirth == dateOfBirth) &&
             (identical(other.referralAction, referralAction) ||
@@ -274,8 +307,18 @@ class _$UserImpl implements _User {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, firstName, lastName,
-      profilePicture, mobileNumber, countryCode, dateOfBirth, referralAction);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      email,
+      firstName,
+      lastName,
+      profilePicture,
+      mobileNumber,
+      countryCode,
+      account,
+      dateOfBirth,
+      referralAction);
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -302,6 +345,7 @@ abstract class _User implements User {
       final String? profilePicture,
       final String? mobileNumber,
       final String? countryCode,
+      final Account account,
       final int? dateOfBirth,
       final String? referralAction}) = _$UserImpl;
 
@@ -321,6 +365,8 @@ abstract class _User implements User {
   String? get mobileNumber;
   @override
   String? get countryCode;
+  @override
+  Account get account;
   @override
   int? get dateOfBirth;
   @override

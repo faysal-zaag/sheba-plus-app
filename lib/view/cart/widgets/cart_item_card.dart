@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:sheba_plus/models/product/product.model.dart';
+import 'package:sheba_plus/models/cart/cart_details.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/view/cart/controller/cart_controller.dart';
 
 import '../../display_center/widgets/display_center_product/product_quantity_increment_decrement_widget.dart';
 
 class CartItemCard extends StatelessWidget {
-  final List<ProductModel> productList;
+  final CartDetails cartDetails;
   final int index;
 
-  const CartItemCard({Key? key, required this.productList, required this.index})
+  CartItemCard({Key? key, required this.cartDetails, required this.index})
       : super(key: key);
+
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,27 +37,28 @@ class CartItemCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${productList[index].name}',
+                  cartDetails.product.name,
                   style: Theme.of(context).textTheme.labelMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 5.kH,
                 Text(
-                  '\$ ${productList[index].price}',
+                  '\$ ${cartDetails.product.price}',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
                 5.kH,
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 15.0),
                       decoration: BoxDecoration(
                         color: AppColors.neutral50,
                         borderRadius: BorderRadius.circular(2.0),
                       ),
                       child: Text(
-                        'Color : Purple',
+                        'Color : ${cartDetails.color?.name}',
                         style: Theme.of(context)
                             .textTheme
                             .labelSmall
@@ -68,7 +73,7 @@ class CartItemCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(2.0),
                       ),
                       child: Text(
-                        'Size : 1.57',
+                        'Size : ${cartDetails.size.name}',
                         style: Theme.of(context)
                             .textTheme
                             .labelSmall
@@ -105,13 +110,24 @@ class CartItemCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 CustomQuantityIncDecWidget(
-                  onIncrementPress: () {},
-                  onDecrementPress: () {},
-                  quantity: 2,
+                  onIncrementPress: () {
+                    cartDetails.quantity++;
+                    cartController.cart.refresh();
+                  },
+                  onDecrementPress: () {
+                    if (cartDetails.quantity > 1) {
+                      cartDetails.quantity--;
+                      cartController.cart.refresh();
+                    }
+                  },
+                  quantity: cartDetails.quantity,
                   hasTitle: false,
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    cartController.removeProductFromCart(
+                        id: cartDetails.product.id);
+                  },
                   icon: Icon(
                     color: AppColors.error,
                     PhosphorIcons.trash(),

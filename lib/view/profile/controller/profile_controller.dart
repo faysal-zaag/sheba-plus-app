@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sheba_plus/models/redem-point/redeem_point.dart';
 import 'package:sheba_plus/models/user/user.dart';
 import 'package:sheba_plus/services/file_service.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
@@ -19,8 +20,12 @@ class ProfileController extends GetxController {
   ProfileController(this._profileRepository, this._fileService);
 
   final user = const User().obs;
+  final redeemPointHistories = <RedeemPoint>[].obs;
 
   final profileEditable = false.obs;
+  final getRedeemPointHistoriesLoading = false.obs;
+  final getMoreRedeemPointHistoriesLoading = false.obs;
+
   final loadingUpdatingUserInfo = false.obs;
   final loadingUploadingPicture = false.obs;
   final changePasswordProcedureLoading = false.obs;
@@ -43,6 +48,10 @@ class ProfileController extends GetxController {
   final oldPasswordObscure = true.obs;
   final newPasswordObscure = true.obs;
   final confirmNewPasswordObscure = true.obs;
+
+  final currentPage = 0.obs;
+  final totalPages = 0.obs;
+  final pointsAlreadyLoaded = false.obs;
 
   final List<Widget> screens = [
     const AccountManagementScreen(),
@@ -70,7 +79,7 @@ class ProfileController extends GetxController {
     confirmNewPasswordObscure(!confirmNewPasswordObscure.value);
   }
 
-  Widget getCurrentScreen(){
+  Widget getCurrentScreen() {
     return screens[selectedProfileMenuIndex.value];
   }
 
@@ -78,12 +87,11 @@ class ProfileController extends GetxController {
     try {
       loadingUpdatingUserInfo(true);
       User userInfo = user.value.copyWith(
-        firstName: userFirstNameController.value.text,
-        lastName: userLastNameController.value.text,
-        dateOfBirth: userDateOfBirthInMilliseconds.value,
-        mobileNumber: userPhoneNumberController.value.text,
-        countryCode: userPhoneNumberCountryCode.value
-      );
+          firstName: userFirstNameController.value.text,
+          lastName: userLastNameController.value.text,
+          dateOfBirth: userDateOfBirthInMilliseconds.value,
+          mobileNumber: userPhoneNumberController.value.text,
+          countryCode: userPhoneNumberCountryCode.value);
       Log.info("${userInfo.toJson()}");
       final response = await _profileRepository.updateUserInfo(userInfo: userInfo);
       user(User.fromJson(response.data["info"]));
@@ -93,6 +101,39 @@ class ProfileController extends GetxController {
       return false;
     } finally {
       loadingUpdatingUserInfo(false);
+    }
+  }
+
+  Future<void> getRedeemPointHistories({int page = 0}) async {
+    try {
+      if (page == 0) {
+        getRedeemPointHistoriesLoading(true);
+      } else {
+        currentPage(page);
+        getMoreRedeemPointHistoriesLoading(true);
+      }
+
+      final response = await _profileRepository.getRedeemPointHistories(page: page);
+
+      var redeemPointHistoriesData = response.data["content"] as List;
+
+      var redeemPointHistoryList = redeemPointHistoriesData.map((redeemPoint) {
+        return RedeemPoint.fromJson(redeemPoint);
+      }).toList();
+
+      totalPages(response.data["totalPages"]);
+
+      if (page == 0) {
+        redeemPointHistories(redeemPointHistoryList);
+      } else {
+        redeemPointHistories.addAll(redeemPointHistoryList);
+      }
+      pointsAlreadyLoaded(true);
+    } catch (e) {
+      Log.error(e.toString());
+    } finally {
+      getRedeemPointHistoriesLoading(false);
+      getMoreRedeemPointHistoriesLoading(false);
     }
   }
 

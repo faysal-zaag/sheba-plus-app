@@ -21,7 +21,7 @@ class ProductSize {
     return ProductSize(
       id: json['id'] as int,
       name: json['name'] as String,
-      available: json['available'] as bool,
+      available: json['available'] != null ? json['available'] as bool : false,
       price: (json['price'] as num).toDouble(),
     );
   }

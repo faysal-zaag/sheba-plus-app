@@ -132,9 +132,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       }),
               )
             ]
-          : displayCenter && authController.isLoggedIn.isFalse && hasCart
-              ? [const DisplayCenterAppBarCartWidget()]
-              : null,
+          : displayCenter && authController.isLoggedIn.isFalse
+              ? [DisplayCenterAppBarCartWidget()]
+              : authController.isLoggedIn.isFalse && hasCart
+                  ? [DisplayCenterAppBarCartWidget()]
+                  : null,
     );
   }
 

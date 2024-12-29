@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     await authController.isAuthenticated(accessToken: storageService.getAuthToken());
     if(authController.isLoggedIn.isTrue && profileController.user.value.referralAction == null){
-      Get.toNamed(Routes.referral);
+      Get.offAndToNamed(Routes.referral);
     }
     else{
       Get.offAndToNamed(Routes.home);

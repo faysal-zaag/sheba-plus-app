@@ -43,7 +43,7 @@ class CategoryController extends GetxController {
           .map((e) => Category.fromJson(e))
           .toList();
       allCategories(categoryList);
-      Utils.prettifyJson('${response.data}', 'get all categories');
+      // Utils.prettifyJson('${response.data}', 'get all categories');
     } catch (err) {
       Log.error(err.toString());
     } finally {
@@ -60,7 +60,7 @@ class CategoryController extends GetxController {
           .map((e) => SubCategory.fromJson(e))
           .toList();
       allSubCategories(categoryList);
-      Utils.prettifyJson('${response.data}', 'get all sub categories');
+      // Utils.prettifyJson('${response.data}', 'get all sub categories');
     } catch (err) {
       Log.error(err.toString());
     } finally {

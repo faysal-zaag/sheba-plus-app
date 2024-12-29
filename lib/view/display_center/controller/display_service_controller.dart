@@ -26,10 +26,10 @@ class DisplayCenterServiceController extends GetxController {
   final carouselCurrentIndex = 0.obs;
   final selectProductDetailsType = 'DESCRIPTION'.obs;
   final totalDisplayServiceProduct = 0.obs;
-  final displayServiceProductList = <DisplayServiceProduct>[].obs;
+  final displayServiceProductList = <DisplayCenterProduct>[].obs;
   final productNameSearchController = TextEditingController().obs;
 
-  var currentDisplayServiceProduct = DisplayServiceProduct(
+  var currentDisplayServiceProduct = DisplayCenterProduct(
           id: 0,
           name: '',
           description: '',
@@ -50,7 +50,6 @@ class DisplayCenterServiceController extends GetxController {
     'DESCRIPTION',
     'SPECIFICATION',
     'ADDITIONAL',
-    'EXTERNAL',
   ];
 
   void onCarouselChange(int index) {
@@ -66,6 +65,10 @@ class DisplayCenterServiceController extends GetxController {
   num calculatePriceAfterDiscount({required num price, num? discountPrice}) {
     num finalPrice = ((price) - (discountPrice ?? 0));
     return finalPrice;
+  }
+
+  void resetData() {
+    productNameSearchController.value.clear();
   }
 
   // ================ Public Api call ==============
@@ -91,11 +94,11 @@ class DisplayCenterServiceController extends GetxController {
               subCategoryIdList: subCategoryIdList);
 
       var list = (response.data['content'] as List)
-          .map((e) => DisplayServiceProduct.fromJson(e))
+          .map((e) => DisplayCenterProduct.fromJson(e))
           .toList();
       displayServiceProductList(list);
       totalDisplayServiceProduct(response.data['totalElements']);
-      debugPrint("all display products: ${response.data}", wrapWidth: 1024);
+      // debugPrint("all display products: ${response.data}", wrapWidth: 1024);
     } catch (err) {
       Log.error(err.toString());
     } finally {
@@ -109,7 +112,7 @@ class DisplayCenterServiceController extends GetxController {
       final response =
           await _displayCenterServiceRepository.getProductById(id: id);
       currentDisplayServiceProduct(
-          DisplayServiceProduct.fromJson(response.data));
+          DisplayCenterProduct.fromJson(response.data));
       currentDisplayServiceProduct.value.discountPrice = calculateDiscountPrice(
           productPrice: currentDisplayServiceProduct.value.price,
           discountPercentage:
