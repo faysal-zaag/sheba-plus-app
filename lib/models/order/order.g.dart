@@ -15,7 +15,9 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       customerAchievedPoint: json['customerAchievedPoint'] as num? ?? 0,
       currentCadRate: json['currentCadRate'] as num? ?? 0,
       paid: json['paid'] as bool? ?? false,
-      hourBooked: json['hourBooked'] as num? ?? 0,
+      agentMeeting: json['agentMeeting'] == null
+          ? const AgentMeeting()
+          : AgentMeeting.fromJson(json['agentMeeting'] as Map<String, dynamic>),
       invoice: json['invoice'] == null
           ? const Invoice()
           : Invoice.fromJson(json['invoice'] as Map<String, dynamic>),
@@ -38,7 +40,7 @@ Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
       'customerAchievedPoint': instance.customerAchievedPoint,
       'currentCadRate': instance.currentCadRate,
       'paid': instance.paid,
-      'hourBooked': instance.hourBooked,
+      'agentMeeting': instance.agentMeeting,
       'invoice': instance.invoice,
       'dropOffAddress': instance.dropOffAddress,
       'shoppingDetailsList': instance.shoppingDetailsList,

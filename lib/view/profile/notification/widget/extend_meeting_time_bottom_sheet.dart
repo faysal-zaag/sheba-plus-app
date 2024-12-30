@@ -12,16 +12,21 @@ class ExtendMeetingTimeBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.7,
       padding: AppPaddings.screenPadding,
-      color: AppColors.white,
-      child: Column(
+      decoration: const BoxDecoration(
+        color: AppColors.white,
+      ),
+      child: Wrap(
         children: [
-          BottomSheetHeader(
-            title: ProfileScreenTexts.extendMeetingTime,
-          ),
-          24.kH,
-          const Expanded(child: MeetingTimeExtendForm())
+          Column(
+            children: [
+              BottomSheetHeader(
+                title: ProfileScreenTexts.extendMeetingTime,
+              ),
+              24.kH,
+              const MeetingTimeExtendForm(),
+            ],
+          )
         ],
       ),
     );

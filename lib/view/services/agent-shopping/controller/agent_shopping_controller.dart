@@ -28,12 +28,14 @@ class AgentShoppingController extends GetxController {
   final agentShoppingSpendAmountController = TextEditingController().obs;
   final agentShoppingServiceDurationController = TextEditingController().obs;
   final agentShoppingServiceTotalCostController = TextEditingController().obs;
+  final agentShoppingSPromoCodeController = TextEditingController().obs;
   final agentShoppingDropOffService = false.obs;
   final sameAsHomeAddress = true.obs;
   final paymentMethod = PaymentMethod.td.obs;
 
   final createAgentBookingLoading = false.obs;
   final updateAgentBookingScheduleLoading = false.obs;
+  final extendMeetingTimeOrAmountLoading = false.obs;
 
   void resetFields() {
     agentShoppingMeetingLocationController.value.clear();
@@ -126,6 +128,25 @@ class AgentShoppingController extends GetxController {
       return false;
     } finally {
       updateAgentBookingScheduleLoading(false);
+    }
+  }
+
+  Future<bool> extendMeetingTimeOrAmount({required int orderId}) async {
+    try {
+      extendMeetingTimeOrAmountLoading(true);
+
+      await _agentShoppingRepository.extendMeetingTimeOrAmount(
+        orderId: orderId,
+        hourBooked: num.parse(agentShoppingServiceDurationController.value.text),
+        estimatedBudget: num.parse(agentShoppingSpendAmountController.value.text),
+      );
+
+      return true;
+    } catch (e) {
+      Log.error(e.toString());
+      return false;
+    } finally {
+      extendMeetingTimeOrAmountLoading(false);
     }
   }
 

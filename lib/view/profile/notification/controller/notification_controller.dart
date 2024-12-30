@@ -175,7 +175,7 @@ class NotificationController extends GetxController {
   }
 
   String headerFooter({required UserNotification notification, required String body}) {
-    return "Hi ${notification.user?.firstName}, $body \n\nRegards,\nDS.ComTeam";
+    return "Hi ${notification.user?.firstName}, $body \n\nRegards,\nSheba Plus Team";
   }
 
   String commonMessage({required UserNotification notification}) {
@@ -213,7 +213,7 @@ class NotificationController extends GetxController {
   }
 
   String getMeetingStartedNotificationMessage({required UserNotification notification}) {
-    return headerFooter(notification: notification, body: "\n\n${notification.details}");
+    return headerFooter(notification: notification, body: "\n\nThe meeting is starting now! Click the 'Join' button to enter.");
   }
 
   String getShoppingDetailsNotificationMessage({required UserNotification notification}) {

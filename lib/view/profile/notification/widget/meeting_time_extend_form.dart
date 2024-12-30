@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/controllers/global_controller.dart';
+import 'package:sheba_plus/services/product_services.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
@@ -15,6 +16,7 @@ import 'package:sheba_plus/utils/formatters/input_formatters.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
+import 'package:sheba_plus/view/profile/order-history/controller/order_controller.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
@@ -36,10 +38,14 @@ class _MeetingTimeExtendFormState extends State<MeetingTimeExtendForm> {
   final authController = Get.find<AuthController>();
   final agentShoppingController = Get.find<AgentShoppingController>();
   final globalController = Get.find<GlobalController>();
+  final orderController = Get.find<OrderController>();
   final addressController = Get.find<AddressController>();
 
   @override
   Widget build(BuildContext context) {
+    num currencyConversionRate = orderController.orderDetails.value.currentCadRate;
+    String previousBudget = ProductServices.getAmount(price: orderController.orderDetails.value.agentMeeting.estimatedBudgetInBdt);
+
     return Container(
       color: AppColors.white,
       child: Form(
@@ -94,11 +100,38 @@ class _MeetingTimeExtendFormState extends State<MeetingTimeExtendForm> {
                 controller: agentShoppingController.agentShoppingSpendAmountController.value,
                 label: AgentShoppingTexts.spendAmount,
                 hintText: AgentShoppingTexts.spendAmountHintText,
+                onChange: (value){
+                  agentShoppingController.agentShoppingSpendAmountController.refresh();
+                  return null;
+                },
                 validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
               ),
               Obx(
                 () => Text(
                   AgentShoppingTexts.prePaymentWarningMessage(maxValue: globalController.globalConfig.value.maxBudget ?? 0),
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
+                ),
+              ),
+              8.kH,
+              Text(
+                "${AgentShoppingTexts.previousBudget} = $previousBudget BDT",
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
+              8.kH,
+              Obx(
+                () => Text(
+                  "${AgentShoppingTexts.totalBudget} = "
+                  "${formatAmount(getTotalBudget(previousBudget, agentShoppingController.agentShoppingSpendAmountController.value.text, 1))} "
+                  "BDT / ${formatAmount(getTotalBudget(previousBudget, agentShoppingController.agentShoppingSpendAmountController.value.text, 1) / currencyConversionRate)} "
+                  "CAD (1 CAD = $currencyConversionRate)",
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+              ),
+              8.kH,
+              Obx(
+                () => Text(
+                  "${AgentShoppingTexts.totalPayable} "
+                  "= ${formatAmount(getTotalBudget(previousBudget, agentShoppingController.agentShoppingSpendAmountController.value.text, 1) / currencyConversionRate)} CAD",
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
                 ),
               ),
@@ -118,9 +151,12 @@ class _MeetingTimeExtendFormState extends State<MeetingTimeExtendForm> {
                   ),
                   16.kW,
                   Expanded(
-                    child: CustomPrimaryButton(
-                      label: PartialCheckoutTexts.makePayment,
-                      onClick: () {},
+                    child: Obx(
+                      () => CustomPrimaryButton(
+                        loading: agentShoppingController.extendMeetingTimeOrAmountLoading.isTrue,
+                        label: PartialCheckoutTexts.makePayment,
+                        onClick: extendMeetingTime,
+                      ),
                     ),
                   )
                 ],
@@ -130,6 +166,28 @@ class _MeetingTimeExtendFormState extends State<MeetingTimeExtendForm> {
         ),
       ),
     );
+  }
+
+  void extendMeetingTime() async {
+    if (_formKey.currentState!.validate()) {
+      final response = await agentShoppingController.extendMeetingTimeOrAmount(
+        orderId: orderController.orderDetails.value.id,
+      );
+      if (response) {
+        Get.back();
+        Get.back();
+      }
+    }
+  }
+
+  double getTotalBudget(String previousBudget, String currentSpend, double conversionRate) {
+    double previous = double.tryParse(previousBudget) ?? 0;
+    double current = double.tryParse(currentSpend) ?? 0;
+    return previous + current;
+  }
+
+  String formatAmount(double amount) {
+    return ProductServices.getAmount(price: amount);
   }
 
   void setTotalCost({String? value}) {

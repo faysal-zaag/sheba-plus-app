@@ -16,4 +16,11 @@ class AgentShoppingRepository{
       "meetingTime": meetingTime
     });
   }
+
+  Future<Response> extendMeetingTimeOrAmount({required int orderId, required num hourBooked, required num estimatedBudget})async{
+    return await _dio.put("${ApiUrls.extendMeetingOrAmountApiUrl}/$orderId", data: {
+      "hourBooked": hourBooked,
+      "estimatedBudget": estimatedBudget
+    });
+  }
 }

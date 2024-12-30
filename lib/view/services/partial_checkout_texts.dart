@@ -17,6 +17,7 @@ class PartialCheckoutTexts {
   static String shippingCost = "Shipping Cost".tr;
   static String dropOffCost = "Drop-off Cost".tr;
   static String dropOffService = "Drop-OFF Service".tr;
+  static String promoDiscount = "Promo Discount".tr;
   static String orderTotal = "Order Total".tr;
   static String makePaymentAndConfirm = "Make Payment & Confirm".tr;
   static String makePayment = "Make Payment".tr;

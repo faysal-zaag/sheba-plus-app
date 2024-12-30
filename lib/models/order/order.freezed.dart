@@ -28,7 +28,7 @@ mixin _$Order {
   num get customerAchievedPoint => throw _privateConstructorUsedError;
   num get currentCadRate => throw _privateConstructorUsedError;
   bool get paid => throw _privateConstructorUsedError;
-  num get hourBooked => throw _privateConstructorUsedError;
+  AgentMeeting get agentMeeting => throw _privateConstructorUsedError;
   Invoice get invoice => throw _privateConstructorUsedError;
   Address get dropOffAddress => throw _privateConstructorUsedError;
   List<ShoppingDetails> get shoppingDetailsList =>
@@ -57,11 +57,12 @@ abstract class $OrderCopyWith<$Res> {
       num customerAchievedPoint,
       num currentCadRate,
       bool paid,
-      num hourBooked,
+      AgentMeeting agentMeeting,
       Invoice invoice,
       Address dropOffAddress,
       List<ShoppingDetails> shoppingDetailsList});
 
+  $AgentMeetingCopyWith<$Res> get agentMeeting;
   $InvoiceCopyWith<$Res> get invoice;
   $AddressCopyWith<$Res> get dropOffAddress;
 }
@@ -89,7 +90,7 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
     Object? customerAchievedPoint = null,
     Object? currentCadRate = null,
     Object? paid = null,
-    Object? hourBooked = null,
+    Object? agentMeeting = null,
     Object? invoice = null,
     Object? dropOffAddress = null,
     Object? shoppingDetailsList = null,
@@ -127,10 +128,10 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
           ? _value.paid
           : paid // ignore: cast_nullable_to_non_nullable
               as bool,
-      hourBooked: null == hourBooked
-          ? _value.hourBooked
-          : hourBooked // ignore: cast_nullable_to_non_nullable
-              as num,
+      agentMeeting: null == agentMeeting
+          ? _value.agentMeeting
+          : agentMeeting // ignore: cast_nullable_to_non_nullable
+              as AgentMeeting,
       invoice: null == invoice
           ? _value.invoice
           : invoice // ignore: cast_nullable_to_non_nullable
@@ -144,6 +145,16 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
           : shoppingDetailsList // ignore: cast_nullable_to_non_nullable
               as List<ShoppingDetails>,
     ) as $Val);
+  }
+
+  /// Create a copy of Order
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AgentMeetingCopyWith<$Res> get agentMeeting {
+    return $AgentMeetingCopyWith<$Res>(_value.agentMeeting, (value) {
+      return _then(_value.copyWith(agentMeeting: value) as $Val);
+    });
   }
 
   /// Create a copy of Order
@@ -183,11 +194,13 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
       num customerAchievedPoint,
       num currentCadRate,
       bool paid,
-      num hourBooked,
+      AgentMeeting agentMeeting,
       Invoice invoice,
       Address dropOffAddress,
       List<ShoppingDetails> shoppingDetailsList});
 
+  @override
+  $AgentMeetingCopyWith<$Res> get agentMeeting;
   @override
   $InvoiceCopyWith<$Res> get invoice;
   @override
@@ -215,7 +228,7 @@ class __$$OrderImplCopyWithImpl<$Res>
     Object? customerAchievedPoint = null,
     Object? currentCadRate = null,
     Object? paid = null,
-    Object? hourBooked = null,
+    Object? agentMeeting = null,
     Object? invoice = null,
     Object? dropOffAddress = null,
     Object? shoppingDetailsList = null,
@@ -253,10 +266,10 @@ class __$$OrderImplCopyWithImpl<$Res>
           ? _value.paid
           : paid // ignore: cast_nullable_to_non_nullable
               as bool,
-      hourBooked: null == hourBooked
-          ? _value.hourBooked
-          : hourBooked // ignore: cast_nullable_to_non_nullable
-              as num,
+      agentMeeting: null == agentMeeting
+          ? _value.agentMeeting
+          : agentMeeting // ignore: cast_nullable_to_non_nullable
+              as AgentMeeting,
       invoice: null == invoice
           ? _value.invoice
           : invoice // ignore: cast_nullable_to_non_nullable
@@ -285,7 +298,7 @@ class _$OrderImpl implements _Order {
       this.customerAchievedPoint = 0,
       this.currentCadRate = 0,
       this.paid = false,
-      this.hourBooked = 0,
+      this.agentMeeting = const AgentMeeting(),
       this.invoice = const Invoice(),
       this.dropOffAddress = const Address(),
       final List<ShoppingDetails> shoppingDetailsList = const []})
@@ -320,7 +333,7 @@ class _$OrderImpl implements _Order {
   final bool paid;
   @override
   @JsonKey()
-  final num hourBooked;
+  final AgentMeeting agentMeeting;
   @override
   @JsonKey()
   final Invoice invoice;
@@ -339,7 +352,7 @@ class _$OrderImpl implements _Order {
 
   @override
   String toString() {
-    return 'Order(id: $id, createdAt: $createdAt, invoiceNumber: $invoiceNumber, status: $status, dropOffService: $dropOffService, customerAchievedPoint: $customerAchievedPoint, currentCadRate: $currentCadRate, paid: $paid, hourBooked: $hourBooked, invoice: $invoice, dropOffAddress: $dropOffAddress, shoppingDetailsList: $shoppingDetailsList)';
+    return 'Order(id: $id, createdAt: $createdAt, invoiceNumber: $invoiceNumber, status: $status, dropOffService: $dropOffService, customerAchievedPoint: $customerAchievedPoint, currentCadRate: $currentCadRate, paid: $paid, agentMeeting: $agentMeeting, invoice: $invoice, dropOffAddress: $dropOffAddress, shoppingDetailsList: $shoppingDetailsList)';
   }
 
   @override
@@ -360,8 +373,8 @@ class _$OrderImpl implements _Order {
             (identical(other.currentCadRate, currentCadRate) ||
                 other.currentCadRate == currentCadRate) &&
             (identical(other.paid, paid) || other.paid == paid) &&
-            (identical(other.hourBooked, hourBooked) ||
-                other.hourBooked == hourBooked) &&
+            (identical(other.agentMeeting, agentMeeting) ||
+                other.agentMeeting == agentMeeting) &&
             (identical(other.invoice, invoice) || other.invoice == invoice) &&
             (identical(other.dropOffAddress, dropOffAddress) ||
                 other.dropOffAddress == dropOffAddress) &&
@@ -381,7 +394,7 @@ class _$OrderImpl implements _Order {
       customerAchievedPoint,
       currentCadRate,
       paid,
-      hourBooked,
+      agentMeeting,
       invoice,
       dropOffAddress,
       const DeepCollectionEquality().hash(_shoppingDetailsList));
@@ -412,7 +425,7 @@ abstract class _Order implements Order {
       final num customerAchievedPoint,
       final num currentCadRate,
       final bool paid,
-      final num hourBooked,
+      final AgentMeeting agentMeeting,
       final Invoice invoice,
       final Address dropOffAddress,
       final List<ShoppingDetails> shoppingDetailsList}) = _$OrderImpl;
@@ -436,7 +449,7 @@ abstract class _Order implements Order {
   @override
   bool get paid;
   @override
-  num get hourBooked;
+  AgentMeeting get agentMeeting;
   @override
   Invoice get invoice;
   @override

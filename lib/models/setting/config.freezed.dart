@@ -20,18 +20,19 @@ Config _$ConfigFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Config {
-  int get createdAt => throw _privateConstructorUsedError;
-  int get updatedAt => throw _privateConstructorUsedError;
-  int get id => throw _privateConstructorUsedError;
-  int get maxBudget => throw _privateConstructorUsedError;
-  int get hourlyRates => throw _privateConstructorUsedError;
-  double get tax => throw _privateConstructorUsedError;
-  double get vat => throw _privateConstructorUsedError;
+  num get createdAt => throw _privateConstructorUsedError;
+  num get updatedAt => throw _privateConstructorUsedError;
+  num get id => throw _privateConstructorUsedError;
+  num get maxBudget => throw _privateConstructorUsedError;
+  num get hourlyRates => throw _privateConstructorUsedError;
+  num get tax => throw _privateConstructorUsedError;
+  num get vat => throw _privateConstructorUsedError;
   String get currency => throw _privateConstructorUsedError;
-  double get currencyConversionRate => throw _privateConstructorUsedError;
-  int get dropOffCharge => throw _privateConstructorUsedError;
-  int get referralPoint => throw _privateConstructorUsedError;
-  int get referralPointConversionRate => throw _privateConstructorUsedError;
+  num get currencyConversionRate => throw _privateConstructorUsedError;
+  num get agentTransportationFee => throw _privateConstructorUsedError;
+  num get dropOffCharge => throw _privateConstructorUsedError;
+  num get referralPoint => throw _privateConstructorUsedError;
+  num get referralPointConversionRate => throw _privateConstructorUsedError;
 
   /// Serializes this Config to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,18 +49,19 @@ abstract class $ConfigCopyWith<$Res> {
       _$ConfigCopyWithImpl<$Res, Config>;
   @useResult
   $Res call(
-      {int createdAt,
-      int updatedAt,
-      int id,
-      int maxBudget,
-      int hourlyRates,
-      double tax,
-      double vat,
+      {num createdAt,
+      num updatedAt,
+      num id,
+      num maxBudget,
+      num hourlyRates,
+      num tax,
+      num vat,
       String currency,
-      double currencyConversionRate,
-      int dropOffCharge,
-      int referralPoint,
-      int referralPointConversionRate});
+      num currencyConversionRate,
+      num agentTransportationFee,
+      num dropOffCharge,
+      num referralPoint,
+      num referralPointConversionRate});
 }
 
 /// @nodoc
@@ -86,6 +88,7 @@ class _$ConfigCopyWithImpl<$Res, $Val extends Config>
     Object? vat = null,
     Object? currency = null,
     Object? currencyConversionRate = null,
+    Object? agentTransportationFee = null,
     Object? dropOffCharge = null,
     Object? referralPoint = null,
     Object? referralPointConversionRate = null,
@@ -94,31 +97,31 @@ class _$ConfigCopyWithImpl<$Res, $Val extends Config>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       maxBudget: null == maxBudget
           ? _value.maxBudget
           : maxBudget // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       hourlyRates: null == hourlyRates
           ? _value.hourlyRates
           : hourlyRates // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       tax: null == tax
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       vat: null == vat
           ? _value.vat
           : vat // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       currency: null == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -126,19 +129,23 @@ class _$ConfigCopyWithImpl<$Res, $Val extends Config>
       currencyConversionRate: null == currencyConversionRate
           ? _value.currencyConversionRate
           : currencyConversionRate // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
+      agentTransportationFee: null == agentTransportationFee
+          ? _value.agentTransportationFee
+          : agentTransportationFee // ignore: cast_nullable_to_non_nullable
+              as num,
       dropOffCharge: null == dropOffCharge
           ? _value.dropOffCharge
           : dropOffCharge // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       referralPoint: null == referralPoint
           ? _value.referralPoint
           : referralPoint // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       referralPointConversionRate: null == referralPointConversionRate
           ? _value.referralPointConversionRate
           : referralPointConversionRate // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
     ) as $Val);
   }
 }
@@ -151,18 +158,19 @@ abstract class _$$ConfigImplCopyWith<$Res> implements $ConfigCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int createdAt,
-      int updatedAt,
-      int id,
-      int maxBudget,
-      int hourlyRates,
-      double tax,
-      double vat,
+      {num createdAt,
+      num updatedAt,
+      num id,
+      num maxBudget,
+      num hourlyRates,
+      num tax,
+      num vat,
       String currency,
-      double currencyConversionRate,
-      int dropOffCharge,
-      int referralPoint,
-      int referralPointConversionRate});
+      num currencyConversionRate,
+      num agentTransportationFee,
+      num dropOffCharge,
+      num referralPoint,
+      num referralPointConversionRate});
 }
 
 /// @nodoc
@@ -187,6 +195,7 @@ class __$$ConfigImplCopyWithImpl<$Res>
     Object? vat = null,
     Object? currency = null,
     Object? currencyConversionRate = null,
+    Object? agentTransportationFee = null,
     Object? dropOffCharge = null,
     Object? referralPoint = null,
     Object? referralPointConversionRate = null,
@@ -195,31 +204,31 @@ class __$$ConfigImplCopyWithImpl<$Res>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       maxBudget: null == maxBudget
           ? _value.maxBudget
           : maxBudget // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       hourlyRates: null == hourlyRates
           ? _value.hourlyRates
           : hourlyRates // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       tax: null == tax
           ? _value.tax
           : tax // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       vat: null == vat
           ? _value.vat
           : vat // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
       currency: null == currency
           ? _value.currency
           : currency // ignore: cast_nullable_to_non_nullable
@@ -227,19 +236,23 @@ class __$$ConfigImplCopyWithImpl<$Res>
       currencyConversionRate: null == currencyConversionRate
           ? _value.currencyConversionRate
           : currencyConversionRate // ignore: cast_nullable_to_non_nullable
-              as double,
+              as num,
+      agentTransportationFee: null == agentTransportationFee
+          ? _value.agentTransportationFee
+          : agentTransportationFee // ignore: cast_nullable_to_non_nullable
+              as num,
       dropOffCharge: null == dropOffCharge
           ? _value.dropOffCharge
           : dropOffCharge // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       referralPoint: null == referralPoint
           ? _value.referralPoint
           : referralPoint // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
       referralPointConversionRate: null == referralPointConversionRate
           ? _value.referralPointConversionRate
           : referralPointConversionRate // ignore: cast_nullable_to_non_nullable
-              as int,
+              as num,
     ));
   }
 }
@@ -253,10 +266,11 @@ class _$ConfigImpl implements _Config {
       this.id = 0,
       this.maxBudget = 0,
       this.hourlyRates = 0,
-      this.tax = 0.0,
-      this.vat = 0.0,
+      this.tax = 0,
+      this.vat = 0,
       this.currency = 'CAD',
-      this.currencyConversionRate = 1.0,
+      this.currencyConversionRate = 1,
+      this.agentTransportationFee = 0,
       this.dropOffCharge = 0,
       this.referralPoint = 0,
       this.referralPointConversionRate = 0});
@@ -266,44 +280,47 @@ class _$ConfigImpl implements _Config {
 
   @override
   @JsonKey()
-  final int createdAt;
+  final num createdAt;
   @override
   @JsonKey()
-  final int updatedAt;
+  final num updatedAt;
   @override
   @JsonKey()
-  final int id;
+  final num id;
   @override
   @JsonKey()
-  final int maxBudget;
+  final num maxBudget;
   @override
   @JsonKey()
-  final int hourlyRates;
+  final num hourlyRates;
   @override
   @JsonKey()
-  final double tax;
+  final num tax;
   @override
   @JsonKey()
-  final double vat;
+  final num vat;
   @override
   @JsonKey()
   final String currency;
   @override
   @JsonKey()
-  final double currencyConversionRate;
+  final num currencyConversionRate;
   @override
   @JsonKey()
-  final int dropOffCharge;
+  final num agentTransportationFee;
   @override
   @JsonKey()
-  final int referralPoint;
+  final num dropOffCharge;
   @override
   @JsonKey()
-  final int referralPointConversionRate;
+  final num referralPoint;
+  @override
+  @JsonKey()
+  final num referralPointConversionRate;
 
   @override
   String toString() {
-    return 'Config(createdAt: $createdAt, updatedAt: $updatedAt, id: $id, maxBudget: $maxBudget, hourlyRates: $hourlyRates, tax: $tax, vat: $vat, currency: $currency, currencyConversionRate: $currencyConversionRate, dropOffCharge: $dropOffCharge, referralPoint: $referralPoint, referralPointConversionRate: $referralPointConversionRate)';
+    return 'Config(createdAt: $createdAt, updatedAt: $updatedAt, id: $id, maxBudget: $maxBudget, hourlyRates: $hourlyRates, tax: $tax, vat: $vat, currency: $currency, currencyConversionRate: $currencyConversionRate, agentTransportationFee: $agentTransportationFee, dropOffCharge: $dropOffCharge, referralPoint: $referralPoint, referralPointConversionRate: $referralPointConversionRate)';
   }
 
   @override
@@ -326,6 +343,8 @@ class _$ConfigImpl implements _Config {
                 other.currency == currency) &&
             (identical(other.currencyConversionRate, currencyConversionRate) ||
                 other.currencyConversionRate == currencyConversionRate) &&
+            (identical(other.agentTransportationFee, agentTransportationFee) ||
+                other.agentTransportationFee == agentTransportationFee) &&
             (identical(other.dropOffCharge, dropOffCharge) ||
                 other.dropOffCharge == dropOffCharge) &&
             (identical(other.referralPoint, referralPoint) ||
@@ -349,6 +368,7 @@ class _$ConfigImpl implements _Config {
       vat,
       currency,
       currencyConversionRate,
+      agentTransportationFee,
       dropOffCharge,
       referralPoint,
       referralPointConversionRate);
@@ -371,45 +391,48 @@ class _$ConfigImpl implements _Config {
 
 abstract class _Config implements Config {
   const factory _Config(
-      {final int createdAt,
-      final int updatedAt,
-      final int id,
-      final int maxBudget,
-      final int hourlyRates,
-      final double tax,
-      final double vat,
+      {final num createdAt,
+      final num updatedAt,
+      final num id,
+      final num maxBudget,
+      final num hourlyRates,
+      final num tax,
+      final num vat,
       final String currency,
-      final double currencyConversionRate,
-      final int dropOffCharge,
-      final int referralPoint,
-      final int referralPointConversionRate}) = _$ConfigImpl;
+      final num currencyConversionRate,
+      final num agentTransportationFee,
+      final num dropOffCharge,
+      final num referralPoint,
+      final num referralPointConversionRate}) = _$ConfigImpl;
 
   factory _Config.fromJson(Map<String, dynamic> json) = _$ConfigImpl.fromJson;
 
   @override
-  int get createdAt;
+  num get createdAt;
   @override
-  int get updatedAt;
+  num get updatedAt;
   @override
-  int get id;
+  num get id;
   @override
-  int get maxBudget;
+  num get maxBudget;
   @override
-  int get hourlyRates;
+  num get hourlyRates;
   @override
-  double get tax;
+  num get tax;
   @override
-  double get vat;
+  num get vat;
   @override
   String get currency;
   @override
-  double get currencyConversionRate;
+  num get currencyConversionRate;
   @override
-  int get dropOffCharge;
+  num get agentTransportationFee;
   @override
-  int get referralPoint;
+  num get dropOffCharge;
   @override
-  int get referralPointConversionRate;
+  num get referralPoint;
+  @override
+  num get referralPointConversionRate;
 
   /// Create a copy of Config
   /// with the given fields replaced by the non-null parameter values.

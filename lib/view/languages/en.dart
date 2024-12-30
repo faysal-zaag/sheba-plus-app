@@ -11,6 +11,7 @@ final Map<String, String> en = {
   "thisFieldIsRequired": "This field is required",
   "continueText": "Continue",
   "next": "Next",
+  "apply": "Apply",
   "yes": "Yes",
   "no": "No",
   "noData": "No data",

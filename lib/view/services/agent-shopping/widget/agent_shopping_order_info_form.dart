@@ -4,24 +4,20 @@ import 'package:intl/intl.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
-import 'package:sheba_plus/utils/constant/app_constants.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/utils/formatters/date_formatters.dart';
-import 'package:sheba_plus/utils/formatters/date_formatters.dart';
-import 'package:sheba_plus/utils/formatters/date_formatters.dart';
 import 'package:sheba_plus/utils/formatters/date_formatters.dart';
 import 'package:sheba_plus/utils/formatters/input_formatters.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
-import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
-import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
-import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/custom_text_field.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
 import 'package:sheba_plus/view/global_texts.dart';
+import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
+import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
+import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 
 class AgentShoppingOrderInfoForm extends StatefulWidget {
   const AgentShoppingOrderInfoForm({super.key});
@@ -106,7 +102,7 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
             ),
             Obx(
               () => Text(
-                AgentShoppingTexts.prePaymentWarningMessage(maxValue: globalController.globalConfig.value.maxBudget ?? 0),
+                AgentShoppingTexts.prePaymentWarningMessage(maxValue: globalController.globalConfig.value.maxBudget),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
               ),
             ),
@@ -149,6 +145,13 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
                 }
                 return null;
               },
+            ),
+            12.kH,
+            Obx(
+                  () => Text(
+                AgentShoppingTexts.agentTransportationFeeMessage(fee: globalController.globalConfig.value.agentTransportationFee),
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
+              ),
             ),
             24.kH,
             CustomPrimaryButton(

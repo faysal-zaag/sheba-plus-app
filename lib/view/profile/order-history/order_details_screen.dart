@@ -43,10 +43,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final globalController = Get.find<GlobalController>();
 
   void _initCall() async {
-    final notificationType = await notificationController.getLatestNotification(dataId: widget.orderId);
-    if (notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) {
-      await orderController.getOrderDetails(orderId: widget.orderId);
-    }
+    await notificationController.getLatestNotification(dataId: widget.orderId);
+    await orderController.getOrderDetails(orderId: widget.orderId);
   }
 
   @override
@@ -98,122 +96,145 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   Widget buildNotificationWidget(UserNotification latestNotification) {
     if (latestNotification.notificationType == AgentOrderNotificationType.PURCHASE_AGENT_SERVICE.name) {
-      int remainingTime = notificationController.getRemainingTime((int.parse(latestNotification.body?.meetingTime ?? "0")));
-      if (remainingTime > 15) {
-        return PurchaseAgentService(
-          message: notificationController.getPurchaseAgentServiceNotificationMessage(notification: latestNotification),
-        );
-      } else if (remainingTime <= 15 && remainingTime != 0) {
-        return AgentServiceUpdated(
-          message: notificationController.getReminderMessage(notification: latestNotification, remainingTime: remainingTime),
-          meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
-        );
-      } else if (remainingTime == 0) {
-        return MeetingStarted(
-          message: notificationController.getMeetingStartedNotificationMessage(notification: latestNotification),
-          meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
-          meetingEndTime: int.parse(latestNotification.body?.meetingEndTime ?? "0"),
-          showExtendMeetingTimeSheet: () => agentShoppingController.showExtendMeetingTimeSheet(
-            context: context,
-            orderId: latestNotification.dataId ?? 0,
-          ),
-        );
-      }
-      return const SizedBox();
+      return _buildPurchaseAgentServiceWidget(latestNotification);
     } else if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SERVICE_INVALID.name) {
       return AgentServiceInvalid(
         message: notificationController.getInvalidNotificationMessage(notification: latestNotification),
       );
     } else if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SERVICE_UPDATED.name) {
-      return AgentServiceUpdated(
-        message: notificationController.getAgentServiceUpdatedNotificationMessage(notification: latestNotification),
-        meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
-      );
+      return _buildAgentServiceUpdatedWidget(latestNotification);
     } else if (latestNotification.notificationType == AgentOrderNotificationType.SHOPPING_ITEM_DETAILS.name) {
-      return Obx(
-        () => orderController.getOrderDetailsLoading.isTrue
-            ? const SizedBox(
-                height: 400,
-                child: Center(
-                  child: CustomLoader(),
-                ),
-              )
-            : Column(
-                children: [
-                  ShoppingItemDetails(
-                    orderId: latestNotification.dataId ?? 0,
-                    message: notificationController.getShoppingDetailsNotificationMessage(notification: latestNotification),
-                    shoppingDetailsList: orderController.orderDetails.value.shoppingDetailsList,
-                    invoice: orderController.orderDetails.value.invoice,
-                    currentCadRate: orderController.orderDetails.value.currentCadRate,
-                    hourBooked: orderController.orderDetails.value.hourBooked,
-                  ),
-                  24.kH,
-                  Padding(
-                    padding: AppPaddings.uPadding16,
-                    child: CustomPrimaryButton(
-                        label: GlobalTexts.proceed,
-                        onClick: () {
-                          Get.toNamed(Routes.finalCheckOutScreen);
-                        }),
-                  ),
-                ],
-              ),
-      );
+      return _buildShoppingItemDetailsWidget(latestNotification);
     } else if (latestNotification.notificationType == AgentOrderNotificationType.AGENT_SHOPPING_COMPLETED.name) {
       return AgentShoppingCompleted(
         message: notificationController.getAgentShoppingCompletedMessage(notification: latestNotification),
       );
     } else if (latestNotification.notificationType == AgentOrderNotificationType.MEETING_AND_BUDGET_EXTENDED.name) {
-      return MeetingStarted(
-        message: notificationController.getMeetingStartedNotificationMessage(notification: latestNotification),
-        meetingTime: int.parse(latestNotification.body?.meetingTime ?? "0"),
-        meetingEndTime: int.parse(latestNotification.body?.meetingEndTime ?? "0"),
-        showExtendMeetingTimeSheet: () => agentShoppingController.showExtendMeetingTimeSheet(
-          context: context,
-          orderId: latestNotification.dataId ?? 0,
-        ),
-      );
+      return _buildMeetingStartedWidget(latestNotification);
     } else if (latestNotification.notificationType == AgentOrderNotificationType.TRANSACTION_COMPLETED.name) {
-      return Column(
-        children: [
-          AgentShoppingCompleted(
-            message: notificationController.getAgentTransactionCompletedMessage(notification: latestNotification),
-          ),
-          Padding(
-            padding: AppPaddings.allPadding16,
-            child: MessageContainer(
-              message: "",
-              child: Row(
-                children: [
-                  Image.asset(
-                    AppImages.giftBox,
-                    width: 24,
-                  ),
-                  16.kW,
-                  Expanded(
-                    child: Text(
-                      "Congratulations you earned ${latestNotification.body?.achievePoint} Promo points!",
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.subtext),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      );
+      return _buildTransactionCompletedWidget(latestNotification);
     } else if (latestNotification.notificationType == AgentOrderNotificationType.ORDER_STATUS.name) {
-      return Column(
-        children: [
-          OrderStatusTracks(
-            orderStatus: latestNotification.body?.orderStatus ?? "",
-          ),
-          if (latestNotification.body?.orderStatus == ORDER_STATUS.DELIVERED.name) const OrderReviewQuestions(),
-        ],
-      );
+      return _buildOrderStatusWidget(latestNotification);
     } else {
       return const Center(child: Text("Unknown notification type"));
     }
+  }
+
+  Widget _buildPurchaseAgentServiceWidget(UserNotification notification) {
+    int remainingTime = notificationController.getRemainingTime(int.parse(notification.body?.meetingTime ?? "0"));
+    if (remainingTime <= 15 && remainingTime != 0) {
+      return AgentServiceUpdated(
+        message: notificationController.getReminderMessage(notification: notification, remainingTime: remainingTime),
+        meetingTime: int.parse(notification.body?.meetingTime ?? "0"),
+      );
+    } else if (remainingTime == 0) {
+      return _buildMeetingStartedWidget(notification);
+    }
+    return PurchaseAgentService(
+      message: notificationController.getPurchaseAgentServiceNotificationMessage(notification: notification),
+    );
+  }
+
+  Widget _buildAgentServiceUpdatedWidget(UserNotification notification) {
+    int remainingTime = notificationController.getRemainingTime(int.parse(notification.body?.meetingTime ?? "0"));
+    if (remainingTime <= 15 && remainingTime != 0) {
+      return AgentServiceUpdated(
+        message: notificationController.getReminderMessage(notification: notification, remainingTime: remainingTime),
+        meetingTime: int.parse(notification.body?.meetingTime ?? "0"),
+      );
+    } else if (remainingTime == 0) {
+      return _buildMeetingStartedWidget(notification);
+    }
+    return AgentServiceUpdated(
+      message: notificationController.getAgentServiceUpdatedNotificationMessage(notification: notification),
+      meetingTime: int.parse(notification.body?.meetingTime ?? "0"),
+    );
+  }
+
+  Widget _buildShoppingItemDetailsWidget(UserNotification notification) {
+    return Obx(
+      () => orderController.getOrderDetailsLoading.isTrue
+          ? const SizedBox(
+              height: 400,
+              child: Center(child: CustomLoader()),
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ShoppingItemDetails(
+                  orderId: notification.dataId ?? 0,
+                  message: notificationController.getShoppingDetailsNotificationMessage(notification: notification),
+                  shoppingDetailsList: orderController.orderDetails.value.shoppingDetailsList,
+                  invoice: orderController.orderDetails.value.invoice,
+                  currentCadRate: orderController.orderDetails.value.currentCadRate,
+                  hourBooked: orderController.orderDetails.value.agentMeeting.hourBooked,
+                ),
+                24.kH,
+                Padding(
+                  padding: AppPaddings.uPadding16,
+                  child: CustomPrimaryButton(
+                    label: GlobalTexts.proceed,
+                    onClick: () {
+                      Get.toNamed(Routes.finalCheckOutScreen);
+                    },
+                  ),
+                ),
+              ],
+            ),
+    );
+  }
+
+  Widget _buildMeetingStartedWidget(UserNotification notification) {
+    return MeetingStarted(
+      message: notificationController.getMeetingStartedNotificationMessage(notification: notification),
+      meetingTime: int.parse(notification.body?.meetingTime ?? "0"),
+      meetingEndTime: int.parse(notification.body?.meetingEndTime ?? "0"),
+      showExtendMeetingTimeSheet: () => agentShoppingController.showExtendMeetingTimeSheet(
+        context: context,
+        orderId: notification.dataId ?? 0,
+      ),
+    );
+  }
+
+  Widget _buildTransactionCompletedWidget(UserNotification notification) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AgentShoppingCompleted(
+          message: notificationController.getAgentTransactionCompletedMessage(notification: notification),
+        ),
+        Padding(
+          padding: AppPaddings.allPadding16,
+          child: MessageContainer(
+            message: "",
+            child: Row(
+              children: [
+                Image.asset(
+                  AppImages.giftBox,
+                  width: 24,
+                ),
+                16.kW,
+                Expanded(
+                  child: Text(
+                    "Congratulations you earned ${notification.body?.achievePoint} Promo points!",
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.subtext),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildOrderStatusWidget(UserNotification notification) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        OrderStatusTracks(orderStatus: notification.body?.orderStatus ?? ""),
+        if (notification.body?.orderStatus == ORDER_STATUS.DELIVERED.name) const OrderReviewQuestions(),
+      ],
+    );
   }
 }

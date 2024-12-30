@@ -10,6 +10,7 @@ final Map<String, String> bn = {
   "continueText": "চালিয়ে যান",
   "next": "পরবর্তী",
   "yes": "হ্যাঁ",
+  "apply": "এপ্লাই",
   "no": "না",
   "noData": "কোন ডাটা নেই",
   "proceed": "",

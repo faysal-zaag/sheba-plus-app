@@ -10,10 +10,16 @@ class AgentShoppingTexts{
   static String bdTimeHintText = "Enter BD time and date".tr;
   static String spendAmount = "How much do you plan to spend during the shopping session?".tr;
   static String spendAmountHintText = "Enter shopping amount".tr;
-  static String prePaymentWarningMessage ({required int maxValue}) => "If your shopping exceeds BDT $maxValue, in that case it is mandatory to pre pay money for shopping.".tr;
-  static String serviceDuration ({required int hourlyRates}) => "How many hours of service would you like to book with the agent? (CAD $hourlyRates/hour)".tr;
+  static String prePaymentWarningMessage ({required num maxValue}) => "If your shopping exceeds BDT $maxValue, in that case it is mandatory to pre pay money for shopping.".tr;
+  static String agentTransportationFeeMessage ({required num fee}) => "Note : Agent transportation fee $fee CAD will also be included.".tr;
+  static String serviceDuration ({required num hourlyRates}) => "How many hours of service would you like to book with the agent? (CAD $hourlyRates/hour)".tr;
   static String serviceDurationHintText = "Enter shopping hour".tr;
   static String serviceDurationCostHintText = "Enter agent fee".tr;
+  static String havePromoCode = "Have Promo Code ?".tr;
+  static String previousBudget = "Previous Budget".tr;
+  static String totalBudget = "Total Budget".tr;
+  static String totalPayable = "Total Payable".tr;
+  static String enterPromoCodeHere = "Enter promo code here".tr;
   static String dropOffServiceNotEnabledMessage = "Since you didn’t select a drop-off option, you will need to collect your product from our Canada office. Once your product arrives, we will notify you, and you can pick it up at your convenience.".tr;
 
   // shopping details

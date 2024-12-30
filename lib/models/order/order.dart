@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sheba_plus/models/address/address.dart';
+import 'package:sheba_plus/models/agent-meeting/agent_meeting.dart';
 import 'package:sheba_plus/models/invoice/invoice.dart';
 import 'package:sheba_plus/models/shopping-details/shopping_details.dart';
 
@@ -17,7 +18,7 @@ class Order with _$Order {
     @Default(0) num customerAchievedPoint,
     @Default(0) num currentCadRate,
     @Default(false) bool paid,
-    @Default(0) num hourBooked,
+    @Default(AgentMeeting()) AgentMeeting agentMeeting,
     @Default(Invoice()) Invoice invoice,
     @Default(Address()) Address dropOffAddress,
     @Default([]) List<ShoppingDetails> shoppingDetailsList,

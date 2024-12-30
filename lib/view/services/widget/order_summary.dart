@@ -22,7 +22,9 @@ class OrderSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double shoppingAmount = double.parse(agentShoppingController.agentShoppingSpendAmountController.value.text);
-    double currencyConversionRate = globalController.globalConfig.value.currencyConversionRate;
+    num maxBudget = globalController.globalConfig.value.maxBudget;
+    num currencyConversionRate = globalController.globalConfig.value.currencyConversionRate;
+    num agentTransportationFee = globalController.globalConfig.value.agentTransportationFee;
     String total = ProductServices.getAmount(
         price: (double.parse(agentShoppingController.agentShoppingServiceTotalCostController.value.text) + (shoppingAmount > 25000 ? shoppingAmount : 0) / currencyConversionRate));
 
@@ -52,9 +54,9 @@ class OrderSummary extends StatelessWidget {
             value: "${agentShoppingController.agentShoppingServiceTotalCostController.value.text} CAD",
           ),
           SummaryRow(
-            title: PartialCheckoutTexts.shoppingCost,
-            value: shoppingAmount > 25000 ? "${ProductServices.getAmount(price: shoppingAmount / currencyConversionRate)} ${GlobalTexts.bdt}" : GlobalTexts.pending,
-            valueColor: shoppingAmount > 25000 ? AppColors.black : AppColors.error,
+            title: "${PartialCheckoutTexts.shoppingCost} (1 CAD = $currencyConversionRate BDT)",
+            value: shoppingAmount > maxBudget ? "${ProductServices.getAmount(price: (shoppingAmount / currencyConversionRate) + agentTransportationFee)} ${GlobalTexts.bdt}" : GlobalTexts.pending,
+            valueColor: shoppingAmount > maxBudget ? AppColors.black : AppColors.error,
           ),
           SummaryRow(
             title: PartialCheckoutTexts.shippingCost,
@@ -63,6 +65,11 @@ class OrderSummary extends StatelessWidget {
           ),
           SummaryRow(
             title: PartialCheckoutTexts.dropOffCost,
+            value: GlobalTexts.pending,
+            valueColor: AppColors.error,
+          ),
+          SummaryRow(
+            title: PartialCheckoutTexts.promoDiscount,
             value: GlobalTexts.pending,
             valueColor: AppColors.error,
           ),

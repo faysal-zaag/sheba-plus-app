@@ -10,6 +10,7 @@ class GlobalTexts {
   static String get thisFieldIsRequired => "thisFieldIsRequired".tr;
   static String get continueText => "continueText".tr;
   static String get next => "next".tr;
+  static String get apply => "apply".tr;
   static String get yes => "yes".tr;
   static String get no => "no".tr;
   static String get pending => "pending".tr;
