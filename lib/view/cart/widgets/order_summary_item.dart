@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sheba_plus/models/display_service/display_service_product.dart';
 import 'package:sheba_plus/models/product/product.model.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 
 class OrderSummaryItem extends StatelessWidget {
   final DisplayCenterProduct product;

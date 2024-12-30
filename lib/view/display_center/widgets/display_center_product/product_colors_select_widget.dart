@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sheba_plus/models/display_service/color.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/utils/utils.dart';
 
 import '../../../../utils/constant/app_colors.dart';

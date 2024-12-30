@@ -6,7 +6,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sheba_plus/controllers/navigation_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/banner/controller/banner_controller.dart';
 import 'package:sheba_plus/view/category/controller/category_controller.dart';
@@ -86,12 +86,14 @@ class _DisplayCenterProductListScreenState
   }
 
   void startAutoChange() {
-    _debounce = Timer.periodic(const Duration(seconds: 5), (Timer t) {
-      setState(() {
-        currentImageIndex =
-            (currentImageIndex + 1) % bannerController.banners.length;
+    if(bannerController.banners.isNotEmpty) {
+      _debounce = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+        setState(() {
+          currentImageIndex =
+              (currentImageIndex + 1) % bannerController.banners.length;
+        });
       });
-    });
+    }
   }
 
   focusOnOff() {
@@ -176,7 +178,9 @@ class _DisplayCenterProductListScreenState
                                     ),
                             ),
                           ),
-                          banner: bannerController.banners[currentImageIndex],
+                          banner: bannerController.banners.isNotEmpty
+                              ? bannerController.banners[currentImageIndex]
+                              : null,
                           showSearchField:
                               navigationController.selectedIndex.value == 2
                                   ? false

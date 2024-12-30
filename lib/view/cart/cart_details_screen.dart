@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/controllers/global_controller.dart';
-import 'package:sheba_plus/data/mock_data.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/view/cart/controller/cart_controller.dart';
 import 'package:sheba_plus/view/components/custom_header_container.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
@@ -22,12 +21,19 @@ class CartDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PrimaryScaffold(
       body: Obx(
-        () =>  Column(
-                children: [
-                  const CustomHeaderContainer(title: 'My Cart'),
-                  2.kH,
-                  Expanded(
-                    child: cartController.cart.value.cartDetailsList.isEmpty ? Center(child: Text('No cart items', style: Theme.of(context).textTheme.bodySmall,),) : ListView(
+        () => Column(
+          children: [
+            const CustomHeaderContainer(title: 'My Cart'),
+            2.kH,
+            Expanded(
+              child: cartController.cart.value.cartDetailsList.isEmpty
+                  ? Center(
+                      child: Text(
+                        'No cart items',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    )
+                  : ListView(
                       children: [
                         Container(
                           padding: const EdgeInsets.all(10.0),
@@ -45,36 +51,37 @@ class CartDetailsScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        if(cartController.cart.value.cartDetailsList.isNotEmpty)...[
+                        if (cartController
+                            .cart.value.cartDetailsList.isNotEmpty) ...[
                           20.kH,
                           Container(
                             padding: const EdgeInsets.all(14.0),
                             color: AppColors.white,
                             child: OrderSummaryItems(
                               cartDetailsList:
-                              cartController.cart.value.cartDetailsList,
+                                  cartController.cart.value.cartDetailsList,
                             ),
                           )
                         ]
                       ],
                     ),
-                  ),
-                  if(cartController.cart.value.cartDetailsList.isNotEmpty)
-                  Container(
-                    color: AppColors.border,
-                    padding: const EdgeInsets.all(10.0),
-                    child: CustomPrimaryButton(
-                      label: 'Proceed to Checkout',
-                      onClick: () {
-                        globalController.showRedeemPointModalSheet(
-                            context: context,
-                            totalDue: 150.00,
-                            totalRedeemPoints: 80000);
-                      },
-                    ),
-                  )
-                ],
-              ),
+            ),
+            if (cartController.cart.value.cartDetailsList.isNotEmpty)
+              Container(
+                color: AppColors.border,
+                padding: const EdgeInsets.all(10.0),
+                child: CustomPrimaryButton(
+                  label: 'Proceed to Checkout',
+                  onClick: () {
+                    globalController.showRedeemPointModalSheet(
+                        context: context,
+                        totalDue: 150.00,
+                        totalRedeemPoints: 80000);
+                  },
+                ),
+              )
+          ],
+        ),
       ),
     );
   }
