@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zoom_videosdk/native/zoom_videosdk.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:device_preview/device_preview.dart'; // Add device_preview package
@@ -22,6 +23,10 @@ void main() async {
   await GetStorage.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+  InitConfig initConfig = InitConfig(
+    domain: "zoom.us",
+    enableLog: true,
   );
   runApp(
     kIsWeb

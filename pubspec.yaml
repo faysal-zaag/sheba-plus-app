@@ -45,6 +45,7 @@ dependencies:
   side_sheet: ^1.0.4
   shimmer: ^3.0.0
   pull_to_refresh: ^2.0.0
+  flutter_zoom_videosdk: ^1.12.10
 
 dev_dependencies:
   flutter_test:
