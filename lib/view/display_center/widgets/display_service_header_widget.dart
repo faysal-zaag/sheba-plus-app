@@ -44,7 +44,7 @@ class DisplayServiceHeaderWidget extends StatelessWidget {
           ),
           10.kH,
         ],
-        Obx(() => GestureDetector(
+        GestureDetector(
               onTap: () {
                 searchFocusNode.unfocus();
               },
@@ -58,7 +58,7 @@ class DisplayServiceHeaderWidget extends StatelessWidget {
                 suffixIcon: suffixWidget,
                 focusNode: searchFocusNode,
               ),
-            )),
+            ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

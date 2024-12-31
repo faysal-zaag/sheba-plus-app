@@ -7,6 +7,7 @@ import 'package:sheba_plus/view/cart/controller/cart_controller.dart';
 import 'package:sheba_plus/view/components/custom_header_container.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
+import 'package:sheba_plus/view/display_center/controller/display_service_controller.dart';
 
 import 'widgets/cart_item_card.dart';
 import 'widgets/order_summary_items.dart';
@@ -16,6 +17,7 @@ class CartDetailsScreen extends StatelessWidget {
 
   final globalController = Get.find<GlobalController>();
   final cartController = Get.find<CartController>();
+  final displayServiceController = Get.find<DisplayCenterServiceController>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,12 @@ class CartDetailsScreen extends StatelessWidget {
       body: Obx(
         () => Column(
           children: [
-            const CustomHeaderContainer(title: 'My Cart'),
+            CustomHeaderContainer(
+              title: 'My Cart',
+              onBack: () {
+                displayServiceController.searchFocusNode.value.unfocus();
+              },
+            ),
             2.kH,
             Expanded(
               child: cartController.cart.value.cartDetailsList.isEmpty

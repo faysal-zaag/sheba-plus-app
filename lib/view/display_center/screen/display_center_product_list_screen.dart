@@ -39,7 +39,6 @@ class _DisplayCenterProductListScreenState
       RefreshController(initialRefresh: false);
   int currentImageIndex = 0;
   bool screenLoading = false;
-  final FocusNode searchFocusNode = FocusNode();
 
   _initCall() async {
     _startLoading();
@@ -86,7 +85,7 @@ class _DisplayCenterProductListScreenState
   }
 
   void startAutoChange() {
-    if(bannerController.banners.isNotEmpty) {
+    if (bannerController.banners.isNotEmpty) {
       _debounce = Timer.periodic(const Duration(seconds: 5), (Timer t) {
         setState(() {
           currentImageIndex =
@@ -99,12 +98,21 @@ class _DisplayCenterProductListScreenState
   focusOnOff() {
     if (navigationController.selectedIndex.value == 2) {
       Future.delayed(Duration.zero, () {
-        searchFocusNode.requestFocus();
+        displayCenterServiceController.searchFocusNode.value.requestFocus();
       });
     } else {
       Future.delayed(Duration.zero, () {
-        searchFocusNode.unfocus();
+        displayCenterServiceController.searchFocusNode.value.unfocus();
       });
+    }
+  }
+
+  clearSearchText() {
+    if (displayCenterServiceController
+        .productNameSearchController.value.text.isNotEmpty) {
+      displayCenterServiceController.productNameSearchController.value.clear();
+      getSearchProduct();
+      displayCenterServiceController.productNameSearchController.refresh();
     }
   }
 
@@ -144,26 +152,17 @@ class _DisplayCenterProductListScreenState
                       children: [
                         DisplayServiceHeaderWidget(
                           searchOnChange: (value) {
+                            displayCenterServiceController
+                                .productNameSearchController
+                                .refresh();
                             getSearchProduct();
                           },
-                          suffixWidget: GestureDetector(
-                            onTap: () {
-                              if (displayCenterServiceController
-                                  .productNameSearchController
-                                  .value
-                                  .text
-                                  .isNotEmpty) {
-                                displayCenterServiceController
-                                    .productNameSearchController.value
-                                    .clear();
-                                getSearchProduct();
-                                displayCenterServiceController
-                                    .productNameSearchController
-                                    .refresh();
-                              }
-                            },
-                            child: Obx(
-                              () => displayCenterServiceController
+                          suffixWidget: Obx(
+                            () => GestureDetector(
+                              onTap: () {
+                                clearSearchText();
+                              },
+                              child: displayCenterServiceController
                                       .productNameSearchController
                                       .value
                                       .text
@@ -185,7 +184,8 @@ class _DisplayCenterProductListScreenState
                               navigationController.selectedIndex.value == 2
                                   ? false
                                   : true,
-                          searchFocusNode: searchFocusNode,
+                          searchFocusNode: displayCenterServiceController
+                              .searchFocusNode.value,
                         ),
                         Obx(
                           () => displayCenterServiceController
