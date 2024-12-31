@@ -12,6 +12,7 @@ class AgentOrderDTO with _$AgentOrderDTO {
     @Default(0) num estimatedBudget,
     @Default(0) num hourBooked,
     @Default(Address()) Address deliveryAddress,
+    String? promoCode,
     @Default(false) bool dropOffService,
   }) = _AgentOrderDTO;
 

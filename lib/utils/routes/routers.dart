@@ -1,11 +1,5 @@
 import 'package:get/get.dart';
 import 'package:sheba_plus/models/notification/user_notification.dart';
-import 'package:sheba_plus/view/profile/account-management/change_password_screen.dart';
-import 'package:sheba_plus/view/profile/final-checkout/final_checkout_screen.dart';
-import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
-import 'package:sheba_plus/view/cart/cart_details_screen.dart';
-import 'package:sheba_plus/view/profile/order-history/order_details_screen.dart';
-import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_order_info_screen.dart';
 import 'package:sheba_plus/view/auth/forget-password/forget_password_screen.dart';
 import 'package:sheba_plus/view/auth/forget-password/reset_password_email_screen.dart';
 import 'package:sheba_plus/view/auth/forget-password/reset_password_email_verification_screen.dart';
@@ -19,12 +13,16 @@ import 'package:sheba_plus/view/cart/cart_details_screen.dart';
 import 'package:sheba_plus/view/display_center/screen/display_center_product_details_screen.dart';
 import 'package:sheba_plus/view/display_center/screen/display_center_product_list_screen.dart';
 import 'package:sheba_plus/view/home/home_screen.dart';
+import 'package:sheba_plus/view/profile/account-management/change_password_screen.dart';
+import 'package:sheba_plus/view/profile/final-checkout/final_checkout_screen.dart';
 import 'package:sheba_plus/view/profile/notification/notification_details_screen.dart';
+import 'package:sheba_plus/view/profile/order-history/order_details_screen.dart';
 import 'package:sheba_plus/view/profile/profile_screen.dart';
 import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_order_info_screen.dart';
+import 'package:sheba_plus/view/services/friends-and-family/friends_and_family_shopping_details_screen.dart';
 import 'package:sheba_plus/view/services/partial_checkout_screen.dart';
+import 'package:sheba_plus/view/services/third_party/third_party_shop_and_item_details_screen.dart';
 import 'package:sheba_plus/view/splash_screen.dart';
-import 'package:sheba_plus/view/third_party/third_party_shop_and_item_details_screen.dart';
 
 import 'routes.dart';
 
@@ -123,6 +121,10 @@ class AppRouters {
     GetPage(
       name: Routes.thirdPartyShopAndItemDetailsScreen,
       page: () => ThirdPartyShopAndItemDetailsScreen(),
+    ),
+    GetPage(
+      name: Routes.friendsAndFamilyShoppingDetailsScreen,
+      page: () => FriendsAndFamilyShoppingDetails(),
     ),
     GetPage(
       name: Routes.finalCheckOutScreen,

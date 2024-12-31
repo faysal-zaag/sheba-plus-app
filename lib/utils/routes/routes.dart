@@ -24,6 +24,7 @@ class Routes {
   static const String displayCenterServiceProductListScreen = '/display-center-service-products';
   static const String displayCenterServiceProductDetailsScreen = '/display-center-service-products-details';
   static const String thirdPartyShopAndItemDetailsScreen = '/third_party_shop_and_item_details';
+  static const String friendsAndFamilyShoppingDetailsScreen = '/friends-and-family-shopping-details';
 
 
   // Order

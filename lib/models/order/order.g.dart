@@ -24,6 +24,9 @@ _$OrderImpl _$$OrderImplFromJson(Map<String, dynamic> json) => _$OrderImpl(
       dropOffAddress: json['dropOffAddress'] == null
           ? const Address()
           : Address.fromJson(json['dropOffAddress'] as Map<String, dynamic>),
+      promo: json['promo'] == null
+          ? const PromoCode()
+          : PromoCode.fromJson(json['promo'] as Map<String, dynamic>),
       shoppingDetailsList: (json['shoppingDetailsList'] as List<dynamic>?)
               ?.map((e) => ShoppingDetails.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -43,5 +46,6 @@ Map<String, dynamic> _$$OrderImplToJson(_$OrderImpl instance) =>
       'agentMeeting': instance.agentMeeting,
       'invoice': instance.invoice,
       'dropOffAddress': instance.dropOffAddress,
+      'promo': instance.promo,
       'shoppingDetailsList': instance.shoppingDetailsList,
     };

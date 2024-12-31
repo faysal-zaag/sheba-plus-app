@@ -2,19 +2,18 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
+import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
-import 'package:sheba_plus/view/third_party/controller/third_party_service_controller.dart';
-import 'package:sheba_plus/view/third_party/widget/shop_item_information_card.dart';
-
-import '../../../utils/constant/app_colors.dart';
-import '../../components/custom_text_field.dart';
-import '../../components/two_options_radio_row.dart';
+import 'package:sheba_plus/view/components/custom_text_field.dart';
+import 'package:sheba_plus/view/components/two_options_radio_row.dart';
+import 'package:sheba_plus/view/services/third_party/controller/third_party_service_controller.dart';
+import 'package:sheba_plus/view/services/widget/shop_item_information_card.dart';
 
 class ShopAndItemInformationCard extends StatelessWidget {
-  final TextEditingController shopNameController;
-  final TextEditingController shopAddressController;
+  final TextEditingController nameController;
+  final TextEditingController addressController;
   final TextEditingController contactNumberController;
   final TextEditingController howMuchNeedToPay;
   final bool alreadyPaid;
@@ -22,12 +21,13 @@ class ShopAndItemInformationCard extends StatelessWidget {
   final TextEditingController unPaidTextEditingController;
   final List<ShopItem> items;
   final int shopIndex;
+  final bool friendsAndFamily;
   final GlobalKey<FormState> formKey;
 
   ShopAndItemInformationCard({
     super.key,
-    required this.shopNameController,
-    required this.shopAddressController,
+    required this.nameController,
+    required this.addressController,
     required this.contactNumberController,
     required this.unPaidTextEditingController,
     required this.items,
@@ -36,6 +36,7 @@ class ShopAndItemInformationCard extends StatelessWidget {
     required this.howMuchNeedToPay,
     required this.alreadyPaid,
     required this.pickUpService,
+    this.friendsAndFamily = false,
   });
 
   final thirdPartyServiceController = Get.find<ThirdPartyServiceController>();
@@ -45,13 +46,15 @@ class ShopAndItemInformationCard extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 4),
+          padding: const EdgeInsets.only(left: 16.0, right: 4, bottom: 16.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Shop and Item Information',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+              Expanded(
+                child: Text(
+                  '${friendsAndFamily ? "Relative/Friend" : "Shop"} and Item Information',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                ),
               ),
               TextButton(
                 onPressed: () {
@@ -65,7 +68,7 @@ class ShopAndItemInformationCard extends StatelessWidget {
                     ),
                     3.kW,
                     Text(
-                      'Delete Shop',
+                      'Delete ${friendsAndFamily ? "" : "Shop"}',
                       style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.error),
                     )
                   ],
@@ -90,25 +93,25 @@ class ShopAndItemInformationCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Shop Information',
+                        friendsAndFamily ? "Relative or Friend Information" : 'Shop Information',
                         style: Theme.of(context).textTheme.labelMedium,
                       ),
                       10.kH,
                       CustomTextField(
-                        controller: shopNameController,
-                        hintText: 'Enter shop name',
+                        controller: nameController,
+                        hintText: "Enter ${friendsAndFamily ? "relative" : "shop"} name",
                         validator: (value) => InputValidators.generalValidator(value: value, message: "Shop name is required"),
                       ),
                       10.kH,
                       CustomTextField(
-                        controller: shopAddressController,
-                        hintText: 'Enter shop address',
+                        controller: addressController,
+                        hintText: 'Enter ${friendsAndFamily ? "relative" : "shop"} address',
                         validator: (value) => InputValidators.generalValidator(value: value, message: "Shop address is required"),
                       ),
                       10.kH,
                       CustomTextField(
                         controller: contactNumberController,
-                        hintText: 'Enter contact person number',
+                        hintText: 'Enter ${friendsAndFamily ? "relative" : "contact person"} number',
                         validator: (value) => InputValidators.generalValidator(value: value, message: "Contact number is required"),
                       ),
                       20.kH,
@@ -172,58 +175,64 @@ class ShopAndItemInformationCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Have You Already Paid?', style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
-                    10.kH,
-                    TwoOptionsRadioRow(
-                      selectedValue: alreadyPaid,
-                      onChanged: (value) => thirdPartyServiceController.togglePaidOrNot(shopIndex: shopIndex),
-                    ),
-                    10.kH,
-                    alreadyPaid
-                        ? Container(
-                      padding: const EdgeInsets.all(10),
-                      width: MediaQuery.of(context).size.width * .4,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    if (!friendsAndFamily)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Already Paid',
-                            style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.white),
+                          Text('Have You Already Paid?', style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600)),
+                          10.kH,
+                          TwoOptionsRadioRow(
+                            selectedValue: alreadyPaid,
+                            onChanged: (value) => thirdPartyServiceController.togglePaidOrNot(shopIndex: shopIndex),
                           ),
-                          10.kW,
-                          const Icon(
-                            Icons.check_circle,
-                            color: AppColors.white,
-                          )
+                          10.kH,
+                          alreadyPaid
+                              ? Container(
+                                  padding: const EdgeInsets.all(10),
+                                  width: MediaQuery.of(context).size.width * .4,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Already Paid',
+                                        style: Theme.of(context).textTheme.labelMedium?.copyWith(color: AppColors.white),
+                                      ),
+                                      10.kW,
+                                      const Icon(
+                                        Icons.check_circle,
+                                        color: AppColors.white,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'How much we need to pay*',
+                                      style: Theme.of(context).textTheme.labelMedium,
+                                    ),
+                                    8.kH,
+                                    CustomTextField(
+                                      controller: howMuchNeedToPay,
+                                      textInputType: TextInputType.number,
+                                      suffixIcon: Padding(
+                                        padding: const EdgeInsets.only(top: 15.0),
+                                        child: Text(
+                                          '(BDT)',
+                                          style: Theme.of(context).textTheme.labelMedium,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                          16.kH,
                         ],
                       ),
-                    )
-                        : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'How much we need to pay*',
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                        8.kH,
-                        CustomTextField(
-                          controller: howMuchNeedToPay,
-                          textInputType: TextInputType.number,
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.only(top: 15.0),
-                            child: Text(
-                              '(BDT)',
-                              style: Theme.of(context).textTheme.labelMedium,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    15.kH,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

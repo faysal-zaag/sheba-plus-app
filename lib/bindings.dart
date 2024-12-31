@@ -18,7 +18,8 @@ import 'package:sheba_plus/view/profile/order-history/controller/order_controlle
 import 'package:sheba_plus/view/profile/reward-points/controller/reward_controller.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
-import 'package:sheba_plus/view/third_party/controller/third_party_service_controller.dart';
+import 'package:sheba_plus/view/services/friends-and-family/controller/friends_and_family_shopping_controller.dart';
+import 'package:sheba_plus/view/services/third_party/controller/third_party_service_controller.dart';
 import 'package:sheba_plus/view_model/repositories/address.repository.dart';
 import 'package:sheba_plus/view_model/repositories/agent_shopping.repository.dart';
 import 'package:sheba_plus/view_model/repositories/auth.repositories.dart';
@@ -65,6 +66,7 @@ class MyBindings implements Bindings {
     Get.put(AgentShoppingController(Get.find<AgentShoppingRepository>(), Get.find<AddressController>(), Get.find<NotificationController>()));
     Get.put(CartController());
     Get.put(ThirdPartyServiceController());
+    Get.put(FriendsAndFamilyShoppingController());
     Get.put(BannerController(Get.find<BannerRepository>()));
 
     Get.put<AuthController>(AuthController(Get.find<AuthRepository>(), Get.find<StorageService>(), Get.find<ProfileController>(), Get.find<AddressController>()));

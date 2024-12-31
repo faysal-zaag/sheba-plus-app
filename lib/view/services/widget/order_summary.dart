@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/data/api/config.dart';
+import 'package:sheba_plus/models/promo-code/promo_code.dart';
 import 'package:sheba_plus/services/product_services.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
@@ -68,10 +69,16 @@ class OrderSummary extends StatelessWidget {
             value: GlobalTexts.pending,
             valueColor: AppColors.error,
           ),
-          SummaryRow(
-            title: PartialCheckoutTexts.promoDiscount,
-            value: GlobalTexts.pending,
-            valueColor: AppColors.error,
+          Obx(
+            () {
+              PromoCode promoDiscount = agentShoppingController.promoDiscount.value;
+
+              return SummaryRow(
+                title: "${PartialCheckoutTexts.promoDiscount} ${promoDiscount.discountType.isNotEmpty ? "(${promoDiscount.percent}${promoDiscount.discountType == "PERCENTAGE" ? "%" : " CAD"})" : ""}",
+                value: GlobalTexts.pending,
+                valueColor: AppColors.error,
+              );
+            },
           ),
           const Divider(
             color: AppColors.divider,

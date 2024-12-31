@@ -6,7 +6,7 @@ import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/profile/notification/widget/shopping-details/shopping_details_row.dart';
-import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
+import 'package:sheba_plus/view/services/services_texts.dart';
 import 'package:sheba_plus/view/services/widget/summary_row.dart';
 
 class ShoppingDetailsContainer extends StatelessWidget {
@@ -26,7 +26,7 @@ class ShoppingDetailsContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            AgentShoppingTexts.shopName,
+            ServicesTexts.shopName,
             style: subTextStyle,
           ),
           Text(
@@ -35,10 +35,10 @@ class ShoppingDetailsContainer extends StatelessWidget {
           ),
           16.kH,
           ShoppingDetailsRow(
-            title1: AgentShoppingTexts.totalItem,
-            title2: AgentShoppingTexts.itemQty,
-            title3: AgentShoppingTexts.itemPrice,
-            title4: AgentShoppingTexts.totalItemPrice,
+            title1: ServicesTexts.totalItem,
+            title2: ServicesTexts.itemQty,
+            title3: ServicesTexts.itemPrice,
+            title4: ServicesTexts.totalItemPrice,
             header: true,
           ),
           6.kH,
@@ -51,7 +51,7 @@ class ShoppingDetailsContainer extends StatelessWidget {
             ),
           ),
           const Divider(),
-          SummaryRow(title: AgentShoppingTexts.totalItemPrice, value: "BDT ${ProductServices.getAmount(price: shoppingDetails.totalItemPrice * currentCadRate)}"),
+          SummaryRow(title: ServicesTexts.totalItemPrice, value: "BDT ${ProductServices.getAmount(price: shoppingDetails.totalItemPrice * currentCadRate)}"),
         ],
       ),
     );

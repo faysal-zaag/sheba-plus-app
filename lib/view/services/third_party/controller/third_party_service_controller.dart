@@ -11,7 +11,7 @@ class ThirdPartyServiceController extends GetxController {
   final needPickUpService = true.obs;
 
   // Shops list containing Shop objects
-  final RxList<Shop> shops = <Shop>[].obs;
+  final RxList<Shop> thirdPartyShops = <Shop>[].obs;
 
   @override
   void onInit() {
@@ -20,47 +20,47 @@ class ThirdPartyServiceController extends GetxController {
   }
 
   void togglePaidOrNot({required int shopIndex}) {
-    shops[shopIndex].alreadyPaid(!shops[shopIndex].alreadyPaid.value);
-    shops.refresh();
+    thirdPartyShops[shopIndex].alreadyPaid(!thirdPartyShops[shopIndex].alreadyPaid.value);
+    thirdPartyShops.refresh();
   }
 
   void needPickUpServiceYesOrNot({required int shopIndex}) {
-    shops[shopIndex].pickUpService(!shops[shopIndex].pickUpService.value);
-    shops.refresh();
+    thirdPartyShops[shopIndex].pickUpService(!thirdPartyShops[shopIndex].pickUpService.value);
+    thirdPartyShops.refresh();
   }
 
   // Add a new shop
   void addNewShop() {
-    shops.add(Shop());
+    thirdPartyShops.add(Shop());
   }
 
   // Delete a shop
   void deleteShop({required int shopIndex}) {
-    if (shops.length > 1) shops.removeAt(shopIndex);
+    if (thirdPartyShops.length > 1) thirdPartyShops.removeAt(shopIndex);
   }
 
   // Add a new item to a shop
   void addNewItem({required int shopIndex}) {
-    shops[shopIndex].items.add(ShopItem());
-    shops.refresh();
+    thirdPartyShops[shopIndex].items.add(ShopItem());
+    thirdPartyShops.refresh();
   }
 
   // Increase item quantity
   void increaseQuantity(int shopIndex, int itemIndex) {
-    shops[shopIndex].items[itemIndex].increaseQuantity();
-    shops.refresh();
+    thirdPartyShops[shopIndex].items[itemIndex].increaseQuantity();
+    thirdPartyShops.refresh();
   }
 
   // Decrease item quantity
   void decreaseQuantity(int shopIndex, int itemIndex) {
-    shops[shopIndex].items[itemIndex].decreaseQuantity();
-    shops.refresh();
+    thirdPartyShops[shopIndex].items[itemIndex].decreaseQuantity();
+    thirdPartyShops.refresh();
   }
 }
 
 class Shop {
-  final TextEditingController shopNameController = TextEditingController();
-  final TextEditingController shopAddressController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
   final TextEditingController contactNumberController = TextEditingController();
   final TextEditingController unPaidTextController = TextEditingController();
   final TextEditingController howMuchNeedToPayController = TextEditingController();

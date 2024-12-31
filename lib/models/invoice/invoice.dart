@@ -17,6 +17,7 @@ class Invoice with _$Invoice {
     @Default(0) num totalAppliedPoint,
     @Default(0) num totalAppliedPointAmount,
     @Default(0) num totalPrice,
+    @Default(0) num promoDiscount,
     @Default(0) num paidAmount,
     @Default(0) num finalPrice,
     @Default(0) num exactFinalPrice,

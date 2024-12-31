@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sheba_plus/models/address/address.dart';
 import 'package:sheba_plus/models/agent-meeting/agent_meeting.dart';
 import 'package:sheba_plus/models/invoice/invoice.dart';
+import 'package:sheba_plus/models/promo-code/promo_code.dart';
 import 'package:sheba_plus/models/shopping-details/shopping_details.dart';
 
 part 'order.freezed.dart';
@@ -21,6 +22,7 @@ class Order with _$Order {
     @Default(AgentMeeting()) AgentMeeting agentMeeting,
     @Default(Invoice()) Invoice invoice,
     @Default(Address()) Address dropOffAddress,
+    @Default(PromoCode()) PromoCode promo,
     @Default([]) List<ShoppingDetails> shoppingDetailsList,
   }) = _Order;
 

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:sheba_plus/models/address/address.dart';
 import 'package:sheba_plus/models/agent-order/agent_order.dto.dart';
 import 'package:sheba_plus/models/invoice/invoice.dart';
+import 'package:sheba_plus/models/promo-code/promo_code.dart';
 import 'package:sheba_plus/models/shopping-details/shopping_details.dart';
 import 'package:sheba_plus/utils/logger.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
@@ -28,14 +29,16 @@ class AgentShoppingController extends GetxController {
   final agentShoppingSpendAmountController = TextEditingController().obs;
   final agentShoppingServiceDurationController = TextEditingController().obs;
   final agentShoppingServiceTotalCostController = TextEditingController().obs;
-  final agentShoppingSPromoCodeController = TextEditingController().obs;
+  final agentShoppingPromoCodeController = TextEditingController().obs;
   final agentShoppingDropOffService = false.obs;
   final sameAsHomeAddress = true.obs;
   final paymentMethod = PaymentMethod.td.obs;
+  final promoDiscount = const PromoCode().obs;
 
   final createAgentBookingLoading = false.obs;
   final updateAgentBookingScheduleLoading = false.obs;
   final extendMeetingTimeOrAmountLoading = false.obs;
+  final verifyPromoCodeLoading = false.obs;
 
   void resetFields() {
     agentShoppingMeetingLocationController.value.clear();
@@ -46,10 +49,12 @@ class AgentShoppingController extends GetxController {
     agentShoppingUtcTime(0);
     agentShoppingSpendAmountController.value.clear();
     agentShoppingServiceDurationController.value.clear();
+    agentShoppingPromoCodeController.value.clear();
     agentShoppingServiceTotalCostController.value.clear();
-    agentShoppingDropOffService(true);
-    sameAsHomeAddress(true);
+    agentShoppingDropOffService(false);
+    sameAsHomeAddress(false);
     paymentMethod(PaymentMethod.td);
+    promoDiscount(const PromoCode());
   }
 
   void togglePaymentMethod({required PaymentMethod method}) {
@@ -86,6 +91,7 @@ class AgentShoppingController extends GetxController {
         estimatedBudget: num.parse(agentShoppingSpendAmountController.value.text),
         hourBooked: num.parse(agentShoppingServiceDurationController.value.text),
         meetingTime: agentShoppingUtcTime.value,
+        promoCode: promoDiscount.value.discountType.isNotEmpty ? promoDiscount.value.code : null,
         deliveryAddress: sameAsHomeAddress.isTrue
             ? _addressController.addresses[0]
             : Address(
@@ -147,6 +153,26 @@ class AgentShoppingController extends GetxController {
       return false;
     } finally {
       extendMeetingTimeOrAmountLoading(false);
+    }
+  }
+
+  Future<bool> verifyPromoCode() async {
+    try {
+      verifyPromoCodeLoading(true);
+
+      final response = await _agentShoppingRepository.verifyPromo(
+        code: agentShoppingPromoCodeController.value.text,
+      );
+
+      promoDiscount(PromoCode.fromJson(response.data));
+
+      return true;
+    } catch (e) {
+      Log.error(e.toString());
+      promoDiscount(const PromoCode());
+      return false;
+    } finally {
+      verifyPromoCodeLoading(false);
     }
   }
 

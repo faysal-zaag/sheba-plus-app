@@ -12,7 +12,7 @@ import 'package:sheba_plus/view/global_texts.dart';
 import 'package:sheba_plus/view/profile/notification/widget/shopping-details/shopping_details_container.dart';
 import 'package:collection/collection.dart';
 import 'package:sheba_plus/view/profile/notification/widget/shopping-details/sopping_summary.dart';
-import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
+import 'package:sheba_plus/view/services/services_texts.dart';
 
 class ShoppingItemDetails extends StatelessWidget {
   final String message;
@@ -52,7 +52,7 @@ class ShoppingItemDetails extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(AgentShoppingTexts.shoppingWithAgent),
+              Text(ServicesTexts.shoppingWithAgent),
               16.kH,
               ...shoppingDetailsList.mapIndexed(
                 (index, shoppingDetails) => Column(

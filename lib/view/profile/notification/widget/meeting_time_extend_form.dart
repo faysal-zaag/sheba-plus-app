@@ -18,7 +18,7 @@ import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';
 import 'package:sheba_plus/view/profile/order-history/controller/order_controller.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
-import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
+import 'package:sheba_plus/view/services/services_texts.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/custom_text_field.dart';
@@ -54,11 +54,11 @@ class _MeetingTimeExtendFormState extends State<MeetingTimeExtendForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Obx(() => Text(AgentShoppingTexts.serviceDuration(hourlyRates: globalController.globalConfig.value.hourlyRates ?? 0))),
+              Obx(() => Text(ServicesTexts.serviceDuration(hourlyRates: globalController.globalConfig.value.hourlyRates ?? 0))),
               12.kH,
               CustomTextField(
                 controller: agentShoppingController.agentShoppingServiceDurationController.value,
-                hintText: AgentShoppingTexts.serviceDurationHintText,
+                hintText: ServicesTexts.serviceDurationHintText,
                 textInputType: TextInputType.number,
                 inputFormatters: [InputFormatters.numberOnly],
                 onChange: (value) {
@@ -72,7 +72,7 @@ class _MeetingTimeExtendFormState extends State<MeetingTimeExtendForm> {
               12.kH,
               CustomTextField(
                 controller: agentShoppingController.agentShoppingServiceTotalCostController.value,
-                hintText: AgentShoppingTexts.serviceDurationCostHintText,
+                hintText: ServicesTexts.serviceDurationCostHintText,
                 suffixIcon: const SizedBox(
                   width: 100,
                   child: Align(
@@ -98,8 +98,8 @@ class _MeetingTimeExtendFormState extends State<MeetingTimeExtendForm> {
                 textInputType: TextInputType.number,
                 inputFormatters: [InputFormatters.numberOnly],
                 controller: agentShoppingController.agentShoppingSpendAmountController.value,
-                label: AgentShoppingTexts.spendAmount,
-                hintText: AgentShoppingTexts.spendAmountHintText,
+                label: ServicesTexts.spendAmount,
+                hintText: ServicesTexts.spendAmountHintText,
                 onChange: (value){
                   agentShoppingController.agentShoppingSpendAmountController.refresh();
                   return null;
@@ -108,19 +108,19 @@ class _MeetingTimeExtendFormState extends State<MeetingTimeExtendForm> {
               ),
               Obx(
                 () => Text(
-                  AgentShoppingTexts.prePaymentWarningMessage(maxValue: globalController.globalConfig.value.maxBudget ?? 0),
+                  ServicesTexts.prePaymentWarningMessage(maxValue: globalController.globalConfig.value.maxBudget ?? 0),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
                 ),
               ),
               8.kH,
               Text(
-                "${AgentShoppingTexts.previousBudget} = $previousBudget BDT",
+                "${ServicesTexts.previousBudget} = $previousBudget BDT",
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               8.kH,
               Obx(
                 () => Text(
-                  "${AgentShoppingTexts.totalBudget} = "
+                  "${ServicesTexts.totalBudget} = "
                   "${formatAmount(getTotalBudget(previousBudget, agentShoppingController.agentShoppingSpendAmountController.value.text, 1))} "
                   "BDT / ${formatAmount(getTotalBudget(previousBudget, agentShoppingController.agentShoppingSpendAmountController.value.text, 1) / currencyConversionRate)} "
                   "CAD (1 CAD = $currencyConversionRate)",
@@ -130,7 +130,7 @@ class _MeetingTimeExtendFormState extends State<MeetingTimeExtendForm> {
               8.kH,
               Obx(
                 () => Text(
-                  "${AgentShoppingTexts.totalPayable} "
+                  "${ServicesTexts.totalPayable} "
                   "= ${formatAmount(getTotalBudget(previousBudget, agentShoppingController.agentShoppingSpendAmountController.value.text, 1) / currencyConversionRate)} CAD",
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
                 ),

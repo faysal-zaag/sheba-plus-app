@@ -4,13 +4,13 @@ import 'package:sheba_plus/utils/constant/app_colors.dart';
 
 class CustomLoader extends StatelessWidget {
   final Color? color;
-  final double? size;
-  const CustomLoader({super.key, this.color, this.size});
+  final double size;
+  const CustomLoader({super.key, this.color, this.size = 50.0});
 
   @override
   Widget build(BuildContext context) {
     return SpinKitFadingCircle(
-      size: size ?? 50.0,
+      size: size,
       color: color ?? AppColors.primary,
     );
   }

@@ -25,6 +25,7 @@ mixin _$AgentOrderDTO {
   num get estimatedBudget => throw _privateConstructorUsedError;
   num get hourBooked => throw _privateConstructorUsedError;
   Address get deliveryAddress => throw _privateConstructorUsedError;
+  String? get promoCode => throw _privateConstructorUsedError;
   bool get dropOffService => throw _privateConstructorUsedError;
 
   /// Serializes this AgentOrderDTO to a JSON map.
@@ -49,6 +50,7 @@ abstract class $AgentOrderDTOCopyWith<$Res> {
       num estimatedBudget,
       num hourBooked,
       Address deliveryAddress,
+      String? promoCode,
       bool dropOffService});
 
   $AddressCopyWith<$Res> get deliveryAddress;
@@ -74,6 +76,7 @@ class _$AgentOrderDTOCopyWithImpl<$Res, $Val extends AgentOrderDTO>
     Object? estimatedBudget = null,
     Object? hourBooked = null,
     Object? deliveryAddress = null,
+    Object? promoCode = freezed,
     Object? dropOffService = null,
   }) {
     return _then(_value.copyWith(
@@ -97,6 +100,10 @@ class _$AgentOrderDTOCopyWithImpl<$Res, $Val extends AgentOrderDTO>
           ? _value.deliveryAddress
           : deliveryAddress // ignore: cast_nullable_to_non_nullable
               as Address,
+      promoCode: freezed == promoCode
+          ? _value.promoCode
+          : promoCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       dropOffService: null == dropOffService
           ? _value.dropOffService
           : dropOffService // ignore: cast_nullable_to_non_nullable
@@ -129,6 +136,7 @@ abstract class _$$AgentOrderDTOImplCopyWith<$Res>
       num estimatedBudget,
       num hourBooked,
       Address deliveryAddress,
+      String? promoCode,
       bool dropOffService});
 
   @override
@@ -153,6 +161,7 @@ class __$$AgentOrderDTOImplCopyWithImpl<$Res>
     Object? estimatedBudget = null,
     Object? hourBooked = null,
     Object? deliveryAddress = null,
+    Object? promoCode = freezed,
     Object? dropOffService = null,
   }) {
     return _then(_$AgentOrderDTOImpl(
@@ -176,6 +185,10 @@ class __$$AgentOrderDTOImplCopyWithImpl<$Res>
           ? _value.deliveryAddress
           : deliveryAddress // ignore: cast_nullable_to_non_nullable
               as Address,
+      promoCode: freezed == promoCode
+          ? _value.promoCode
+          : promoCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       dropOffService: null == dropOffService
           ? _value.dropOffService
           : dropOffService // ignore: cast_nullable_to_non_nullable
@@ -193,6 +206,7 @@ class _$AgentOrderDTOImpl implements _AgentOrderDTO {
       this.estimatedBudget = 0,
       this.hourBooked = 0,
       this.deliveryAddress = const Address(),
+      this.promoCode,
       this.dropOffService = false})
       : _meetingLocations = meetingLocations;
 
@@ -222,12 +236,14 @@ class _$AgentOrderDTOImpl implements _AgentOrderDTO {
   @JsonKey()
   final Address deliveryAddress;
   @override
+  final String? promoCode;
+  @override
   @JsonKey()
   final bool dropOffService;
 
   @override
   String toString() {
-    return 'AgentOrderDTO(meetingLocations: $meetingLocations, meetingTime: $meetingTime, estimatedBudget: $estimatedBudget, hourBooked: $hourBooked, deliveryAddress: $deliveryAddress, dropOffService: $dropOffService)';
+    return 'AgentOrderDTO(meetingLocations: $meetingLocations, meetingTime: $meetingTime, estimatedBudget: $estimatedBudget, hourBooked: $hourBooked, deliveryAddress: $deliveryAddress, promoCode: $promoCode, dropOffService: $dropOffService)';
   }
 
   @override
@@ -245,6 +261,8 @@ class _$AgentOrderDTOImpl implements _AgentOrderDTO {
                 other.hourBooked == hourBooked) &&
             (identical(other.deliveryAddress, deliveryAddress) ||
                 other.deliveryAddress == deliveryAddress) &&
+            (identical(other.promoCode, promoCode) ||
+                other.promoCode == promoCode) &&
             (identical(other.dropOffService, dropOffService) ||
                 other.dropOffService == dropOffService));
   }
@@ -258,6 +276,7 @@ class _$AgentOrderDTOImpl implements _AgentOrderDTO {
       estimatedBudget,
       hourBooked,
       deliveryAddress,
+      promoCode,
       dropOffService);
 
   /// Create a copy of AgentOrderDTO
@@ -283,6 +302,7 @@ abstract class _AgentOrderDTO implements AgentOrderDTO {
       final num estimatedBudget,
       final num hourBooked,
       final Address deliveryAddress,
+      final String? promoCode,
       final bool dropOffService}) = _$AgentOrderDTOImpl;
 
   factory _AgentOrderDTO.fromJson(Map<String, dynamic> json) =
@@ -298,6 +318,8 @@ abstract class _AgentOrderDTO implements AgentOrderDTO {
   num get hourBooked;
   @override
   Address get deliveryAddress;
+  @override
+  String? get promoCode;
   @override
   bool get dropOffService;
 

@@ -31,6 +31,7 @@ mixin _$Invoice {
   num get totalAppliedPoint => throw _privateConstructorUsedError;
   num get totalAppliedPointAmount => throw _privateConstructorUsedError;
   num get totalPrice => throw _privateConstructorUsedError;
+  num get promoDiscount => throw _privateConstructorUsedError;
   num get paidAmount => throw _privateConstructorUsedError;
   num get finalPrice => throw _privateConstructorUsedError;
   num get exactFinalPrice => throw _privateConstructorUsedError;
@@ -61,6 +62,7 @@ abstract class $InvoiceCopyWith<$Res> {
       num totalAppliedPoint,
       num totalAppliedPointAmount,
       num totalPrice,
+      num promoDiscount,
       num paidAmount,
       num finalPrice,
       num exactFinalPrice});
@@ -92,6 +94,7 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
     Object? totalAppliedPoint = null,
     Object? totalAppliedPointAmount = null,
     Object? totalPrice = null,
+    Object? promoDiscount = null,
     Object? paidAmount = null,
     Object? finalPrice = null,
     Object? exactFinalPrice = null,
@@ -141,6 +144,10 @@ class _$InvoiceCopyWithImpl<$Res, $Val extends Invoice>
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as num,
+      promoDiscount: null == promoDiscount
+          ? _value.promoDiscount
+          : promoDiscount // ignore: cast_nullable_to_non_nullable
+              as num,
       paidAmount: null == paidAmount
           ? _value.paidAmount
           : paidAmount // ignore: cast_nullable_to_non_nullable
@@ -176,6 +183,7 @@ abstract class _$$InvoiceImplCopyWith<$Res> implements $InvoiceCopyWith<$Res> {
       num totalAppliedPoint,
       num totalAppliedPointAmount,
       num totalPrice,
+      num promoDiscount,
       num paidAmount,
       num finalPrice,
       num exactFinalPrice});
@@ -205,6 +213,7 @@ class __$$InvoiceImplCopyWithImpl<$Res>
     Object? totalAppliedPoint = null,
     Object? totalAppliedPointAmount = null,
     Object? totalPrice = null,
+    Object? promoDiscount = null,
     Object? paidAmount = null,
     Object? finalPrice = null,
     Object? exactFinalPrice = null,
@@ -254,6 +263,10 @@ class __$$InvoiceImplCopyWithImpl<$Res>
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as num,
+      promoDiscount: null == promoDiscount
+          ? _value.promoDiscount
+          : promoDiscount // ignore: cast_nullable_to_non_nullable
+              as num,
       paidAmount: null == paidAmount
           ? _value.paidAmount
           : paidAmount // ignore: cast_nullable_to_non_nullable
@@ -285,6 +298,7 @@ class _$InvoiceImpl implements _Invoice {
       this.totalAppliedPoint = 0,
       this.totalAppliedPointAmount = 0,
       this.totalPrice = 0,
+      this.promoDiscount = 0,
       this.paidAmount = 0,
       this.finalPrice = 0,
       this.exactFinalPrice = 0});
@@ -327,6 +341,9 @@ class _$InvoiceImpl implements _Invoice {
   final num totalPrice;
   @override
   @JsonKey()
+  final num promoDiscount;
+  @override
+  @JsonKey()
   final num paidAmount;
   @override
   @JsonKey()
@@ -337,7 +354,7 @@ class _$InvoiceImpl implements _Invoice {
 
   @override
   String toString() {
-    return 'Invoice(agentFee: $agentFee, shoppingCost: $shoppingCost, shippingCost: $shippingCost, dropOffCost: $dropOffCost, totalVat: $totalVat, totalTax: $totalTax, totalProduct: $totalProduct, totalProductPrice: $totalProductPrice, totalAppliedPoint: $totalAppliedPoint, totalAppliedPointAmount: $totalAppliedPointAmount, totalPrice: $totalPrice, paidAmount: $paidAmount, finalPrice: $finalPrice, exactFinalPrice: $exactFinalPrice)';
+    return 'Invoice(agentFee: $agentFee, shoppingCost: $shoppingCost, shippingCost: $shippingCost, dropOffCost: $dropOffCost, totalVat: $totalVat, totalTax: $totalTax, totalProduct: $totalProduct, totalProductPrice: $totalProductPrice, totalAppliedPoint: $totalAppliedPoint, totalAppliedPointAmount: $totalAppliedPointAmount, totalPrice: $totalPrice, promoDiscount: $promoDiscount, paidAmount: $paidAmount, finalPrice: $finalPrice, exactFinalPrice: $exactFinalPrice)';
   }
 
   @override
@@ -368,6 +385,8 @@ class _$InvoiceImpl implements _Invoice {
                 other.totalAppliedPointAmount == totalAppliedPointAmount) &&
             (identical(other.totalPrice, totalPrice) ||
                 other.totalPrice == totalPrice) &&
+            (identical(other.promoDiscount, promoDiscount) ||
+                other.promoDiscount == promoDiscount) &&
             (identical(other.paidAmount, paidAmount) ||
                 other.paidAmount == paidAmount) &&
             (identical(other.finalPrice, finalPrice) ||
@@ -391,6 +410,7 @@ class _$InvoiceImpl implements _Invoice {
       totalAppliedPoint,
       totalAppliedPointAmount,
       totalPrice,
+      promoDiscount,
       paidAmount,
       finalPrice,
       exactFinalPrice);
@@ -424,6 +444,7 @@ abstract class _Invoice implements Invoice {
       final num totalAppliedPoint,
       final num totalAppliedPointAmount,
       final num totalPrice,
+      final num promoDiscount,
       final num paidAmount,
       final num finalPrice,
       final num exactFinalPrice}) = _$InvoiceImpl;
@@ -452,6 +473,8 @@ abstract class _Invoice implements Invoice {
   num get totalAppliedPointAmount;
   @override
   num get totalPrice;
+  @override
+  num get promoDiscount;
   @override
   num get paidAmount;
   @override

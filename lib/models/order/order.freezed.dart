@@ -31,6 +31,7 @@ mixin _$Order {
   AgentMeeting get agentMeeting => throw _privateConstructorUsedError;
   Invoice get invoice => throw _privateConstructorUsedError;
   Address get dropOffAddress => throw _privateConstructorUsedError;
+  PromoCode get promo => throw _privateConstructorUsedError;
   List<ShoppingDetails> get shoppingDetailsList =>
       throw _privateConstructorUsedError;
 
@@ -60,11 +61,13 @@ abstract class $OrderCopyWith<$Res> {
       AgentMeeting agentMeeting,
       Invoice invoice,
       Address dropOffAddress,
+      PromoCode promo,
       List<ShoppingDetails> shoppingDetailsList});
 
   $AgentMeetingCopyWith<$Res> get agentMeeting;
   $InvoiceCopyWith<$Res> get invoice;
   $AddressCopyWith<$Res> get dropOffAddress;
+  $PromoCodeCopyWith<$Res> get promo;
 }
 
 /// @nodoc
@@ -93,6 +96,7 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
     Object? agentMeeting = null,
     Object? invoice = null,
     Object? dropOffAddress = null,
+    Object? promo = null,
     Object? shoppingDetailsList = null,
   }) {
     return _then(_value.copyWith(
@@ -140,6 +144,10 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
           ? _value.dropOffAddress
           : dropOffAddress // ignore: cast_nullable_to_non_nullable
               as Address,
+      promo: null == promo
+          ? _value.promo
+          : promo // ignore: cast_nullable_to_non_nullable
+              as PromoCode,
       shoppingDetailsList: null == shoppingDetailsList
           ? _value.shoppingDetailsList
           : shoppingDetailsList // ignore: cast_nullable_to_non_nullable
@@ -176,6 +184,16 @@ class _$OrderCopyWithImpl<$Res, $Val extends Order>
       return _then(_value.copyWith(dropOffAddress: value) as $Val);
     });
   }
+
+  /// Create a copy of Order
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $PromoCodeCopyWith<$Res> get promo {
+    return $PromoCodeCopyWith<$Res>(_value.promo, (value) {
+      return _then(_value.copyWith(promo: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -197,6 +215,7 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
       AgentMeeting agentMeeting,
       Invoice invoice,
       Address dropOffAddress,
+      PromoCode promo,
       List<ShoppingDetails> shoppingDetailsList});
 
   @override
@@ -205,6 +224,8 @@ abstract class _$$OrderImplCopyWith<$Res> implements $OrderCopyWith<$Res> {
   $InvoiceCopyWith<$Res> get invoice;
   @override
   $AddressCopyWith<$Res> get dropOffAddress;
+  @override
+  $PromoCodeCopyWith<$Res> get promo;
 }
 
 /// @nodoc
@@ -231,6 +252,7 @@ class __$$OrderImplCopyWithImpl<$Res>
     Object? agentMeeting = null,
     Object? invoice = null,
     Object? dropOffAddress = null,
+    Object? promo = null,
     Object? shoppingDetailsList = null,
   }) {
     return _then(_$OrderImpl(
@@ -278,6 +300,10 @@ class __$$OrderImplCopyWithImpl<$Res>
           ? _value.dropOffAddress
           : dropOffAddress // ignore: cast_nullable_to_non_nullable
               as Address,
+      promo: null == promo
+          ? _value.promo
+          : promo // ignore: cast_nullable_to_non_nullable
+              as PromoCode,
       shoppingDetailsList: null == shoppingDetailsList
           ? _value._shoppingDetailsList
           : shoppingDetailsList // ignore: cast_nullable_to_non_nullable
@@ -301,6 +327,7 @@ class _$OrderImpl implements _Order {
       this.agentMeeting = const AgentMeeting(),
       this.invoice = const Invoice(),
       this.dropOffAddress = const Address(),
+      this.promo = const PromoCode(),
       final List<ShoppingDetails> shoppingDetailsList = const []})
       : _shoppingDetailsList = shoppingDetailsList;
 
@@ -340,6 +367,9 @@ class _$OrderImpl implements _Order {
   @override
   @JsonKey()
   final Address dropOffAddress;
+  @override
+  @JsonKey()
+  final PromoCode promo;
   final List<ShoppingDetails> _shoppingDetailsList;
   @override
   @JsonKey()
@@ -352,7 +382,7 @@ class _$OrderImpl implements _Order {
 
   @override
   String toString() {
-    return 'Order(id: $id, createdAt: $createdAt, invoiceNumber: $invoiceNumber, status: $status, dropOffService: $dropOffService, customerAchievedPoint: $customerAchievedPoint, currentCadRate: $currentCadRate, paid: $paid, agentMeeting: $agentMeeting, invoice: $invoice, dropOffAddress: $dropOffAddress, shoppingDetailsList: $shoppingDetailsList)';
+    return 'Order(id: $id, createdAt: $createdAt, invoiceNumber: $invoiceNumber, status: $status, dropOffService: $dropOffService, customerAchievedPoint: $customerAchievedPoint, currentCadRate: $currentCadRate, paid: $paid, agentMeeting: $agentMeeting, invoice: $invoice, dropOffAddress: $dropOffAddress, promo: $promo, shoppingDetailsList: $shoppingDetailsList)';
   }
 
   @override
@@ -378,6 +408,7 @@ class _$OrderImpl implements _Order {
             (identical(other.invoice, invoice) || other.invoice == invoice) &&
             (identical(other.dropOffAddress, dropOffAddress) ||
                 other.dropOffAddress == dropOffAddress) &&
+            (identical(other.promo, promo) || other.promo == promo) &&
             const DeepCollectionEquality()
                 .equals(other._shoppingDetailsList, _shoppingDetailsList));
   }
@@ -397,6 +428,7 @@ class _$OrderImpl implements _Order {
       agentMeeting,
       invoice,
       dropOffAddress,
+      promo,
       const DeepCollectionEquality().hash(_shoppingDetailsList));
 
   /// Create a copy of Order
@@ -428,6 +460,7 @@ abstract class _Order implements Order {
       final AgentMeeting agentMeeting,
       final Invoice invoice,
       final Address dropOffAddress,
+      final PromoCode promo,
       final List<ShoppingDetails> shoppingDetailsList}) = _$OrderImpl;
 
   factory _Order.fromJson(Map<String, dynamic> json) = _$OrderImpl.fromJson;
@@ -454,6 +487,8 @@ abstract class _Order implements Order {
   Invoice get invoice;
   @override
   Address get dropOffAddress;
+  @override
+  PromoCode get promo;
   @override
   List<ShoppingDetails> get shoppingDetailsList;
 

@@ -16,7 +16,7 @@ import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
-import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
+import 'package:sheba_plus/view/services/services_texts.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/custom_text_field.dart';
@@ -48,8 +48,8 @@ class _ShoppingRescheduleFormState extends State<ShoppingRescheduleForm> {
             children: [
               TextFieldWithLabel(
                 controller: notificationController.rescheduledMeetingLocationController.value,
-                label: AgentShoppingTexts.meetingLocation,
-                hintText: AgentShoppingTexts.meetingLocationHintText,
+                label: ServicesTexts.meetingLocation,
+                hintText: ServicesTexts.meetingLocationHintText,
                 validator: (value) => InputValidators.generalValidator(
                   value: value,
                   message: GlobalTexts.thisFieldIsRequired,
@@ -60,7 +60,7 @@ class _ShoppingRescheduleFormState extends State<ShoppingRescheduleForm> {
                 asterisk: true,
                 controller: notificationController.rescheduledEasternTimeController.value,
                 label: ProfileScreenTexts.pleaseReschedule,
-                hintText: AgentShoppingTexts.easternTimeHintText,
+                hintText: ServicesTexts.easternTimeHintText,
                 suffixIcon: Icon(
                   PhosphorIcons.calendarDots(),
                   color: AppColors.primary,
@@ -80,7 +80,7 @@ class _ShoppingRescheduleFormState extends State<ShoppingRescheduleForm> {
               CustomTextField(
                 readOnly: true,
                 controller: notificationController.rescheduledBDTimeController.value,
-                hintText: AgentShoppingTexts.bdTimeHintText,
+                hintText: ServicesTexts.bdTimeHintText,
                 suffixIcon: Icon(
                   PhosphorIcons.calendarDots(),
                   color: AppColors.primary,

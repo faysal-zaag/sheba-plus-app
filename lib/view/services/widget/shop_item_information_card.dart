@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_border_radius.dart';
+import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/components/custom_text_field.dart';
 import 'package:sheba_plus/view/display_center/widgets/display_center_product/product_quantity_increment_decrement_widget.dart';
-import 'package:sheba_plus/view/third_party/controller/third_party_service_controller.dart';
+import 'package:sheba_plus/view/services/third_party/controller/third_party_service_controller.dart';
 
-import '../../../utils/constant/app_colors.dart';
 
 class ShopItemInformationCard extends StatelessWidget {
   final TextEditingController itemNameController;

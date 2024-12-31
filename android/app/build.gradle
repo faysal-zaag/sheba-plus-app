@@ -48,6 +48,4 @@ flutter {
 
 dependencies{
     implementation platform('com.google.firebase:firebase-bom:33.7.0')
-    implementation 'us.zoom.sdk:zoom-sdk-android:5.14.5.13706'
-    implementation 'androidx.multidex:multidex:2.0.1'
 }

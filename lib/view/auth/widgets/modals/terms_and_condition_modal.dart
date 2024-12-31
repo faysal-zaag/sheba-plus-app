@@ -103,6 +103,8 @@ class TermsAndConditionSheet extends StatelessWidget {
                             Get.offAndToNamed(Routes.displayCenterServiceProductListScreen);
                           } else if (serviceIndex == 3) {
                             Get.offAndToNamed(Routes.thirdPartyShopAndItemDetailsScreen);
+                          } else if (serviceIndex == 4) {
+                            Get.offAndToNamed(Routes.friendsAndFamilyShoppingDetailsScreen);
                           }
                         }
                         globalController.termsAccepted(false);

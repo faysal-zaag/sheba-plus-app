@@ -1,23 +1,24 @@
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
+import 'package:sheba_plus/utils/utils.dart';
+import 'package:sheba_plus/view/global_texts.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
-import 'package:sheba_plus/utils/utils.dart';
-import 'package:sheba_plus/view/components/custom_header_container.dart';
-import 'package:sheba_plus/view/components/custom_primary_button.dart';
-import 'package:sheba_plus/view/components/message_container.dart';
+import 'package:sheba_plus/view/services/services_texts.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
-import 'package:sheba_plus/view/global_texts.dart';
-import 'package:sheba_plus/view/third_party/controller/third_party_service_controller.dart';
-import 'package:sheba_plus/view/third_party/widget/shop_and_item_information_card.dart';
+import 'package:sheba_plus/view/components/message_container.dart';
+import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/view/components/custom_primary_button.dart';
+import 'package:sheba_plus/view/components/custom_header_container.dart';
+import 'package:sheba_plus/view/services/widget/shop_and_item_information_card.dart';
+import 'package:sheba_plus/view/services/friends-and-family/controller/friends_and_family_shopping_controller.dart';
 
-class ThirdPartyShopAndItemDetailsScreen extends StatelessWidget {
-  ThirdPartyShopAndItemDetailsScreen({super.key});
+class FriendsAndFamilyShoppingDetails extends StatelessWidget {
+  FriendsAndFamilyShoppingDetails({super.key});
 
-  final thirdPartyServiceController = Get.find<ThirdPartyServiceController>();
+  final friendsAndFamilyShoppingController = Get.find<FriendsAndFamilyShoppingController>();
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -26,25 +27,26 @@ class ThirdPartyShopAndItemDetailsScreen extends StatelessWidget {
       hasCart: true,
       body: Column(
         children: [
-          const CustomHeaderContainer(
-            title: '3rd Party Shop & Item details',
+          CustomHeaderContainer(
+            title: friendsAndFamilyShoppingController.headerText,
           ),
           Expanded(
             child: ListView(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(16),
-                  child: MessageContainer(message: thirdPartyServiceController.thirdPartyServiceMessage),
+                  child: MessageContainer(message: friendsAndFamilyShoppingController.friendsFamilyServiceMessage),
                 ),
                 Obx(
                   () => Column(
                     children: [
-                      ...thirdPartyServiceController.shops.mapIndexed(
+                      ...friendsAndFamilyShoppingController.friendsAndFamilyShops.mapIndexed(
                         (index, shop) => ShopAndItemInformationCard(
+                          friendsAndFamily: true,
                           formKey: formKey,
                           shopIndex: index,
-                          shopNameController: shop.shopNameController,
-                          shopAddressController: shop.shopAddressController,
+                          nameController: shop.nameController,
+                          addressController: shop.addressController,
                           contactNumberController: shop.contactNumberController,
                           unPaidTextEditingController: shop.unPaidTextController,
                           alreadyPaid: shop.alreadyPaid.value,
@@ -59,10 +61,10 @@ class ThirdPartyShopAndItemDetailsScreen extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     if(formKey.currentState!.validate()){
-                      thirdPartyServiceController.addNewShop();
+                      friendsAndFamilyShoppingController.addNewShop();
                     }
                     else{
-                      Utils.showErrorToast(message: "Complete the first shop information", alignment: Alignment.topCenter);
+                      Utils.showErrorToast(message: ServicesTexts.firstShopNotFilledErrorMessage, alignment: Alignment.topCenter);
                     }
                   },
                   child: Row(
@@ -73,7 +75,7 @@ class ThirdPartyShopAndItemDetailsScreen extends StatelessWidget {
                       ),
                       5.kW,
                       Text(
-                        'Add New Shop',
+                        ServicesTexts.addNewRelative,
                         style: Theme.of(context).textTheme.labelMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: AppColors.primary,

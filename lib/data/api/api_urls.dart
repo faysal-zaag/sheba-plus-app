@@ -52,6 +52,7 @@ class ApiUrls {
   static const String createAgentBooking = "$securedApiUrl/orders/create/agent-booking";
   static const String updateAgentBookingSchedule = "$securedApiUrl/orders/schedule/update/id";
   static const String extendMeetingOrAmountApiUrl = "$securedApiUrl/orders/agent-order/update/extend-meeting/or-amount";
+  static const String verifyPromoApiUrl = "$securedApiUrl/promos/verify";
 
   //Display Service
   static const String getAllDisplayServiceProductsApiUrl = "$baseApiUrl/products";

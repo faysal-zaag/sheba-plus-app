@@ -4,7 +4,7 @@ import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/view/components/custom_header_container.dart';
 import 'package:sheba_plus/view/components/message_container.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
-import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
+import 'package:sheba_plus/view/services/services_texts.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 import 'package:sheba_plus/view/services/agent-shopping/widget/agent_shopping_order_info_form.dart';
 
@@ -21,7 +21,7 @@ class AgentShoppingOrderInfoScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomHeaderContainer(title: AgentShoppingTexts.agentShoppingOrderInfoHeader,),
+          CustomHeaderContainer(title: ServicesTexts.agentShoppingOrderInfoHeader,),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -31,7 +31,7 @@ class AgentShoppingOrderInfoScreen extends StatelessWidget {
                     padding: AppPaddings.allPadding16,
                     child: MessageContainer(
                         message:
-                        AgentShoppingTexts.agentShoppingOrderInfoMessage),
+                        ServicesTexts.agentShoppingOrderInfoMessage),
                   ),
                   const AgentShoppingOrderInfoForm(),
                 ],

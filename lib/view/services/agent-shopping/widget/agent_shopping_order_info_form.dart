@@ -16,7 +16,7 @@ import 'package:sheba_plus/view/components/custom_text_field.dart';
 import 'package:sheba_plus/view/components/text_field_with_label.dart';
 import 'package:sheba_plus/view/global_texts.dart';
 import 'package:sheba_plus/view/profile/saved-address/controller/address_controller.dart';
-import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
+import 'package:sheba_plus/view/services/services_texts.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 
 class AgentShoppingOrderInfoForm extends StatefulWidget {
@@ -45,8 +45,8 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
           children: [
             TextFieldWithLabel(
               controller: agentShoppingController.agentShoppingMeetingLocationController.value,
-              label: AgentShoppingTexts.meetingLocation,
-              hintText: AgentShoppingTexts.meetingLocationHintText,
+              label: ServicesTexts.meetingLocation,
+              hintText: ServicesTexts.meetingLocationHintText,
               validator: (value) => InputValidators.generalValidator(
                 value: value,
                 message: GlobalTexts.thisFieldIsRequired,
@@ -55,8 +55,8 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
             TextFieldWithLabel(
               readOnly: true,
               controller: agentShoppingController.agentShoppingEasternTimeController.value,
-              label: AgentShoppingTexts.easternTime,
-              hintText: AgentShoppingTexts.easternTimeHintText,
+              label: ServicesTexts.easternTime,
+              hintText: ServicesTexts.easternTimeHintText,
               suffixIcon: Icon(
                 PhosphorIcons.calendarDots(),
                 color: AppColors.primary,
@@ -77,7 +77,7 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
             CustomTextField(
               readOnly: true,
               controller: agentShoppingController.agentShoppingBDTimeController.value,
-              hintText: AgentShoppingTexts.bdTimeHintText,
+              hintText: ServicesTexts.bdTimeHintText,
               suffixIcon: Icon(
                 PhosphorIcons.calendarDots(),
                 color: AppColors.primary,
@@ -96,22 +96,22 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
               textInputType: TextInputType.number,
               inputFormatters: [InputFormatters.numberOnly],
               controller: agentShoppingController.agentShoppingSpendAmountController.value,
-              label: AgentShoppingTexts.spendAmount,
-              hintText: AgentShoppingTexts.spendAmountHintText,
+              label: ServicesTexts.spendAmount,
+              hintText: ServicesTexts.spendAmountHintText,
               validator: (value) => InputValidators.generalValidator(value: value, message: GlobalTexts.thisFieldIsRequired),
             ),
             Obx(
               () => Text(
-                AgentShoppingTexts.prePaymentWarningMessage(maxValue: globalController.globalConfig.value.maxBudget),
+                ServicesTexts.prePaymentWarningMessage(maxValue: globalController.globalConfig.value.maxBudget),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
               ),
             ),
             12.kH,
-            Obx(() => Text(AgentShoppingTexts.serviceDuration(hourlyRates: globalController.globalConfig.value.hourlyRates ?? 0))),
+            Obx(() => Text(ServicesTexts.serviceDuration(hourlyRates: globalController.globalConfig.value.hourlyRates ?? 0))),
             12.kH,
             CustomTextField(
               controller: agentShoppingController.agentShoppingServiceDurationController.value,
-              hintText: AgentShoppingTexts.serviceDurationHintText,
+              hintText: ServicesTexts.serviceDurationHintText,
               textInputType: TextInputType.number,
               inputFormatters: [InputFormatters.numberOnly],
               onChange: (value) {
@@ -125,7 +125,7 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
             12.kH,
             CustomTextField(
               controller: agentShoppingController.agentShoppingServiceTotalCostController.value,
-              hintText: AgentShoppingTexts.serviceDurationCostHintText,
+              hintText: ServicesTexts.serviceDurationCostHintText,
               suffixIcon: const SizedBox(
                 width: 100,
                 child: Align(
@@ -149,7 +149,7 @@ class _AgentShoppingOrderInfoFormState extends State<AgentShoppingOrderInfoForm>
             12.kH,
             Obx(
                   () => Text(
-                AgentShoppingTexts.agentTransportationFeeMessage(fee: globalController.globalConfig.value.agentTransportationFee),
+                ServicesTexts.agentTransportationFeeMessage(fee: globalController.globalConfig.value.agentTransportationFee),
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.error),
               ),
             ),

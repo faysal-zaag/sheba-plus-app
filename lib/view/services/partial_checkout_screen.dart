@@ -9,6 +9,7 @@ import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/auth/register_screen/register-address/widget/register_address_form.dart';
 import 'package:sheba_plus/view/auth/register_screen/register-address/widget/register_new_address_form.dart';
 import 'package:sheba_plus/view/components/custom_header_container.dart';
+import 'package:sheba_plus/view/components/custom_loader.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/message_container.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
@@ -16,7 +17,7 @@ import 'package:sheba_plus/view/components/text_field_with_label.dart';
 import 'package:sheba_plus/view/components/two_options_radio_row.dart';
 import 'package:sheba_plus/view/global_texts.dart';
 import 'package:sheba_plus/view/home/home_screen_texts.dart';
-import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
+import 'package:sheba_plus/view/services/services_texts.dart';
 import 'package:sheba_plus/view/services/agent-shopping/controller/agent_shopping_controller.dart';
 import 'package:sheba_plus/view/services/partial_checkout_texts.dart';
 import 'package:sheba_plus/view/services/widget/order_summary.dart';
@@ -96,13 +97,13 @@ class PartialCheckoutScreen extends StatelessWidget {
                               ],
                             )
                           : MessageContainer(
-                              message: AgentShoppingTexts.dropOffServiceNotEnabledMessage,
+                              message: ServicesTexts.dropOffServiceNotEnabledMessage,
                               backgroundColor: AppColors.primary25,
                               borderColor: AppColors.primary50,
                             ),
                     )),
                 Obx(
-                  () => agentShoppingController.sameAsHomeAddress.isFalse
+                  () => agentShoppingController.agentShoppingDropOffService.isTrue && agentShoppingController.sameAsHomeAddress.isFalse
                       ? Container(
                           margin: const EdgeInsets.only(top: 16.0),
                           color: AppColors.white,
@@ -120,16 +121,31 @@ class PartialCheckoutScreen extends StatelessWidget {
                   padding: AppPaddings.horizontal16,
                   child: TextFieldWithLabel(
                     required: false,
-                    controller: agentShoppingController.agentShoppingSPromoCodeController.value,
-                    label: AgentShoppingTexts.havePromoCode,
-                    hintText: AgentShoppingTexts.enterPromoCodeHere,
-                    suffixIcon: Padding(
+                    controller: agentShoppingController.agentShoppingPromoCodeController.value,
+                    onChange: (v) {
+                      agentShoppingController.agentShoppingPromoCodeController.refresh();
+                      return null;
+                    },
+                    label: ServicesTexts.havePromoCode,
+                    hintText: ServicesTexts.enterPromoCodeHere,
+                    suffixIcon: Container(
+                      width: 60,
                       padding: const EdgeInsets.only(right: 16.0),
                       child: Align(
                         alignment: Alignment.centerRight,
-                        child: Text(
-                          GlobalTexts.apply,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: AppColors.primary),
+                        child: Obx(
+                          () => agentShoppingController.verifyPromoCodeLoading.isTrue
+                              ? const CustomLoader(size: 30.0,)
+                              : InkWell(
+                                  onTap: verifyPromo,
+                                  child: Text(
+                                    GlobalTexts.apply,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(color: agentShoppingController.agentShoppingPromoCodeController.value.text.isEmpty ? AppColors.hintText.withOpacity(0.5) : AppColors.primary),
+                                  ),
+                                ),
                         ),
                       ),
                     ),
@@ -178,6 +194,10 @@ class PartialCheckoutScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void verifyPromo() async {
+    await agentShoppingController.verifyPromoCode();
   }
 
   void createAgentBooking() async {

@@ -10,7 +10,7 @@ import 'package:sheba_plus/utils/constant/app_paddings.dart';
 import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
 import 'package:sheba_plus/view/components/dashed_divider.dart';
 import 'package:sheba_plus/view/components/message_container.dart';
-import 'package:sheba_plus/view/services/agent-shopping/agent_shopping_texts.dart';
+import 'package:sheba_plus/view/services/services_texts.dart';
 import 'package:sheba_plus/view/services/partial_checkout_texts.dart';
 import 'package:sheba_plus/view/services/widget/summary_column.dart';
 import 'package:sheba_plus/view/services/widget/summary_row.dart';
@@ -35,12 +35,12 @@ class ShoppingSummary extends StatelessWidget {
         children: [
           SummaryRow(
             titleColor: AppColors.black,
-            title: AgentShoppingTexts.totalShoppingCost,
+            title: ServicesTexts.totalShoppingCost,
             customValue: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  AgentShoppingTexts.totalItemPrice,
+                  ServicesTexts.totalItemPrice,
                   style: subTextStyle,
                 ),
                 4.kH,
@@ -68,29 +68,29 @@ class ShoppingSummary extends StatelessWidget {
             title: PartialCheckoutTexts.agentFee,
             customValue: Row(
               children: [
-                SummaryColumn(title: AgentShoppingTexts.totalHour, value: "CAD ${ProductServices.getAmount(price: hourBooked)}"),
+                SummaryColumn(title: ServicesTexts.totalHour, value: "CAD ${ProductServices.getAmount(price: hourBooked)}"),
                 24.kW,
-                SummaryColumn(title: AgentShoppingTexts.totalFee, value: "CAD ${ProductServices.getAmount(price: invoice.agentFee)}"),
+                SummaryColumn(title: ServicesTexts.totalFee, value: "CAD ${ProductServices.getAmount(price: invoice.agentFee)}"),
               ],
             ),
           ),
           12.kH,
           SummaryRow(
             titleColor: AppColors.black,
-            title: AgentShoppingTexts.shippingCost,
-            customValue: SummaryColumn(title: AgentShoppingTexts.totalShippingCost, value: "CAD ${ProductServices.getAmount(price: invoice.shippingCost)}"),
+            title: ServicesTexts.shippingCost,
+            customValue: SummaryColumn(title: ServicesTexts.totalShippingCost, value: "CAD ${ProductServices.getAmount(price: invoice.shippingCost)}"),
           ),
           12.kH,
           SummaryRow(
             titleColor: AppColors.black,
-            title: AgentShoppingTexts.tax,
-            customValue: SummaryColumn(title: AgentShoppingTexts.totalTax, value: "CAD ${ProductServices.getAmount(price: invoice.totalTax)}"),
+            title: ServicesTexts.tax,
+            customValue: SummaryColumn(title: ServicesTexts.totalTax, value: "CAD ${ProductServices.getAmount(price: invoice.totalTax)}"),
           ),
           12.kH,
           SummaryRow(
             titleColor: AppColors.black,
-            title: AgentShoppingTexts.vat,
-            customValue: SummaryColumn(title: AgentShoppingTexts.totalVat, value: "CAD ${invoice.totalVat}"),
+            title: ServicesTexts.vat,
+            customValue: SummaryColumn(title: ServicesTexts.totalVat, value: "CAD ${invoice.totalVat}"),
           ),
           12.kH,
           SummaryRow(
@@ -109,7 +109,7 @@ class ShoppingSummary extends StatelessWidget {
                 ),
               ],
             ),
-            value: AgentShoppingTexts.total,
+            value: ServicesTexts.total,
             valueColor: AppColors.hintText,
           ),
           SummaryRow(
@@ -121,18 +121,18 @@ class ShoppingSummary extends StatelessWidget {
           12.kH,
           SummaryRow(
             titleColor: AppColors.black,
-            title: AgentShoppingTexts.totalExpenditure,
+            title: ServicesTexts.totalExpenditure,
             value: "CAD ${ProductServices.getAmount(price: invoice.finalPrice)}",
           ),
           SummaryRow(
             titleColor: AppColors.black,
-            title: AgentShoppingTexts.alreadyPaid,
+            title: ServicesTexts.alreadyPaid,
             value: "(-) CAD ${ProductServices.getAmount(price: invoice.paidAmount)}",
             valueColor: AppColors.error,
           ),
           SummaryRow(
             titleColor: AppColors.black,
-            title: AgentShoppingTexts.existingDues,
+            title: ServicesTexts.existingDues,
             value: "CAD ${ProductServices.getAmount(price: invoice.finalPrice - invoice.paidAmount)}",
           ),
           12.kH,

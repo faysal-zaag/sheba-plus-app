@@ -18,6 +18,7 @@ _$AgentOrderDTOImpl _$$AgentOrderDTOImplFromJson(Map<String, dynamic> json) =>
       deliveryAddress: json['deliveryAddress'] == null
           ? const Address()
           : Address.fromJson(json['deliveryAddress'] as Map<String, dynamic>),
+      promoCode: json['promoCode'] as String?,
       dropOffService: json['dropOffService'] as bool? ?? false,
     );
 
@@ -28,5 +29,6 @@ Map<String, dynamic> _$$AgentOrderDTOImplToJson(_$AgentOrderDTOImpl instance) =>
       'estimatedBudget': instance.estimatedBudget,
       'hourBooked': instance.hourBooked,
       'deliveryAddress': instance.deliveryAddress,
+      'promoCode': instance.promoCode,
       'dropOffService': instance.dropOffService,
     };
