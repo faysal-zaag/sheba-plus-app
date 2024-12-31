@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';
 import 'package:sheba_plus/view/auth/controller/auth_controller.dart';

@@ -4,7 +4,7 @@ import 'package:intl_phone_field/countries.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:sheba_plus/models/address/address.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';

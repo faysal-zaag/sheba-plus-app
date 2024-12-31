@@ -19,21 +19,17 @@ class CartController extends GetxController {
     final exist = cart.value.cartDetailsList
         .where((element) => element.product.id == cartDetails.product.id);
 
-    if (exist.isNotEmpty) {
-      cart.value.cartDetailsList.map((e) {
-        if (e.product.id == cartDetails.product.id) {
-          e.quantity = quantity;
-        }
-        return e;
-      }).toList();
-    } else {
+    // if (exist.isNotEmpty) {
+    //   cart.value.cartDetailsList.map((e) {
+    //     if (e.product.id == cartDetails.product.id) {
+    //       e.quantity = quantity;
+    //     }
+    //     return e;
+    //   }).toList();
+    // } else {
       cart.value.cartDetailsList.add(cartDetails);
-    }
+    // }
     calculateSubTotal();
-
-    debugPrint(
-        "===>> products in cart: ${cart.value.cartDetailsList.map((product) => product.toJson())}",
-        wrapWidth: 1024);
   }
 
   void removeProductFromCart({required int id}) {
@@ -47,13 +43,13 @@ class CartController extends GetxController {
       CartDetails cartDetails = cart.value.cartDetailsList[i];
       var res = cartDetails.product.discountPercentage == 0.0
           ? multiplyProductAndPrice(
-              price: cartDetails.product.price ?? 0,
-              quantity: cartDetails.quantity ?? 0)
+              price: cartDetails.product.price,
+              quantity: cartDetails.quantity)
           : multiplyProductAndPrice(
               price: Utils.getDiscountPrice(
-                  price: cartDetails.product.price ?? 0,
+                  price: cartDetails.product.price,
                   percent: cartDetails.product.discountPercentage ?? 0),
-              quantity: cartDetails.quantity ?? 0);
+              quantity: cartDetails.quantity);
       subTotal.value += res;
     }
   }

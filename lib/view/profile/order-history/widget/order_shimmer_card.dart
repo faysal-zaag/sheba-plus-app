@@ -3,7 +3,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/view/styles.dart';
 
 class OrderShimmerCard extends StatelessWidget {

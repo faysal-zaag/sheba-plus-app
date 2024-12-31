@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sheba_plus/models/shopping-details/shopping_details.dart';
 import 'package:sheba_plus/services/product_services.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 
 class FinalCheckoutOrderSummaryItem extends StatelessWidget {
   final ShoppingItemDetails shoppingItemDetails;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/view/components/custom_header_container.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';
 import 'package:sheba_plus/view/components/vertical_bordered_text_container.dart';

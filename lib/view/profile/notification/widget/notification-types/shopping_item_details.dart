@@ -4,7 +4,7 @@ import 'package:sheba_plus/models/invoice/invoice.dart';
 import 'package:sheba_plus/models/shopping-details/shopping_details.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/components/custom_primary_button.dart';
 import 'package:sheba_plus/view/components/message_container.dart';

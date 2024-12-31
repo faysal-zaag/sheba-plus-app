@@ -6,7 +6,7 @@ import 'package:sheba_plus/models/promo-code/promo_code.dart';
 import 'package:sheba_plus/services/product_services.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/view/global_texts.dart';
 import 'package:sheba_plus/view/global_texts.dart';
 import 'package:sheba_plus/view/global_texts.dart';

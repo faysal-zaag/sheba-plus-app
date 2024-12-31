@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl_phone_field/countries.dart';
 import 'package:sheba_plus/controllers/global_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/utils/validators/input_validators.dart';
 import 'package:sheba_plus/view/auth/auth_screen_texts.dart';

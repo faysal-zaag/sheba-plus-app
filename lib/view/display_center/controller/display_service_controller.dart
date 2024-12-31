@@ -28,6 +28,7 @@ class DisplayCenterServiceController extends GetxController {
   final totalDisplayServiceProduct = 0.obs;
   final displayServiceProductList = <DisplayCenterProduct>[].obs;
   final productNameSearchController = TextEditingController().obs;
+  final searchFocusNode = FocusNode().obs;
 
   var currentDisplayServiceProduct = DisplayCenterProduct(
           id: 0,

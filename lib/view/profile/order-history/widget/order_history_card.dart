@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:sheba_plus/models/notification/user_notification.dart';
 import 'package:sheba_plus/models/order/order.dart';
 import 'package:sheba_plus/models/user/user.dart';
 import 'package:sheba_plus/utils/constant/app_border_radius.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_paddings.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/utils/formatters/date_formatters.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
-import 'package:sheba_plus/view/profile/notification/controller/notification_controller.dart';
 import 'package:sheba_plus/view/profile/order-history/widget/order_status.dart';
 import 'package:sheba_plus/view/profile/profile_screen_text.dart';
 import 'package:sheba_plus/view/styles.dart';

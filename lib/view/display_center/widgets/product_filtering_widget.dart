@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/utils/utils.dart';
 import 'package:sheba_plus/view/category/controller/category_controller.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
@@ -22,12 +23,6 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
   final categoryController = Get.find<CategoryController>();
   final displayServiceController = Get.find<DisplayCenterServiceController>();
 
-  _initCall() async {
-    categoryController.getAllCategories();
-    categoryController.getAllSubCategories();
-    categoryController.resetData();
-  }
-
   _getProductByFilter() async {
     displayServiceController.getAllDisplayCenterServiceProducts(
         subCategoryIdList: categoryController.subCategoryIds,
@@ -40,13 +35,6 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
         sort: categoryController.selectedSortBy.value,
         priceTo: categoryController.startValue.value,
         priceFrom: categoryController.endValue.value);
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    // _initCall();
-    super.initState();
   }
 
   @override
@@ -301,10 +289,20 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      PhosphorIcons.square(),
-                                    ),
+                                    onPressed: () {
+                                      categoryController.selectedSortBy(
+                                          categoryController
+                                              .productSortByItems[index]);
+                                    },
+                                    icon: categoryController
+                                                .productSortByItems[index] ==
+                                            categoryController
+                                                .selectedSortBy.value
+                                        ? SvgPicture.asset(
+                                            'assets/icons/circle_green.svg')
+                                        : Icon(
+                                            PhosphorIcons.circle(),
+                                          ),
                                   ),
                                   Text(
                                     categoryController
@@ -332,17 +330,17 @@ class _ProductFilteringWidgetState extends State<ProductFilteringWidget> {
                               values: RangeValues(
                                   categoryController.startValue.value,
                                   categoryController.endValue.value),
+                              divisions: 1000,
                               onChanged: (values) {
-                                setState(() {
-                                  categoryController.startValue(values.start);
-                                  categoryController.endValue(values.end);
-                                  categoryController.minPriceEditingController
-                                          .value.text =
-                                      '\$ ${categoryController.startValue.toStringAsFixed(2)}';
-                                  categoryController.maxPriceEditingController
-                                          .value.text =
-                                      '\$ ${categoryController.endValue.toStringAsFixed(2)}';
-                                });
+                                categoryController.startValue(values.start);
+                                categoryController.endValue(values.end);
+                                categoryController
+                                        .minPriceEditingController.value.text =
+                                    '\$ ${categoryController.startValue.toStringAsFixed(2)}';
+                                categoryController
+                                        .maxPriceEditingController.value.text =
+                                    '\$ ${categoryController.endValue.toStringAsFixed(2)}';
+                                categoryController.selectedFilteringCount();
                               },
                             ),
                             Padding(

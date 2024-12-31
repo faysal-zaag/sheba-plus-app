@@ -7,11 +7,13 @@ import 'package:sheba_plus/utils/constant/app_paddings.dart';
 class CustomHeaderContainer extends StatelessWidget {
   final String title;
   final Color backgroundColor;
+  final Function? onBack;
 
   const CustomHeaderContainer({
     super.key,
     required this.title,
     this.backgroundColor = AppColors.white,
+    this.onBack,
   });
 
   @override
@@ -27,6 +29,9 @@ class CustomHeaderContainer extends StatelessWidget {
             child: IconButton(
               onPressed: () {
                 Get.back();
+                if (onBack != null) {
+                  onBack!();
+                }
               },
               icon: Icon(
                 PhosphorIcons.caretLeft(),
@@ -39,8 +44,8 @@ class CustomHeaderContainer extends StatelessWidget {
             child: Text(
               title,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontSize: 16,
-              ),
+                    fontSize: 16,
+                  ),
             ),
           ),
         ],

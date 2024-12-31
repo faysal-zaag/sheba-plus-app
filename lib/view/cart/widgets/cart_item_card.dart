@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:sheba_plus/models/cart/cart_details.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/view/cart/controller/cart_controller.dart';
 
 import '../../display_center/widgets/display_center_product/product_quantity_increment_decrement_widget.dart';
@@ -112,11 +112,13 @@ class CartItemCard extends StatelessWidget {
                 CustomQuantityIncDecWidget(
                   onIncrementPress: () {
                     cartDetails.quantity++;
+                    cartController.calculateSubTotal();
                     cartController.cart.refresh();
                   },
                   onDecrementPress: () {
                     if (cartDetails.quantity > 1) {
                       cartDetails.quantity--;
+                      cartController.calculateSubTotal();
                       cartController.cart.refresh();
                     }
                   },

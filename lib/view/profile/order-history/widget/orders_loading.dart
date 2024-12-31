@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/view/profile/notification/widget/notification_shimmer_card.dart';
 import 'package:sheba_plus/view/profile/order-history/widget/order_shimmer_card.dart';
 

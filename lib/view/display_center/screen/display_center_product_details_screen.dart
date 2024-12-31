@@ -6,7 +6,7 @@ import 'package:sheba_plus/models/display_service/color.dart';
 import 'package:sheba_plus/models/display_service/display_service_product.dart';
 import 'package:sheba_plus/models/display_service/product_size.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/view/cart/controller/cart_controller.dart';
 import 'package:sheba_plus/view/components/custom_loader.dart';
 import 'package:sheba_plus/view/components/primary_scaffold.dart';

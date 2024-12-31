@@ -6,7 +6,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:sheba_plus/controllers/navigation_controller.dart';
 import 'package:sheba_plus/utils/constant/app_colors.dart';
 import 'package:sheba_plus/utils/constant/app_constants.dart';
-import 'package:sheba_plus/utils/constant/sizedbox_extension.dart';
+import 'package:sheba_plus/utils/constant/sizedBox_extension.dart';
 import 'package:sheba_plus/utils/routes/routes.dart';
 import 'package:sheba_plus/view/banner/controller/banner_controller.dart';
 import 'package:sheba_plus/view/category/controller/category_controller.dart';
@@ -39,7 +39,6 @@ class _DisplayCenterProductListScreenState
       RefreshController(initialRefresh: false);
   int currentImageIndex = 0;
   bool screenLoading = false;
-  final FocusNode searchFocusNode = FocusNode();
 
   _initCall() async {
     _startLoading();
@@ -86,23 +85,34 @@ class _DisplayCenterProductListScreenState
   }
 
   void startAutoChange() {
-    _debounce = Timer.periodic(const Duration(seconds: 5), (Timer t) {
-      setState(() {
-        currentImageIndex =
-            (currentImageIndex + 1) % bannerController.banners.length;
+    if (bannerController.banners.isNotEmpty) {
+      _debounce = Timer.periodic(const Duration(seconds: 5), (Timer t) {
+        setState(() {
+          currentImageIndex =
+              (currentImageIndex + 1) % bannerController.banners.length;
+        });
       });
-    });
+    }
   }
 
   focusOnOff() {
     if (navigationController.selectedIndex.value == 2) {
       Future.delayed(Duration.zero, () {
-        searchFocusNode.requestFocus();
+        displayCenterServiceController.searchFocusNode.value.requestFocus();
       });
     } else {
       Future.delayed(Duration.zero, () {
-        searchFocusNode.unfocus();
+        displayCenterServiceController.searchFocusNode.value.unfocus();
       });
+    }
+  }
+
+  clearSearchText() {
+    if (displayCenterServiceController
+        .productNameSearchController.value.text.isNotEmpty) {
+      displayCenterServiceController.productNameSearchController.value.clear();
+      getSearchProduct();
+      displayCenterServiceController.productNameSearchController.refresh();
     }
   }
 
@@ -142,26 +152,17 @@ class _DisplayCenterProductListScreenState
                       children: [
                         DisplayServiceHeaderWidget(
                           searchOnChange: (value) {
+                            displayCenterServiceController
+                                .productNameSearchController
+                                .refresh();
                             getSearchProduct();
                           },
-                          suffixWidget: GestureDetector(
-                            onTap: () {
-                              if (displayCenterServiceController
-                                  .productNameSearchController
-                                  .value
-                                  .text
-                                  .isNotEmpty) {
-                                displayCenterServiceController
-                                    .productNameSearchController.value
-                                    .clear();
-                                getSearchProduct();
-                                displayCenterServiceController
-                                    .productNameSearchController
-                                    .refresh();
-                              }
-                            },
-                            child: Obx(
-                              () => displayCenterServiceController
+                          suffixWidget: Obx(
+                            () => GestureDetector(
+                              onTap: () {
+                                clearSearchText();
+                              },
+                              child: displayCenterServiceController
                                       .productNameSearchController
                                       .value
                                       .text
@@ -176,12 +177,15 @@ class _DisplayCenterProductListScreenState
                                     ),
                             ),
                           ),
-                          banner: bannerController.banners[currentImageIndex],
+                          banner: bannerController.banners.isNotEmpty
+                              ? bannerController.banners[currentImageIndex]
+                              : null,
                           showSearchField:
                               navigationController.selectedIndex.value == 2
                                   ? false
                                   : true,
-                          searchFocusNode: searchFocusNode,
+                          searchFocusNode: displayCenterServiceController
+                              .searchFocusNode.value,
                         ),
                         Obx(
                           () => displayCenterServiceController

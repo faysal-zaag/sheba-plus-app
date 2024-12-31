@@ -26,12 +26,18 @@ class CategoryController extends GetxController {
   final subCategoryIds = <num>[].obs;
   final productAvailability = <String>['In-stock', 'Out of stock'];
   final selectProductAvailability = ''.obs;
-  final productSortByItems = <String>['Newest', 'Price : Low to high', 'Price : High to low'];
+  final productSortByItems = <String>[
+    'Newest',
+    'Price : Low to high',
+    'Price : High to low'
+  ];
   final selectedSortBy = ''.obs;
-  final  minPriceEditingController =  TextEditingController().obs;
-  final maxPriceEditingController =  TextEditingController().obs;
+  final minPriceEditingController =
+      TextEditingController(text: '\$ ${0.00.toString()}').obs;
+  final maxPriceEditingController =
+      TextEditingController(text: '\$ ${99999.00.toString()}').obs;
   final startValue = 0.00.obs;
-  final endValue = 10000.00.obs;
+  final endValue = 99999.00.obs;
 
   // ================ Public Api call ==============
   Future<void> getAllCategories() async {
@@ -70,10 +76,11 @@ class CategoryController extends GetxController {
 
   int selectedFilteringCount() {
     int count = 0;
-    if(categoryIds.isNotEmpty) count++;
-    if(subCategoryIds.isNotEmpty) count++;
-    if(selectProductAvailability.isNotEmpty) count++;
-    if(selectedSortBy.isNotEmpty) count++;
+    if (categoryIds.isNotEmpty) count++;
+    if (subCategoryIds.isNotEmpty) count++;
+    if (selectProductAvailability.isNotEmpty) count++;
+    if (selectedSortBy.isNotEmpty) count++;
+    if (startValue.value != 0.00 || endValue.value != 99999.00) count = count+1;
     return count;
   }
 
@@ -84,9 +91,9 @@ class CategoryController extends GetxController {
     subCategoryIds([]);
     selectProductAvailability('');
     selectedSortBy('');
-    minPriceEditingController.value.clear();
-    maxPriceEditingController.value.clear();
-    startValue(0.0);
-    endValue(10000.0);
+    minPriceEditingController.value.text = '\$ ${0.00.toString()}';
+    maxPriceEditingController.value.text = '\$ ${99999.00.toString()}';
+    startValue(0.00);
+    endValue(99999.00);
   }
 }
